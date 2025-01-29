@@ -1,0 +1,45 @@
+//
+// Cards.
+//
+
+//
+// Card.
+//
+
+.comp-card__icon-image {
+  svg {
+    color: $c-body !important;
+    fill: $c-body !important;
+
+    path {
+      fill: $c-body !important;
+    }
+  }
+}
+
+.comp-card__fa-icon {
+  color: $c-body;
+}
+
+//
+// Style: Small.
+//
+
+.comp-cards--style--small {
+  .comp-card {
+    .comp-card__fa-icon {
+      color: $c-white !important;
+    }
+
+    .comp-card__icon-image {
+      svg {
+        color: $c-white !important;
+        fill: $c-white !important;
+
+        path {
+          fill: $c-white !important;
+        }
+      }
+    }
+  }
+}

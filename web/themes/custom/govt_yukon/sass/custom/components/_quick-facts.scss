@@ -1,0 +1,109 @@
+//
+// Quick Facts.
+//
+
+.comp-quick-facts {
+  clear: both;
+  margin: rem(0 0 30px);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3);
+  border-bottom: 10px solid $c-midnight-sun;
+}
+
+.comp-quick-facts__title {
+  display: block;
+  margin: 0;
+  padding: rem(15px 24px);
+  color: $c-body;
+  font-size: rem(22px);
+  line-height: 1.4;
+  background: $c-midnight-sun;
+}
+
+.comp-quick-facts__content {
+  padding: rem(0 24px);
+
+  .rss-url-titles-list {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.comp-quick-facts__items {
+
+}
+
+.comp-quick-facts__content .rss-url-titles-list > .rss-url-titles-list__item,
+.comp-quick-facts__item {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: rem(21px 0);
+  font-size: rem(19px);
+  font-weight: 500;
+  border-bottom: 1px solid $gray-border;
+
+  @include media-breakpoint-up(xl) {
+    font-size: rem(22px);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .paragraph > div {
+    margin: rem(0 0 15px);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  p,
+  .field--type-link a {
+    line-height: 1.4;
+  }
+}
+
+.comp-quick-facts__content .rss-url-titles-list > .rss-url-titles-list__item a,
+.comp-quick-facts__item .field--type-link a {
+  position: relative;
+  display: block;
+  padding-right: rem(55px);
+  color: $c-zinc;
+  line-height: 1.4;
+  text-decoration: none;
+
+  &:visited {
+    color: $c-link-visited;
+  }
+
+  &:hover,
+  &:focus {
+    color: $c-link-hover;
+    text-decoration: underline;
+  }
+
+  // Icon.
+  &::after {
+    @extend %fa-icon;
+    @extend .far;
+    position: absolute;
+    top: rem(2px);
+    right: 0;
+    content: fa-content($fa-var-external-link);
+    color: $c-neutral-30;
+    @include smooth-transition;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    color: $c-link-hover;
+  }
+}

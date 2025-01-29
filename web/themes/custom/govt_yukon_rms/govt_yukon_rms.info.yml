@@ -1,0 +1,27 @@
+name: 'Government of Yukon - Recruitment Marketing Site'
+type: theme
+'base theme': govt_yukon
+description: 'A Government of Yukon branded theme for the Recruitment Marketing Site project.'
+version: VERSION
+libraries:
+  - govt_yukon_rms/global-styling
+core_version_requirement: ^9 || ^10
+regions:
+  language_switcher: 'Language Switcher'
+  site_search: 'Site Search'
+  header: 'Page Header'
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  page_title: 'Page Title'
+  content_above: 'Content Above'
+  content: Content
+  content_below: 'Content Below'
+  sidebar: Sidebar
+  sidebar_second: 'Sidebar Right'
+  above_footer: 'Above Footer'
+  footer: Footer
+  user_menu: 'User Menu'
+  primary_menu: 'Primary Menu'
+  secondary_menu: 'Secondary Menu'
+  mobile_menu: 'Mobile Menu'
+  footer_menu: 'Footer Menu'

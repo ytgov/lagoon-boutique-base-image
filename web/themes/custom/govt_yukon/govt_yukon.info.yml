@@ -1,0 +1,56 @@
+name: 'Government of Yukon'
+description: 'The Government of Yukon base front-end theme.'
+type: theme
+'base theme': stable9
+starterkit: true
+version: VERSION
+libraries:
+  - govt_yukon/base
+  - govt_yukon/messages
+  - core/normalize
+  - govt_yukon/global-styling
+libraries-extend:
+  user/drupal.user:
+    - govt_yukon/user
+  core/drupal.dropbutton:
+    - govt_yukon/dropbutton
+  core/drupal.dialog:
+    - govt_yukon/dialog
+  file/drupal.file:
+    - govt_yukon/file
+  core/drupal.progress:
+    - govt_yukon/progress
+libraries-override:
+  stable/normalize:
+    css:
+      base:
+        css/core/assets/vendor/normalize-css/normalize.css: false
+        css/core/normalize-fixes.css: false
+  stable9/normalize:
+    css:
+      base:
+        css/core/assets/vendor/normalize-css/normalize.css: false
+        css/core/normalize-fixes.css: false
+ckeditor5-stylesheets:
+  - css/fonts.css
+  - css/ckeditor.css
+core_version_requirement: ^9 || ^10
+regions:
+  language_switcher: 'Language Switcher'
+  site_search: 'Site Search'
+  header: 'Page Header'
+  highlighted: 'Highlighted'
+  breadcrumb: 'Breadcrumb'
+  page_title: 'Page Title'
+  content_above: 'Content Above'
+  content: 'Content'
+  content_below: 'Content Below'
+  sidebar: 'Sidebar'
+  above_footer: 'Above Footer'
+  footer: 'Footer'
+  user_menu: 'User Menu'
+  primary_menu: 'Primary Menu'
+  secondary_menu: 'Secondary Menu'
+  mobile_menu: 'Mobile Menu'
+  footer_menu: 'Footer Menu'
+generator: 'starterkit_theme:9.4.9'

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+/**
+ * Implements hook_page_form_alter().
+ */
+function govt_yukon_claro_form_alter(&$form, &$form_state, $form_id) {
+  if ((str_contains($form_id, 'node_') && str_contains($form_id, '_form')) ||
+    (str_contains($form_id, 'block_') && str_contains($form_id, '_form'))) {
+    $form['#attached']['library'][] = 'govt_yukon/global-fonts';
+    $form['#attached']['library'][] = 'govt_yukon/font-awesome';
+  }
+}

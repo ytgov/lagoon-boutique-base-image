@@ -1,0 +1,173 @@
+//
+// Variables.
+//
+
+// Generic Colors.
+$c-white: #fff;
+$c-black: #000;
+
+// Brand Colors.
+$c-bryum-moss: #7A9A01;
+$c-bryum-moss-dark: #5A8327;
+$c-bryum-moss-light: #CAD3B1;
+
+$c-twilight: #512A44;
+$c-twilight-dark: #33002B;
+$c-twilight-light: #C2B3BA;
+
+$c-river-blue: #0097A9;
+$c-river-blue-dark: #008493;
+$c-river-blue-light: #99D6DC;
+$c-river-blue-focus: #66afe9;
+
+$c-midnight-sun: #F2A900;
+$c-midnight-sun-dark: #D09611;
+$c-midnight-sun-light: #FDDBAE;
+
+$c-lichen: #DC4405;
+$c-lichen-dark: #A94442;
+$c-lichen-light: #F5B5AA;
+
+$c-zinc: #244C5A;
+$c-zinc-dark: #013648;
+$c-zinc-light: #A7B7BD;
+
+$c-yg-yellow: #FBD161;
+$c-yg-yellow-dark: #EFB73A;
+
+// Action Colors.
+$c-link: #005A65;
+$c-link-hover: #008392;
+$c-link-visited: #643F5D;
+
+$c-btn: #00616D;
+$c-btn-hover: $c-zinc-dark;
+
+$c-action: $c-yg-yellow;
+$c-action-hover: $c-yg-yellow-dark;
+
+// Neutral Colors.
+$c-neutral-100: #000000;
+$c-neutral-70:  #4A4A4A;
+$c-neutral-60:  #626262;
+$c-neutral-50:  #7B7B7B;
+$c-neutral-40:  #939393;
+$c-neutral-30:  #ACACAC;
+$c-neutral-20:  #C4C4C4;
+$c-neutral-5:   #E9E9E9;
+$c-neutral-2:   #f3f3f3;
+
+$gray-base:              #151515;
+$gray-darker:            #353535;
+$gray-dark:              #545353;
+$gray:                   #807e7e;
+$gray-light:             #b3b3b3;
+$gray-lighter:           #efefef;
+$gray-lighter-alt:       #cecece;
+$gray-border:            $c-neutral-20;
+$gray-border-light:      #e6e6e6;
+$gray-container-border:  #ccc;
+$c-gray-input-light: #f1f1f1;
+$c-gray-input-text: #555;
+
+// Color Config Variables.
+$c-site-bg: $c-white;
+
+$c-primary: $c-btn;
+$c-primary-hover: $c-btn-hover;
+
+$c-secondary: $c-twilight;
+$c-secondary-hover: $c-twilight-dark;
+
+$c-tertiary: $c-midnight-sun;
+$c-tertiary-hover: $c-midnight-sun-dark;
+
+$c-body: $c-neutral-100;
+
+$c-star-on: $c-link-hover;
+$c-star-hover: $c-link;
+$c-star-off: #e2e2e2;
+
+$c-tab-nav-background: #dedede;
+
+$c-footer-top: #0d3e4f;
+$c-footer-bottom: #0b3442;
+
+// Messaging & Status Colors.
+$c-error-text: #963708;
+$c-error-icon: $c-error-text;
+$c-error-bg: #fdd4bb;
+$c-error-border: $c-error-text;
+
+$c-warning-text: #563B00;
+$c-warning-icon: $c-warning-text;
+$c-warning-bg: #FFE9C3;
+$c-warning-border:$c-warning-text;
+
+$c-info-text: #004053;
+$c-info-icon: $c-info-text;
+$c-info-bg: #D4ECEF;
+$c-info-border: $c-info-text;
+
+$c-success-text: #244402;
+$c-success-icon: $c-success-text;
+$c-success-bg: #e1ebd7;
+$c-success-border: $c-success-text;
+
+$c-form-required: $c-lichen-dark;
+
+// Fonts.
+$f-montserrat: 'Montserrat', Helvetica, Arial, sans-serif;
+// Montserrat weights: 400, 500, 700.
+
+$f-primary: $f-montserrat;
+$f-secondary: $f-montserrat;
+$f-web: Helvetica, Arial, sans-serif;
+$f-body: $f-secondary;
+
+// Font Sizing.
+$fs-base: 16px;
+$fs-global-min: rem(16px);
+$fs-global: rem(18px);
+
+$fs-h1:              rem(50px);
+$fs-h1-min:          rem(38px);
+$fs-h2:              rem(42px);
+$fs-h2-min:          rem(36px);
+$fs-h3:              rem(30px);
+$fs-h3-min:          rem(28px);
+$fs-h4:              rem(25px);
+$fs-h5:              rem(22px);
+$fs-h6:              rem(20px);
+$fs-overline:        rem(22px);
+$fs-overline-min:    rem(19px);
+
+$fs-btn: rem(22px);
+$fs-btn-lg: rem(36px);
+$fs-btn-sm: $fs-global;
+
+$line-height-paragraph: 1.7;
+
+// Theme Configuration.
+$border-radius: 10px;
+$image-hover-opacity: .8;
+$btn-margin: rem(12px);
+
+// Forms.
+$form-max-width: 486px;
+
+// Change with caution.
+// 16px is the recommended size for form elements/accessibility.
+$fs-form-item: rem(18px);
+$form-item-min-height: rem(48px);
+
+// Z-index.
+$z-mobile-overlay: 300;
+
+//
+// Responsive Helpers.
+//
+
+$screen-min: 320px;
+$screen-mobile-lg: 370px;
+$screen-mobile-xl: 500px;

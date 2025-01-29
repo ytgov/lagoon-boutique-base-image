@@ -1,0 +1,279 @@
+//
+// Carousel.
+//
+
+@use 'sass:math';
+
+.comp-carousel {
+  position: relative;
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.comp-carousel__slider {
+  .slick-next,
+  .slick-prev {
+    top: 0;
+    width: rem(75px);
+    height: 100%;
+    text-align: center;
+    transform: none;
+    z-index: 50;
+
+    &:focus {
+      top: 0;
+    }
+  }
+
+  .slick-prev .slick-prev-icon,
+  .slick-prev:focus .slick-prev-icon {
+    margin: 0;
+    font-size: rem(45px);
+    line-height: 1;
+    opacity: 1;
+  }
+
+  .slick-prev {
+    left: 0;
+
+    .slick-prev-icon {
+      color: $c-white;
+
+      // Icon.
+      &::before {
+        @extend %fa-icon;
+        @extend .far;
+        content: fa-content($fa-var-angle-left);
+      }
+    }
+
+    &:focus .slick-prev-icon {
+      color: $c-action-hover;
+    }
+  }
+
+  .slick-next .slick-next-icon,
+  .slick-next:focus .slick-next-icon {
+    margin: 0;
+    font-size: rem(45px);
+    line-height: 1;
+    opacity: 1;
+  }
+
+  .slick-next {
+    right: 0;
+
+    .slick-next-icon {
+      color: $c-white;
+
+      // Icon.
+      &::before {
+        @extend %fa-icon;
+        @extend .far;
+        content: fa-content($fa-var-angle-right);
+      }
+    }
+
+    &:focus .slick-next-icon {
+      color: $c-action-hover;
+    }
+  }
+
+  .slick-dots {
+    bottom: rem(40px);
+    z-index: 50;
+
+    li {
+
+      &.slick-active {
+        button {
+          background: $c-white;
+          border: 1px solid $c-white;
+        }
+      }
+
+      button {
+        margin: 0;
+        padding: 0;
+        width: rem(16px);
+        height: rem(16px);
+        background: $c-black;
+        border: 1px solid $c-white;
+        border-radius: 50%;
+
+        .slick-dot-icon {
+          display: none !important;
+
+          &::before {
+            display: none !important;
+          }
+        }
+
+        &:hover,
+        &:focus {
+          background: $c-action-hover;
+          border: 1px solid $c-white;
+        }
+      }
+    }
+  }
+}
+
+.comp-carousel__slider-item {
+
+}
+
+//
+// Carousel Slides.
+//
+
+.comp-carousel-slide {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: rem(452px);
+  text-align: center;
+  background-color: $c-neutral-100;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+
+  @include media-breakpoint-up(md) {
+    min-height: rem(592px);
+  }
+}
+
+.comp-carousel-slide__link-wrapper {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: rem(100px 0);
+  width: 100%;
+  height: 100%;
+
+  @include media-breakpoint-up(md) {
+    padding: rem(100px);
+  }
+}
+
+.comp-carousel-slide__link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.comp-carousel-slide__body {
+  margin: 0 auto;
+  padding: rem(75px 30px 75px);
+  max-width: rem(1140px);
+  color: $c-white;
+
+  @include media-breakpoint-up(md) {
+    padding: rem(75px 90px 75px);
+  }
+
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6,
+  .h-overline {
+    color: $c-white;
+  }
+
+  .h-overline {
+    margin: rem(0 0 10px 0);
+  }
+
+  h1,
+  .h1 {
+    margin: rem(0 0 15px 0);
+    padding: 0;
+  }
+
+  h5,
+  .h5 {
+    margin: rem(0 0 2px 0);
+    letter-spacing: 0.36em;
+  }
+
+  .comp-carousel-slide__body-text {
+    font-size: rem(25px);
+    font-weight: 500;
+  }
+}
+
+.comp-carousel-slide__buttons {
+  clear: both;
+  margin: rem(35px 0 0 0);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .btn {
+    margin-left: math.div($btn-margin, 2);
+    margin-right: math.div($btn-margin, 2);
+  }
+}
+
+// Left Aligned.
+.comp-carousel-slide--align--left {
+  justify-content: flex-start;
+  text-align: left;
+
+  .comp-carousel-slide__body {
+    margin: 0 auto;
+    width: 100%;
+    max-width: rem(1440px);
+  }
+
+  .comp-carousel-slide__buttons {
+    justify-content: flex-start;
+
+    .btn {
+      margin-left: 0;
+      margin-right: $btn-margin;
+    }
+  }
+}
+
+//
+// Carousel Visibility.
+//
+
+.comp-carousel__slider {
+  visibility: hidden;
+  opacity: 0;
+
+  &.slick-initialized {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.comp-carousel__slider .comp-carousel__slider-item {
+  display: none;
+}
+
+.comp-carousel__slider .comp-carousel__slider-item:first-of-type {
+  display: block;
+  visibility: hidden;
+}
+
+.comp-carousel__slider.slick-initialized .comp-carousel__slider-item {
+  display: block;
+  visibility: visible !important;
+}

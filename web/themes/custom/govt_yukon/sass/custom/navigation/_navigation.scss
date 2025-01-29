@@ -1,0 +1,318 @@
+//
+// Navigation Styles.
+// > For general navigation styling.
+// > Put content specific navigation styling in their corresponding partial.
+//
+
+// Menus.
+.menu {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: top;
+}
+
+.menu__item {
+  position: relative;
+  float: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+.menu__link {
+  display: block;
+  margin: 0;
+  padding: rem(0 5px);
+  color: $c-body;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.2;
+
+  &:visited {
+    color: $c-link-visited;
+  }
+
+  &:hover,
+  &:focus {
+    color: $c-body;
+    text-decoration: underline;
+  }
+}
+
+span.menu__link {
+  &:hover,
+  &:focus,
+  &.menu__link--active-trail {
+    text-decoration: none !important;
+  }
+}
+
+// Menus With Dropdowns.
+.menu--has-dropdowns.menu--level-0 {
+  > .menu__item {
+    // Items that are expanded.
+    &.menu__item--expanded {
+      > .menu__link {
+        // Icon.
+        &::after {
+          @extend %fa-icon;
+          @extend .far;
+          position: relative;
+          top: 0;
+          margin: rem(0 0 0 6px);
+          content: fa-content($fa-var-angle-down);
+          transition: all .2s ease-in-out;
+
+          @include media-breakpoint-up(xxl) {
+            margin: rem(0 0 0 10px);
+          }
+        }
+      }
+    }
+  }
+
+  // Dropdowns.
+  > .menu__item > .menu {
+    display: none;
+    position: absolute;
+    left: rem(-22px);
+    margin: 0;
+    padding: rem(20px 32px);
+    width: 100%;
+    min-width: rem(350px);
+    background: $c-white;
+    visibility: hidden;
+    opacity: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .5);
+    transition: all .5s ease;
+    z-index: 50;
+
+    > .menu__item {
+      margin: rem(0 0 6px 0);
+      padding: 0;
+      width: 100%;
+      text-align: left;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      > .menu__link {
+        margin: 0;
+        padding: rem(5px 0);
+
+        &.menu__link--active-trail {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  // Increase min-width on last item.
+  > .menu__item:last-child > .menu {
+    min-width: rem(440px);
+  }
+
+  // Dropdowns - Show on hover.
+  > .menu__item:hover > .menu,
+  > .menu__item:focus-within > .menu,
+  > .menu__item .menu:hover {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  > .menu__item.menu__item--expanded > .menu__link:hover,
+  > .menu__item.menu__item--expanded > .menu__link:focus,
+  > .menu__item.menu__item--expanded:hover > .menu__link,
+  > .menu__item.menu__item--expanded:focus-within > .menu__link {
+    // Icon.
+    &::after {
+      top: rem(3.5px);
+    }
+  }
+
+  // Always display 3+ level menus.
+  > .menu__item > .menu > .menu__item > .menu {
+    position: static;
+    display: block;
+    margin: 0;
+    padding: 0;
+    min-width: auto;
+    visibility: visible;
+    opacity: 1;
+    box-shadow: none;
+
+    > .menu__item {
+      margin: rem(6px 0 0 0);
+      padding: 0;
+      width: 100%;
+      text-align: left;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      > .menu__link {
+        position: relative;
+        margin: 0;
+        padding: rem(5px 0 5px 25px);
+        color: $c-link;
+        text-decoration: none;
+        font-weight: normal;
+
+        &:visited {
+          color: $c-link-visited;
+        }
+
+        &:hover,
+        &:focus {
+          color: $c-link-hover;
+          text-decoration: underline;
+        }
+
+        &.menu__link--active-trail {
+          text-decoration: underline;
+        }
+
+        // Icon.
+        &::before{
+          @extend %fa-icon;
+          @extend .far;
+          position: absolute;
+          top: rem(7px);
+          left: rem(9px);
+          content: fa-content($fa-var-angle-right);
+          font-size: rem(16px);
+        }
+      }
+    }
+  }
+}
+
+// Tabs & Drupal Admin Tabs.
+.nav-drupal-tabs {
+  margin: rem(20px) 0;
+  padding: 0;
+}
+
+.drupal-tabs {
+  margin: 0 0 rem(20px);
+  padding: 0;
+  list-style: none;
+
+  > li {
+    display: inline-block;
+    // LTR.
+    margin-right: .3em;
+    margin-bottom: .3em;
+  }
+}
+
+[dir='rtl'] .drupal-tabs > li {
+  margin-right: 0;
+  margin-left: .3em;
+}
+
+.drupal-tabs a {
+  display: block;
+  margin: 0;
+  padding: rem(8px);
+  text-decoration: none;
+  color: $c-btn;
+  font-weight: 500;
+  background: $c-white;
+  border: 1px solid $c-btn;
+  border-radius: $border-radius;
+
+  &:visited {
+    color: $c-btn;
+  }
+
+  &.is-active {
+    color: $c-white;
+    text-decoration: none;
+    background: $c-btn;
+    border-color: $c-btn;
+  }
+
+  &:focus,
+  &:hover {
+    color: $c-white;
+    text-decoration: none;
+    background: $c-btn-hover;
+    border-color: $c-btn-hover;
+  }
+}
+
+// Drupal Primary Tabs.
+ul.tabs.drupal-tabs--primary,
+.drupal-tabs--primary {
+  display: block;
+  margin: 0 0 rem(15px);
+  padding: 0;
+  background: none;
+  border: 0;
+
+  li {
+    margin: 0 rem(5px) rem(5px) 0;
+    padding: 0;
+
+    a {
+      display: block;
+      margin: 0;
+      padding: rem(10px 20px 8px);
+      line-height: 1.2;
+      color: $c-btn;
+      text-decoration: none;
+      background: $c-white;
+      border: 1px solid $c-btn;
+      border-radius: $border-radius;
+
+      &:visited {
+        color: $c-btn;
+      }
+
+      &.active,
+      &.is-active {
+        color: $c-white;
+        background: $c-btn;
+        border-color: $c-btn;
+      }
+
+      &:hover,
+      &:focus {
+        color: $c-white;
+        background: $c-btn-hover;
+        border-color: $c-btn-hover;
+      }
+    }
+  }
+}
+
+//
+// Skip To Main Content.
+//
+
+.skip-to-main-content {
+  position: absolute;
+  top: rem(5px);
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 9999;
+
+  .skip-link.visually-hidden.focusable {
+    &:focus {
+      position: static !important;
+      margin: 0 !important;
+      width: auto !important;
+      height: auto !important;
+      overflow: visible !important;
+      clip: unset !important;
+    }
+  }
+}

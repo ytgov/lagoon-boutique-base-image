@@ -1,0 +1,58 @@
+//
+// Page Accent.
+//
+
+.comp-page-accent {
+  position: relative;
+  pointer-events: none;
+
+  * {
+    pointer-events: none;
+  }
+}
+
+.comp-page-accent__content {
+  position: relative;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  width: 100%;
+  height: rem(50px);
+  overflow: hidden;
+
+  @include media-breakpoint-up(md) {
+    position: absolute;
+    display: block;
+    height: rem(200px);
+  }
+}
+
+//
+// Aurora.
+//
+
+.comp-page-accent--aurora .comp-page-accent__content {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: rem(-100px);
+    display: block;
+    width: rem(300px);
+    height: rem(50px);
+    background-image: url('../images/aurora-small-mobile.svg');
+    background-repeat: no-repeat;
+    overflow: hidden;
+    transition: all .4s ease;
+
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: rem(-30px);
+      right: -60%;
+      width: 100%;
+      height: rem(185px);
+      background-image: url('../images/aurora-main.svg');
+      background-size: contain;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<div class="comp-share-this-page">
+  <div class="dropdown comp-share-this-page__dropdown">
+    <button class="btn btn--secondary dropdown-toggle comp-share-this-page__dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ 'Share this page'|t }}</button>
+    <ul class="dropdown-menu comp-share-this-page__dropdown-menu">
+      <li class="comp-share-this-page__dropdown-menu__item comp-share-this-page__dropdown-menu__item--share-facebook">
+        <a class="dropdown-item comp-share-this-page__dropdown-menu__link" href="https://facebook.com/sharer/sharer.php?u={{ encoded_absolute_path }}" target="_blank" aria-label="{{ 'Share on Facebook'|t }}">{{ 'Share'|t }}</a>
+      </li>
+      <li class="comp-share-this-page__dropdown-menu__item comp-share-this-page__dropdown-menu__item--share-twitter">
+        <a class="dropdown-item comp-share-this-page__dropdown-menu__link" href="https://twitter.com/intent/tweet/?text={{ encoded_title }}&amp;url={{ encoded_absolute_path }}" target="_blank" aria-label="{{ 'Share on Twitter'|t }}">{{ 'Tweet'|t }}</a>
+      </li>
+      <li class="comp-share-this-page__dropdown-menu__item comp-share-this-page__dropdown-menu__item--email">
+        <a class="dropdown-item comp-share-this-page__dropdown-menu__link" href="mailto:?subject={{ encoded_title }}&amp;body={{ encoded_absolute_path }}" target="_self" aria-label="{{ 'Share by email'|t }}">{{ 'Send by email'|t }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

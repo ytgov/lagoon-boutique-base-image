@@ -1,0 +1,23 @@
+//
+// Recent Blog Posts Block.
+//
+
+.recent-posts-block{
+  margin-bottom: rem(36px);
+
+  .views-row {
+    padding: rem(16px) 0;
+    margin-bottom: rem(2px);
+    border-bottom: 1px solid $border-color;
+
+    .views-field-field-blog-date {
+      font-size: $fs-base;
+      color: $c-zinc;
+    }
+
+    .views-field-title a {
+      font-weight: 500;
+      text-decoration: none;
+    }
+  }
+}

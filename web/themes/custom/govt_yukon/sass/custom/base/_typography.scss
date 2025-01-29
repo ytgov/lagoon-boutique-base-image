@@ -1,0 +1,146 @@
+//
+// Typography.
+//
+
+.f-italic {
+  font-style: italic;
+}
+
+.f-bold {
+  font-weight: bold;
+}
+
+//
+// Headers.
+//
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+.h-overline {
+  margin: 0 0 rem(15px);
+  padding: 0;
+  line-height: 1.2;
+  color: $c-body;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-family: $f-primary;
+}
+
+h1,
+.h1 {
+  margin: 0 0 rem(45px);
+  font-size: $fs-h1-min;
+  font-weight: 700;
+
+  @include media-breakpoint-up(lg) {
+    font-size: $fs-h1;
+  }
+}
+
+h2,
+.h2 {
+  font-size: $fs-h2-min;
+
+  @include media-breakpoint-up(lg) {
+    font-size: $fs-h2;
+  }
+}
+
+h3,
+.h3 {
+  font-size: $fs-h3-min;
+
+  @include media-breakpoint-up(lg) {
+    font-size: $fs-h3;
+  }
+}
+
+h4,
+.h4 {
+  font-size: $fs-h4;
+}
+
+h5,
+.h5 {
+  font-size: $fs-h5;
+}
+
+h6,
+.h6 {
+  font-size: $fs-h6;
+}
+
+.h-overline {
+  font-size: $fs-overline-min;
+  font-weight: 500;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+
+  @include media-breakpoint-up(lg) {
+    font-size: $fs-overline;
+  }
+}
+
+.page-title-overline {
+  .h-overline {
+    margin-top: rem(10px);
+
+    @include media-breakpoint-up(lg) {
+      margin-top: rem(40px);
+    }
+  }
+}
+
+//
+// Basic Content.
+//
+
+@mixin text-link() {
+  color: $c-link;
+  font-weight: 400;
+  text-decoration: underline;
+  @include smooth-transition;
+
+  &:visited {
+    color: $c-link-visited;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-link-hover;
+    text-decoration: underline;
+  }
+}
+
+a {
+  @include text-link;
+}
+
+.link-fade {
+  position: relative;
+  opacity: 1;
+
+  &:hover,
+  &:focus {
+    opacity: .85;
+  }
+}
+
+p {
+  margin: 0 0 rem(30px);
+  line-height: $line-height-paragraph;
+}

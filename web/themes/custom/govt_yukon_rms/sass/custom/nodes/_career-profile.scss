@@ -1,0 +1,72 @@
+//
+// Career Profile.
+//
+
+// Career Profile Header.
+.career-profile-header {
+  display: flex;
+  flex-wrap: nowrap;
+
+  .page-title-header {
+    margin: rem(0 0 25px);
+  }
+
+  .h-overline {
+
+  }
+}
+
+.career-profile-header__image {
+  display: none;
+  padding: rem(0 40px 0 0);
+  width: 34%;
+  min-width: 34%;
+
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
+}
+
+.career-profile-header__mobile-image {
+  display: block;
+  margin: rem(20px 0 30px);
+
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}
+
+.career-profile-header__content {
+  width: 100%;
+}
+
+.career-profile-header__intro-body {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.career-profile-header__category-data {
+  > .field {
+    margin-top: rem(4px);
+
+    &:first-child {
+      margin-top: rem(30px);
+    }
+  }
+
+  .field__items {
+    > .field__item {
+      display: inline-block;
+
+      &::after {
+        display: inline;
+        content: ',';
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+  }
+}

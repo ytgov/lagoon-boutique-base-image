@@ -1,0 +1,50 @@
+//
+// Bootstrap Overrides.
+//
+
+$enable-smooth-scroll: false;
+
+$body-bg: $c-white;
+$body-color: $c-body;
+
+// Links.
+// Style anchor elements.
+$link-color:        $c-link;
+$link-decoration:   underline;
+$link-hover-color:  $c-link-hover;
+
+// Nav Tabs.
+$nav-tabs-border-color:             $c-neutral-20;
+$nav-tabs-border-radius:            10px;
+$nav-tabs-link-hover-border-color:  $c-neutral-20 $c-neutral-20 $c-neutral-20;
+$nav-tabs-link-active-color:        $c-body;
+$nav-tabs-link-active-bg:           $body-bg;
+$nav-tabs-link-active-border-color: $c-neutral-20 $c-neutral-20 $nav-tabs-link-active-bg;
+
+// Grid Breakpoints.
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1544px
+);
+
+// Grid Containers.
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1464px
+);
+
+// Grid Columns.
+// Set the number of columns and specify the width of the gutters.
+$grid-columns:       12;
+$grid-gutter-width:  1.5rem; // Alt: 1.875rem
+$grid-row-columns:   6;

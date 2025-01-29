@@ -1,0 +1,48 @@
+//
+// Site Structure.
+//
+
+.site-structure-gutter {
+  padding-left: rem(5px);
+  padding-right: rem(5px);
+}
+
+.page-title-header {
+  clear: both;
+  margin: 0 0 rem(45px);
+
+  .h-page-title {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.page-title-header__content {
+  display: block;
+  flex-wrap: wrap;
+
+  @include media-breakpoint-up(lg) {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  > .comp-share-this-page {
+    margin: rem(20px 0 0);
+    padding: 0;
+
+    @include media-breakpoint-up(lg) {
+      margin: 0;
+      padding: rem(10px 0 0 25px);
+    }
+  }
+}
+
+.page-title-header__page-title {
+  width: 100%;
+}
+
+.share-this-page-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin: rem(20px 0 0);
+}

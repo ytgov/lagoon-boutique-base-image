@@ -1,0 +1,20 @@
+<nav class="menu-pager-nav" role="navigation" aria-labelledby="menu-pager-nav-label">
+  <h4 class="visually-hidden" id="menu-pager-nav-label">{{ 'Next Page Navigation'|t }}</h4>
+  <ul class="menu-pager-nav__menu">
+    <li class="menu-pager-nav__menu__item menu-pager-nav__menu__item--previous">
+      {% if previous %}
+        {{ previous }}
+      {% else %}
+        <a aria-disabled="true" class="menu-pager-nav__menu__link menu-pager-nav__menu__link--disabled">{{ 'Previous'|t }}</a>
+      {% endif %}
+    </li>
+    <li class="menu-pager-nav__menu__item menu-pager-nav__menu__item--separator"></li>
+    <li class="menu-pager-nav__menu__item menu-pager-nav__menu__item--next">
+      {% if next %}
+        {{ next }}
+      {% else %}
+        <a aria-disabled="true" class="menu-pager-nav__menu__link menu-pager-nav__menu__link--disabled">{{ 'Next'|t }}</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>

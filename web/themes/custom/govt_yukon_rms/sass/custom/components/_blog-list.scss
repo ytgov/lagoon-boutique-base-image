@@ -1,0 +1,198 @@
+//
+// Blog List Page.
+//
+
+.view-blogs {
+  // Layout.
+  .views-infinite-scroll-content-wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 2.5rem;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: calc(50% - 1.25rem) calc(50% - 1.25rem);
+    }
+
+    .node--type-blog.node--view-mode-teaser {
+      height: 100%;
+    }
+  }
+
+  // Card.
+  .comp-card {
+    text-align: left;
+    overflow: hidden;
+  }
+
+  a.comp-card__link-wrapper {
+    color: $c-body;
+    text-decoration: none;
+
+    &:visited {
+      color: $c-body;
+    }
+
+    &:hover,
+    &:focus {
+      color: $c-body;
+      text-decoration: none;
+
+      .comp-icon-card__text {
+        color: $c-link-hover;
+      }
+    }
+  }
+
+  .comp-card__text {
+    width: 100%;
+    max-width: unset;
+    padding-bottom: rem(20px);
+    text-decoration: none;
+  }
+
+  // Date field.
+  .field--name-field-blog-date {
+    font-size: $fs-base;
+    font-weight: $font-weight-light;
+    margin-bottom: rem(8px);
+  }
+
+  // Title.
+  .field--name-title {
+    text-decoration: underline;
+  }
+
+  // Categories / Tags.
+  .comp-card__categories {
+    position: relative;
+    padding: rem(0 20px 25px 20px);
+    font-size: $fs-base;
+    font-weight: $font-weight-light;
+
+    a {
+      color: $c-zinc;
+      font-weight: 500;
+
+      &:visited {
+        color: $c-link-visited;
+      }
+
+      &:hover,
+      &:focus {
+        color: $c-link-hover;
+      }
+    }
+
+    // Top border.
+    &::before {
+      content: '';
+      display: block;
+      margin-bottom: rem(25px);
+      border-top: 1px solid $c-neutral-20;
+    }
+  }
+}
+
+// Mobile toggle filter button.
+.blog-list__mobile-filters-toggle {
+  display: block;
+  margin-bottom: rem(36px);
+  text-align: center;
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+}
+
+.blog-list__mobile-filters-toggle__button__icon {
+  margin-left: rem(8px);
+}
+
+// Filters.
+.blog-list__filters {
+  display: block;
+
+  @include media-breakpoint-down(lg) {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s all ease;
+
+    &.blog-list__filters--show-all {
+      max-height: 2000px;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // Wrapper.
+  // Using important to get around Better Exposed Filters default styles.
+  fieldset {
+    float: none !important;
+    display: block;
+    margin: 0 0 rem(36px) !important;
+    padding: 0 0 rem(4px);
+    border-bottom: 1px solid $border-color;
+  }
+
+  // Title.
+  .fieldset-legend {
+    font-size: $fs-h4;
+    margin: 0 0 rem(4px);
+    padding: 0 0 rem(20px);
+    border-bottom: 1px solid $border-color;
+  }
+
+  // Checkboxes.
+  .form-type-checkbox {
+    display: none;
+    width: 100%;
+    margin: rem(12px) 0;
+
+    // Show the first x number.
+    &:nth-child(n+1):nth-child(-n+12) {
+      display: inline-block;
+    }
+
+    label {
+      min-height: 24px;
+      padding: 0 0 0 rem(40px);
+      font-size: $fs-base;
+
+      &::before {
+        width: 22px;
+        height: 22px;
+      }
+
+      &::after {
+        font-size: $fs-base;
+      }
+    }
+  }
+
+  // Show more/less.
+  // Added via javascript in global.js.
+  .blog-list__filters__more {
+    display: inline-block;
+    position: relative;
+    margin: rem(12px) 0 rem(12px) rem(16px);
+    font-size: $fs-base;
+    cursor: pointer;
+
+    &::before {
+      content: '+';
+      display: inline-block;
+      margin-right: rem(8px);
+    }
+  }
+
+  .fieldset-wrapper--show-all {
+    .form-type-checkbox {
+      display: inline-block !important;
+    }
+
+    .blog-list__filters__more::before {
+      content: '-';
+    }
+  }
+}

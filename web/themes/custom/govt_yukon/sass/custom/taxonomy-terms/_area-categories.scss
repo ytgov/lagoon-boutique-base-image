@@ -1,0 +1,130 @@
+//
+// Area Categories.
+//
+
+.area-category-header {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: rem(0 0 30px);
+  padding: rem(0 0 30px);
+  border-bottom: 1px solid $gray-border;
+
+  @include media-breakpoint-up(lg) {
+    flex-wrap: nowrap;
+    margin: rem(0 0 40px);
+    padding: rem(0 0 56px);
+  }
+}
+
+.area-category-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(50px);
+  min-width: rem(50px);
+  height: rem(50px);
+  text-align: center;
+  color: $c-white;
+  background: $c-zinc;
+
+  @include media-breakpoint-up(lg) {
+    width: rem(100px);
+    min-width: rem(100px);
+    height: rem(100px);
+  }
+}
+
+.area-category-icon__fa-icon {
+  margin: 0;
+  font-size: rem(24px);
+
+  @include media-breakpoint-up(lg) {
+    font-size: rem(56px);
+  }
+}
+
+.area-category-icon__icon-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: rem(24px);
+  height: rem(24px);
+
+  @include media-breakpoint-up(lg) {
+    width: rem(56px);
+    height: rem(56px);
+  }
+
+  svg {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    max-height: rem(24px);
+    fill: $c-white;
+
+    @include media-breakpoint-up(lg) {
+      max-height: rem(56px);
+    }
+
+    path {
+      fill: $c-white;
+    }
+  }
+}
+
+.area-category-header__title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-wrap: wrap;
+  padding: 0;
+  width: 100%;
+}
+
+.area-category-header--has-icon .area-category-header__title {
+  padding: rem(4px 0 0 65px);
+  min-height: rem(50px);
+
+  @include media-breakpoint-up(lg) {
+    padding: rem(8px 0 0 132px);
+    min-height: rem(100px);
+  }
+}
+
+.area-category-header__title__primary {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.area-category-header__title__top {
+  width: 100%;
+  font-size: $fs-h5;
+  font-weight: 500;
+}
+
+.area-category-header__pager {
+  margin: rem(30px 0 0);
+  padding: 0;
+  width: 100%;
+  white-space: normal;
+
+  @include media-breakpoint-up(lg) {
+    margin: 0;
+    padding: rem(18px 0 0 0);
+    width: auto;
+    white-space: nowrap;
+  }
+}

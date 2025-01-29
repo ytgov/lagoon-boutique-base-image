@@ -1,0 +1,31 @@
+//
+// Add To Any - Social share links.
+//
+
+.a2a_kit.addtoany_list {
+  a {
+    padding: calc($btn-margin / 2) $btn-margin calc($btn-margin / 2) 0;
+
+    @include media-breakpoint-up(md) {
+      padding: calc($btn-margin / 2) 0 calc($btn-margin / 2) $btn-margin;
+    }
+
+    > span {
+      background-color: $c-btn !important;
+      border-radius: $border-radius !important;
+
+      @include media-breakpoint-up(md) {
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+      }
+
+      svg {
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: rem(32px);
+        max-height: rem(32px);
+      }
+    }
+  }
+}

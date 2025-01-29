@@ -1,0 +1,491 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\block\Entity\Block;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function govt_yukon_form_system_theme_settings_alter(&$form, FormStateInterface $form_state, $form_id = NULL) {
+  // Work-around for a core bug affecting admin themes.
+  // See issue https://www.drupal.org/project/drupal/issues/943212.
+  if (isset($form_id)) {
+    return;
+  }
+
+  // Site Configuration.
+  $form['site_config'] = [
+    '#type' => 'details',
+    '#title' => t('Site Configuration'),
+    '#open' => TRUE,
+  ];
+  $form['site_config']['copyright_name'] = [
+    '#type' => 'textfield',
+    '#title' => t('Copyright Name'),
+    '#description' => t('The name displayed in the copyright text (site and emails). If empty, the Drupal site name will be used instead.'),
+    '#default_value' => theme_get_setting('copyright_name'),
+  ];
+
+  // Email Configuration.
+  $form['email_config'] = [
+    '#type' => 'details',
+    '#title' => t('Email Configuration'),
+    '#open' => TRUE,
+  ];
+  $form['email_config']['email_wrapper_bg_color'] = [
+    '#type' => 'textfield',
+    '#title' => t('Wrapper Background Color'),
+    '#default_value' => theme_get_setting('email_wrapper_bg_color'),
+    '#description' => t('The HTML hex color used for the wrapping area around the email body.<br>Example: cccccc'),
+    '#size' => 6,
+    '#maxlength' => 6,
+    '#field_prefix' => '#',
+    '#attributes' => [
+      'placeholder' => 'cccccc',
+    ],
+  ];
+  $form['email_config']['email_footer_signature'] = [
+    '#type' => 'textfield',
+    '#title' => t('Footer Signature Text'),
+    '#default_value' => theme_get_setting('email_footer_signature'),
+    '#description' => t('Text that is displayed at the bottom of the email body.'),
+  ];
+}
+
+/**
+ * Prepares global variables for all templates.
+ */
+function govt_yukon_preprocess(&$variables) {
+  $handler = \Drupal::service('theme_handler');
+  $variables['base_theme_directory'] = $handler->getTheme('govt_yukon')->getPath();
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * Adds template suggestions.
+ */
+function govt_yukon_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  // Add content type suggestions.
+  if ($node = \Drupal::request()->attributes->get('node')) {
+    if ($node instanceof NodeInterface) {
+      array_splice($suggestions, 1, 0, 'page__type__' . $node->getType());
+    }
+  }
+
+  // Add taxonomy vocabulary suggestions.
+  if ($term = \Drupal::request()->attributes->get('taxonomy_term')) {
+    $vocabulary_id = $term->bundle();
+    array_splice($suggestions, 1, 0, 'page__taxonomy__' . $vocabulary_id);
+  }
+
+  // Add page path alias suggestions.
+  $page_current_path = \Drupal::service('path.current')->getPath();
+
+  if (!empty($page_current_path)) {
+    $page_current_alias = \Drupal::service('path_alias.manager')->getAliasByPath($page_current_path);
+  }
+
+  if (!empty($page_current_alias)) {
+    $search_for = '/';
+    $page_current_alias = str_replace('-', '_', $page_current_alias);
+    $pos_page_current_alias = strpos($page_current_alias, $search_for);
+
+    if ($pos_page_current_alias !== FALSE) {
+      $page_current_alias_formatted = substr_replace($page_current_alias, '', $pos_page_current_alias, strlen($search_for));
+      $page_current_alias_formatted = str_replace('/', '__', $page_current_alias_formatted);
+    }
+
+    if ($page_current_alias_formatted) {
+      array_splice($suggestions, 1, 0, 'page__' . $page_current_alias_formatted);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function govt_yukon_preprocess_page(&$variables) {
+  // Load the site name out of configuration.
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
+  // Call route specific preprocess function.
+  $variables['route_name'] = \Drupal::routeMatch()->getRouteName();
+  $function = 'govt_yukon_preprocess_page__' . str_replace('.', '_', $variables['route_name']);
+  if (function_exists($function)) {
+    $function($variables);
+  }
+
+  // Set variables from theme settings.
+  $variables['copyright_name'] = theme_get_setting('copyright_name');
+
+  // Set Parent Root Title.
+  $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+  $node_id = \Drupal::routeMatch()->getRawParameter('node');
+
+  if ($node_id) {
+    $menu_link = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $node_id]);
+
+    if (is_array($menu_link) && count($menu_link)) {
+      $menu_link = reset($menu_link);
+
+      if ($menu_link->getParent()) {
+        $parents = $menu_link_manager->getParentIds($menu_link->getParent());
+        $parents_reverse = array_reverse($parents);
+        $parent = reset($parents_reverse);
+        $parent_root_title = $menu_link_manager->createInstance($parent)->getTitle();
+        $variables['parent_root_title'] = $parent_root_title;
+
+        // Immediate Parent.
+        $immediate_parent = $menu_link->getParent();
+        $immediate_parent_title = $menu_link_manager->createInstance($immediate_parent)->getTitle();
+        $variables['immediate_parent_title'] = $immediate_parent_title;
+      }
+    }
+  }
+
+  // Variables for social media sharing.
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+
+    // Absolute path variable.
+    $node_absolute_url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
+    $variables['absolute_path'] = $node_absolute_url;
+
+    // Encoded fields for social media sharing.
+    $node_absolute_encoded_url = urlencode($node_absolute_url);
+    $variables['encoded_absolute_path'] = $node_absolute_encoded_url;
+
+    $encoded_title = rawurlencode($node->title->value);
+    $variables['encoded_title'] = $encoded_title;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_taxonomy_term_alter().
+ */
+function govt_yukon_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+  $term = $variables['elements']['#taxonomy_term'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  // Add view mode theme suggestions.
+  $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
+}
+
+/**
+ * Implements hook_theme_suggestions_user_alter().
+ */
+function govt_yukon_theme_suggestions_user_alter(array &$suggestions, array $variables) {
+  // Define the view mode.
+  $mode = $variables['elements']['#view_mode'];
+  // Create a theme hook suggestion for view modes.
+  $suggestions[] = 'user__' . $mode;
+}
+
+/**
+ * Implements hook__preprocess_comment_HOOK() for Comments.
+ */
+function govt_yukon_preprocess_comment(&$variables) {
+  if (isset($variables['elements']['#comment'])) {
+    $comment = $variables['elements']['#comment'];
+
+    $variables['comment_type'] = $comment->bundle();
+
+    $variables['created'] = t('@comment_date', [
+      '@comment_date' => \Drupal::service('date.formatter')->format($comment->getCreatedTime(), 'custom', 'F j, Y'),
+    ]);
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function govt_yukon_preprocess_node(&$variables) {
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+
+    // Base path variable.
+    $variables['base_path'] = base_path();
+
+    // Absolute path variable.
+    $node_absolute_url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
+    $variables['absolute_path'] = $node_absolute_url;
+
+    // Encoded fields for social media sharing.
+    $node_absolute_encoded_url = urlencode($node_absolute_url);
+    $variables['encoded_absolute_path'] = $node_absolute_encoded_url;
+
+    $encoded_title = rawurlencode($node->title->value);
+    $variables['encoded_title'] = $encoded_title;
+  }
+}
+
+/**
+ * Implements hook_preprocess_taxonomy_term().
+ */
+function govt_yukon_preprocess_taxonomy_term(&$variables) {
+  if (isset($variables['term'])) {
+    // Set base path variable since it's not available by default.
+    $variables['base_path'] = base_path();
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function govt_yukon_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Comment form.
+  if ($form_id == 'comment_node_comment_form' || $form_id == 'comment_comment_form') {
+    // Update submit button text.
+    $form['actions']['submit']['#value'] = t('Post Comment');
+  }
+
+  // User Login form.
+  if ($form_id == 'user_login_form') {
+    // Make submit button the primary button.
+    $form['actions']['submit']['#button_type'] = 'primary';
+
+    // Remove autofocus from username input.
+    unset($form['name']['#attributes']['autofocus']);
+  }
+
+  // User Reset Password form.
+  if ($form_id == 'user_pass') {
+    // Make submit button the primary button.
+    $form['actions']['submit']['#button_type'] = 'primary';
+
+    // Remove mail which was markup.
+    // And assign new text to the name field description instead.
+    $form['mail'] = [];
+    $form['name']['#description'] = t('Password reset instructions will be sent to your registered email address.');
+
+    // Remove autofocus from username input.
+    unset($form['name']['#attributes']['autofocus']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_input().
+ */
+function govt_yukon_preprocess_input(&$variables) {
+  if (!isset($variables['element'])) {
+    return;
+  }
+
+  $variables['type'] = $variables['element']['#type'] ?? NULL;
+  $variables['button_type'] = $variables['element']['#button_type'] ?? NULL;
+  $variables['element_id'] = $variables['element']['#attributes']['id'] ?? NULL;
+
+  if (($variables['type'] ?? NULL) === 'submit') {
+    $variables['value'] = $variables['element']['#value'];
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_input_alter().
+ */
+function govt_yukon_theme_suggestions_input_alter(&$suggestions, array $variables) {
+  $element = $variables['element'];
+
+  // Set suggestion if it's referenced from a webform.
+  if (isset($element['#webform']) && !empty($element['#webform'])) {
+    array_splice($suggestions, 1, 0, 'input__' . 'webform' . '__' . $element['#type']);
+  }
+  // Set suggestion for inputs within nested paragraphs.
+  if (isset($element['#attributes']['data-paragraph-parent'])) {
+    array_splice($suggestions, 1, 0, 'input__' . $element['#type'] . '__' . 'paragraph__parent' . '__' . $element['#attributes']['data-paragraph-parent']);
+  }
+  // Set suggestion for inputs within paragraphs.
+  if (isset($element['#attributes']['data-paragraph'])) {
+    array_splice($suggestions, 1, 0, 'input__' . $element['#type'] . '__' . 'paragraph' . '__' . $element['#attributes']['data-paragraph']);
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_form_element_alter().
+ */
+function govt_yukon_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#name'])) {
+    $suggestions[] = 'form_element__' . $element['#name'];
+  }
+  if (isset($element['#type'])) {
+    $suggestions[] = 'form_element__type__' . $element['#type'];
+  }
+  if (isset($element['#form_id'])) {
+    $suggestions[] = 'form_element__form_id__' . $element['#form_id'];
+    $suggestions[] = 'form_element__' . $element['#form_id'] . '__' . $element['#type'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_form_element().
+ */
+function govt_yukon_preprocess_form_element(&$variables) {
+  $variables['label']['#attributes']['data-element-type'] = $variables['element']['#type'];
+
+  if (isset($variables['element']['#id'])) {
+    $variables['element_id'] = $variables['element']['#id'];
+  }
+  if (isset($variables['element']['#attributes']['class'])) {
+    if ($variables['element']['#type'] == 'textarea' && in_array('js-text-full', $variables['element']['#attributes']['class'])) {
+      $variables['is_js_text_widget'] = TRUE;
+    }
+  }
+  if (isset($variables['element']['#allowed_formats'])) {
+    if (in_array('full_html', $variables['element']['#allowed_formats'])) {
+      $variables['is_js_text_widget'] = TRUE;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_form_element_label().
+ */
+function govt_yukon_preprocess_form_element_label(&$variables) {
+  if (isset($variables['element'])) {
+    $variables['attributes'] = array_merge($variables['attributes'], $variables['element']['#attributes']);
+
+    if (isset($variables['element']['#attributes']['data-element-type'])) {
+      $variables['element_type'] = $variables['element']['#attributes']['data-element-type'];
+    }
+    if (isset($variables['element']['#id'])) {
+      $variables['element_id'] = $variables['element']['#id'];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_fieldset().
+ */
+function govt_yukon_preprocess_fieldset(&$variables) {
+  if (isset($variables['element']['#type'])) {
+    $variables['element_type'] = $variables['element']['#type'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_email().
+ */
+function govt_yukon_preprocess_email(array &$variables) {
+  // Load the site name out of configuration.
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
+  $variables['base_path'] = base_path();
+  $variables['site_path'] = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+
+  $theme = \Drupal::theme()->getActiveTheme();
+  $variables['theme_path'] = $theme->getPath();
+
+  // Set variables from theme settings.
+  $variables['email_wrapper_bg_color'] = theme_get_setting('email_wrapper_bg_color');
+  $variables['email_footer_signature'] = theme_get_setting('email_footer_signature');
+  $variables['copyright_name'] = theme_get_setting('copyright_name');
+}
+
+/**
+ * Implements hook_preprocess_user().
+ */
+function govt_yukon_preprocess_user(&$variables) {
+  // Base path variable.
+  $variables['base_path'] = base_path();
+}
+
+/**
+ * Implements hook_preprocess_user().
+ */
+function govt_yukon_preprocess_username(&$variables) {
+  $account = $variables['account'];
+
+  if (isset($account->field_display_name->value)) {
+    $variables['display_name'] = $account->field_display_name->value;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for maintenance-page.html.twig.
+ */
+function govt_yukon_preprocess_maintenance_page(&$variables) {
+  // By default, site_name is set to Drupal if no db connection is available
+  // or during site installation. Setting site_name to an empty string makes
+  // the site and update pages look cleaner.
+  // @see template_preprocess_maintenance_page
+  if (!$variables['db_is_active']) {
+    $variables['site_name'] = '';
+  }
+
+  // Set variables from theme settings.
+  $variables['copyright_name'] = theme_get_setting('copyright_name');
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task().
+ */
+function govt_yukon_preprocess_menu_local_task(&$variables) {
+  $url = $variables['link']['#url'];
+  if ($url instanceof Url && $url->getRouteName() == 'entity.user.canonical') {
+    $variables['link']['#title'] = t('Dashboard');
+  }
+  if ($url instanceof Url && $url->getRouteName() == 'entity.user.edit_form') {
+    $variables['link']['#title'] = t('Account details');
+  }
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function govt_yukon_preprocess_block(&$variables) {
+  if (isset($variables['elements']['#id'])) {
+    $region = Block::load($variables['elements']['#id'])->getRegion();
+    if (!empty($region)) {
+      $variables['content']['#attributes']['data-block']['region'] = $region;
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_block_alter().
+ */
+function govt_yukon_theme_suggestions_block_alter(&$suggestions, $variables) {
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $bundle = $variables['elements']['content']['#block_content']->bundle();
+    array_splice($suggestions, 1, 0, 'block__' . $bundle);
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_menu_alter().
+ */
+function govt_yukon_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+  if (isset($variables['attributes']['data-block']['region'])) {
+    $region = $variables['attributes']['data-block']['region'];
+    $suggestions[] = $variables['theme_hook_original'] . '__' . $region;
+    $suggestions[] = 'menu__' . $variables['menu_name'] . '__' . $region;
+  }
+}
+
+/**
+ * Implements hook_preprocess_image_widget().
+ */
+function govt_yukon_preprocess_image_widget(array &$variables) {
+  $data = &$variables['data'];
+
+  // This prevents image widget templates from rendering preview container HTML
+  // to users that do not have permission to access these previews.
+  // @todo revisit in https://drupal.org/node/953034
+  // @todo revisit in https://drupal.org/node/3114318
+  if (isset($data['preview']['#access']) && $data['preview']['#access'] === FALSE) {
+    unset($data['preview']);
+  }
+}

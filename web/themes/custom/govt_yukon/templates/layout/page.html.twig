@@ -1,0 +1,315 @@
+{#
+/**
+ * @file
+ * Page Theme: Default Page Template.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template in this directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+{% set site_logo %}
+  <img src="{{ base_path ~ base_theme_directory }}/images/logo-yukon.svg" width="150" height="60" alt="{{ site_name ? site_name }}" />
+{% endset %}
+
+{% set site_logo_footer %}
+  <img src="{{ base_path ~ base_theme_directory }}/images/logo-yukon--white.svg" width="150" height="60" alt="{{ site_name ? site_name }}" />
+{% endset %}
+
+{% block page_overlays %}
+  {# Mobile overlays. #}
+  {% if page.mobile_menu %}
+    <div class="offcanvas offcanvas-end offcanvas-mobile-nav" tabindex="-1" id="offcanvas-mobile-nav" aria-labelledby="offcanvas-mobile-nav-label">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvas-mobile-nav-label">{{ 'Menu'|t }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ 'Close Menu'|t }}" title="{{ 'Close Menu'|t }}"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="mobile-nav">
+          {{ page.mobile_menu }}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {# / Mobile overlays. #}
+{% endblock page_overlays %}
+
+{% block page_header %}
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="site-header__container container">
+        <div class="row">
+          <div class="col">
+            <div class="site-header__content">
+              <div class="site-header__logo-container">
+                <a href="{{ front_page }}" rel="home" title="{{ 'Home'|t }}" class="site-header__logo">
+                  {{ site_logo }}
+                </a>
+              </div>
+              <div class="site-header__primary-content">
+                {% if page.language_switcher %}
+                  <div class="site-header__language-switcher">
+                    {{ page.language_switcher }}
+                  </div>
+                {% endif %}
+
+                <div class="site-header__navigation-container">
+                  {# Primary Menu. #}
+                  {% if page.primary_menu %}
+                    <div class="primary-nav">
+                      {{ page.primary_menu }}
+                    </div>
+                  {% endif %}
+                  {# / Primary Menu. #}
+
+                  {# Site Search. #}
+                  {% if page.site_search %}
+                    {{ attach_library('govt_yukon/comp-site-search') }}
+                    <div class="comp-site-search site-header__search">
+                      <ul class="menu comp-site-search__menu">
+                        <li class="menu__item comp-site-search__menu__item">
+                          <a href="#" class="comp-site-search__menu__menu-link" role="button" aria-label="{{ 'Site Search'|t }}"></a>
+                        </li>
+                      </ul>
+                    </div>
+                  {% endif %}
+                  {# / Site Search. #}
+
+                  {# Mobile Menu Toggle. #}
+                  {% if page.mobile_menu %}
+                    <div class="site-header__mobile-menu-toggle">
+                      <button class="site-header__mobile-menu-toggle__button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-mobile-nav" aria-controls="offcanvas-mobile-nav" aria-label="{{ 'Menu'|t }}" title="{{ 'Menu'|t }}"></button>
+                    </div>
+                  {% endif %}
+                  {# / Mobile Menu Toggle. #}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {# Site Search - Form. #}
+    {% if page.site_search %}
+      <div class="comp-site-search-form">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="comp-site-search-form__content">
+                <div class="comp-site-search-form__content__form">
+                  {{ page.site_search }}
+                </div>
+                <a href="#" class="comp-site-search-form__close" role="button" aria-label="{{ 'Close Search'|t }}"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {# / Site Search - Form. #}
+  </header>
+{% endblock page_header %}
+
+{% block page_body %}
+  {% set site_content_attributes = create_attribute() %}
+  {% set page_accent = false %}
+
+  {#
+  Render sidebars to check if it is truly empty.
+  Issue: https://www.drupal.org/node/953034.
+  #}
+  {% set left_sidebar_rendered = page.sidebar|render %}
+  {% set left_sidebar_exists = left_sidebar_rendered|striptags('<a><img>')|trim ? true : false %}
+
+  {% set right_sidebar_exists = page.sidebar_second|render %}
+
+  {# Set column class based on sidebars. #}
+  {% if left_sidebar_exists and right_sidebar_exists %}
+    {% set col_class = 'col-lg-6' %}
+    {% set sidebar_col_class = 'col-lg-3' %}
+  {% elseif left_sidebar_exists or right_sidebar_exists %}
+    {% set col_class = 'col-lg-9' %}
+    {% set sidebar_col_class = 'col-lg-3' %}
+  {% else %}
+    {% set col_class = 'col-sm-12 col-main-content--full-width' %}
+  {% endif %}
+
+  {# Site Content Classes. #}
+  {%
+    set site_content_classes = [
+      'site-content',
+      (node and node.field_hide_header_elements.value) ? 'site-content--hide-header-elements',
+      (node and node.field_disable_page_top_margin.value) ? 'site-content--disable-top-margin',
+      left_sidebar_exists ? 'site-content--with-left-sidebar',
+      right_sidebar_exists ? 'site-content--with-right-sidebar',
+      (right_sidebar_exists and right_sidebar_exists) ? 'site-content--with-both-sidebars',
+      page_accent ? 'site-content--with-page-accent'
+    ]
+  %}
+
+  {% if page_accent %}
+    <div class="comp-page-accent comp-page-accent--aurora">
+      <div class="comp-page-accent__content"></div>
+    </div>
+  {% endif %}
+
+  <div{{ site_content_attributes.addClass(site_content_classes) }}>
+    <main class="site-content__main clearfix" role="main">
+      {# Link is in html.html.twig. #}
+      <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
+
+      <div class="site-content__container container">
+        {% if page.header %}
+          <div class="site-content__header">
+            {{ page.header }}
+          </div>
+        {% endif %}
+
+        {% if not (node and node.field_hide_header_elements.value) %}
+          {% if page.breadcrumb %}
+            <div class="row">
+              <div class="col-md-12">
+                {{ page.breadcrumb }}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+
+        {% if page.highlighted %}
+          <div class="row">
+            <div class="col-md-12">
+              {{ page.highlighted }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% block page_title %}
+          {% if not (node and node.field_hide_header_elements.value) %}
+            {% if page.page_title %}
+              <div class="row">
+                <div class="col-md-12">
+                  {% if parent_root_title %}
+                    <div class="page-title-overline">
+                      <p class="h-overline">{{ parent_root_title }}</p>
+                    </div>
+                  {% endif %}
+
+                  {{ page.page_title }}
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endblock page_title %}
+
+        <div class="row">
+          {# Left Sidebar. #}
+          {% if left_sidebar_exists %}
+            <div class="{{ sidebar_col_class }}">
+              <aside class="site-sidebar site-sidebar--left" role="complementary">
+                <h4 class="site-sidebar__root-title">
+                  {% if parent_root_title %}
+                    {{ parent_root_title }}
+                  {% else %}
+                    {{ drupal_title() }}
+                  {% endif %}
+                </h4>
+
+                {{ page.sidebar }}
+              </aside>
+            </div>
+          {% endif %}
+          {# / Left Sidebar. #}
+
+          <div class="{{ col_class }}">
+            <div class="site-content__main-body">
+              {% if page.help %}
+                {{ page.help }}
+              {% endif %}
+
+              {% if page.content_above %}
+                {{ page.content_above }}
+              {% endif %}
+
+              {% if page.content %}
+                {{ page.content }}
+              {% endif %}
+
+              {% if page.content_below %}
+                {{ page.content_below }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+{% endblock page_body %}
+
+{% block page_footer %}
+  {# Above Footer #}
+  {% if page.above_footer %}
+    <div class="above-site-footer">
+      {{ page.above_footer }}
+    </div>
+  {% endif %}
+  {# / Above Footer #}
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__top">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="site-footer__top__content">
+              <a href="{{ front_page }}" class="site-footer__logo">
+                {{ site_logo_footer }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="site-footer__bottom__content">
+              {# Footer Menu. #}
+              {% if page.footer_menu %}
+                <div class="site-footer-nav">
+                  {{ page.footer_menu }}
+                </div>
+              {% endif %}
+              {# / Footer Menu. #}
+
+              <div class="site-footer__copyright">
+                {{ '&copy; @year <a href="@frontpage_url">@site_name</a>'|t({'@site_name': copyright_name ? copyright_name : site_name, '@frontpage_url': front_page, '@year': 'now'|date('Y') }) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+{% endblock page_footer %}

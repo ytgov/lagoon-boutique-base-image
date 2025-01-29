@@ -1,0 +1,134 @@
+//
+// Block Quote.
+//
+
+blockquote,
+.comp-block-quote__quote {
+  position: relative;
+  clear: both;
+  display: block;
+  margin: 0 0 rem(20px);
+  padding: rem(30px 30px 70px 30px);
+  font-family: $f-primary;
+  font-size: $fs-global;
+  font-weight: 500;
+  line-height: 1.4;
+  font-style: normal;
+  color: $c-white;
+  border: 0;
+  border-radius: 30px 30px 30px 0;
+  background: $c-river-blue;
+
+  @include media-breakpoint-up(sm) {
+    padding: rem(40px 40px 50px 80px);
+    font-size: rem(24px);
+    border-radius: 100px 100px 100px 0;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: rem(67px 115px 85px 217px);
+    font-size: rem(30px);
+  }
+
+  p {
+    margin: rem(0 0 33px 0);
+    padding: 0;
+    line-height: 1.4;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &::before {
+    display: none;
+  }
+
+  // Icon.
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: rem(30px);
+    left: rem(30px);
+    display: block;
+    width: rem(30px);
+    height: rem(23px);
+    background-image: url('../images/components/quote-right.svg');
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    transform: rotate(180deg);
+
+    @include media-breakpoint-up(lg) {
+      bottom: rem(55px);
+      left: rem(80px);
+      width: rem(92px);
+      height: rem(72px);
+    }
+  }
+}
+
+.comp-block-quote__author {
+  font-size: $fs-global;
+
+  @include media-breakpoint-up(sm) {
+    font-size: rem(23px);
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: rem(25px);
+  }
+
+  div {
+    display: inline;
+  }
+}
+
+//
+// Variants.
+//
+
+.comp-block-quote--dark .comp-block-quote__quote {
+  background: $c-zinc;
+}
+
+// Right Alignment.
+.comp-block-quote--align--right .comp-block-quote__quote {
+  padding: rem(30px 30px 70px 30px);
+  border-radius: 30px 30px 0 30px;
+
+  @include media-breakpoint-up(sm) {
+    padding: rem(40px 62px 50px 60px);
+    border-radius: 100px 100px 0 100px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: rem(67px 127px 85px 119px);
+  }
+
+  // Icon.
+  &::after {
+    bottom: rem(30px);
+    left: auto;
+    right: rem(30px);
+    transform: none;
+
+    @include media-breakpoint-up(lg) {
+      bottom: rem(52px);
+      left: auto;
+      right: rem(120px);
+    }
+  }
+
+  .comp-block-quote__author {
+    padding-right: 0;
+
+    @include media-breakpoint-up(sm) {
+      padding-right: rem(20px);
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-right: rem(111px);
+    }
+  }
+}

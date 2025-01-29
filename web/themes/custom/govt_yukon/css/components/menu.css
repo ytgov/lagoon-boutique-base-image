@@ -1,0 +1,31 @@
+/**
+ * @file
+ * Visual styles for menu.
+ */
+
+ul.menu {
+
+}
+
+[dir="rtl"] ul.menu {
+
+}
+
+.menu-item--expanded {
+
+}
+
+.menu-item--collapsed {
+
+}
+
+[dir="rtl"] .menu-item--collapsed {
+
+}
+.menu-item {
+
+}
+
+ul.menu a.is-active {
+
+}

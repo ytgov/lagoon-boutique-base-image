@@ -1,0 +1,8 @@
+FROM uselagoon/php-8.1-cli-drupal:latest
+
+COPY composer.* /app/
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev
+COPY . /app
+
+# Define where the Drupal Root is located
+ENV WEBROOT=web

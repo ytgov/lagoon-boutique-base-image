@@ -1,0 +1,81 @@
+//
+// Mixins.
+//
+
+@use "sass:math";
+
+@mixin focus-shadow() {
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%);
+}
+
+@mixin button-hide-text() {
+  text-align: left;
+  text-indent: -99999px;
+  outline: none;
+}
+
+@mixin border-top-radius($radius) {
+  border-top-right-radius: $radius;
+  border-top-left-radius: $radius;
+}
+
+@mixin border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+@mixin border-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+  border-top-left-radius: $radius;
+}
+
+@mixin linear-gradient($top, $bottom) {
+  background: linear-gradient(to bottom, $top 0%, $bottom 100%);
+}
+
+@mixin background-opacity($color, $opacity: .3) {
+  background: $color; // Fallback.
+  background: rgba($color, $opacity);
+}
+
+@mixin smooth-transition() {
+  transition: color .2s ease-in-out, opacity .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+}
+
+//
+// Typography.
+//
+
+// Calculate rem from px.
+$rem-base: 16px;
+
+@function strip-unit($num) {
+  @return math.div($num, ($num * 0 + 1));
+}
+
+@function convert-to-rem($value, $base-value: $rem-base)  {
+  // $value: strip-unit($value) / strip-unit($base-value) * 1rem;
+  $value: math.div(strip-unit($value), strip-unit($base-value)) * 1rem;
+  @if ($value == 0rem) { $value: 0; } // Turn 0rem into 0.
+  @return $value;
+}
+
+@function rem($values, $base-value: $rem-base) {
+  $max: length($values);
+  @if $max == 1 { @return convert-to-rem(nth($values, 1), $base-value); }
+  $remValues: ();
+  @for $i from 1 through $max {
+    $remValues: append($remValues, convert-to-rem(nth($values, $i), $base-value));
+  }
+  @return $remValues;
+}
+
+@mixin font-size($size) {
+  font-size: $size; // Fallback in px.
+  font-size: rem($size);
+}

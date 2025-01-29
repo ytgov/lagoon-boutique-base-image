@@ -1,0 +1,98 @@
+{#
+/**
+ * @file
+ * Paragraph Theme: Carousel Slide.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set component_prefix = 'comp-carousel-slide' %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    component_prefix,
+    paragraph.field_slide_text_alignment.value ? component_prefix ~ '--align--' ~ paragraph.field_slide_text_alignment.value|clean_class
+  ]
+%}
+{# Background Image. #}
+{% if paragraph.field_background_image.0.entity.field_media_image.0.entity.fileuri %}
+  {% set bg_image_url = paragraph.field_background_image.0.entity.field_media_image.0.entity.fileuri|image_style('carousel_banner') %}
+  {% set bg_style = 'background-image: url(' ~ bg_image_url ~ ');' %}
+  {% set attributes = attributes.setAttribute('style', bg_style) %}
+{% endif %}
+
+{% set overlay_link = false %}
+{% if paragraph.field_link.0.url and not paragraph.field_buttons.0.entity.field_link.0.url %}
+  {% set overlay_link = true %}
+{% endif %}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if overlay_link %}
+        <div class="{{ component_prefix ~ '__link-wrapper' }}">
+          <a href="{{ paragraph.field_link.0.url }}" class="{{ component_prefix ~ '__link' }}">
+            <div class="visually-hidden">
+              {% if paragraph.field_overline_header.value %}
+                {{ content.field_overline_header }}
+              {% endif %}
+              {% if paragraph.field_primary_header.value %}
+                {{ content.field_primary_header }}
+              {% endif %}
+            </div>
+          </a>
+        </div>
+      {% endif %}
+
+      <div class="{{ component_prefix ~ '__body' }}">
+        {% if paragraph.field_overline_header.value %}
+          <div class="h-overline">{{ content.field_overline_header }}</div>
+        {% endif %}
+        {% if paragraph.field_primary_header.value %}
+          <div class="h1">{{ content.field_primary_header }}</div>
+        {% endif %}
+        <div class="{{ component_prefix ~ '__body-text' }}">
+          {{ content|without('field_background_image', 'field_link', 'field_overline_header', 'field_primary_header', 'field_buttons') }}
+        </div>
+        {% if paragraph.field_buttons.0.entity.field_link.0.url %}
+          {{ content.field_buttons }}
+        {% endif %}
+      </div>
+    {% endblock content %}
+  </div>
+{% endblock paragraph %}

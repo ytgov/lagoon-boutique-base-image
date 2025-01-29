@@ -1,0 +1,893 @@
+//
+// Global Elements.
+//
+
+// Lists.
+ul:not([class]),
+ol:not([class]) {
+  margin: rem(0 0 25px 30px);
+  padding: 0;
+}
+
+ul:not([class]),
+.list {
+  display: block;
+  margin: rem(0 0 25px 30px);
+  padding: 0;
+  list-style: none;
+
+  > li {
+    display: block;
+    position: relative;
+    margin: 0 0 rem(5px);
+    padding: 0 0 0 rem(16px);
+    line-height: $line-height-paragraph;
+
+    // Bullet.
+    &::before {
+      content: '';
+      position: absolute;
+      top: rem(12px);
+      left: 0;
+      display: block;
+      width: rem(5px);
+      height: rem(5px);
+      background: $c-body;
+      border-radius: 50%;
+    }
+  }
+
+  // Small variation.
+  &.list--sm {
+    font-size: rem(14px);
+
+    > li::before {
+      top: rem(8px);
+    }
+  }
+}
+
+ol:not([class]),
+.ordered-list {
+  margin: rem(0 0 25px 45px);
+  list-style-type: decimal;
+
+  > li {
+    position: relative;
+    margin: 0 0 rem(5px);
+    padding: 0;
+    line-height: $line-height-paragraph;
+  }
+}
+
+// Horizontal Rule.
+hr {
+  clear: both;
+  display: block;
+  margin: rem(55px 0);
+  padding: 0;
+  width: 100%;
+  height: 1px;
+  background: $c-neutral-20;
+  border: 0;
+  opacity: 1;
+}
+
+// Images.
+img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+// CKEditor alignment styles.
+.drupal-media {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.media,
+img,
+.drupal-media,
+.caption-drupal-media {
+  &.align-left {
+    display: block;
+  }
+
+  &.align-left,
+  &.drupal-media-style-align-left {
+    float: none;
+    margin: 0 0 20px;
+
+    @include media-breakpoint-up(sm) {
+      float: left;
+      margin: 0 20px 20px 0;
+    }
+  }
+
+  &.align-right {
+    display: block;
+  }
+
+  &.align-right,
+  &.drupal-media-style-align-right {
+    float: none;
+    margin: 0 0 20px;
+
+    @include media-breakpoint-up(sm) {
+      float: right;
+      margin: 0 0 20px 20px;
+    }
+  }
+
+  &.align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  &.drupal-media-style-align-center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}
+
+.caption-drupal-media {
+  display: table;
+
+  &.align-left,
+  &.align-center,
+  &.align-right {
+    display: table;
+  }
+
+  > figcaption {
+    padding: rem(10px 15px);
+    font-size: 75%;
+    background-color: $c-neutral-5;
+    border: 0;
+  }
+}
+
+// Alignment.
+
+// Video Embeds.
+iframe[src*='youtube.com'],
+iframe[src*='vimeo.com'] {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: rem(560px);
+}
+
+// Tables.
+.table-responsive {
+  border: 0;
+}
+
+.view table caption {
+  margin: 0;
+  padding: 0;
+}
+
+table,
+.table {
+  margin: 0 0 rem(30px);
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+
+  // Cells.
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: rem(8px 12px);
+        line-height: 1.4;
+        vertical-align: top;
+        border-top: 1px solid $c-neutral-20;
+      }
+
+      > td.is-active {
+        background: $gray-lighter;
+      }
+    }
+  }
+
+  // Bottom align for column headings.
+  > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid $c-neutral-20;
+  }
+
+  // Remove top/bottom border from thead by default.
+  > caption + thead,
+  > colgroup + thead,
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-top: 0;
+        border-bottom: 0;
+      }
+    }
+  }
+
+  // Account for multiple tbody instances.
+  > tbody + tbody {
+    border-top: 2px solid $c-neutral-20;
+  }
+
+  // Nesting.
+  .table {
+    background-color: $c-white;
+  }
+
+  // No border variation.
+  &.no-border {
+    // Cells.
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th,
+        > td {
+          border: 0;
+        }
+      }
+    }
+  }
+}
+
+table:not([class]) {
+  @extend .table;
+  @extend .table-bordered;
+}
+
+.table-bordered thead {
+  background: $c-body;
+  color: $c-white;
+}
+
+// Table Sort.
+.tablesort {
+  width: auto;
+  height: auto;
+
+  &.tablesort--asc {
+    background: none;
+
+    &::before {
+      @extend %fa-icon;
+      @extend .fas;
+      content: fa-content($fa-var-caret-down);
+      margin: 0 0 0 rem(2px);
+    }
+  }
+
+  &.tablesort--desc {
+    background: none;
+
+    &::before {
+      @extend %fa-icon;
+      @extend .fas;
+      content: fa-content($fa-var-caret-up);
+      margin: 0 0 0 rem(2px);
+    }
+  }
+}
+
+// Messages.
+.messages {
+  position: relative;
+  margin: rem(25px 0 25px 0);
+  padding: rem(16px 20px 16px 46px);
+  background: none;
+  box-shadow: none;
+  border: 0;
+  border-left: 4px solid;
+  border-radius: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  // Icon.
+  &::before {
+    @extend %fa-icon;
+    @extend .fas;
+    position: absolute;
+    top: rem(18px);
+    left: rem(15px);
+    right: auto;
+  }
+}
+
+[dir="rtl"] .messages {
+  border-width: 1px;
+  padding-left: rem(20px);
+  padding-right: rem(39px);
+  text-align: right;
+
+  // Icon.
+  &::before {
+    left: auto;
+    right: rem(15px);
+  }
+}
+
+.messages + .messages {
+  margin-top: 1.538em;
+}
+
+.messages__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.messages__item + .messages__item {
+  margin-top: 0.769em;
+}
+
+// Status/Success Message.
+.messages--status {
+  color: $c-success-text;
+  background-color: $c-success-bg;
+  border-color: $c-success-border;
+  background-image: none;
+  box-shadow: none;
+
+  // Icon.
+  &::before {
+    content: fa-content($fa-var-check-circle);
+    color: $c-success-icon;
+  }
+
+  p.error {
+    color: $c-success-text;
+  }
+
+  a {
+    color: $c-success-text;
+    text-decoration: underline;
+
+    &:visited {
+      color: $c-success-text;
+    }
+
+    &:hover,
+    &:focus {
+      color: $c-success-text;
+      text-decoration: underline;
+    }
+  }
+}
+
+[dir="rtl"] .messages--status {
+  border-color: $c-success-border;
+  box-shadow: none;
+  margin-left: 0;
+}
+
+// Warning Message.
+.messages--warning {
+  background-color: $c-warning-bg;
+  border-color: $c-warning-border;
+  color: $c-warning-text;
+  background-image: none;
+  box-shadow: none;
+
+  // Icon.
+  &::before {
+    content: fa-content($fa-var-exclamation-circle);
+    color: $c-warning-icon;
+  }
+
+  p.error {
+    color: $c-warning-text;
+  }
+
+  a {
+    color: $c-warning-text;
+    text-decoration: underline;
+
+    &:visited {
+      color: $c-warning-text;
+    }
+
+    &:hover,
+    &:focus {
+      color: $c-warning-text;
+      text-decoration: underline;
+    }
+  }
+}
+
+[dir="rtl"] .messages--warning {
+  border-color: $c-warning-border;
+  box-shadow: none;
+}
+
+// Error Message.
+.messages--error {
+  background-color: $c-error-bg;
+  color: $c-error-text;
+  border-color: $c-error-border;
+  background-image: none;
+  box-shadow: none;
+
+  // Icon.
+  &::before {
+    content: fa-content($fa-var-exclamation-triangle);
+    color: $c-error-icon;
+  }
+
+  p.error {
+    color: $c-error-text;
+  }
+
+  a {
+    color: $c-error-text;
+    text-decoration: underline;
+
+    &:visited {
+      color: $c-error-text;
+    }
+
+    &:hover,
+    &:focus {
+      color: $c-error-text;
+      text-decoration: underline;
+    }
+  }
+}
+
+[dir="rtl"] .messages--error {
+  border-color: $c-error-border;
+  box-shadow: none;
+}
+
+// Information Message.
+.messages--information,
+.messages--info {
+  background-color: $c-info-bg;
+  border-color: $c-info-border;
+  color: $c-info-text;
+  background-image: none;
+  box-shadow: none;
+
+  // Icon.
+  &::before {
+    content: fa-content($fa-var-info-circle);
+    color: $c-info-icon;
+  }
+
+  p.error {
+    color: $c-info-text;
+  }
+
+  a {
+    color: $c-info-text;
+    text-decoration: underline;
+
+    &:visited {
+      color: $c-info-text;
+    }
+
+    &:hover,
+    &:focus {
+      color: $c-info-text;
+      text-decoration: underline;
+    }
+  }
+}
+
+[dir="rtl"] .messages--information,
+[dir="rtl"] .messages--info {
+  border-color: $c-info-border;
+  box-shadow: none;
+}
+
+// Tabs.
+.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: rem(20px 0 40px);
+  list-style: none;
+  border-bottom-color: $c-neutral-20;
+
+  > li {
+    display: flex;
+    float: none;
+    margin: 0;
+    padding: rem(0 16px 0 0);
+
+    > .nav-link {
+      padding: rem(17px 25px);
+      font-size: $fs-global;
+      line-height: 1.2;
+      font-weight: 500;
+      border-color: var(--bs-nav-tabs-link-hover-border-color);
+
+      @include media-breakpoint-up(xl) {
+        font-size: rem(22px);
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    margin: rem(20px 0 25px);
+    border: 0;
+
+    > li {
+      display: flex;
+      float: none;
+      margin: 0;
+      padding: rem(0 12px 12px 0);
+      border: 0;
+
+      > .nav-link {
+        position: relative;
+        margin: 0;
+        padding: rem(10px 20px 8px);
+        font-size: $fs-global-min;
+        line-height: 1.2;
+        font-weight: 500;
+        color: $c-btn;
+        background: $c-white;
+        border: 1px solid $c-btn;
+        border-radius: 12px;
+
+        &.active {
+          color: $c-white;
+          background: $c-btn;
+          border: 1px solid $c-btn;
+
+          // Arrow.
+          &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: -7px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid $c-btn;
+            transform: translateX(-50%);
+          }
+        }
+
+        &:hover,
+        &:focus {
+          color: $c-white;
+          background: $c-btn-hover;
+          border: 1px solid $c-btn-hover;
+
+          // Arrow.
+          &::after {
+            border-top-color: $c-btn-hover;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Buttons.
+button {
+  @include smooth-transition;
+}
+
+.btn,
+.btn-default,
+.btn--default {
+  position: relative;
+  display: inline-block;
+  margin: 0 $btn-margin $btn-margin 0;
+  padding: rem(18px 28px);
+  width: auto;
+  height: auto;
+  min-height: $form-item-min-height;
+  font-family: $f-primary;
+  font-size: $fs-btn;
+  line-height: 1.2;
+  font-weight: 500;
+  text-align: inherit;
+  color: $c-btn;
+  text-shadow: none;
+  text-transform: none;
+  text-decoration: none;
+  cursor: pointer;
+  background: $c-white;
+  border: 1px solid $c-btn;
+  border-radius: $border-radius;
+  box-shadow: none;
+  @include smooth-transition();
+
+  &:visited {
+    color: $c-btn;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-btn-hover;
+    border-color: $c-btn-hover;
+    text-decoration: none;
+  }
+
+  &:disabled,
+  &[disabled] {
+    color: $c-body;
+    background: $c-neutral-40;
+    border-color: $c-body;
+    box-shadow: none;
+    text-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+// Primary button.
+.btn-primary,
+.btn--primary {
+  color: $c-white;
+  background: $c-btn;
+  border-color: $c-btn;
+
+  &:visited {
+    color: $c-white;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-white;
+    background: $c-btn-hover;
+    border-color: $c-btn-hover;
+  }
+}
+
+// Secondary button.
+.btn-secondary,
+.btn--secondary {
+  color: $c-btn;
+  background: $c-white;
+  border-color: $c-btn;
+
+  &:visited {
+    color: $c-btn;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-btn-hover;
+    background: $c-white;
+    border-color: $c-btn-hover;
+  }
+}
+
+// Primary & Secondary Disabled States.
+.btn-primary,
+.btn--primary,
+.btn-secondary,
+.btn--secondary {
+  &:disabled,
+  &[disabled] {
+    color: $c-body;
+    background: $c-neutral-40;
+    border-color: $c-body;
+    box-shadow: none;
+    text-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+// Tertiary button.
+.btn--tertiary {
+  font-weight: 500;
+  color: $c-btn;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+
+  &:visited {
+    color: $c-btn;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-btn-hover;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &[disabled] {
+    color: $c-body;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+// Text button.
+.btn--text {
+  font-weight: 500;
+  color: $c-btn;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+
+  &:visited {
+    color: $c-btn;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-btn-hover;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &[disabled] {
+    color: $c-body;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+// Link button.
+.btn--link,
+.btn--text-link {
+  font-weight: normal;
+  color: $c-link;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+
+  &:visited {
+    color: $c-link;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-link-hover;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &[disabled] {
+    color: $c-body;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+// Button Has Icon.
+.btn--has-icon {
+  position: relative;
+  padding-left: rem(63px);
+
+  // Font Awesome Icon.
+  .btn__fa-icon {
+    position: absolute;
+    top: rem(17px);
+    left: rem(28px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: rem(25px); // 25px
+    height: rem(25px);
+  }
+
+  // Image SVG Icon.
+  .btn__icon-image {
+    position: absolute;
+    top: rem(17px);
+    left: rem(28px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: rem(25px);
+    height: rem(25px);
+
+    svg {
+      display: block;
+      margin: auto;
+      width: 100%;
+      height: auto;
+      max-height: rem(25px);
+      fill: $c-btn !important;
+
+      path {
+        // Caution: Path fills can use issues with some SVGs.
+        //fill: $c-btn !important;
+      }
+    }
+  }
+}
+
+.btn--primary.btn--has-icon {
+  svg {
+    fill: $c-white !important;
+
+    path {
+      // Caution: Path fills can use issues with some SVGs.
+      //fill: $c-white !important;
+    }
+  }
+}
+
+// Button is an external link.
+.btn--is-external {
+  // Icon.
+  &::after {
+    @extend %fa-icon;
+    @extend .far;
+    content: fa-content($fa-var-external-link);
+    margin: rem(0 0 0 8rem);
+  }
+}
+
+// Resource Download.
+.btn--resource-download {
+  &::before {
+    @extend %fa-icon;
+    @extend .far;
+    content: fa-content($fa-var-arrow-to-bottom);
+    margin: rem(0 13px 0 0);
+  }
+}
+
+// Large button.
+.btn-lg,
+.btn--lg,
+.btn-group-lg > .btn {
+  font-size: $fs-btn-lg;
+}
+
+// Small button.
+.btn-sm,
+.btn--sm,
+.btn-group-sm > .btn {
+  font-size: $fs-btn-sm;
+}
+
+// Button Helpers.
+.btn--no-margin {
+  margin: 0;
+}
+
+.btn--full-width {
+  width: 100%;
+}

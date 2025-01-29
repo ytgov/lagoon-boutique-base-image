@@ -1,0 +1,37 @@
+//
+// Layouts.
+//
+
+.layout--2-col-66-33 > .container,
+.layout--nested--2-col-66-33,
+.layout--2-col-58-42 > .container,
+.layout--nested--2-col-58-42 {
+  > .row > div > .layout__region--second {
+    padding-left: 0;
+
+    @include media-breakpoint-up(lg) {
+      padding-left: rem(20px);
+    }
+
+    @include media-breakpoint-up(xxl) {
+      padding-left: rem(56px);
+    }
+  }
+}
+
+.layout--2-col-33-66 > .container,
+.layout--nested--2-col-33-66,
+.layout--2-col-42-58 > .container,
+.layout--nested--2-col-42-58 {
+  > .row > div > .layout__region--first {
+    padding-right: 0;
+
+    @include media-breakpoint-up(lg) {
+      padding-right: rem(20px);
+    }
+
+    @include media-breakpoint-up(xxl) {
+      padding-right: rem(56px);
+    }
+  }
+}

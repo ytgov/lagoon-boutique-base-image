@@ -1,0 +1,453 @@
+//
+// Forms.
+//
+
+.form-item,
+.form-actions {
+  margin-top: rem(28px);
+  margin-bottom: rem(28px);
+}
+
+.form-item:first-child {
+  margin-top: 0;
+}
+
+.control-label,
+.form-item__label,
+.fieldset-legend {
+  display: block;
+  margin: 0 0 rem(6px);
+  padding: 0;
+  font-size: rem(20px);
+  font-weight: 500;
+  color: $c-body;
+
+  &.form-required {
+    color: $c-body;
+  }
+}
+
+.fieldset-legend,
+.fieldset-legend.form-required {
+  color: $c-body;
+}
+
+.form-group {
+  margin-bottom: rem(25px);
+}
+
+.form-control {
+  display: block;
+  margin: 0;
+  padding: rem(12px 20px);
+  width: 100%;
+  max-width: $form-max-width;
+  height: $form-item-min-height;
+  font-size: $fs-form-item;
+  line-height: 1.2;
+  color: $c-body;
+  background: $c-white;
+  border: 1px solid $c-neutral-50;
+  border-radius: 3px;
+
+  @include media-breakpoint-up(md) {
+    width: auto;
+  }
+
+  &:focus {
+    border-color: $c-river-blue-focus;
+    outline: 0;
+    @include focus-shadow;
+  }
+
+  &.form-textarea {
+    max-width: 100%;
+    height: rem(150px);
+    line-height: $line-height-paragraph;
+  }
+}
+
+.form-control.error,
+.form-item input.error,
+.form-item textarea.error,
+.form-item select.error {
+  border: 1px solid $c-form-required;
+}
+
+.radio,
+.checkbox {
+  margin-top: 0;
+}
+
+.help-block {
+  margin-top: rem(5px);
+  font-size: 80%;
+  line-height: 1.2;
+  font-style: normal;
+}
+
+.form-type-radio .description,
+.form-type-checkbox .description {
+  margin-left: 0;
+}
+
+// Required fields.
+.form-required {
+  color: $c-form-required;
+}
+
+.form-required::after {
+  // Hide Drupal core asterisk.
+  display: none;
+}
+
+// Optional fields.
+.form-optional {
+  font-weight: normal;
+  font-size: 90%;
+  color: $gray;
+}
+
+textarea,
+textarea.resize-vertical {
+  // Remove browser resizer.
+  resize: none;
+}
+
+// Hide optional fields on login/registration forms since they are actually required.
+.form-item-completion-register-name .form-optional,
+.form-item-login-returning-customer-name .form-optional,
+.form-item-login-returning-customer-password .form-optional {
+  display: none;
+}
+
+// Select/Dropdown.
+.select-wrapper {
+  position: relative;
+  max-width: $form-max-width;
+
+  // Pseudo arrow.
+  &::after {
+    @extend %fa-icon;
+    @extend .far;
+    content: fa-content($fa-var-angle-down);
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    color: $c-body;
+    pointer-events: none;
+  }
+
+  .form-control {
+    // Account for arrow.
+    padding-right: 37px;
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+}
+
+// Radio.
+.form-type-radio {
+  position: relative;
+
+  // Hide radio so we can use a pseudo element instead.
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  label {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 1px 0 0 27px;
+    width: auto;
+    height: auto;
+    min-height: 20px;
+    font-size: $fs-form-item;
+    line-height: 1.2;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 1;
+
+    // Pseudo radio.
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      display: block;
+      margin: 0;
+      padding: 0;
+      width: 16px;
+      height: 16px;
+      background: $c-white;
+      border: 6px solid $c-white;
+      box-shadow: 0 0 0 2px $gray-border;
+      border-radius: 50%;
+      transition: all .2s ease-in-out;
+    }
+
+    &:hover,
+    &:focus {
+      &::before {
+        background: lighten($gray-border, 35%);
+        border-color: lighten($gray-border, 35%);
+      }
+    }
+  }
+
+  // Active/checked radio.
+  input[type="radio"]:checked + label::before {
+    background: $c-link;
+    box-shadow: 0 0 0 2px $c-link;
+    border: 3px solid $c-white;
+    animation: shrink-bounce 200ms cubic-bezier(.4,.0,.23,1);
+  }
+
+  // Focus state.
+  input[type="radio"]:focus + label::before {
+    outline: 2px solid $c-link;
+    box-shadow: 0 0 10px $c-link;
+  }
+}
+
+// Checkbox.
+.form-type-checkbox {
+  position: relative;
+
+  // Hide checkbox so we can use a pseudo element instead.
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  label {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 1px 0 0 27px;
+    width: auto;
+    height: auto;
+    min-height: 20px;
+    font-size: $fs-form-item;
+    line-height: 1.2;
+    vertical-align: top;
+    cursor: pointer;
+    z-index: 1;
+
+    // Pseudo checkbox.
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+      width: 19px;
+      height: 19px;
+      background: transparent;
+      border: 2px solid $gray-border;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 250ms cubic-bezier(.4,.0,.23,1);
+    }
+
+    &::after {
+      @extend %fa-icon;
+      @extend .fas;
+      content: fa-content($fa-var-check);
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      font-size: 13px;
+      color: $c-white;
+      line-height: 1;
+      text-align: center;
+      transition: all .2s ease-in-out;
+    }
+
+    &:hover,
+    &:focus {
+      &::before {
+        background: lighten($gray-border, 35%);
+      }
+
+      &::after {
+        color: lighten($gray-border, 35%);
+      }
+    }
+  }
+
+  // Active/checked checkbox.
+  input[type="checkbox"]:checked + label::before {
+    background: $c-link;
+    border-color: $c-link;
+    animation: shrink-bounce 200ms cubic-bezier(.4,.0,.23,1);
+  }
+
+  input[type="checkbox"]:checked + label::after {
+    color: $c-white;
+  }
+
+  // Focus state.
+  input[type="checkbox"]:focus + label::before {
+    outline: 1px solid $c-link;
+    box-shadow: 0 0 10px $c-link;
+  }
+}
+
+// Form Submit Trigger.
+.form-submit--trigger {
+  // Hidden by default.
+  // This anchor element will show up beside submit inputs.
+  // Use a more specific class to use this element instead of the input.
+  // Useful if you need icons etc. on your submit buttons.
+  display: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+
+  span {
+    display: none;
+  }
+}
+
+//
+// Webforms.
+//
+
+.webform-submission-form {
+  // Fix hidden state required markers.
+  .js-webform-states-hidden {
+    .control-label.form-required {
+      // Add in marker.
+      &::after {
+        content: ' *';
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        width: auto;
+        height: auto;
+        color: $c-form-required;
+        vertical-align: initial;
+        background: none;
+      }
+
+      // Hide html marker since it causes issues from the JS.
+      span.form-required {
+        display: none !important;
+      }
+    }
+  }
+}
+
+// Thumbs Up.
+// Replacement styles for radios.
+.form-wrapper.form-thumbs-up {
+  > legend,
+  > .fieldset-wrapper {
+    display: inline-block;
+    margin: rem(0 0 6px 0);
+    padding: 0;
+    width: auto;
+    height: auto;
+    vertical-align: top;
+  }
+
+  > legend {
+    margin: rem(11px 20px 6px 0);
+  }
+
+  > .fieldset-wrapper {
+    .form-radios {
+      position: relative;
+
+      .form-item {
+        display: inline-block;
+        margin: rem(0 10px 0 0);
+        padding: 0;
+        vertical-align: top;
+      }
+
+      .form-type-radio {
+        label {
+          position: relative;
+          display: inline-block;
+          margin: 0;
+          padding: 0;
+          width: auto;
+          height: auto;
+          min-height: auto;
+          font-size: 0;
+          line-height: 1.2;
+          vertical-align: top;
+          cursor: pointer;
+          z-index: 1;
+
+          // Pseudo radio.
+          &::before {
+            @extend %fa-icon;
+            @extend .far;
+            content: fa-content($fa-var-thumbs-up);
+            position: static;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            width: auto;
+            height: auto;
+            font-size: rem(38px);
+            color: $c-neutral-20;
+            vertical-align: top;
+            background: none;
+            border: 0;
+            box-shadow: none;
+            border-radius: 0;
+            transition: all .2s ease-in-out;
+          }
+
+          &:hover {
+            &::before {
+              color: $c-river-blue-dark;
+              border: 0;
+              background: none;
+            }
+          }
+        }
+
+        // Active/checked radio.
+        input[type="radio"]:checked + label::before {
+          color: $c-river-blue-dark;
+          background: none;
+          box-shadow: none;
+          border: 0;
+          animation: shrink-bounce 200ms cubic-bezier(.4,.0,.23,1);
+        }
+
+        // Focus state.
+        input[type="radio"]:focus + label::before {
+          color: $c-zinc;
+          border: 0;
+          background: none;
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+      .form-type-radio:last-child label::before {
+        content: fa-content($fa-var-thumbs-down);
+      }
+    }
+  }
+}

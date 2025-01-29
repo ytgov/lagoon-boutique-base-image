@@ -1,0 +1,57 @@
+//
+// Global Elements.
+//
+
+// CKEditor alignment styles.
+.drupal-media {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.media,
+img,
+.drupal-media,
+.caption-drupal-media {
+  &.align-left {
+    display: block;
+  }
+
+  &.align-left,
+  &.drupal-media-style-align-left {
+    float: none;
+    margin: 0 0 20px;
+
+    @include media-breakpoint-up(sm) {
+      float: left;
+      margin: 0 40px 20px 0;
+    }
+  }
+
+  &.align-right {
+    display: block;
+  }
+
+  &.align-right,
+  &.drupal-media-style-align-right {
+    float: none;
+    margin: 0 0 20px;
+
+    @include media-breakpoint-up(sm) {
+      float: right;
+      margin: 0 0 20px 40px;
+    }
+  }
+
+  &.align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  &.drupal-media-style-align-center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}

@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+node_modules
+templates/*
+images/*
+!.gitkeep
+css/*
+!css/components
+!css/README.txt

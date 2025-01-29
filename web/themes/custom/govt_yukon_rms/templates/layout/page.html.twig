@@ -1,0 +1,169 @@
+{% extends '@govt_yukon/templates/layout/page.html.twig' %}
+
+{% block page_body %}
+  {% set site_content_attributes = create_attribute() %}
+  {% set share_this_page = false %}
+  {% if node and node.field_share_this_page.value %}
+    {% set share_this_page = true %}
+  {% endif %}
+  {% set share_this_page_content %}
+    {% include '@govt_yukon/includes/share-this-page.html.twig' %}
+  {% endset %}
+  {% set page_accent = true %}
+
+  {#
+  Render sidebars to check if it is truly empty.
+  Issue: https://www.drupal.org/node/953034.
+  #}
+  {% set left_sidebar_rendered = page.sidebar|render %}
+  {% set left_sidebar_exists = left_sidebar_rendered|striptags('<a><img>')|trim ? true : false %}
+
+  {% set right_sidebar_exists = page.sidebar_second|render %}
+
+  {# Set column class based on sidebars. #}
+  {% if left_sidebar_exists and right_sidebar_exists %}
+    {% set col_class = 'col-lg-6' %}
+    {% set sidebar_col_class = 'col-lg-3' %}
+  {% elseif left_sidebar_exists or right_sidebar_exists %}
+    {% set col_class = 'col-lg-9' %}
+    {% set sidebar_col_class = 'col-lg-3' %}
+  {% else %}
+    {% set col_class = 'col-sm-12 col-main-content--full-width' %}
+  {% endif %}
+
+  {# Site Content Classes. #}
+  {%
+    set site_content_classes = [
+      'site-content',
+      (node and node.field_hide_header_elements.value) ? 'site-content--hide-header-elements',
+      (node and node.field_disable_page_top_margin.value) ? 'site-content--disable-top-margin',
+      left_sidebar_exists ? 'site-content--with-left-sidebar',
+      right_sidebar_exists ? 'site-content--with-right-sidebar',
+      (right_sidebar_exists and right_sidebar_exists) ? 'site-content--with-both-sidebars',
+      page_accent ? 'site-content--with-page-accent'
+    ]
+  %}
+
+  {% if page_accent %}
+    <div class="comp-page-accent comp-page-accent--aurora">
+      <div class="comp-page-accent__content"></div>
+    </div>
+  {% endif %}
+
+  <div{{ site_content_attributes.addClass(site_content_classes) }}>
+    <main class="site-content__main clearfix" role="main">
+      {# Link is in html.html.twig. #}
+      <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
+
+      <div class="site-content__container container">
+        {% if page.header %}
+          <div class="site-content__header">
+            {{ page.header }}
+          </div>
+        {% endif %}
+
+        {% if not (node and node.field_hide_header_elements.value) %}
+          {% if page.breadcrumb %}
+            <div class="row">
+              <div class="col-md-12">
+                {{ page.breadcrumb }}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+
+        {% if page.highlighted %}
+          <div class="row">
+            <div class="col-md-12">
+              {{ page.highlighted }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% block page_title %}
+          {% if not (node and node.field_hide_header_elements.value) %}
+            {% if page.page_title %}
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="page-title-header">
+                    {% if parent_root_title %}
+                      <div class="page-title-overline">
+                        <p class="h-overline">{{ parent_root_title }}</p>
+                      </div>
+                    {% endif %}
+                    <div class="page-title-header__content">
+                      <div class="page-title-header__page-title">
+                        {{ page.page_title }}
+                      </div>
+                      {% if share_this_page %}
+                        {{ share_this_page_content }}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endblock page_title %}
+
+        {# Page Banner. #}
+        {% if node and node.field_page_banner.0.entity.field_media_image.0.entity.fileuri %}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="comp-page-banner">
+                {{ drupal_field('field_page_banner', 'node', node.id, 'default') }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {# / Page Banner. #}
+
+        <div class="row">
+          {# Left Sidebar. #}
+          {% if left_sidebar_exists %}
+            <div class="{{ sidebar_col_class }}">
+              <aside class="site-sidebar site-sidebar--left" role="complementary">
+                <h4 class="site-sidebar__root-title">
+                  {% if parent_root_title %}
+                    {{ parent_root_title }}
+                  {% else %}
+                    {{ drupal_title() }}
+                  {% endif %}
+                </h4>
+
+                {{ page.sidebar }}
+              </aside>
+            </div>
+          {% endif %}
+          {# / Left Sidebar. #}
+
+          <div class="{{ col_class }}">
+            <div class="site-content__main-body">
+              {% if page.help %}
+                {{ page.help }}
+              {% endif %}
+
+              {% if page.content_above %}
+                {{ page.content_above }}
+              {% endif %}
+
+              {% if page.content %}
+                {{ page.content }}
+              {% endif %}
+
+              {% if page.content_below %}
+                {{ page.content_below }}
+              {% endif %}
+
+              {% if node and share_this_page and node.field_hide_header_elements.value %}
+                <div class="share-this-page-footer">
+                  {{ share_this_page_content }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+{% endblock page_body %}

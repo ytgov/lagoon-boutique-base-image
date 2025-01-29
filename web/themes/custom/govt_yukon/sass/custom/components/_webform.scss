@@ -1,0 +1,60 @@
+//
+// Webform.
+//
+
+.comp-webform {
+
+}
+
+.comp-webform__title {
+  font-weight: 700;
+}
+
+.comp-webform__content {
+
+}
+
+.comp-webform__additional-info {
+  margin: rem(0 0 20px);
+  padding: 0;
+
+  @include media-breakpoint-up(lg) {
+    margin: 0;
+    padding: rem(0 50px 0 0);
+  }
+}
+
+.comp-webform__additional-info__body {
+  margin: rem(28px 0 0);
+}
+
+//
+// Webform With Sidebar.
+//
+
+.comp-webform--has-sidebar {
+  .comp-webform__content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .comp-webform__additional-info {
+    width: 100%;
+
+    @include media-breakpoint-up(lg) {
+      width: 35%;
+    }
+  }
+
+  .comp-webform__webform {
+    width: 100%;
+
+    @include media-breakpoint-up(lg) {
+      width: 65%;
+    }
+  }
+
+  .comp-webform__title {
+    font-weight: 500;
+  }
+}

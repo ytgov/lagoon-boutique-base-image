@@ -1,0 +1,46 @@
+//
+// General.
+//
+
+html {
+  font-size: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  color: $c-body;
+  background: $c-site-bg;
+  font-family: $f-body;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-size: rem(16px);
+  line-height: 1.4;
+  min-width: $screen-min;
+
+  @include media-breakpoint-up(lg) {
+    font-size: rem(18px);
+  }
+
+  &.cke_editable {
+    padding: rem(20px);
+    background: $c-white;
+  }
+}
+
+html.drupal,
+html.drupal body {
+  background: $c-site-bg;
+}
+
+::selection {
+  color: $c-white;
+  background: $c-link;
+}
+
+::-moz-selection {
+  color: $c-white;
+  background: $c-link;
+}

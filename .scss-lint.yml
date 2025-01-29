@@ -1,0 +1,35 @@
+scss_files: 'web/themes/custom/govt_yukon_rms/sass/custom/**/*.scss'
+
+linters:
+  Comment:
+    enabled: false
+  ColorVariable:
+    enabled: false
+  EmptyLineBetweenBlocks:
+    enabled: false
+  SelectorFormat:
+    enabled: false
+  ImportantRule:
+    enabled: false
+  SelectorDepth:
+    enabled: false
+  QualifyingElement:
+    enabled: false
+  PropertySortOrder:
+    enabled: false
+  NestingDepth:
+    enabled: false
+  SpaceAfterPropertyColon:
+    enabled: false
+  SpaceAfterComma:
+    enabled: false
+  DeclarationOrder:
+    enabled: false
+  EmptyRule:
+    enabled: false
+  MergeableSelector:
+    enabled: false
+  DuplicateProperty:
+    enabled: false
+  IdSelector:
+    enabled: false

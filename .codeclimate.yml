@@ -1,0 +1,24 @@
+version: "2"
+exclude_patterns:
+  - "**/**"
+  - "!web/modules/custom"
+  - "!web/themes/custom"
+plugins:
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php,module,inc,install,test,profile,theme,css,info,txt,md"
+      standard: "Drupal,DrupalPractice"
+      file-list: ".phpcs-files.txt"
+  phpmd:
+    enabled: true
+    config:
+      rulesets: "cleancode,codesize,design,naming,unusedcode"
+      file_extensions:
+        - php
+        - inc
+        - module
+        - install
+        - test
+  scss-lint:
+    enabled: true

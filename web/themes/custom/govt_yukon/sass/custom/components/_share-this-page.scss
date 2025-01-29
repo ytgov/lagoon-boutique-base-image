@@ -1,0 +1,129 @@
+//
+// Share This Page.
+//
+
+.comp-share-this-page {
+
+}
+
+.comp-share-this-page__dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.comp-share-this-page__dropdown-toggle {
+  margin: 0;
+  padding: rem(14px 20px 10px);
+  font-size: $fs-global;
+  font-weight: 500;
+
+  // Share icon.
+  &::before {
+    @extend %fa-icon;
+    @extend .far;
+    content: fa-content($fa-var-share-alt);
+  }
+
+  // Arrow icon.
+  &::after {
+    @extend %fa-icon;
+    @extend .far;
+    content: fa-content($fa-var-angle-down);
+    margin: rem(0 0 0 14px);
+    border: 0;
+    vertical-align: baseline;
+  }
+
+  &.show,
+  &[aria-expanded='true'] {
+    // Arrow icon.
+    &::after {
+      content: fa-content($fa-var-angle-up);
+    }
+  }
+}
+
+.comp-share-this-page__dropdown-menu {
+  margin-top: rem(2px);
+  padding: 0;
+  width: 100%;
+  border: 1px solid $c-btn;
+  border-radius: $border-radius;
+}
+
+.comp-share-this-page__dropdown-menu__item {
+  border-bottom: 1px solid $c-btn;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.comp-share-this-page__dropdown-menu__link {
+  display: block;
+  margin: 0;
+  padding: rem(14px 20px 10px);
+  font-size: $fs-global;
+  font-weight: 500;
+  color: $c-btn;
+  text-decoration: none;
+  background: none;
+
+  &:visited {
+    color: $c-btn;
+    background: none;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-btn-hover;
+    text-decoration: none;
+    background: none;
+  }
+
+  &.active,
+  &:active {
+    color: $c-neutral-100;
+    background: none;
+  }
+}
+
+.comp-share-this-page__dropdown-toggle,
+.comp-share-this-page__dropdown-menu__link {
+  // Icon.
+  &::before {
+    margin: rem(0 14px 0 0);
+    width: rem(20px);
+    text-align: center;
+  }
+}
+
+.comp-share-this-page__dropdown-menu__item--share-facebook .comp-share-this-page__dropdown-menu__link {
+  // Facebook icon.
+  &::before {
+    @extend %fa-icon;
+    @extend .fab;
+    content: fa-content($fa-var-facebook-f);
+
+  }
+}
+
+.comp-share-this-page__dropdown-menu__item--share-twitter .comp-share-this-page__dropdown-menu__link {
+  // Facebook icon.
+  &::before {
+    @extend %fa-icon;
+    @extend .fab;
+    content: fa-content($fa-var-twitter);
+  }
+}
+
+.comp-share-this-page__dropdown-menu__item--email .comp-share-this-page__dropdown-menu__link {
+  // Facebook icon.
+  &::before {
+    @extend %fa-icon;
+    @extend .far;
+    content: fa-content($fa-var-envelope);
+  }
+}

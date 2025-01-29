@@ -1,0 +1,142 @@
+{% extends 'page.html.twig' %}
+
+{% block page_body %}
+  {% set site_content_attributes = create_attribute() %}
+  {% set share_this_page = false %}
+  {% if node and node.field_share_this_page.value %}
+    {% set share_this_page = true %}
+  {% endif %}
+  {% set share_this_page_content %}
+    {% include '@govt_yukon/includes/share-this-page.html.twig' %}
+  {% endset %}
+
+  {%
+    set site_content_classes = [
+      'site-content',
+      (node and node.field_hide_header_elements.value) ? 'site-content--hide-header-elements',
+      (node and node.field_disable_page_top_margin.value) ? 'site-content--disable-top-margin'
+    ]
+  %}
+
+  <div{{ site_content_attributes.addClass(site_content_classes) }} class="site-content{{ site_content_class }}">
+    <main class="content__main-content clearfix" role="main">
+      {# Link is in html.html.twig. #}
+      <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
+
+      <div class="site-content__container container">
+        {% if not (node and node.field_hide_header_elements.value) %}
+          {% if page.breadcrumb %}
+            <div class="row">
+              <div class="col-md-12">
+                {{ page.breadcrumb }}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+
+        {% if page.highlighted %}
+          <div class="row">
+            <div class="col-md-12">
+              {{ page.highlighted }}
+            </div>
+          </div>
+        {% endif %}
+
+        {# Page Banner. #}
+        {% if node and node.field_page_banner.0.entity.field_media_image.0.entity.fileuri %}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="comp-page-banner">
+                {{ drupal_field('field_page_banner', 'node', node.id, 'default') }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {# / Page Banner. #}
+
+        <div class="row">
+          <div class="col-sm-12 col-main-content--full-width">
+            {%
+              set area_category_header_classes = [
+                'area-category-header',
+                (node and node.field_area_category.0.target_id) ? 'area-category-header--has-icon'
+              ]
+            %}
+            {% set area_category_header_attributes = create_attribute() %}
+
+            <div class="area-page-header">
+              <div{{ area_category_header_attributes.addClass(area_category_header_classes) }}>
+                <div class="area-category-header__title">
+                  {% if node and node.field_area_category.0.target_id %}
+                    {{ drupal_field('field_area_category', 'node', node.id, 'default') }}
+                  {% endif %}
+                  {% if immediate_parent_title %}
+                    <div class="area-category-header__title__top">{{ immediate_parent_title }}</div>
+                  {% endif %}
+                  <div class="area-category-header__title__primary">
+                    {% block page_title %}
+                      {% if page.page_title %}
+                        {{ page.page_title }}
+                      {% endif %}
+                    {% endblock page_title %}
+                  </div>
+                </div>
+                {% if page.header %}
+                  <div class="area-category-header__pager">
+                    {{ page.header }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            {% if page.help %}
+              {{ page.help }}
+            {% endif %}
+
+            {% if page.content_above %}
+              {{ page.content_above }}
+            {% endif %}
+
+            {% if page.content %}
+              {{ page.content }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {# Components. #}
+      {% if node and node.field_components.0.target_id %}
+        <div class="page-components">
+          {{ node.field_components|view }}
+        </div>
+      {% endif %}
+      {# / Components. #}
+
+      {# Below Content. #}
+      {% if page.content_below %}
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              {{ page.content_below }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      {# / Below Content. #}
+
+      {# Share This Page. #}
+      {% if node and share_this_page %}
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="share-this-page-footer">
+                {{ share_this_page_content }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      {# / Share This Page. #}
+    </main>
+  </div>
+{% endblock page_body %}

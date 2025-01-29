@@ -1,0 +1,132 @@
+//
+// Site Search.
+//
+
+.search-form {
+  clear: both;
+  display: block;
+  margin: rem(0 0 40px);
+  padding: 0;
+  max-width: rem(500px);
+
+  .search-help-link {
+    display: none;
+  }
+
+  .container-inline label:after,
+  .container-inline .label:after {
+    display: none;
+  }
+
+  .form-wrapper {
+    position: relative;
+    margin: 0;
+    padding: rem(0 83px 0 0);
+  }
+
+  .form-item {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .control-label .form-optional {
+    display: none;
+  }
+
+  .form-control {
+    display: block;
+    margin: 0;
+    padding: rem(6px 16px);
+    width: 100%;
+    max-width: 100%;
+    height: rem(37px);
+    color: $c-gray-input-text;
+    background: $c-gray-input-light;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid $c-action;
+  }
+
+  > .container-inline {
+    input.form-submit {
+      display: none;
+    }
+
+    .form-submit--trigger {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      width: rem(83px);
+      height: rem(37px);
+      text-align: center;
+      background: $c-action;
+      border: 0;
+      border-radius: 0 5px 5px 0;
+
+      &:hover,
+      &:focus {
+        background: $c-action-hover;
+      }
+
+      // Icon.
+      &::before {
+        @extend %fa-icon;
+        @extend .fas;
+        content: fa-content($fa-var-search);
+        font-size: rem(16px);
+      }
+
+      span {
+        @extend .sr-only;
+        display: block;
+      }
+    }
+  }
+
+  // Advanced Search.
+  .search-advanced {
+    margin-top: rem(20px);
+
+    > .details-wrapper > .form-wrapper {
+      margin: rem(0 0 20px);
+
+      &:first-child {
+        .form-item {
+          margin: rem(0 0 20px);
+        }
+      }
+    }
+  }
+}
+
+//
+// Search Results.
+//
+
+.search-results {
+  clear: both;
+  margin: rem(0 0 20px);
+  padding: 0;
+  list-style: none;
+
+  > li {
+    margin: rem(0 0 35px);
+    padding: rem(0 0 35px);
+    border-bottom: 1px solid $gray-border;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+.search-result__snippet-info {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}

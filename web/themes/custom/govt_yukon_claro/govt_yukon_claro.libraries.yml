@@ -1,0 +1,4 @@
+core:
+  css:
+    theme:
+      css/styles.css: { minified: false }

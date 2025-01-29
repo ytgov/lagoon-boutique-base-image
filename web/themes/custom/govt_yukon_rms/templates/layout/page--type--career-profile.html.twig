@@ -1,0 +1,200 @@
+{% extends 'page--type--landing-page.html.twig' %}
+
+
+{% block page_body %}
+  {% set site_content_attributes = create_attribute() %}
+  {% set share_this_page = false %}
+  {% if node and node.field_share_this_page.value %}
+    {% set share_this_page = true %}
+  {% endif %}
+  {% set share_this_page_content %}
+    {% include '@govt_yukon/includes/share-this-page.html.twig' %}
+  {% endset %}
+  {% set page_accent = true %}
+
+  {%
+    set site_content_classes = [
+    'site-content',
+    (node and node.field_hide_header_elements.value) ? 'site-content--hide-header-elements',
+    (node and node.field_disable_page_top_margin.value) ? 'site-content--disable-top-margin',
+    page_accent ? 'site-content--with-page-accent'
+  ]
+  %}
+
+  {% if page_accent %}
+    <div class="comp-page-accent comp-page-accent--aurora">
+      <div class="comp-page-accent__content"></div>
+    </div>
+  {% endif %}
+
+  <div{{ site_content_attributes.addClass(site_content_classes) }} class="site-content{{ site_content_class }}">
+    <main class="content__main-content clearfix" role="main">
+      {# Link is in html.html.twig. #}
+      <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
+
+      <div class="site-content__container">
+        {% if page.header %}
+          <div class="site-content__header">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  {{ page.header }}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if not (node and node.field_hide_header_elements.value) %}
+          {% if page.breadcrumb %}
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  {{ page.breadcrumb }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+
+        {% if page.highlighted %}
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                {{ page.highlighted }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {# Page Banner. #}
+        {% if node and node.field_page_banner.0.entity.field_media_image.0.entity.fileuri %}
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="comp-page-banner">
+                  {{ drupal_field('field_page_banner', 'node', node.id, 'default') }}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {# / Page Banner. #}
+
+
+        {# Career Profile Header. #}
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="career-profile-header">
+                {% if node and node.field_image.0.entity.field_media_image.0.entity.fileuri %}
+                  <div class="career-profile-header__image">
+                    {{ drupal_field('field_image', 'node', node.id, 'default') }}
+                  </div>
+                {% endif %}
+
+                <div class="career-profile-header__content">
+                  <p class="h-overline">{{ 'Career profile'|t }}</p>
+                  {% block page_title %}
+                    {% if page.page_title %}
+                      <div class="page-title-header">
+                        <div class="page-title-header__content">
+                          <div class="page-title-header__page-title">
+                            {{ page.page_title }}
+                          </div>
+
+                          {% if node and node.field_image.0.entity.field_media_image.0.entity.fileuri %}
+                            <div class="career-profile-header__mobile-image">
+                              {{ drupal_field('field_image', 'node', node.id, 'default') }}
+                            </div>
+                          {% endif %}
+
+                          {% if share_this_page %}
+                            {{ share_this_page_content }}
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endblock page_title %}
+
+                  {% if node and node.body.value %}
+                    <div class="career-profile-header__intro-body">
+                      {{ drupal_field('body', 'node', node.id, 'default') }}
+                    </div>
+                  {% endif %}
+
+                  <div class="career-profile-header__category-data">
+                    {% if node and node.field_departments.0.entity.name.value %}
+                      {{ drupal_field('field_departments', 'node', node.id, 'default') }}
+                    {% endif %}
+                    {% if node and node.field_job_types.0.entity.name.value %}
+                      {{ drupal_field('field_job_types', 'node', node.id, 'default') }}
+                    {% endif %}
+                    {% if node and node.field_locations.0.entity.name.value %}
+                      {{ drupal_field('field_locations', 'node', node.id, 'default') }}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+              <div class="comp-divider"></div>
+            </div>
+          </div>
+        </div>
+        {# / Career Profile Header. #}
+
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-main-content--full-width">
+              {% if page.help %}
+                {{ page.help }}
+              {% endif %}
+
+              {% if page.content_above %}
+                {{ page.content_above }}
+              {% endif %}
+
+              {% if page.content %}
+                {{ page.content }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {# Components. #}
+      {% if node and node.field_components.0.target_id %}
+        <div class="page-components">
+          {{ node.field_components|view }}
+        </div>
+      {% endif %}
+      {# / Components. #}
+
+      {# Below Content. #}
+      {% if page.content_below %}
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              {{ page.content_below }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      {# / Below Content. #}
+
+      {# Share This Page. #}
+      {% if node and share_this_page and node.field_hide_header_elements.value %}
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="share-this-page-footer">
+                {{ share_this_page_content }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      {# / Share This Page. #}
+    </main>
+  </div>
+{% endblock page_body %}

@@ -1,0 +1,45 @@
+//
+// Career Profiles.
+//
+
+.comp-career-profiles {
+  margin: rem(0 0 20px);
+}
+
+.comp-career-profiles__bottom-button {
+  margin: rem(10px 0 0);
+  text-align: center;
+
+  .btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+//
+// Career Profiles Listing.
+//
+
+.career-profiles-listing .career-profiles-listing__items,
+.career-profiles-listing .views-infinite-scroll-content-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: rem(0 -12px);
+
+  > .career-profiles-listing__item,
+  > .views-row {
+    margin: 0;
+    padding: rem(0 12px 20px 12px);
+    width: 100%;
+
+    @include media-breakpoint-up(md) {
+      padding: rem(0 12px 40px 12px);
+      width: 33.33%;
+    }
+
+    > div {
+      height: 100%;
+    }
+  }
+}

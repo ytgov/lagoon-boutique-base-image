@@ -1,0 +1,12 @@
+//
+// Divider.
+//
+
+.comp-divider {
+  clear: both;
+  margin: rem(55px 0);
+  padding: 0;
+  width: 100%;
+  height: 1px;
+  background: $c-neutral-20;
+}
