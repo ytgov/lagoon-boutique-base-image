@@ -1,0 +1,12 @@
+docker-compose-yaml: docker-compose.yml
+project: lagoon-boutique-base-image
+environment_variables:
+  git_sha: true
+
+environments:
+  prod:
+    cronjobs:
+      - name: drush cron
+        schedule: "M * * * *"
+        command: drush cron
+        service: cli
