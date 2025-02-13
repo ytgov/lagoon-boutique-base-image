@@ -25,7 +25,7 @@ services:
   cli:
     build:
       context: .
-      dockerfile: lagoon/cli.dockerfile
+      dockerfile: Dockerfile.cli
     image: &cli-image ${COMPOSE_PROJECT_NAME:-lagoon-boutique-base-image}-cli
     labels:
       lagoon.type: cli-persistent
@@ -42,7 +42,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: lagoon/nginx.dockerfile
+      dockerfile: Dockerfile.nginx
       args:
         CLI_IMAGE: *cli-image
     labels:
@@ -63,7 +63,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: lagoon/php.dockerfile
+      dockerfile: Dockerfile.php
       args:
         CLI_IMAGE: *cli-image
     labels:
