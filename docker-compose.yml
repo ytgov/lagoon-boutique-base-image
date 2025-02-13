@@ -26,7 +26,7 @@ services:
     build:
       context: .
       dockerfile: lagoon/cli.dockerfile
-    image: &cli-image ${COMPOSE_PROJECT_NAME:lagoon-boutique-base-image}-cli
+    image: &cli-image ${COMPOSE_PROJECT_NAME:-lagoon-boutique-base-image}-cli
     labels:
       lagoon.type: cli-persistent
       lagoon.persistent.name: nginx
