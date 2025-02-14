@@ -11,7 +11,9 @@ database:
     version: "10.11"
 use_dns_when_possible: true
 composer_version: "2"
-web_environment: []
+web_environment:
+    - LAGOON_ENVIRONMENT=pr-1
+    - LAGOON_PROJECT=lagoon-boutique-base-image
 corepack_enable: false
 
 # Key features of DDEV's config.yaml:
