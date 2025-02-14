@@ -9,7 +9,7 @@ lagoon-sync:
       sync-directory: "/app/web/sites/default/files"
     local:
       config:
-        sync-directory: "/var/www/html/sites/default/files"
+        sync-directory: "/var/www/html/web/sites/default/files"
   drupalconfig:
     config:
       syncpath: "./config/sync"
