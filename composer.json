@@ -78,7 +78,7 @@
                 "web-root": "web/"
             },
             "allowed-packages": [
-                "acromedia/acro_lagoon_drush"
+                "amazeeio/drupal_integrations"
             ]
         },
         "installer-paths": {
