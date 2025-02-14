@@ -38,7 +38,6 @@ phpcs.xml
 # Lagoon specific
 .drush-lock-update
 drush/Commands/contrib/
-drush/sites/lagoon.site.yml
 web/sites/*/settings.local.php
 web/sites/*/services.local.yml
 web/sites/*/settings.lagoon.php
