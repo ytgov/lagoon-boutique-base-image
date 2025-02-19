@@ -1,0 +1,6 @@
+parameters: {}
+services:
+  gov_yukon_recruit.rss.parser:
+    class: 'Drupal\gov_yukon_recruit\Rss\RssParser'
+    arguments:
+      - '@http_client'

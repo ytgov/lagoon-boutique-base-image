@@ -1,0 +1,3 @@
+# Shared services for all environments.
+parameters: {}
+services: {}

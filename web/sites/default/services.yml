@@ -1,0 +1,4 @@
+# DO NOT EDIT. Used for Acromedia or Lagoon requirements.
+# Place all custom site parameters and services in one of the environment files.
+parameters: {}
+services: {}

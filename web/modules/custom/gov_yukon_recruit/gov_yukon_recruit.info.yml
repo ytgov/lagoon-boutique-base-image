@@ -1,0 +1,9 @@
+name: Government of Yukon Recruitment Marketing Custom Features
+description: Provides custom features for the recruitment marketing site.
+package: gov_yukon
+type: module
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:block
+  - drupal:field
+  - drupal:node

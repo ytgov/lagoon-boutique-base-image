@@ -1,0 +1,94 @@
+version: "2.3"
+
+x-volumes:
+  &default-volumes # Define all volumes you would like to have real-time mounted into the docker containers
+  volumes:
+    - .:/app:delegated
+    - files:/app/web/sites/default/files
+
+x-environment: &default-environment
+  LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-lagoon-boutique-base-image}.docker.amazee.io
+  # Uncomment if you like to have the system behave like in production
+  #LAGOON_ENVIRONMENT_TYPE: production
+  # Uncomment to enable xdebug and then restart via `docker-compose up -d`
+  #XDEBUG_ENABLE: "true"
+
+x-user: &default-user
+  # The default user under which the containers should run.
+  # Change this if you are on linux and run with another user than id `1000`
+  user: "1000"
+
+volumes:
+  files: {}
+
+services:
+  cli:
+    build:
+      context: .
+      dockerfile: Dockerfile.cli
+    image: &cli-image ${COMPOSE_PROJECT_NAME:-lagoon-boutique-base-image}-cli
+    labels:
+      lagoon.type: cli-persistent
+      lagoon.persistent.name: nginx
+      lagoon.persistent: /app/web/sites/default/files/
+      lando.type: php-cli-drupal
+    <<: *default-volumes
+    user: root
+    volumes_from:
+      - container:amazeeio-ssh-agent
+    environment:
+      <<: *default-environment
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+      args:
+        CLI_IMAGE: *cli-image
+    labels:
+      lagoon.type: nginx-php-persistent
+      lagoon.persistent: /app/web/sites/default/files/
+      lando.type: nginx-drupal
+    <<: *default-volumes
+    <<: *default-user
+    depends_on:
+      - cli
+    environment:
+      <<: *default-environment
+      LAGOON_LOCALDEV_URL: *default-url
+    networks:
+      - amazeeio-network
+      - default
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+      args:
+        CLI_IMAGE: *cli-image
+    labels:
+      lagoon.type: nginx-php-persistent
+      lagoon.name: nginx
+      lagoon.persistent: /app/web/sites/default/files/
+      lando.type: php-fpm
+    <<: *default-volumes
+    <<: *default-user
+    depends_on:
+      - cli
+    environment:
+      <<: *default-environment
+
+  mariadb:
+    image: uselagoon/mariadb-10.5-drupal:latest
+    labels:
+      lagoon.type: mariadb
+      lando.type: mariadb-drupal
+    ports:
+      - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
+    <<: *default-user
+    environment:
+      <<: *default-environment
+
+networks:
+  amazeeio-network:
+    external: true

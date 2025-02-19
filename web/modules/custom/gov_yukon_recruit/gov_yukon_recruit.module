@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Government of Yukon recruiting site custom features.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function gov_yukon_recruit_theme() {
+  return [
+    'rss_url_titles' => [
+      'variables' => [
+        'content' => [],
+      ],
+    ],
+  ];
+}
