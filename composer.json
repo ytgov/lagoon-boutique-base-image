@@ -33,7 +33,7 @@
         "drupal/fontawesome": "^2.24",
         "drupal/image_effects": "^3.4",
         "drupal/layout_paragraphs": "^2.0",
-        "drupal/link_attributes": "^1.13",
+        "drupal/link_attributes": "^2.1",
         "drupal/linkit": "^6.0@beta",
         "drupal/matomo": "^1.21",
         "drupal/menu_block": "^1.10",
