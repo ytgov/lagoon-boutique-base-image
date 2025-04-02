@@ -34,7 +34,7 @@
         "drupal/layout_paragraphs": "2.1.1",
         "drupal/link_attributes": "2.1.0",
         "drupal/linkit": "7.0.3",
-        "drupal/matomo": "1.21.0",
+        "drupal/matomo": "1.25.0",
         "drupal/menu_block": "1.10.0",
         "drupal/metatag": "2.0.0",
         "drupal/openid_connect": "1.4.0",
