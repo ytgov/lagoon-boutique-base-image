@@ -856,22 +856,6 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
  * Keep this code block at the end of this file to take full effect.
  */
 #
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
-#$databases['default']['default'] = array (
-#  'database' => 'lobbyist_registry_backend_uat_d11',
-#  'username' => 'lobbyist_registry_backend_d11',
-#  'password' => '8G#z&dU^@p%p5&-6FrWKxCgPt&K$XVXL',
-#  'prefix' => '',
-#  'host' => 'localhost',
-#  'port' => '3306',
-#  'isolation_level' => 'READ COMMITTED',
-#  'driver' => 'mysql',
-#  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
-#  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
-#);
-# $settings["config_sync_directory"]  = "../config/sync";
 
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 	  include $app_root . '/' . $site_path . '/settings.local.php';
