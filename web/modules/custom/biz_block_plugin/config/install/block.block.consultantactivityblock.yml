@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: consultantactivityblock
+theme: wxt_lobbyist
+region: content
+weight: -10
+provider: null
+plugin: consultant_single_act_block
+settings:
+  id: consultant_single_act_block
+  label: 'Consultant Activity block'
+  provider: biz_block_plugin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/search-organization/organization-view/consultant-activity-view*\r\n/admin-dashboard/consultant-activity-view*\r\n/consultant-account-home/consultant-activity-view"
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

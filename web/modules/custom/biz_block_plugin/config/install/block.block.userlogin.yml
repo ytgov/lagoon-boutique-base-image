@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: userlogin
+theme: wxt_lobbyist
+region: content
+weight: -7
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'Log In'
+  provider: user
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: /login
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

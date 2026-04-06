@@ -1,0 +1,5 @@
+biz_block_plugin.settings:
+    title: Dashboard Lobbyist Settings
+    base_route_name: biz_block_plugin.settings
+    names:
+        - biz_block_plugin.settings

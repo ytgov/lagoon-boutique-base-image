@@ -1,0 +1,22 @@
+uuid: a6a39178-9320-4c8b-8f9c-8cc1370c786f
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: BZ5tpW7H8X4PVGRm3MImTIHd2tN0eF7zOtp4SpRYUA0
+id: wxt_lobbyist_messages
+theme: wxt_lobbyist
+region: header
+weight: -16
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

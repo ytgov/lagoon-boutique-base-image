@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Implements hook_help().
+ */
+function biz_business_rules_help($path, $arg) {
+  switch ($path) {
+    case 'help.page.biz_business_rules':
+      return 'Implementation of the Business rules on lobbyist registry service.';
+      break;
+  }
+}
+function biz_business_rules_uninstall(){
+    $database = \Drupal::database();
+    $database->delete('config')->where("name like '%biz_business_rules.settings%'")->execute();
+}

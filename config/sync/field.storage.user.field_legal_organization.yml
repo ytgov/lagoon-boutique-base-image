@@ -1,0 +1,21 @@
+uuid: db35e1cf-0d0d-4fe0-b30f-5dc09d1f0447
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.field_legal_organization
+field_name: field_legal_organization
+entity_type: user
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

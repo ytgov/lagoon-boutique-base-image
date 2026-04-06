@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:webform:041aed45-ae6b-4e5f-9849-8b2cf3a58e43'
+  module:
+    - block_content
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: feedbackform
+theme: wxt_lobbyist
+region: page_form
+weight: 0
+provider: null
+plugin: 'block_content:041aed45-ae6b-4e5f-9849-8b2cf3a58e43'
+settings:
+  id: 'block_content:041aed45-ae6b-4e5f-9849-8b2cf3a58e43'
+  label: 'Feedback form'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/login\r\n"
+    negate: true
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

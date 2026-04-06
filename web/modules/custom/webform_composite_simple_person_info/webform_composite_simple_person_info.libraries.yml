@@ -1,0 +1,4 @@
+webform_composite_simple_person_info:
+  version: VERSION
+  dependencies:
+    - webform/webform.composite

@@ -1,0 +1,9 @@
+uuid: 615ea741-7185-4148-a8df-3e5414700d27
+langcode: en
+status: true
+dependencies: {  }
+name: "Lobby's topics"
+vid: lobby_s_topics
+description: null
+weight: 0
+new_revision: false

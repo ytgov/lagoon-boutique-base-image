@@ -1,0 +1,5 @@
+biz_block_plugin.settings:
+  title: Lobbyist tables settings
+  description: ''
+  parent: biz_lobbyist_registration.admin_config
+  route_name: biz_block_plugin.settings

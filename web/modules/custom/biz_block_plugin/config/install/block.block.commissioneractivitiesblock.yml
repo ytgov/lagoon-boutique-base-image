@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: commissioneractivitiesblock
+theme: wxt_lobbyist
+region: content
+weight: 0
+provider: null
+plugin: commissioner_act_block
+settings:
+  id: commissioner_act_block
+  label: 'Commissioner Activities block'
+  provider: biz_block_plugin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /admin-dashboard
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

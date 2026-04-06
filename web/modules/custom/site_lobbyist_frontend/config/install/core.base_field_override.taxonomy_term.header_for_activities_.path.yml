@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.header_for_activities_
+  module:
+    - path
+id: taxonomy_term.header_for_activities_.path
+field_name: path
+entity_type: taxonomy_term
+bundle: header_for_activities_
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

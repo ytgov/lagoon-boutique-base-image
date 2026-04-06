@@ -1,0 +1,7 @@
+review_checkbox_acept: "Je confirme que les renseignements que je m’apprête à transmettre sont exacts, et que la loi m'autorise à communiquer ces renseignements."
+consultant_content_instruct:
+  value: '<p>À titre de lobbyiste-conseil, vous devez faire rapport de vos activités de lobbyisme, en indiquant pour le compte de qui vous les menez.</p><ul><li data-list-item-id="e8bf1cdaea7fc54ee85069b618c249860">Allez à la page «&nbsp;Accueil du compte » et sélectionnez «&nbsp;Ajouter une activité de lobbyisme&nbsp;».</li></ul><p>&nbsp;</p>'
+  format: basic_html
+in_house_content_instruct:
+  value: '<p>À titre de lobbyiste salarié, vous devez indiquer qui fait du lobbyisme pour votre organisation ainsi que vos activités de lobbyisme.</p><ul><li data-list-item-id="e1decd2351c8026353c257a3ac0cbfc3d">Allez à la page «&nbsp;Accueil du compte » et sélectionnez « Ajouter une activité de lobbyisme&nbsp;»</li><li data-list-item-id="e679fa7b8a3cfb176b75fb0031ed7a9cf">Allez à «&nbsp;Renseignements sur l’organisation&nbsp;» et sélectionnez «Ajouter un lobbyiste salarié&nbsp;».</li></ul><p>&nbsp;</p>'
+  format: basic_html

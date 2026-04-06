@@ -1,0 +1,12 @@
+format: full_html
+name: 'Yukon Legislative Assembly'
+mail: edgar@bizont.ca
+linkonly: false
+textonly: false
+sitestyle: true
+simple_address: false
+engine: mimemail
+preserve_class: false
+advanced:
+  incoming: false
+  key: 3afMdO1Rnn8UTItUOqzCObfMePN5ym4_NILNk9Y2EYQ

@@ -1,0 +1,29 @@
+name: 'WxT Lobbyist'
+type: theme
+description: 'WxT sub-theme(s) support leveraging WxT Bootstrap. Source files for Bootstrap are defined as part of the WxT Library module.'
+package: Other
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
+libraries:
+  - wxt_lobbyist/global-styling
+ 
+base theme: false
+
+regions:
+  branding: 'Branding'
+  navbar: 'Navbar'
+  navigation: 'Navigation'
+  search_bar: 'Search bar'
+  site_alert: 'Site Wide Alert'
+  highlighted: 'Highlighted'
+  header_slider: 'Header Slider'
+  header: 'Header'
+  help: 'Help'
+  inline_arlert:  'In-Page Alert'
+  content_slider: 'Content Slider'
+  content: 'Content'
+  page_form:  'Page webform'
+  sidebar: 'Sidebar'
+  sidebar_sticky: 'Sidebar Sticky'
+  featured: 'Featured'
+  footer_top: 'Footer Top'
+  footer: 'Footer'

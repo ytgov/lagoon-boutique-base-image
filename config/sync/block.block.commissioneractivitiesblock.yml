@@ -1,0 +1,35 @@
+uuid: 8573529b-c7c3-4d32-8e98-42d603ab8c8e
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: UPksfdH0lq5IYp6BgewDP76JtHMBnAHPS5rohggs4iY
+id: commissioneractivitiesblock
+theme: wxt_lobbyist
+region: content
+weight: -5
+provider: null
+plugin: commissioner_act_block
+settings:
+  id: commissioner_act_block
+  label: 'Commissioner Activities block'
+  label_display: '0'
+  provider: biz_block_plugin
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /admin-dashboard
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }

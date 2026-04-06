@@ -1,0 +1,15 @@
+biz_lobbyist_registration.admin_config:
+  path: '/admin/config/biz_lobbyist_registration'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Lobbyist'
+  requirements:
+    _permission: 'administer site configuration'
+    
+biz_lobbyist_registration.settings:
+  path: '/admin/config/biz_lobbyist_registration/settings'
+  defaults:
+    _form: '\Drupal\biz_lobbyist_registration\Form\RegistrationSettingsForm'
+    _title: 'Lobbyist Registration Settings'
+  requirements:
+    _permission: 'administer site configuration'

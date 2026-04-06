@@ -1,0 +1,22 @@
+uuid: f8600692-d68c-4914-a185-09951b75b0cb
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
+id: wxt_lobbyist_help
+theme: wxt_lobbyist
+region: branding
+weight: -3
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

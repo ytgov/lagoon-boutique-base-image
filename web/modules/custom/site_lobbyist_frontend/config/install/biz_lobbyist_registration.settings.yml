@@ -1,0 +1,12 @@
+registration_url_api: '{{domain}}/entity/user?_format=json'
+validate_email_url_api: public/api/user_by_email
+in_house_lobbyist_welcome_mail: ''
+consultant_lobbyist_welcome_mail: ''
+base_url: ''
+json_path: json/user/
+add_an_in_house_lobbyust_button_text: 'Add aditional in-house lobbyist to the organization'
+error_message: 'There are {{number}} errors found'
+scope: lobbyist_backend
+client_id: lobbyist_register_frontend_2020
+client_secret: B1z0nt..
+grant_type: password

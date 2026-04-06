@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Lobby''s topics'
+vid: lobby_s_topics
+description: 'Available topics for lobby activities'
+weight: 0

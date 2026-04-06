@@ -1,0 +1,121 @@
+<?php
+use Drupal\webform\WebformSubmissionInterface;
+use Drupal\Core\Render\Markup;
+
+/**
+ * @file
+ * Functions to support theming in the wxt_lobbyist theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for Block document templates.
+ */
+function wxt_lobbyist_preprocess_block(array &$variables) {
+  //-- This stops the block being cache in drupal 8
+  $variables['#cache']['max-age'] = 0;
+  \Drupal::service('page_cache_kill_switch')->trigger();
+  if($variables['plugin_id']  == 'user_login_block'){
+      $variables['content']['user_links']['#items']['request_password']['#title'] = t('Forgot your password');
+  }
+}
+
+function wxt_lobbyist_preprocess_status_messages(&$variables) {
+  if(isset($variables['message_list']["error"]) && strpos( $variables['message_list']["error"][0] , 'have been found')){
+    $message =  $variables['message_list']["error"][0];
+    $arr = explode(':', $message);
+    preg_match_all('!\d+!', $arr[0], $matches);
+    $custom_message = \Drupal::config('biz_lobbyist_registration.settings')->get('error_message');
+    $arr[0]= str_replace('{{number}}', $matches[0][0], $custom_message);
+    $string = implode(':',array_slice($arr, 0, 3));
+    $variables['message_list']["error"][0] = Markup::create($string);
+  }
+}
+
+/**
+ * Prepares variables for webform 'wizard' progress template.
+ *
+ * Default template: webform-progress.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing the following key:
+ *   - webform: A webform.
+ *   - current_page: The current wizard page.
+ */
+function wxt_lobbyist_preprocess_webform_progress(array &$variables) {
+  /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
+  $libraries_manager = \Drupal::service('webform.libraries_manager');
+
+  /** @var \Drupal\webform\WebformInterface $webform */
+  $webform = $variables['webform'];
+  $webform_submission = $variables['webform_submission'];
+  $current_page = $variables['current_page'];
+  $operation = $variables['operation'];
+
+  $pages = $webform->getPages($operation, $webform_submission);
+
+  $page_keys = array_keys($pages);
+  $page_indexes = array_flip($page_keys);
+  $current_index = $page_indexes[$current_page];
+
+  $total = count($page_keys);
+
+  if ($webform->getSetting('wizard_progress_bar')) {
+    $variables['bar'] = [
+      '#theme' => ($libraries_manager->isIncluded('progress-tracker')) ? 'webform_progress_tracker' : 'webform_progress_bar',
+      '#webform' => $webform,
+      '#webform_submission' => $webform_submission,
+      '#current_page' => $current_page,
+      '#operation' => $operation,
+    ];
+  }
+
+  if ($webform->getSetting('wizard_progress_pages')) {
+    $variables['summary'] = t('Step @start of @end', ['@start' => $current_index + 1, '@end' => $total]);
+  }
+
+  if ($webform->getSetting('wizard_progress_percentage')) {
+    $variables['percentage'] = number_format(($current_index / ($total - 1)) * 100, 0) . '%';
+  }
+}
+
+function wxt_lobbyist_theme_suggestions_page_alter(array &$suggestions, array $variables, $hook) {
+  if(in_array('page__get_version', $suggestions)){
+      $suggestions[] = 'page--get-version-sub';
+  }
+}
+
+
+
+function wxt_lobbyist_preprocess(&$variables){
+    $current_alias = \Drupal::service('path_alias.manager')->getAliasByPath(\Drupal::service('path.current')->getPath());
+    $current_alias = trim($current_alias, '/');
+    $current_alias = str_replace('/', '-', $current_alias);
+    $variables['classes'] = $current_alias;
+    $variables['current_language'] = \Drupal::languageManager()->getCurrentLanguage();
+    // Inject a usable directory path.
+    if(isset($variables['directory'])){
+        $variables['theme_path'] = base_path() . $variables['directory'];
+    }
+}
+
+/**
+ * Implements template_preprocess_html().
+ */
+function wxt_lobbyist_preprocess_html(&$variables) {
+  if(isset($variables['page']) && isset($variables['page']['#title'])){
+    $page_class =  strip_tags($variables['page']["#title"]);
+    $page_class = str_replace(["/", "(", ")","&#039;", "'", " "], '-', $page_class);
+    $variables['custom_title']= strtolower( $page_class );
+  }
+
+}
+
+function wxt_lobbyist_preprocess_breadcrumb(&$variables) {
+    foreach($variables['breadcrumb'] as $key => $breadcrumb){
+        if( isset($breadcrumb['url'])) {
+            if(strpos($breadcrumb['url'] ,'home-search') !== FALSE){
+                unset($variables['breadcrumb'][$key]);
+            }
+        }
+    }
+}

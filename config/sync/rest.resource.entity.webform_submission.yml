@@ -1,0 +1,22 @@
+uuid: e4518e45-d2b8-486d-8d47-dc40b25c73e8
+langcode: en
+status: true
+dependencies:
+  module:
+    - serialization
+    - user
+    - webform
+id: entity.webform_submission
+plugin_id: 'entity:webform_submission'
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie
+  PATCH:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie

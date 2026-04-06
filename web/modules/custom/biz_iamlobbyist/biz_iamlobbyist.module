@@ -1,0 +1,179 @@
+<?php
+        
+use Drupal\webform\WebformSubmissionForm;
+use Drupal\Core\Form\FormStateInterface;
+
+/** 
+ * Goto step/page in form.
+ *
+ * @param string $goto_step
+ * @param array $pages
+ * @param object $form_state
+ *
+ */
+function goto_step($goto_step, $pages, \Drupal\Core\Form\FormStateInterface $form_state){
+    // Convert associative array to index for easier manipulation.
+    $all_keys = array_keys($pages);
+    $goto_destination_page_index = array_search($goto_step, $all_keys);
+    if($goto_destination_page_index > 0){
+        // The backend pointer for page will add 1 so to go our page we must -1.
+        $form_state->set('current_page', $all_keys[$goto_destination_page_index]);
+        $webform_submission = $form_state->getFormObject()->getEntity();
+        $current_page = $webform_submission->getCurrentPage();
+
+    }
+    else{
+        \Drupal::logger("biz_iamlobbyist")->notice('Index is empty, goto_step failed!');
+    }
+}
+
+/** 
+ * Goto step/page in form.
+ *
+ * Function for a custom reset for a webform modal, so the user restart its answers every time the modal opens
+ */
+function custom_reset(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    // Delete save draft.
+    // Reset user input but preserve form tokens.
+    // Reset values.
+    $form_state->setValues([]);
+    // Reset current page.
+    $storage = $form_state->getStorage();
+    $form_state->setStorage($storage);
+    // Rebuild the form.
+    $form_state->setRebuild();
+}
+    
+/**
+ * Implements hook_webform_submission_form_alter().
+ */
+function biz_iamlobbyist_webform_submission_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+    if ($form_id !== 'webform_submission_lobbyist_finder_modal_add_form') {
+        return;
+    }
+
+    // The following line is only needed if you allow drafts (manual or auto-save).
+    $form['actions']['wizard_next']['#submit'][] = '_lobbyist_finder_submit_page';
+    $form['actions']['wizard_prev']['#submit'][] = '_lobbyist_finder_prev_page';
+    $form_state->addCleanValueKey(
+        ['no',
+        'select_one_option',
+        'are_you_option',
+        'are_you_option_1',
+        'are_you_option_2',
+        'are_you_option_3',
+        'are_you_option_4',
+        'are_you_option_5',
+        'are_you_option_6',
+        'are_you_option_7',
+        'are_you_option_8',
+        'are_you_option_9',
+        'are_you_option_10' ]
+    );
+    
+    $webform_submission = $form_state->getFormObject()->getEntity();
+    $current_page = $webform_submission->getCurrentPage();
+    $curent_values = $form_state->getValues();
+    if ((($current_page == 'page_2') && $curent_values['no'] == 'No')){
+         $form['elements']['page_2']['no'][0]['#suffix'] = '<div class="hidden">';
+         $form['elements']['page_2']['no'][0]['#prefix'] = '</div>';
+         $form['actions']['wizard_next']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+         $form['actions']['wizard_prev']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+    }
+    if ((($current_page == 'page_4') && $curent_values['select_one_option'] == 'No')){
+         $form['elements']['page_4']['select_one_option'][0]['#suffix'] = '<div class="hidden">';
+         $form['elements']['page_4']['select_one_option'][0]['#prefix'] = '</div>';
+         $form['actions']['wizard_next']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+         $form['actions']['wizard_prev']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+    }
+    if ((($current_page == 'page_6_6') && $curent_values['are_you_option_6'] == 'No')){
+         $form['elements']['page_6_6']['are_you_option_6'][0]['#suffix'] = '<div class="hidden">';
+         $form['elements']['page_6_6']['are_you_option_6'][0]['#prefix'] = '</div>';
+         $form['actions']['wizard_next']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+         $form['actions']['wizard_prev']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+    }
+    if ((($current_page == 'page_12') && $curent_values['are_you_option_10'] == 'No')){
+         $form['elements']['page_12']['are_you_option_10'][0]['#suffix'] = '<div class="hidden">';
+         $form['elements']['page_12']['are_you_option_10'][0]['#prefix'] = '</div>';
+         $form['actions']['wizard_next']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+         $form['actions']['wizard_prev']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+    }
+
+    if (($current_page == 'page_2')   || ($current_page == 'page_4')   || 
+        ($current_page == 'page_6')   || ($current_page == 'page_6_1') || 
+        ($current_page == 'page_6_2') || ($current_page == 'page_6_3') || 
+        ($current_page == 'page_6_4') || ($current_page == 'page_6_5') || 
+        ($current_page == 'page_6_6') || ($current_page == 'page_7')   || 
+        ($current_page == 'page_9')   || ($current_page == 'page_10')  || 
+        ($current_page == 'page_11')  || ($current_page == 'page_12')  || 
+        ($current_page == 'final_page')) {
+
+        $form['actions']['wizard_next']['#attributes']['class'] = array('hidden', 'webform-button--next') ;
+    } else {
+        $form['actions']['wizard_next']['#attributes']['class'][] = 'webform-button--next';
+    }
+}
+
+/****
+    * Get current page function
+    */
+    
+function _drupal_bootstrap_variables(array &$form, FormStateInterface $form_state){
+    $current_page = $webform_submission->getCurrentPage();
+}
+
+/****
+    * Get current page and user's selection for a dynamic redirection to next pages
+    */
+function _lobbyist_finder_submit_page(array &$form, FormStateInterface $form_state) {
+    // Conditional logic goes here.
+    $curent_values = $form_state->getValues();
+    $pages = $form_state->get('pages');
+    $webform_submission = $form_state->getFormObject()->getEntity();
+    $current_page = $webform_submission->getCurrentPage();
+
+    if (($curent_values['are_you_option'] == 'Yes' && $current_page == 'page_6_1') || 
+        ($curent_values['are_you_option_1'] == 'Yes' && $current_page == 'page_6_2') || 
+        ($curent_values['are_you_option_2'] == 'Yes' && $current_page == 'page_6_3') || 
+        ($curent_values['are_you_option_3'] == 'Yes' && $current_page == 'page_6_4') || 
+        ($curent_values['are_you_option_4'] == 'Yes' && $current_page == 'page_6_5') || 
+        ($curent_values['are_you_option_5'] == 'Yes' && $current_page == 'page_6_6') || 
+        ($curent_values['are_you_option_6'] == 'Yes' && $current_page == 'page_7') ) {
+        $page_name = 'page_8';
+        $webform_submission->setCurrentPage('page_8');
+        goto_step($page_name, $pages, $form_state);
+    }
+
+    if (($curent_values['are_you_option_7'] == 'Yes' && $current_page == 'page_10') || 
+        ($curent_values['are_you_option_8'] == 'Yes' && $current_page == 'page_11') || 
+        ($curent_values['are_you_option_9'] == 'Yes' && $current_page == 'page_12') || 
+        ($curent_values['are_you_option_10'] == 'Yes' && $current_page == 'final_page')) {
+        $page_name = 'final_page';
+        $webform_submission->setCurrentPage('final_page');
+        goto_step($page_name, $pages, $form_state);
+    }
+}
+
+/****
+    * Get current page and user's selection for a dynamic redirection to previous pages
+    */
+
+function _lobbyist_finder_prev_page(array &$form, FormStateInterface $form_state) {
+    // Conditional logic goes here.
+    $curent_values = $form_state->getValues();
+    $pages = $form_state->get('pages');
+    $webform_submission = $form_state->getFormObject()->getEntity();
+    $current_page = $webform_submission->getCurrentPage();
+
+    if ($current_page == 'page_6_6') {
+        $page_name = 'page_5';
+        $webform_submission->setCurrentPage('page_5');
+        $current_page = $webform_submission->getCurrentPage();
+        goto_step($page_name, $pages, $form_state);
+    }
+    if ($current_page == 'page_12' || ($current_page == 'page_11' && $curent_values['are_you_option_9'] == 'No' )) {
+        $page_name = 'page_8';
+        $webform_submission->setCurrentPage('page_8');
+        goto_step($page_name, $pages, $form_state);
+    }
+}

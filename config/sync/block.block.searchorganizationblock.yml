@@ -1,0 +1,35 @@
+uuid: e9bcd4a4-283a-4b2b-aebc-3a780d83e00d
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: nBYp50sWxRLa60fcWI1XDiMquq_3rNA7A42_tNTt6qE
+id: searchorganizationblock
+theme: wxt_lobbyist
+region: content
+weight: -6
+provider: null
+plugin: search_organization_block
+settings:
+  id: search_organization_block
+  label: 'Search organization block'
+  label_display: '0'
+  provider: biz_block_plugin
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /search-organization
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }

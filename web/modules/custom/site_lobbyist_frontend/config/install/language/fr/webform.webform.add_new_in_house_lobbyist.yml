@@ -1,0 +1,4 @@
+description: 'In-House lobbyist lobby on behalf of an organization as an employee, CEO, partner, executive director, board member, etc. '
+elements: "position:\n  '#title': Poste\ne_mail_address:\n  '#title': 'Adresse électronique'\ntelephone:\n  '#title': Téléphone\nactions:\n  '#preview_prev__label': Modifier\n"
+settings:
+  confirmation_message: "The lobbyist has been saved in your organization.<br />\r\n<br />\r\n&nbsp;"

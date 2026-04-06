@@ -1,0 +1,31 @@
+uuid: 09b90077-d70c-4612-ae0c-aec62b446286
+langcode: en
+status: true
+dependencies:
+  config:
+    - webform.webform.feedback_form
+  module:
+    - system
+    - webform
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_webform
+theme: wxt_lobbyist
+region: content
+weight: -1
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: Webform
+  label_display: '0'
+  provider: webform
+  webform_id: feedback_form
+  default_data: ''
+  redirect: false
+  lazy: false
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '<front>'

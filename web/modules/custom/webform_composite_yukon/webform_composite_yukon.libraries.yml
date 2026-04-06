@@ -1,0 +1,11 @@
+webform_composite_yukon:
+  version: VERSION
+  css:
+    theme:
+      css/webform_composite_yukon.css: {}
+  js:
+    js/webform.composite.yukon.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - webform/webform.composite

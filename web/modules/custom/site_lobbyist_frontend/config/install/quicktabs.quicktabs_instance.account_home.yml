@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies: {  }
+id: account_home
+label: 'In House Account Home'
+renderer: quick_tabs
+options:
+  accordion_tabs:
+    jquery_ui:
+      collapsible: 0
+      heightStyle: auto
+  quick_tabs:
+    ajax: '1'
+hide_empty_tabs: 0
+default_tab: '0'
+configuration_data:
+  -
+    title: 'Account Home'
+    weight: '0'
+    type: block_content
+    content:
+      node_content:
+        options:
+          nid: ''
+          view_mode: full
+          hide_title: '1'
+      qtabs_content:
+        options:
+          machine_name: consultant_account_home
+      view_content:
+        options:
+          vid: block_content
+          display: default
+          args: ''
+      block_content:
+        options:
+          bid: inhouse_activities_block
+          block_title: ''
+          display_title: 0
+  -
+    title: 'Organization Information'
+    weight: '0'
+    type: block_content
+    content:
+      node_content:
+        options:
+          nid: ''
+          view_mode: full
+          hide_title: '1'
+      qtabs_content:
+        options:
+          machine_name: consultant_account_home
+      view_content:
+        options:
+          vid: block_content
+          display: default
+          args: ''
+      block_content:
+        options:
+          bid: inhouselobbyist_custom_block
+          block_title: ''
+          display_title: 0

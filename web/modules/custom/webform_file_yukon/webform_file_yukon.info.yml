@@ -1,0 +1,14 @@
+name: 'Webform file custom'
+type: module
+description: 'Webform file custom'
+package: 'Yukon'
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+# core: 8.x
+dependencies:
+  - 'webform:webform'
+
+# Information added by Drupal.org packaging script on 2019-03-28
+version: '8.1'
+core: '8.x'
+project: 'webform'
+datestamp: 1553768595

@@ -1,0 +1,10 @@
+{
+    "name": "drupal/biz_biz_webforms",
+    "type": "drupal-module",
+    "description": "Bizont enhancements for webform.",
+    "homepage": "",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6"
+    }
+}

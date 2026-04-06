@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: accountcustominformation
+theme: wxt_lobbyist
+region: content
+weight: -11
+provider: null
+plugin: account_custom_info_block
+settings:
+  id: account_custom_info_block
+  label: 'Account Custom Information'
+  provider: biz_block_plugin
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: /test
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,9 @@
+uuid: 6181f0af-5867-4aec-991e-63c8cef7ec90
+langcode: en
+status: true
+dependencies: {  }
+id: role_administrator
+label: 'Role administrator'
+weight: 7
+is_admin: false
+permissions: {  }

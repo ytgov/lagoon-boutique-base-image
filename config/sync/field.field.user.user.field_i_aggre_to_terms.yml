@@ -1,0 +1,30 @@
+uuid: 4e8f4062-ab24-4afd-86f5-a6b3ec7d8f17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_i_aggre_to_terms
+  module:
+    - multiple_registration
+    - user
+third_party_settings:
+  multiple_registration:
+    user_additional_register_form_required: null
+    user_additional_register_form:
+      in_house_lobbyist: in_house_lobbyist
+      consultant_lobbyist: consultant_lobbyist
+      authenticated: 0
+id: user.user.field_i_aggre_to_terms
+field_name: field_i_aggre_to_terms
+entity_type: user
+bundle: user
+label: 'Confirm you understand this information will be public'
+description: "<p> I understand that by submitting my information, it will be published on a public website for the purpose of creating a public facing registry containing information on lobbying activities.</p>\r\n\r\n<p>Personal information is collected under the Lobbyists Registration Act, sections 6, 12 and 16. Contact the Office of the Lobbyist Registry at <a href=\"mailto:info@yukonlobbyistregistry.ca\">info@yukonlobbyistregistry.ca</a> for more information.</p>\r\n"
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,18 @@
+uuid: 69af03f3-a2aa-4414-9b4f-898a7cf1c3d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lobby_s_topics
+id: taxonomy_term.lobby_s_topics.name
+field_name: name
+entity_type: taxonomy_term
+bundle: lobby_s_topics
+label: Name
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

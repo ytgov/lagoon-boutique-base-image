@@ -1,0 +1,22 @@
+uuid: f97a3aea-24a2-416f-8a5e-218607b8f771
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_updated_by_system
+  module:
+    - user
+id: user.user.field_updated_by_system
+field_name: field_updated_by_system
+entity_type: user
+bundle: user
+label: 'Updated by system'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

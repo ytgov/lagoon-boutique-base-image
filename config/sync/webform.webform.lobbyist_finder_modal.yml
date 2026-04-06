@@ -1,0 +1,1129 @@
+uuid: b5dfda11-b97d-419f-98cb-52d5165618f1
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 1
+template: false
+archive: false
+id: lobbyist_finder_modal
+title: 'Lobbyist Finder Modal'
+description: ''
+categories: {  }
+elements: |-
+  '#attributes':
+    class:
+      - finder-modal
+  page_0:
+    '#type': webform_wizard_page
+    '#title': page_0
+    '#wrapper_attributes':
+      class:
+        - current-page
+    '#prev_button_label': BACK
+    '#next_button_label': 'I AGREE'
+    markup_62:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - title-disclaimer
+      '#text': Disclaimer
+    disclaimer_body:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-disclaimer
+      '#text': '<p>This quiz is for general information only. Criteria laid out in the <em>Yukon Lobbyists Registration Act</em> determines what type of lobbyist you are.</p>'
+  page_1:
+    '#type': webform_wizard_page
+    '#title': page_1
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-title
+      '#text': '<p>We need to find out if you&rsquo;re communicating with a public office holder.&nbsp;</p>'
+    processed_text:
+      '#type': processed_text
+      '#wrapper_attributes':
+        class:
+          - img-center
+      '#text': '<img data-entity-uuid="1bc03b9e-95d2-4af2-8f3b-41aabcf7fddf" data-entity-type="file" src="/web/sites/default/files/inline-images/0.png" width="352" height="184"><p>&nbsp;</p>'
+      '#format': full_html
+  page_2:
+    '#type': webform_wizard_page
+    '#title': page_2
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_01:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        invisible:
+          ':input[name="no"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-title
+      '#text': '<p>Are you communicating with a public office holder?</p>'
+    markup_02:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        invisible:
+          ':input[name="no"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        <p>This could be a:</p>
+
+        <ul>
+         <li>Member of the Legislative Assembly (MLA)</li>
+         <li>Caucus employee</li>
+         <li>Premier, Minister or a Cabinet office employee</li>
+         <li>Deputy Minister of a department or directorate</li> 
+         <li>President of a crown corporation</li>
+         <li>Government of Yukon employee</li>
+         <li>Yukon crown corporation employee</li>
+        </ul>
+        <br />
+        &nbsp;
+    markup_2302:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        visible:
+          ':input[name="no"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - title
+      '#text': 'You do not appear to be a lobbyist'
+    processed_text_0602:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="no"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        <p>Based on your responses, you do not appear to be a lobbyist as defined by the Lobbyists Registration Act.</p>
+      '#format': basic_html
+    processed_text_0702:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="no"]':
+            value: 'No'
+      '#wrapper_attributes':
+        data-webform-key: page_2
+        class:
+          - custom-button
+      '#text': |
+        <a href="/">Go back to the lobbyist registry homepage</a>
+      '#format': restricted_html
+    'no':
+      '#type': radios
+      '#title': 'Select one option'
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_3:
+    '#type': webform_wizard_page
+    '#title': page_3
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_03:
+      '#wrapper_attributes':
+        class:
+          - body-title
+      '#text': '<p>We need to find out how you are communicating with a public office holder.</p>'
+      '#type': processed_text
+      '#format': basic_html
+    processed_text_01:
+      '#type': processed_text
+      '#wrapper_attributes':
+        class:
+          - img-center
+      '#text': '<img data-entity-uuid="97024fa5-49ea-4b9d-908b-92a08088b831" data-entity-type="file" src="/web/sites/default/files/inline-images/1.png" width="219" height="233" alt="Image"><p>&nbsp;</p>'
+      '#format': full_html
+  page_4:
+    '#type': webform_wizard_page
+    '#title': page_4
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_04:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        invisible:
+          ':input[name="select_one_option"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-title
+      '#text': 'Are you communicating  or planning to communicate with a public office holder?'
+    markup_05:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        invisible:
+          ':input[name="select_one_option"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        <p>For example, communication techniques may include but are not limited to:</p>      
+
+        <ul>
+         <li>Social media appeals</li>
+         <li>Phone calls or texting</li>
+         <li>Informal and formal meetings</li>
+         <li>Arranging a meeting with a public office holder for a client</li>
+         <li>Grassroots communications. For example, persuading the public to sign petitions</li>
+        </ul>
+    markup_23:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        visible:
+          ':input[name="select_one_option"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - title
+      '#text': 'You do not appear to be a lobbyist'
+    processed_text_06:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="select_one_option"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        <p>Based on your responses, you do not appear to be a lobbyist as defined by the Lobbyists Registration Act.</p>
+      '#format': basic_html
+    processed_text_07:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="select_one_option"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - custom-button
+      '#text': |
+        <a href="/">Go back to the lobbyist registry homepage</a>
+      '#format': restricted_html
+    select_one_option:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_5:
+    '#type': webform_wizard_page
+    '#title': page_5
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_06:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-title
+      '#text': '<p>We need to find out if the intended outcome of your communications is an attempt to influence a government decision.</p>'
+    processed_text_02:
+      '#type': processed_text
+      '#wrapper_attributes':
+        class:
+          - img-center
+      '#text': '<img data-entity-uuid="29f9ff53-5879-476e-b01f-54eab627e510" data-entity-type="file" src="/web/sites/default/files/inline-images/2.png" width="189" height="180" alt="Image"><p>&nbsp;</p>'
+      '#format': basic_html
+  page_6:
+    '#type': webform_wizard_page
+    '#title': page_6
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_07:
+      '#type': processed_text
+      '#wrapper_attributes':
+        data-webform-key: page_6
+        class:
+          - body-title
+      '#text': '<p>Is the intended outcome of your communications an attempt to influence&hellip;</p>'
+      '#format': basic_html
+    markup_08:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        <p>The development of a legislative proposal?<br /></p>
+    are_you_option:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_6_1:
+    '#type': webform_wizard_page
+    '#title': page_6_1
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_24:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_6_1
+        class:
+          - body-title
+      '#text': '<p>Is the intended outcome of your communications an attempt to influence&hellip;</p>'
+    markup_25:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': '<p>The introduction of a Bill, motion or resolution in the Legislative Assembly OR passing, amending or defeating an Act, Bill, motion or resolution?</p>'
+    are_you_option_1:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_6_2:
+    '#type': webform_wizard_page
+    '#title': page_6_2
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_28:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_6_2
+        class:
+          - body-title
+      '#text': '<p>Is the intended outcome of your communications an attempt to influence&hellip;</p>'
+    markup_29:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': '<p>Making or amending a regulation? For example, the <em>Wildlife Sanctuary Regulation</em>.</p>'
+    are_you_option_2:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_6_3:
+    '#type': webform_wizard_page
+    '#title': page_6_3
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_31:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_6_3
+        class:
+          - body-title
+      '#text': '<p>Is the intended outcome of your communications an attempt to influence&hellip;</p>'
+    markup_32:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': '<p>The development, amendment or termination of a government policy or program? For example, creating a new program for youth.</p>'
+    are_you_option_3:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_6_4:
+    '#type': webform_wizard_page
+    '#title': page_6_4
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_34:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_6_4
+        class:
+          - body-title
+      '#text': '<p>Is the intended outcome of your communications an attempt to influence&hellip;</p>'
+    markup_35:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': '<p>A decision by Cabinet, a Cabinet committee or a minister to have the private sector (instead of the government) provide the government with goods and services?</p>'
+    are_you_option_4:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_6_5:
+    '#type': webform_wizard_page
+    '#title': page_6_5
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_37:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_6_5
+        class:
+          - body-title
+      '#text': '<p>Is the intended outcome of your communications an attempt to influence&hellip;</p>'
+    markup_38:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': '<p>&nbsp;The awarding of a grant, contribution or other financial benefit by or on behalf of the government?</p>'
+    are_you_option_5:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_6_6:
+    '#type': webform_wizard_page
+    '#title': page_6_6
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_09:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_6_6
+        class:
+          - body-title
+      '#text': '<p>&nbsp;Is the intended outcome of your communications an attempt to influence&hellip;</p>'
+      '#states':
+        invisible:
+          ':input[name="are_you_option"]':
+            value: 'No'
+          ':input[name="are_you_option_1"]':
+            value: 'No'
+          ':input[name="are_you_option_2"]':
+            value: 'No'
+          ':input[name="are_you_option_3"]':
+            value: 'No'
+          ':input[name="are_you_option_4"]':
+            value: 'No'
+          ':input[name="are_you_option_5"]':
+            value: 'No'
+          ':input[name="are_you_option_6"]':
+            value: 'No'
+    markup_10:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': '<p>Awarding a contract by or on behalf of the government? For example, awarding a contract to build a new government facility.</p>'
+      '#states':
+        invisible:
+          ':input[name="are_you_option"]':
+            value: 'No'
+          ':input[name="are_you_option_1"]':
+            value: 'No'
+          ':input[name="are_you_option_2"]':
+            value: 'No'
+          ':input[name="are_you_option_3"]':
+            value: 'No'
+          ':input[name="are_you_option_4"]':
+            value: 'No'
+          ':input[name="are_you_option_5"]':
+            value: 'No'
+          ':input[name="are_you_option_6"]':
+            value: 'No'
+    markup_44_not:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        visible:
+          ':input[name="are_you_option"]':
+            value: 'No'
+          ':input[name="are_you_option_1"]':
+            value: 'No'
+          ':input[name="are_you_option_2"]':
+            value: 'No'
+          ':input[name="are_you_option_3"]':
+            value: 'No'
+          ':input[name="are_you_option_4"]':
+            value: 'No'
+          ':input[name="are_you_option_5"]':
+            value: 'No'
+          ':input[name="are_you_option_6"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - title
+      '#text': 'You do not appear to be a lobbyist'
+    processed_text_28_lobby:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="are_you_option"]':
+            value: 'No'
+          ':input[name="are_you_option_1"]':
+            value: 'No'
+          ':input[name="are_you_option_2"]':
+            value: 'No'
+          ':input[name="are_you_option_3"]':
+            value: 'No'
+          ':input[name="are_you_option_4"]':
+            value: 'No'
+          ':input[name="are_you_option_5"]':
+            value: 'No'
+          ':input[name="are_you_option_6"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        <p>Based on your responses, you do not appear to be a lobbyist as defined in the <em>Lobbyists Registration Act</em>. If you are unsure, check the legislation or email <a href="mailto:yla@gov.yk.ca">info@yukonlobbyistregistry.ca</a> to confirm.</p>
+      '#format': basic_html
+    processed_text_29_link:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="are_you_option"]':
+            value: 'No'
+          ':input[name="are_you_option_1"]':
+            value: 'No'
+          ':input[name="are_you_option_2"]':
+            value: 'No'
+          ':input[name="are_you_option_3"]':
+            value: 'No'
+          ':input[name="are_you_option_4"]':
+            value: 'No'
+          ':input[name="are_you_option_5"]':
+            value: 'No'
+          ':input[name="are_you_option_6"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - custom-button
+      '#text': |
+        <a href="/">Go back to the lobbyist registry homepage</a>
+      '#format': restricted_html
+    are_you_option_6:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_8:
+    '#type': webform_wizard_page
+    '#title': page_8
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_13:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-title
+      '#text': |
+        <p>We need to determine what type of lobbyist you are.&nbsp;<br />
+        These next questions will help us determine if you&rsquo;re an in-house or consultant lobbyist.&nbsp;</p>
+    processed_text_03:
+      '#type': processed_text
+      '#wrapper_attributes':
+        class:
+          - img-center
+      '#text': '<img data-entity-uuid="6dad5d76-6319-427b-9f8b-8224e328e445" data-entity-type="file" src="/web/sites/default/files/inline-images/3_0.png"><p>&nbsp;</p>'
+      '#format': full_html
+  page_9:
+    '#type': webform_wizard_page
+    '#title': page_9
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_14:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_9
+        class:
+          - body-title
+      '#text': 'What is your role?'
+    markup_15:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': '<p>Are you currently, or will you be lobbying on behalf of a client? For example, you have a contract with a client to lobby on their behalf.</p>'
+    are_you_option_7:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_10:
+    '#type': webform_wizard_page
+    '#title': page_10
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_16:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_10
+        class:
+          - body-title
+      '#text': 'What is your role?'
+    markup_17:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': 'Are you employed by another individual, corporation, partnership or organization? For example, you are an employee of a company who is lobbying on behalf of your employer.'
+    are_you_option_8:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_11:
+    '#type': webform_wizard_page
+    '#title': page_11
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_18:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        data-webform-key: page_11
+        class:
+          - body-title
+      '#text': 'What is your role?'
+    markup_19:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': 'Are you self-employed or a partner in a partnership?'
+    are_you_option_9:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  page_12:
+    '#type': webform_wizard_page
+    '#title': page_12
+    '#prev_button_label': BACK
+    '#next_button_label': NEXT
+    markup_20:
+      '#type': processed_text
+      '#format': basic_html
+      '#wrapper_attributes':
+        class:
+          - body-title
+      '#text': 'What is your role?'
+      '#states':
+        invisible:
+          ':input[name="are_you_option_7"]':
+            value: 'No'
+          ':input[name="are_you_option_8"]':
+            value: 'No'
+          ':input[name="are_you_option_9"]':
+            value: 'No'
+          ':input[name="are_you_option_10"]':
+            value: 'No'
+    markup_21:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        invisible:
+          ':input[name="are_you_option_7"]':
+            value: 'No'
+          ':input[name="are_you_option_8"]':
+            value: 'No'
+          ':input[name="are_you_option_9"]':
+            value: 'No'
+          ':input[name="are_you_option_10"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        Are you the &ldquo;directing mind&rdquo; of a corporation, partnership or organization? This means you control the operations in whole or in part. For example, you are a board member of a society lobbying on behalf of the society.<br />
+        <br />
+        &nbsp;
+    markup_44:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        visible:
+          ':input[name="are_you_option_7"]':
+            value: 'No'
+          ':input[name="are_you_option_8"]':
+            value: 'No'
+          ':input[name="are_you_option_9"]':
+            value: 'No'
+          ':input[name="are_you_option_10"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - title
+      '#text': 'You do not appear to be a lobbyist'
+    processed_text_28:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="are_you_option_7"]':
+            value: 'No'
+          ':input[name="are_you_option_8"]':
+            value: 'No'
+          ':input[name="are_you_option_9"]':
+            value: 'No'
+          ':input[name="are_you_option_10"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        <p>Based on your responses, you do not appear to be a lobbyist as defined in the <em>Lobbyists Registration Act</em>. If you are unsure, check the legislation or email <a href="mailto:yla@gov.yk.ca">info@yukonlobbyistregistry.ca</a> to confirm.</p>
+      '#format': basic_html
+    processed_text_29:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="are_you_option_7"]':
+            value: 'No'
+          ':input[name="are_you_option_8"]':
+            value: 'No'
+          ':input[name="are_you_option_9"]':
+            value: 'No'
+          ':input[name="are_you_option_10"]':
+            value: 'No'
+      '#wrapper_attributes':
+        class:
+          - custom-button
+      '#text': |
+        <a href="/">Go back to the lobbyist registry homepage</a>
+      '#format': restricted_html
+    are_you_option_10:
+      '#type': radios
+      '#title': 'Select one option'
+      '#title_display': invisible
+      '#options': yes_no
+      '#options_display': two_columns
+      '#required': true
+      '#wrapper_type': container
+      '#wrapper_attributes':
+        class:
+          - modal-form-radio
+  final_page:
+    '#type': webform_wizard_page
+    '#title': final_page
+    '#prev_button_label': BACK
+    markup_inhouse:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        visible:
+          - ':input[name="are_you_option_8"]':
+              value: 'Yes'
+          - or
+          - ':input[name="are_you_option_9"]':
+              value: 'Yes'
+          - or
+          - ':input[name="are_you_option_10"]':
+              value: 'Yes'
+      '#wrapper_attributes':
+        class:
+          - title
+      '#text': |
+        You appear to be an in-house lobbyist<br />
+        <br />
+        &nbsp;
+    processed_inhouse:
+      '#type': processed_text
+      '#states':
+        visible:
+          - ':input[name="are_you_option_8"]':
+              value: 'Yes'
+          - or
+          - ':input[name="are_you_option_9"]':
+              value: 'Yes'
+          - or
+          - ':input[name="are_you_option_10"]':
+              value: 'Yes'
+      '#wrapper_attributes':
+        class:
+          - body-messages
+      '#text': |
+        <p>If you and/or others in your organization spend at least 20 hours lobbying the Government of Yukon in a calendar year, your organization must register. The primary contact will create one account for the organization.</p>
+      '#format': basic_html
+    processed_inhouse_1:
+      '#type': processed_text
+      '#states':
+        visible:
+          - ':input[name="are_you_option_8"]':
+              value: 'Yes'
+          - or
+          - ':input[name="are_you_option_9"]':
+              value: 'Yes'
+          - or
+          - ':input[name="are_you_option_10"]':
+              value: 'Yes'
+      '#wrapper_attributes':
+        class:
+          - custom-button
+      '#text': |
+        <a href="/en/register-as-lobbyist">Find out how to register</a>
+      '#format': restricted_html
+    processed_inhouse_2:
+      '#type': processed_text
+      '#states':
+        visible:
+          - ':input[name="are_you_option_8"]':
+              value: 'Yes'
+          - or
+          - ':input[name="are_you_option_9"]':
+              value: 'Yes'
+          - or
+          - ':input[name="are_you_option_10"]':
+              value: 'Yes'
+      '#wrapper_attributes':
+        class:
+          - custom-button
+      '#text': |
+        <a href="/">Return to the home page</a>
+      '#format': restricted_html
+    markup_consultant:
+      '#type': processed_text
+      '#format': basic_html
+      '#states':
+        visible:
+          ':input[name="are_you_option_7"]':
+            value: 'Yes'
+          ':input[name="are_you_option_8"]':
+            '!value': 'Yes'
+          ':input[name="are_you_option_9"]':
+            '!value': 'Yes'
+          ':input[name="are_you_option_10"]':
+            '!value': 'Yes'
+      '#wrapper_attributes':
+        class:
+          - title
+      '#text': |
+        You appear to be a consultant lobbyist<br />
+        <br />
+        &nbsp;
+    processed_consultant_1:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="are_you_option_7"]':
+            value: 'Yes'
+          ':input[name="are_you_option_8"]':
+            '!value': 'Yes'
+          ':input[name="are_you_option_9"]':
+            '!value': 'Yes'
+          ':input[name="are_you_option_10"]':
+            '!value': 'Yes'
+      '#wrapper_attributes':
+        class:
+          - custom-button
+      '#text': |
+        <a href="/register-as-lobbyist">Find out how to register</a>
+      '#format': restricted_html
+    processed_consultant_2:
+      '#type': processed_text
+      '#states':
+        visible:
+          ':input[name="are_you_option_7"]':
+            value: 'Yes'
+          ':input[name="are_you_option_8"]':
+            '!value': 'Yes'
+          ':input[name="are_you_option_9"]':
+            '!value': 'Yes'
+          ':input[name="are_you_option_10"]':
+            '!value': 'Yes'
+      '#wrapper_attributes':
+        class:
+          - custom-button
+      '#text': |
+        <a href="/"> Return to the home page </a>
+      '#format': restricted_html
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit_hide': true
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: ''
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: true
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes:
+    class:
+      - finder-modal
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: false
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }
+variants: {  }

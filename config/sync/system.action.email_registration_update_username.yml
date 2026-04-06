@@ -1,0 +1,14 @@
+uuid: 1417e298-93d0-402f-8e66-5257543f433c
+langcode: en
+status: true
+dependencies:
+  module:
+    - email_registration
+    - user
+_core:
+  default_config_hash: 9NUVFV7_ydOrDXtCKnO7O9wGML91BxSt-zW9W0QdJ-o
+id: email_registration_update_username
+label: 'Update username (from email_registration)'
+type: user
+plugin: email_registration_update_username
+configuration: {  }

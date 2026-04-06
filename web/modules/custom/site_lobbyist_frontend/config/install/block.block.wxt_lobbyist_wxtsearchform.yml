@@ -1,0 +1,21 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: e-ho1_W6GSM0obUJGLkn2mFRlOBVAcKka5NvLTHdopI
+id: wxt_lobbyist_wxtsearchform
+theme: wxt_lobbyist
+region: branding
+weight: -7
+provider: null
+plugin: wxt_search_form_block
+settings:
+  id: wxt_search_form_block
+  label: 'WxT Search form'
+  provider: wxt_library
+  label_display: visible
+visibility: {  }

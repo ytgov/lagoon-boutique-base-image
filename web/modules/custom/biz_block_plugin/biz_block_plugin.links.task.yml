@@ -1,0 +1,4 @@
+biz_block_plugin.settings:
+    route_name: biz_block_plugin.settings
+    title: Settings
+    base_route: biz_block_plugin.settings

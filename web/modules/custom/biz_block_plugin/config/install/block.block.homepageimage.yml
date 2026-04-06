@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:image_block:51b47ec5-5f99-426c-b6cc-729774a50503'
+  module:
+    - block_content
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: homepageimage
+theme: wxt_lobbyist
+region: content_slider
+weight: -10
+provider: null
+plugin: 'block_content:51b47ec5-5f99-426c-b6cc-729774a50503'
+settings:
+  id: 'block_content:51b47ec5-5f99-426c-b6cc-729774a50503'
+  label: 'Homepage Image'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

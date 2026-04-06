@@ -1,0 +1,36 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - block_class
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+third_party_settings:
+  block_class:
+    classes: 'col-sm-4 col-md-3 col-sm-offset-2 col-md-offset-4 col-lg-offset-5'
+_core:
+  default_config_hash: oAJ2v-JRbwvEzuCgfpeYp-0i5mhI2AMJymJIkmQBylc
+id: wxt_lobbyist_sharewidgetblock
+theme: wxt_lobbyist
+region: branding
+weight: -8
+provider: null
+plugin: share_widget_block
+settings:
+  id: share_widget_block
+  label: 'Share widget block'
+  provider: wxt_library
+  label_display: '0'
+  share_settings:
+    share_widget: ''
+  share_widget:
+    facebook: facebook
+    gmail: gmail
+    twitter: twitter
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

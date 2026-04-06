@@ -1,0 +1,158 @@
+<?php
+use Drupal\Core\Render\Element;
+use Drupal\Core\Form\FormStateInterface;
+/**
+ * @file
+ * Provides an example that shows how to create a Webform composite.
+ */
+
+module_load_include('inc', 'webform', 'includes/webform.theme.template');
+
+/**
+ * Implements hook_theme().
+ */
+function webform_composite_yukon_theme() {
+  return [
+    'webform_composite_yukon' => [
+      'render element' => 'element',
+    ],
+  ];
+}
+function webform_composite_yukon_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'webform_composite_yukon/webform_composite_yukon';
+}
+/**
+ * Prepares variables for webform example composite templates.
+ *
+ * Default template: webform-example-composite.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ */
+function template_preprocess_webform_composite_yukon(array &$variables) {
+  // Here you can get the composite element and alter it.
+  _template_preprocess_webform_composite($variables);
+}
+
+function webform_composite_yukon_webform_submission_form_alter( array &$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+  $current_page = $form_state->get('current_page');
+  if(isset($form['elements'])){
+    foreach($form['elements'] as $element){
+      if(is_array($element ) && isset($element['#webform_key']) && $element['#webform_key'] === $current_page){
+        if(isset($element['#type']) && $element['#type'] != 'webform_composite_yukon'){
+          foreach($element as $sub_element){
+            if(is_array($sub_element) && isset($sub_element['#type']) && $sub_element['#type'] === 'webform_composite_yukon'){
+              /*
+              $add_more_item = ['#prefix' => '<div class="webform-multiple-add js-webform-multiple-add container-inline">',
+                                '#suffix' => "</div>",
+                                '#type' =>"submit", 
+                                '#value' =>  $sub_element['#add_more_button_label'],
+                                '#limit_validation_errors' => [],
+                                '#submit' =>[
+                                    "Drupal\webform_composite_yukon\Element\WebformCompositeYukon",
+                                    "addItemsSubmit"
+                                  ],
+                                  '#ajax' => [
+                                    'callback' =>[
+                                      "Drupal\webform_composite_yukon\Element\WebformCompositeYukon",
+                                      "ajaxCallback"
+                                    ]
+                                  ],
+                                 'more_items' =>[
+                                  '#type' => "number",
+                                  '#title' => $sub_element['#add_more_button_label'],
+                                  '#title_display' => "invisible",
+                                  '#min' => 1,
+                                  '#max' => 100,
+                                  '#default_value' => 1,
+                                  '#field_suffix' =>  "",
+                                  '#error_no_message' => TRUE,
+                                ],
+                                '#name' => $sub_element['#webform_key']. '_table_add',
+                                
+                                ];
+                              */
+
+             $id = str_replace('_', '-', $sub_element['#webform_key']) ;                
+              $add_more_item['add'] = [
+                '#prefix' => '<div class="webform-multiple-add js-webform-multiple-add container-inline">',
+                '#suffix' => '</div>',
+              ];
+              $add_more_item['add']['submit'] = [
+                '#type' => 'submit',
+                '#value' =>  $sub_element['#add_more_button_label'],
+                '#limit_validation_errors' => [],
+                '#submit' => ['Drupal\webform_composite_yukon\Element\WebformCompositeYukon', 'addItemsSubmit'],
+                '#ajax' => [
+                  'callback' => ["Drupal\webform_composite_yukon\Element\WebformCompositeYukon",  "ajaxCallback"],
+                  'wrapper' => $sub_element['#webform_key'].'_table',
+                  'progress' => ['type' => 'none'],
+                ],
+                '#name' => $sub_element['#webform_key'] . '_table_add',
+                '#id' => 'edit-'.$sub_element['#webform_key'].'-add-submit'
+              ];
+              $add_more_item['add']['more_items'] = [
+                '#type' => 'number',
+                '#title' => $sub_element['#add_more_button_label'] . ' ' . $sub_element['#add_more_input_label'],
+                '#title_display' => 'invisible',
+                '#min' => 1,
+                '#max' => 100,
+                '#default_value' => $sub_element['#add_more_items'],
+                '#field_suffix' => $sub_element['#add_more_input_label'],
+                '#error_no_message' => TRUE,
+              ];
+
+              if(!array_key_exists($sub_element['#webform_key'].'_add_submit',  $form['actions'])){
+                //$form['actions'][$sub_element['#webform_key'].'_add_submit']= $add_more_item;
+                //kint($form['actions']);
+              }
+            }
+          }
+        }
+      }
+    }
+    
+  } 
+}
+ /**
+ * Prepares variables for webform actions templates.
+ *
+ * @see \Drupal\webform\WebformSubmissionForm::actionsElement
+ * @see \Drupal\webform\WebformSubmissionForm::actions
+ * @see template_preprocess_webform_actions()
+ * @see webform-actions.html.twig
+ */
+function webform_composite_yukon_preprocess_webform_actions(array &$variables) {
+  $element = &$variables['element'];
+  if(isset($element['wizard_next']) && isset($element['wizard_prev'])){
+    $wizard_next = $element['wizard_next'];
+    $wizard_next+= [
+      '#prefix' => '<div class="back-blue">',
+      '#suffix' => '</div>',
+    ];
+    $wizard_next['#weight'] = 0;
+    $wizard_prev = $element['wizard_prev'];
+    $wizard_prev['#weight'] = 15;
+    unset($element['wizard_next']);
+    unset($element['wizard_prev']);
+    array_push($element, $wizard_next);
+    array_push($element, $wizard_prev);
+  }else if(isset($element['submit']) && isset($element['wizard_prev'])){
+    $submit = $element['submit'];
+    $submit+= [
+      '#prefix' => '<div class="back-blue">',
+      '#suffix' => '</div>',
+    ];
+    $submit['#weight'] = 2;
+    $wizard_prev = $element['wizard_prev'];
+    $wizard_prev['#weight'] = 15;
+    
+    unset($element['wizard_prev']);
+    unset($element['submit']);
+    array_push($element, $submit);
+    array_push($element, $wizard_prev);      
+  }
+}
+
+

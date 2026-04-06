@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: searchactivityblock
+theme: wxt_lobbyist
+region: content
+weight: -6
+provider: null
+plugin: search_activity_custom_block
+settings:
+  id: search_activity_custom_block
+  label: 'Search activity block'
+  provider: biz_block_plugin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /search-activity
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

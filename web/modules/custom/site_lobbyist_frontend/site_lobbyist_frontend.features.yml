@@ -1,0 +1,11 @@
+excluded:
+  - core.entity_form_display.block_content.basic.default
+  - core.entity_form_display.block_content.tables.default
+  - core.entity_form_display.taxonomy_term.lobbyist_s_portfolios.default
+  - core.entity_view_display.block_content.basic.default
+  - core.entity_view_display.block_content.tables.default
+  - core.entity_view_display.taxonomy_term.lobbyist_s_portfolios.default
+  - field.field.block_content.basic.body
+  - field.field.block_content.image_block.body
+  - field.field.block_content.tables.body
+required: true

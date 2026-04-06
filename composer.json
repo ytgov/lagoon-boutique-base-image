@@ -1,140 +1,59 @@
 {
-    "name": "ytgov/lagoon-boutique-base-image",
-    "description": "Base images for Drupal with CLI, Nginx, and PHP",
+    "name": "ytgov/lagoon-quitpath-ca",
+    "description": "Yukon Government - lobbyist - registry",
     "type": "project",
-    "license": "GPL-2.0-or-later",
-    "homepage": "https://www.drupal.org/project/drupal",
-    "support": {
-        "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
-        "chat": "https://www.drupal.org/node/314178"
-    },
-    "repositories": {
-        "0": {
+    "license": "MIT",
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        }
-    },
-    "require": {
-        "ext-simplexml": "*",
-        "composer/installers": "^2.0.1",
-        "cweagans/composer-patches": "^1.7.3",
-        "drupal/addtoany": "^2.0.0",
-        "drupal/admin_toolbar": "^3.3.0",
-        "drupal/allowed_formats": "^2.0.0",
-        "drupal/better_exposed_filters": "^7.0.0-beta1",
-        "drupal/coder": "^8.3.17",
-        "drupal/color_field": "^3.0.0",
-        "drupal/core-composer-scaffold": "^10.4.5",
-        "drupal/core-project-message": "^10.4.5",
-        "drupal/core-recommended": "^10.4.5",
-        "drupal/easy_breadcrumb": "^2.0.9",
-        "drupal/field_group": "^3.4.0",
-        "drupal/fontawesome": "^2.24.0",
-        "drupal/image_effects": "^3.4.0",
-        "drupal/layout_paragraphs": "^2.1.1",
-        "drupal/link_attributes": "^2.1.0",
-        "drupal/linkit": "^7.0.3",
-        "drupal/matomo": "^1.21.0",
-        "drupal/menu_block": "^1.10.0",
-        "drupal/metatag": "^2.0.0",
-        "drupal/openid_connect": "^1.4.0",
-        "drupal/paragraphs": "^1.15.0",
-        "drupal/pathauto": "^1.11.0",
-        "drupal/redirect": "^1.8.0",
-        "drupal/schema_metatag": "^3.0.0",
-        "drupal/simple_sitemap": "^4.2.2",
-        "drupal/simplenews": "^4.0.0",
-        "drupal/svg_image_field": "^2.2.0-beta1",
-        "drupal/symfony_mailer": "^1.5",
-        "drupal/tmgmt": "^1.15.0",
-        "drupal/token": "^1.11.0",
-        "drupal/twig_tweak": "^3.2.0",
-        "drupal/views_bulk_operations": "^4.2.0",
-        "drupal/views_infinite_scroll": "^2.0.3",
-        "drupal/webform": "^6.3.0-beta2",
-        "drush/drush": "^12.5"
-    },
-    "conflict": {
-        "drupal/drupal": "*"
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "config": {
-        "allow-plugins": {
-            "composer/installers": true,
-            "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "phpstan/extension-installer": true,
-            "cweagans/composer-patches": true,
-            "php-http/discovery": true,
-            "tbachert/spi": false
         },
-        "sort-packages": true
+        {
+            "type": "vcs",
+            "url": "git@github.com:ytgov/lagoon-boutique-base-image.git"
+        }
+    ],
+    "require": {
+        "ytgov/lagoon-boutique-base-image": "dev-w3creatives/prod11",
+        "drupal/address": "^2.0",
+        "drupal/block_class": "^4.0",
+        "drupal/quicktabs": "^4.0",
+        "drupal/views_fieldsets": "^4.0",
+        "drupal/easy_breadcrumb": "^2.0",
+        "drupal/multiple_registration": "3.x-dev@dev",
+        "drupal/email_registration": "^2.0@RC",
+        "drupal/restui": "^1.22",
+        "drupal/webform_rest": "^4.2",
+        "drupal/mask": "^2.1@RC"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/contrib/{$name}": ["type:drupal-drush"]
+        },
         "drupal-scaffold": {
             "locations": {
                 "web-root": "web/"
-            }
-        },
-        "installer-paths": {
-            "web/core": [
-                "type:drupal-core"
-            ],
-            "web/libraries/{$name}": [
-                "type:drupal-library"
-            ],
-            "web/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "web/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "web/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "drush/Commands/contrib/{$name}": [
-                "type:drupal-drush"
-            ],
-            "web/modules/custom/{$name}": [
-                "type:drupal-custom-module"
-            ],
-            "web/profiles/custom/{$name}": [
-                "type:drupal-custom-profile"
-            ],
-            "web/themes/custom/{$name}": [
-                "type:drupal-custom-theme"
-            ]
-        },
-        "drupal-core-project-message": {
-            "include-keys": [
-                "homepage",
-                "support"
-            ],
-            "post-create-project-cmd-message": [
-                "<bg=blue;fg=white>                                                         </>",
-                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
-                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
-                "<bg=blue;fg=white>                                                         </>",
-                "",
-                "<bg=yellow;fg=black>Next steps</>:",
-                "  * Install the site: https://www.drupal.org/docs/8/install",
-                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
-                "  * Get support: https://www.drupal.org/support",
-                "  * Get involved with the Drupal community:",
-                "      https://www.drupal.org/getting-involved",
-                "  * Remove the plugin that prints this message:",
-                "      composer remove drupal/core-project-message"
-            ]
-        },
-        "patches": {
-            "drupal/entity_reference_revisions": {
-                "Non-translatable fields can only be changed when updating the current revision": "https://www.drupal.org/files/issues/2024-01-15/3150084-35.patch"
             },
-            "drupal/core": {
-                "Exposed filters get values from url when ajax is on": "https://www.drupal.org/files/issues/2024-08-23/drupal-3121172-34.patch"
-            }
+            "excludes": [
+                "sites/development.services.yml",
+                "sites/example.settings.local.php"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "drupal/core-project-message": false,
+            "drupal/core-composer-scaffold": true,
+            "cweagans/composer-patches": true,
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }

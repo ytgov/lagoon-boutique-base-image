@@ -1,0 +1,61 @@
+uuid: 54fb6b52-65a3-40a7-94f5-892f17092bfe
+langcode: en
+status: true
+dependencies: {  }
+id: account_home
+label: 'In House Account Home'
+renderer: quick_tabs
+hide_empty_tabs: false
+default_tab: 0
+options:
+  quick_tabs:
+    ajax: true
+    class: ''
+    style: ''
+configuration_data:
+  -
+    title: 'Account Home'
+    weight: 0
+    type: block_content
+    content:
+      block_content:
+        options:
+          bid: inhouse_activities_block
+          block_title: ''
+          display_title: false
+      view_content:
+        options:
+          vid: block_content
+          display: default
+          args: ''
+      node_content:
+        options:
+          nid: ''
+          view_mode: full
+          hide_title: true
+      qtabs_content:
+        options:
+          machine_name: ''
+  -
+    title: 'Organization Information'
+    weight: 0
+    type: block_content
+    content:
+      block_content:
+        options:
+          bid: inhouselobbyist_custom_block
+          block_title: ''
+          display_title: false
+      view_content:
+        options:
+          vid: block_content
+          display: default
+          args: ''
+      node_content:
+        options:
+          nid: ''
+          view_mode: full
+          hide_title: true
+      qtabs_content:
+        options:
+          machine_name: ''

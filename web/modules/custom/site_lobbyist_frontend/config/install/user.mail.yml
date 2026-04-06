@@ -1,0 +1,32 @@
+cancel_confirm:
+  body: "[user:display-name],\r\n\r\nA request to cancel your account has been made at [site:name].\r\n\r\nYou may now cancel your account on [site:url-brief] by clicking this link or copying and pasting it into your browser:\r\n\r\n[user:cancel-url]\r\n\r\nNOTE: The cancellation of your account is not reversible.\r\n\r\nThis link expires in one day and nothing will happen if it is not used.\r\n\r\n--  [site:name] team"
+  subject: 'Account cancellation request for [user:display-name] at [site:name]'
+password_reset:
+  body: "[user:display-name],\r\n\r\nWe’ve received your request to reset your password to the Yukon Lobbyist Registry.\r\n\r\nWhat you need to do:\r\n\r\nThis password reset will expire in 24 hours. If it expires, you can go to the Lobbyist Registry (link) to reset your password again.\r\n1.\tSelect this link or copy and paste it into your browser. You can only use this link once.  \r\n[user:one-time-login-url]\r\n\r\n2.\tReset your password in the lobbyist registry. \r\n\r\nFor more information:\r\n\r\nEmail the Office of the Lobbyist Registry at info@yukonlobbyistregistry.ca."
+  subject: 'Password reset for Yukon Lobbyist Registry'
+register_admin_created:
+  body: "This email is confirmation of your application to create an in-house lobbyist account on the Yukon Lobbyist Registry ([site:url])\r\n\r\nWhat you need to do:\r\nAs an in-house lobbyist you are required to report your lobbying activity and add any employees, board members, etc. who may be lobbying on behalf of your organization.\r\n\r\n    1.  Log into the registry ([site:url]/login).\r\n    2.  Enter the email address and password you created when you registered.\r\n    3.  From your account page, add a lobbying activity by clicking on \"add a lobbying activity.\"\r\n\r\nIf you need help:\r\nFor help verifying your registration, email info@yukonlobbyistregistry.ca or phone 867-667-5618."
+  subject: 'Confirmation: Create an in-house lobbyist account'
+register_no_approval_required:
+  body: "This email is confirmation of your application to create an in-house lobbyist account on the Yukon Lobbyist Registry.\r\nWhat you need to do: \r\nAs an in-house lobbyist you are required to report your lobbying activity and add any employees in your organization who are performing lobbyist\r\nactivities.\r\n    1. Log into the registry([site:url]/login).\r\n        a. Email address\r\n        b. Your password\r\nIf you need help\r\nIf assistance is required email info@yukonlobbyistregistry.ca or telephone\r\n867-667-5618"
+  subject: 'Confirmation: Create an in-house lobbyist account'
+register_pending_approval:
+  body: "This email is confirmation of your application to create a consultant lobbyist account on the Yukon Lobbyist Registry ([site:url])\r\nWhat you need to do:\r\nAs a consultant lobbyist, you are required to report your lobbying activity on behalf of a client.\r\n\r\n    1.  Log into the registry ([site:url]/login).\r\n    2.  Enter the email address and password you created when you registered.\r\n    3.  From your account page, add a lobbying activity by clicking on \"add a lobbying activity.\"\r\n\r\nIf you need help:\r\nFor help verifying your registration, email info@yukonlobbyistregistry.ca or phone 867-667-5618."
+  subject: 'Confirmation: Create a consultant lobbyist account'
+register_pending_approval_admin:
+  body: "This email is confirmation of your application to create an in-house lobbyist account on the Yukon Lobbyist Registry.\r\nWhat you need to do: \r\nAs an in-house lobbyist you are required to report your lobbying activity and add any employees in your organization who are performing lobbyist\r\nactivities.\r\n    1. Log into the registry([site:url]/login).\r\n        a. Email address\r\n        b. Your password\r\nIf you need help\r\nIf assistance is required email info@yukonlobbyistregistry.ca or telephone\r\n867-667-5618"
+  subject: 'Confirmation: Create an in-house lobbyist account'
+status_activated:
+  body: "This email is confirmation of your application to create a consultant lobbyist account on the Yukon Lobbyist Registry ([site:url])\r\n\r\nWhat you need to do:\r\nAs a consultant lobbyist, you are required to report your lobbying activity on behalf of a client.\r\n\r\n    1.  Log into the registry ([site:url]/login).\r\n    2.  Enter the email address and password you created when you registered.\r\n    3.  From your account page, add a lobbying activity by clicking on \"add a lobbying activity.\"\r\n\r\nIf you need help:\r\nFor help verifying your registration, email info@yukonlobbyistregistry.ca or phone 867-667-5618."
+  subject: 'Confirmation: Create a consultant lobbyist account'
+status_blocked:
+  body: "[user:display-name],\r\n\r\nYour account on [site:name] has been blocked.\r\n\r\n--  [site:name] team"
+  subject: 'Account details for [user:display-name] at [site:name] (blocked)'
+status_canceled:
+  body: "[user:display-name],\r\n\r\nYour account on [site:name] has been canceled.\r\n\r\n--  [site:name] team"
+  subject: 'Account details for [user:display-name] at [site:name] (canceled)'
+langcode: en
+email_verify_register_rest:
+  body: "[user:display-name],\r\n        A request to verify your account has been made at [site:name].\r\n        Here is your temporary token: \r\n        [user:rest-register-temp-token]\r\n        This will expire in 7 Days."
+  subject: '[site:name] Account Verification for [user:display-name]'
+

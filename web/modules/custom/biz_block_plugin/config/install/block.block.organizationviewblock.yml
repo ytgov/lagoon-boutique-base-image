@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: organizationviewblock
+theme: wxt_lobbyist
+region: content
+weight: 0
+provider: null
+plugin: organization_view_block
+settings:
+  id: organization_view_block
+  label: 'Organization view block'
+  provider: biz_block_plugin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /search-organization/organization-view
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

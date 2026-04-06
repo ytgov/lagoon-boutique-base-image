@@ -1,0 +1,5 @@
+biz_business_rules.settings:
+  title: 'Messages for Business rules' 
+  description: ''
+  parent: biz_lobbyist_registration.admin_config
+  route_name: biz_business_rules.settings

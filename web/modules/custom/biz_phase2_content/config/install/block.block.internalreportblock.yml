@@ -1,0 +1,43 @@
+uuid: ce83feae-0bc1-4116-828f-6371377eea16
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - user
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: internalreportblock
+theme: wxt_lobbyist
+region: content
+weight: 0
+provider: null
+plugin: internal_report_block
+settings:
+  id: internal_report_block
+  label: 'Internal Report block'
+  provider: biz_block_plugin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /internal-report
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      administrator: administrator
+      reviewer: reviewer
+      role_administrator: role_administrator
+      editor: editor
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

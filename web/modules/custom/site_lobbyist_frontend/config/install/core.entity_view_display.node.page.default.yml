@@ -1,0 +1,48 @@
+uuid: ef17495b-bcab-4d30-be65-3b94a8bba971
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.page.body
+    - field.field.node.page.comment
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.layout_builder__translation
+    - field.field.node.page.layout_selection
+    - node.type.page
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  private_message_link:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  comment: true
+  content_moderation_control: true
+  field_meta_tags: true
+  langcode: true
+  layout_builder__layout: false
+  layout_builder__translation: true
+  layout_selection: false
+  panelizer: false
+  search_api_excerpt: true

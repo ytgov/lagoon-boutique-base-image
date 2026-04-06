@@ -1,0 +1,20 @@
+<?php
+  use Drupal\Core\Render\Element;
+  use Drupal\Core\Form\FormStateInterface;
+  /**
+   * @file
+   * Provides an example that shows how to create a Webform composite.
+   */
+  
+  module_load_include('inc', 'webform', 'includes/webform.theme.template');
+
+  function webform_file_yukon_theme(){
+    return [
+      'webform_file_yukon' => [
+        'render element' => 'element',
+      ],
+    ];
+  }
+  function template_preprocess_webform_file_yukon(array &$variables) {
+    template_preprocess_webform_element_managed_file($variables);
+  }

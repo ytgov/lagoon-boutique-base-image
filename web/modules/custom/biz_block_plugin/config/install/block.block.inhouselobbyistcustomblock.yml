@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - block_class
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+third_party_settings:
+  block_class:
+    classes: in-house-lobbyist-users
+id: inhouselobbyistcustomblock
+theme: wxt_lobbyist
+region: content
+weight: -14
+provider: null
+plugin: inhouselobbyist_custom_block
+settings:
+  id: inhouselobbyist_custom_block
+  label: 'In-house Lobbyist'
+  provider: biz_block_plugin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /in-house-organization-info
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

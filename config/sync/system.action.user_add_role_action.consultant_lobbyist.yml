@@ -1,0 +1,14 @@
+uuid: 27e9b7de-eb6c-4e48-9c6b-8f6a58128d95
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.consultant_lobbyist
+  module:
+    - user
+id: user_add_role_action.consultant_lobbyist
+label: 'Add the Consultant lobbyist role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: consultant_lobbyist

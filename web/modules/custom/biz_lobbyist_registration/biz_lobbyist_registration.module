@@ -1,0 +1,476 @@
+<?php
+use Drupal\Core\Url;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Database\ConnectionNotDefinedException;
+use Drupal\Core\Database\DatabaseExceptionWrapper;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\biz_webforms\BizWebformController;
+use Drupal\webform\WebformSubmissionForm;
+use Drupal\oauth2_client\Service\OAuth2Client;
+use GuzzleHttp\Client;
+use Drupal\Core\Cache\CacheableMetadata;
+
+global $default_username, $default_pass;
+
+/**
+ * Implements hook_local_tasks_alter().
+ */
+function biz_lobbyist_registration_local_tasks_alter(&$local_tasks) {
+     unset($local_tasks['user.register']);
+}
+/*
+ * Implements hook_user_logout
+ * Redirect when user logout
+ */
+function biz_lobbyist_registration_user_logout($account) {
+    $response = new RedirectResponse("/");
+    $response->send();
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ * Change the title from tabs in registration page
+ */
+function biz_lobbyist_registration_menu_local_tasks_alter(&$data, $route_name) {
+  $forms = ["user.login", "multiple_registration.role_registration_page","user.pass"];
+  if(in_array($route_name, $forms)){
+    $new_tab['#link']['title'] = t("I Don't know");
+  	$new_tab['#link']['url'] = Drupal\Core\Url::fromUri('internal:/form/lobbyist-finder-modal');
+  	$new_tab['#theme'] = "menu_local_task";
+  	$new_tab['#active'] = FALSE;
+  	$new_tab['#access'] = $data['tabs'][0]['multiple_registration.local_tasks:in_house_lobbyist']['#access'];
+  	$data['tabs'][0]['multiple_registration.local_tasks:modal_lobbyist'] = $new_tab;
+  	unset($data['tabs'][0]['user.login']);
+  	foreach ($data['tabs'][0] as $type => &$tab) {
+        if ($tab['#link']['title'] == t('Create new In-house lobbyist account')) {
+            $tab['#link']['title'] = t('Register as In-house lobbyist');
+        }
+        if ($tab['#link']['title'] == t('Create new Consultant lobbyist account')) {
+            $tab['#link']['title'] = t('Register as Consultant lobbyist');
+        }
+        if ($tab['#link']['title'] == t('Reset your password')) {
+            $tab['#link']['localized_options']['attributes']['class'] = 'forgot-password-class';
+            $tab['#link']['title'] = t('Forgot your password?');
+        }
+        if ($tab['#link']['title'] == t("I Don't know")) {
+	        $tab['#link']['localized_options']['attributes']['class'][] = 'webform-dialog button';
+	        $tab['#link']['localized_options']['attributes']['data-dialog-options'][] = '{"width":650,"height":500}';
+        }
+        unset($tab);
+    }
+  }
+}
+
+
+function biz_lobbyist_registration_preprocess_page(array &$variables) {
+  $current_user = \Drupal::currentUser();
+
+    // Redirect if user is logged in
+    if ($current_user->isAuthenticated()) {
+        $current_path = \Drupal::service('path.current')->getPath();
+        $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+        if ($alias === '/fr/login' || $alias === '/en/login' || $alias === '/login') {
+            $request = \Drupal::request();
+            if ($request->query->has('destination')) {
+                $url_redirect =  $request->query->get('destination');
+            }else{
+                $account = \Drupal\user\Entity\User::load($current_user->id());
+                $url_redirect = BizWebformController::get_user_path_redirect($account, "", "", TRUE);
+            }
+            $response = new \Symfony\Component\HttpFoundation\RedirectResponse($url_redirect);
+            $response->send();
+            exit;
+        }
+    }
+}
+
+/**
+ * Implements hook_form_alter().
+ *  The actions are change only for validate and save the information in another server
+ */
+function biz_lobbyist_registration_form_alter(&$form, $form_state, $form_id){
+
+    switch($form_id){
+        case "user_register_form":
+            $form['actions']['submit']['#value'] = t('Create account');
+            //Redirect when submit the account
+            $form['actions']['submit']['#submit'][] = 'biz_lobbyist_registration_submitForm';
+            //Validate if the user exist in the backend if not, it will be save
+            $form['#validate'][] = 'biz_lobbyist_registration_validate_email';
+            $form['account']['mail']['#description'] = t('This should be your business email address. An email address can only be used once to register. This is the email address our system uses to correspond with you.');
+            unset($form["field_token_auth_"]);
+            
+        break;
+        case 'user_form':
+            $current_user = \Drupal::currentUser();
+            $roles = $current_user->getRoles();
+            $form['#prefix'] = '<div class="organization info-organization purple-header new-notifications-header"><div class="col-xs-12"><p><strong>' . t('Edit user') . '</strong></p></div></div>';
+            if(!in_array('administrator', $roles)){
+                unset($form["field_token_auth_"]);
+            }
+            $form['#validate'][] = 'check_password';
+        break;
+        case 'user_login_form':
+            $form['#validate'][] = 'validate_login';
+            $form['#submit'][] = 'submit_login';
+        break;
+        case "user_pass":
+            $form['#submit'][] = 'custom_redirect';
+        break;
+    }
+}
+/*
+    *
+    * Save the password in global variable
+    */
+function check_password(&$form, &$form_state){
+    global $default_pass;
+    $data = $form_state->getValues();
+    $default_pass = $data["pass"];
+}
+
+/*
+    *
+    * Redirect to correct page after user login
+    */
+function submit_login(&$form, &$form_state){
+    $data = $form_state->getValues();
+    $current_user = user_load_by_name($data['name']);
+    // Use the 'destination' if provided in the URL
+    $destination = \Drupal::request()->query->get('destination');
+    if (!empty(trim($destination)) && str_starts_with($destination, '/')) {
+        \Drupal::request()->query->set('destination', $destination);
+    }
+    else {
+        // Redirect to default path if no valid destination is provided
+        $url_redirect = BizWebformController::get_user_path_redirect($current_user ,"", "", TRUE);
+        \Drupal::request()->query->set('destination', $url_redirect);
+    }
+}
+/*
+    *
+    * Redirect to correct page when user forgot the password
+    */
+function custom_redirect(&$form, &$form_state){
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    //Redirect to login page after send password reset instructions
+    $url_object = \Drupal::service('path.validator') ->getUrlIfValid('/' . $language. '/login');
+    $route_name = $url_object->getRouteName();
+    $route_parameters = $url_object->getrouteParameters();
+    $url_redirect = \Drupal\Core\Url::fromRoute($route_name, $route_parameters);
+    $form_state->setRedirectUrl($url_redirect);
+}
+/*
+    *
+    * Validate login and save new token for authentication in backend environment
+    */
+function validate_login(&$form, &$form_state){
+    $data = $form_state->getValues();
+    $current_user = user_load_by_name($data['name']);
+    user_save_tokens($current_user, $data['name'], $data['pass'] );
+}
+/**
+  * Save the token for access to backend
+  *
+  */
+function user_save_tokens($current_user, $name, $pass){
+    if(!empty(\Drupal::config('biz_lobbyist_registration.settings')->get('base_url'))){
+        if($current_user){
+            
+            $response_token = BizWebformController::get_token_oauth2_client(trim($name), trim($pass));
+            $response_token = json_decode($response_token);
+            if(!isset($response_token->access_token)){
+                \Drupal::logger('biz_lobbyist_registration')->error(json_encode($response_token));
+                if($response_token->error == t('Invalid username and password combination')){
+                    \Drupal::messenger()->addMessage(t('Invalid username and password combination. Please try again.'), 'error');
+                }
+                else{
+                    \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+                }   
+                return FALSE;          
+            }
+            $entity_new_data = [ 'field_token_auth_' => $response_token->access_token];
+            BizWebformController::update_tokens($current_user->id(), $entity_new_data );
+        }
+        else{
+            \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+            return FALSE;
+        }
+    }
+    
+}
+
+/**
+ * Validate if the email address is already taken 
+ */
+function biz_lobbyist_registration_validate_email($form, &$form_state){
+    global $default_username;
+    try{
+      $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      $request_options = BizWebformController::get_request_options(FALSE);
+      $email = $form_state->getValue('mail');
+      $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+      $url = $base_url . \Drupal::config('biz_lobbyist_registration.settings')->get('validate_email_url_api'). "/".$email;
+      $response = BizWebformController::execute_external_api($url, [], "GET", $request_options);
+      \Drupal::logger('biz_lobbyist_registration')->notice(json_encode($response["message"]));
+      $data = json_decode($response["message"]);
+      if(!empty($data)){
+          return FALSE;
+      }
+      //Save User
+      $user_values = $form_state->getValues();
+      $username = trim($user_values["name"]);
+      $password = $user_values["pass"];
+  
+      $mail = array("value" => trim($user_values["mail"]));
+      $name = array("value" => $username);
+      $status = array("value" =>trim( $user_values["status"]));
+      $pass = array("value" => $password);
+      $user_values["mail"] = $mail;
+      $user_values["name"] = ['value' => explode('@', $mail['value'])[0]];
+      $user_values["status"] = $status;
+      $user_values["pass"] = $pass;
+      unset($user_values["administer_users"]);
+      unset($user_values["notify"]);
+      unset($user_values["preferred_langcode"]);
+      unset($user_values["preferred_admin_langcode"]);
+      unset($user_values["form_build_id"]);
+      unset($user_values["form_token"]);
+      unset($user_values["form_id"]);
+      unset($user_values["contact"]);
+      unset($user_values["rid"]);
+      unset($user_values["timezone"]);
+      unset($user_values["op"]);
+      unset($user_values["htmlmail_plaintext"]);
+      unset($user_values["field_i_aggre_to_terms"]);
+      unset($user_values["field_token_auth_"]);
+      unset($user_values['conflict_entity_original_hash']);
+      $user_roles["roles"][0] = isset($user_values["multiple_registration_rid"]) ? $user_values["multiple_registration_rid"] : (isset($user_values["roles"][1]) ? $user_values["roles"][1] : "");
+      $user_roles["roles"][1] = $user_values["roles"][0];
+      $user_values["roles"] = $user_roles["roles"];
+      unset($user_values["multiple_registration_rid"]);
+      unset($user_values["submit"]);
+      $user_values['field_street_address'] = $user_values["field_street_address"][0];
+      $user_values['preferred_langcode'] = ["value" => $language];
+  
+      $url = $base_url .'entity/user?_format=json';
+    
+      // Initialize the Guzzle client
+      $client = \Drupal::httpClient();
+    
+        // Send the POST request
+        $response = $client->post($url, [
+          'json' => $user_values,
+          $request_options
+        ]);
+          $user_name = "";
+           if ($response->getStatusCode() === 200) {
+               $default_username = $data['name'][0]['value'];
+              
+          }
+          else {
+              return FALSE;
+          }
+      
+      
+      $response = BizWebformController::execute_external_api($url ,$user_values, "POST", $request_options);
+     
+    }
+    catch(\Exception $e){
+      if ($e->hasResponse()) {
+            \Drupal::logger('biz_lobbyist_registration')->error(json_encode($e->getMessage()));
+            $form_state->setErrorByName('mail', t('The website encountered an unexpected error. Please try again later.'), 'error', TRUE);
+    
+          }
+
+    }
+}
+
+/**
+ * If the account was created redirect to basic page
+ */
+function biz_lobbyist_registration_submitForm(&$form, $form_state) {
+    global $default_username;
+    $user_values = $form_state->getValues();
+    $username = $user_values["name"];
+    $password = $user_values["pass"];
+    $response_token = BizWebformController::get_token_oauth2_client($default_username, $password);
+    $response_token = json_decode($response_token);
+    if(!isset($response_token->access_token)){
+        \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+        \Drupal::logger('biz_lobbyist_registration')->error(json_encode($response_token));
+        return FALSE;
+    }
+    $token_auth = $response_token->access_token;
+    $current_user = user_load_by_mail($user_values['mail']);
+    $entity_new_data = [ 'field_token_auth_' => $response_token->access_token];
+    BizWebformController::update_tokens($current_user->id(), $entity_new_data );
+    \Drupal::messenger()->deleteAll();
+}
+/*
+ * Function change the page title after the user will create your account
+*/
+function biz_lobbyist_registration_preprocess_page_title(&$variables) {
+    $node = \Drupal::request()->attributes->get('node');
+    $name = isset($_GET['name']) ? ", " . $_GET['name'] : "";
+    if ($node && $node->bundle() == 'page' && !empty($name)) {
+        $variables['title'] = t($node->getTitle(). $name);
+    }
+}
+
+/**
+  * Notify to the user when creating a new account
+  */
+function biz_lobbyist_registration_entity_insert(\Drupal\Core\Entity\EntityInterface $entity){
+    switch($entity->getEntityType()->id()){
+        case 'user':
+            $user = \Drupal\user\Entity\User::load($entity->id());
+            $roles = $user->getRoles();
+            $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+            $user_name = "";
+            $field_first_name = $entity->get('field_first_name')->getString();
+            $field_last_name = $entity->get('field_last_name')->getString();
+            $field_first_name_consultant_ = $entity->get('field_first_name_consultant_')->getString();
+            $field_last_name_consultant_ = $entity->get('field_last_name_consultant_')->getString();
+
+            if(!empty($field_first_name) && !empty($field_last_name)){
+                $user_name = $field_first_name . " ". $field_last_name;
+            }
+            elseif(!empty($field_first_name_consultant_) && !empty($field_last_name_consultant_)){
+                $user_name = $field_first_name_consultant_ . " ". $field_last_name_consultant_;
+            }
+
+            // if(in_array('in_house_lobbyist', $roles)){
+            //   _user_mail_notify('register_admin_created', $user);
+            // }elseif(in_array('consultant_lobbyist', $roles)){
+            //   _user_mail_notify('status_activated', $user);
+            // }
+            
+            $request = \Drupal::request();
+            $path = $request->getPathInfo();
+            if ($path != "/en/user-import") {
+            
+                BizWebformController::redirect_to("/" . $language . "/account-register?name=". $user_name);
+            }
+        break;
+    }
+}
+
+/**
+  * Redirect the user when updating an account
+  */
+function biz_lobbyist_registration_entity_update(Drupal\Core\Entity\EntityInterface $entity){
+    if ($entity->getEntityType()->id() == 'user') {
+        global $default_pass;
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $current_path = \Drupal::service('path.current')->getPath();
+        if(strpos($current_path, "edit")){
+            $roles = $entity->getRoles();
+            if(in_array("in_house_lobbyist", $roles)){
+                $path = "/in-house-account-home?qt-account_home=1";
+            }
+            elseif(in_array("consultant_lobbyist", $roles)){
+                $path = "/consultant-account-home?qt-account_home=1";
+            }
+            if(!empty($path)){
+                $response = new RedirectResponse( "/" . $language . $path);
+                $response->send();
+            }
+        }
+    }
+}
+
+/**
+  * Save the user information in backend
+  */
+function biz_lobbyist_registration_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+    global $default_pass;
+    if ($entity->getEntityType()->id() == 'user') {
+        $current_uri = \Drupal::request()->getRequestUri();
+        if(strpos($current_uri, 'user/') !== FALSE && strpos($current_uri, '/edit') !== FALSE){
+            $email = $entity->getEmail();
+            $current_user = \Drupal::currentUser();
+            $changed_fields = entity_has_changed($entity);            
+            $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+            $endpoint = \Drupal::config('biz_lobbyist_registration.settings')->get('json_path');
+            $url = $base_url .$endpoint . $current_user->getEmail();
+            $request_options = BizWebformController::get_request_options(TRUE);
+            $get_user = BizWebformController::execute_external_api($url, [], "GET", $request_options);
+            if($get_user['code'] !== 400) {
+                $user_result = isset(json_decode($get_user['message'])[0]) ? json_decode($get_user['message'])[0] : [];
+                if(!empty($user_result->uid)){
+                    if(!empty($entity->get('field_street_address')->getValue())){
+                        $address = $entity->get('field_street_address')->getValue();
+                        $address[0]['postal_code'] = strtoupper($address[0]['postal_code']);
+                        $entity->set('field_street_address', $address);
+                    }
+                    if(isset($changed_fields['field_street_address']) && isset($changed_fields['field_street_address'][0]) && isset($changed_fields['field_street_address'][0]['postal_code']) ){  
+                        $changed_fields['field_street_address'][0]['postal_code'] = strtoupper($changed_fields['field_street_address'][0]['postal_code']);
+                    }
+                    $request_options = BizWebformController::get_request_options(FALSE);
+                    $url = $base_url . 'user/' . $user_result->uid . '?_format=json';
+                    $response = BizWebformController::execute_external_api($url, $changed_fields, 'PATCH', $request_options);
+                    if(!empty($default_pass)){
+                        $current_user = user_load_by_name($entity->get('name')->getString());
+                        $response_token = BizWebformController::get_token_oauth2_client($entity->get('name')->getString(), $default_pass);
+                        $response_token = json_decode($response_token);
+                        if(isset($response_token->access_token)){
+                            $entity->set('field_token_auth_', $response_token->access_token);
+                        }else{
+                            \Drupal::logger('biz_lobbyist_registration')->error(json_encode($response_token));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/**
+  * Return only the information updated
+  *
+  */
+function entity_has_changed($entity) {
+    global $default_pass;
+    $changed_fields = [];
+    if (!$entity->original) {
+        return $changed_fields;
+    }
+    $field_names = get_field_list($entity->bundle(), $entity->getEntityTypeId());
+    $field_names[]='mail';
+    foreach($field_names as $key => $field_name) {
+        if($entity->hasField($field_name) && $field_name != 'field_comments' && !$entity->get($field_name)->equals($entity->original->get($field_name))){
+            if($field_name == 'pass'){
+                if(!empty($default_pass)){
+                    $changed_fields[$field_name] = ["value" =>$default_pass];
+                }
+            }
+            else{
+                $changed_fields[$field_name] = $entity->get($field_name)->getValue();
+            }
+        }
+    }
+    return $changed_fields;
+}
+
+/**
+ * Get list of field names from bundle
+ * @param  string $bundle Bundle name
+ * @return array Array of field names
+ */
+function get_field_list($bundle, $entity_type_id) {
+    $fields_by_weight = [];
+    $bundle_fields = \Drupal::entityTypeManager()
+      ->getStorage('entity_view_display')
+      ->load($entity_type_id . '.' . $bundle . '.' . 'default')
+      ->getComponents();
+
+    foreach ($bundle_fields as $name => $options) {
+        $fields_by_weight[] = $name;
+    }
+    if(!in_array('pass', $fields_by_weight)){
+        $fields_by_weight[] = 'pass';
+    }
+    return $fields_by_weight;
+}
+
+?>

@@ -1,0 +1,13 @@
+biz_business_rules.settings:
+    type: config_object
+    label: 'Mails for business rules'
+    mapping:
+        consultant_validate_start_date:
+            type: text
+            label: 'Message after a new activity is created and start date is prior 15 days as of today'    
+        in_house_validate_end_calendar:
+            type: text
+            label: 'Message after a new activity is created after January 31'
+        wave_for_not_validate:
+            type: checkbox
+            label: 'Not end the activities'

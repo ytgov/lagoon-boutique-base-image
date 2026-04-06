@@ -1,0 +1,93 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a table.
+ *
+ * Available variables:
+ * - activity:
+ * - link_edit_act: 
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_in_house_activity()
+ */
+#}
+<div class="header-view two-columns-purple-header">
+    <div class="no-padding col-xs-6">
+        <p>{% trans %} Lobbying activity{% endtrans %}</p>
+    </div>
+    <div class="col-xs-6 no-padding update-action">
+        {% if link_edit_act is not empty %}
+         <a class="update-action" href="{{link_edit_act}}">{% trans %}Edit activity{% endtrans %}</a>
+        {% endif %}
+    </div>
+</div>
+<div class="info-container gray-info-container">
+
+    <div class="header-row no-padding row col-xs-12">
+    	<div class="field col no-padding align-self-start col-xs-12 col-md-6">
+    			<p class="field-title">{% trans %}Project title{% endtrans %}</p>
+    		    {% if activity.title is not empty %}
+    			<p>{{activity.title| raw}}</p>
+    			{% endif %}
+    	</div>
+    	<div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %} Year{% endtrans %}</p>
+            {% if activity.year is not empty %}
+                <p>{{activity.year}}</p>
+            {% endif %}
+      </div>
+        
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="no-padding col-xs-12 col-md-6">
+    			<p class="field-title">{% trans %}Topic{% endtrans %}</p>
+    		{% if activity.topic_term is not empty %}
+    			<p>{{activity.topic_term| raw}}</p>
+    		{% endif %} 
+    	</div>
+    	<div class="no-padding col-xs-12 col-md-6">
+    			<p class="field-title">{% trans %}Status{% endtrans %}</p>
+    		{% if activity.status is not empty %}
+    			<p>{{activity.status| raw}}</p>
+    		{% endif %} 
+    	</div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+    	<div class="field col no-padding align-self-start col-xs-12">
+    		<p class="field-title">{% trans %}Details about the lobbying activity{% endtrans %}</p>
+		    {% if activity.add_detail is not empty %}
+			    <p>{{activity.add_detail | raw}}</p>
+			{% endif %}
+    	</div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+    	<div class="field col no-padding align-self-start col-xs-12 col-md-6">
+    		<p class="field-title">{% trans %}Lobbying or plan to lobby{% endtrans %}</p>
+    	    {% if activity.who_are_you_lobbying_label is not empty %}
+    		    <p>{{activity.who_are_you_lobbying_label| raw}}</p>
+    		{% endif %}
+    	</div>
+    	<div class="field col no-padding align-self-start col-xs-12 col-md-6">
+    			<p class="field-title">{% trans %}Type of lobbying activity{% endtrans %}</p>
+    		    {% if activity.how_do_you_want_to_lobby_ is not empty %}
+    			    <p>{{activity.how_do_you_want_to_lobby_| raw}}</p>
+    			{% endif %}
+    	</div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+    	<div class="field col no-padding align-self-start col-xs-12 col-md-6">
+			<p class="field-title">{% trans %}Has your organization received a grant from the government of Yukon within the last year?{% endtrans %}</p>
+		    {% if activity.has_your_organization_received_a_grant_from_the_government_of_yu is not empty %}
+			    <p>{{activity.has_your_organization_received_a_grant_from_the_government_of_yu| raw}}</p>
+			{% endif %}
+    	</div>
+    	<div class="field col no-padding align-self-start col-xs-12 col-md-6">
+    			<p class="field-title">{% trans %}Was the grant awarded related to the lobbying that has been, or will be, undertaken?{% endtrans %}</p>
+    		    {% if activity.was_the_grant_awarded_related_to_the_matter_the_lobbying_has_bee is not empty %}
+    			<p>{{activity.was_the_grant_awarded_related_to_the_matter_the_lobbying_has_bee| raw}}</p>
+    			{% endif %}
+    	</div>
+    </div>
+</div>
+{{ attach_library('wxt_lobbyist/biz-update-info') }}

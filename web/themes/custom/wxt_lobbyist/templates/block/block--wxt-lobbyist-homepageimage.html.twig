@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ * - site_name: Name for site as defined in Site information settings.
+ * - site_slogan: Slogan for site as defined in Site information settings.
+ *
+ * @ingroup templates
+ */
+#}
+{% block content %}
+    <div class="homepage-image-100vh" style="height: 100%; background-size: cover; background-image:url({{ file_url(content.field_image['#items'].entity.uri.value) }} );background-repeat: no-repeat; background-position: bottom;"> 
+        <div class="home-image-text">
+            <div class="container">
+               {{ content|without('field_image') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

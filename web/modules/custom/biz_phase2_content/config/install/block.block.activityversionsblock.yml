@@ -1,0 +1,32 @@
+uuid: cf094a03-efc2-449f-a5b0-b25c49ddc2b4
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: activityversionsblock
+theme: wxt_lobbyist
+region: content
+weight: -7
+provider: null
+plugin: activity_versions_block
+settings:
+  id: activity_versions_block
+  label: 'Registration versions'
+  provider: biz_block_plugin
+  label_display: visible
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: "/search-organization/organization-view/consultant-activity-view\r\n/search-organization/organization-view/consultant-activity-view/*\r\n/search-organization/organization-view/in-house-activity-view\r\n/search-organization/organization-view/in-house-activity-view/*\r\n/consultant-account-home/consultant-activity-view\r\n/in-house-account-home/in-house-activity-view\r\n/admin-dashboard/in-house-activity-view\r\n/admin-dashboard/consultant-activity-view"
+    negate: false
+    context_mapping: {  }

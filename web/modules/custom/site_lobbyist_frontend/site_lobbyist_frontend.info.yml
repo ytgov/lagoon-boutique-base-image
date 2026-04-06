@@ -1,0 +1,56 @@
+name: 'Site lobbyist frontend'
+description: 'Provides site components.'
+type: module
+package: Custom
+version: '1'
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
+dependencies:
+  - address
+  - biz_business_rules
+  - biz_lobbyist_registration
+  - block
+  - block_class
+  - block_content
+  - ckeditor
+  - contact
+  - content_moderation
+  - content_translation
+  - editor
+  - email_registration
+  - field
+  - file
+  - filter
+  - fontawesome
+  - help
+  - image
+  - language
+  - lightning_core
+  - mailsystem
+  - mask
+  - menu_ui
+  - mimemail
+  - multiple_registration
+  - node
+  - path
+  - quicktabs
+  - rdf
+  - rest
+  - search
+  - serialization
+  - smtp
+  - system
+  - taxonomy
+  - telephone
+  - telephone_formatter
+  - text
+  - toolbar_menu
+  - user
+  - views
+  - views_fieldsets
+  - webform
+  - webform_node
+  - webform_rest
+  - workflows
+  - wxt_ext_webform
+  - wxt_library
+  - webform_node

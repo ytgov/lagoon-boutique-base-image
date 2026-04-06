@@ -1,0 +1,162 @@
+uuid:
+  -
+    value: 5cca78fc-4c1f-4968-9e98-7fbf7f3eed55
+langcode:
+  -
+    value: en
+type:
+  -
+    target_id: page
+    target_type: node_type
+    target_uuid: 6fef1780-50eb-492c-a2da-f019329ea36d
+revision_timestamp:
+  -
+    value: '2021-08-19T17:00:16+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_uid:
+  -
+    target_type: user
+    target_uuid: 96661573-0cad-414d-83eb-48276d7ce94e
+revision_log: {  }
+status:
+  -
+    value: true
+uid:
+  -
+    target_type: user
+    target_uuid: 96661573-0cad-414d-83eb-48276d7ce94e
+title:
+  -
+    value: 'Lobbying activities'
+created:
+  -
+    value: '2021-07-28T22:57:47+00:00'
+    format: 'Y-m-d\TH:i:sP'
+changed:
+  -
+    value: '2021-08-19T16:49:51+00:00'
+    format: 'Y-m-d\TH:i:sP'
+promote:
+  -
+    value: false
+sticky:
+  -
+    value: false
+default_langcode:
+  -
+    value: true
+revision_translation_affected: {  }
+moderation_state:
+  -
+    value: published
+scheduled_transition_date: {  }
+scheduled_transition_state: {  }
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+body: {  }
+comment:
+  -
+    status: 1
+    cid: 0
+    last_comment_timestamp: 1627513092
+    last_comment_name: null
+    last_comment_uid: 276
+    comment_count: 0
+field_meta_tags: {  }
+layout_selection: {  }
+_content_sync:
+  entity_type: node
+  entity_dependencies:
+    user:
+      - user.user.96661573-0cad-414d-83eb-48276d7ce94e
+      - user.user.96661573-0cad-414d-83eb-48276d7ce94e
+path:
+  -
+    alias: /public-report
+_translations:
+  fr:
+    uuid:
+      -
+        value: 5cca78fc-4c1f-4968-9e98-7fbf7f3eed55
+    langcode:
+      -
+        value: fr
+    type:
+      -
+        target_id: page
+        target_type: node_type
+        target_uuid: 6fef1780-50eb-492c-a2da-f019329ea36d
+    revision_timestamp:
+      -
+        value: '2021-08-19T17:00:16+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    revision_uid:
+      -
+        target_type: user
+        target_uuid: 96661573-0cad-414d-83eb-48276d7ce94e
+    revision_log: {  }
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_type: user
+        target_uuid: 96661573-0cad-414d-83eb-48276d7ce94e
+    title:
+      -
+        value: 'Lobbying activities fr'
+    created:
+      -
+        value: '2021-08-19T17:00:04+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    changed:
+      -
+        value: '2021-08-19T17:00:16+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    promote:
+      -
+        value: false
+    sticky:
+      -
+        value: false
+    default_langcode:
+      -
+        value: false
+    revision_translation_affected:
+      -
+        value: true
+    moderation_state:
+      -
+        value: published
+    scheduled_transition_date: {  }
+    scheduled_transition_state: {  }
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    body: {  }
+    comment:
+      -
+        status: 1
+        cid: 0
+        last_comment_timestamp: 1627513092
+        last_comment_name: null
+        last_comment_uid: 276
+        comment_count: 0
+    field_meta_tags: {  }
+    layout_selection: {  }
+    _content_sync:
+      entity_type: node
+      entity_dependencies:
+        user:
+          - user.user.96661573-0cad-414d-83eb-48276d7ce94e
+          - user.user.96661573-0cad-414d-83eb-48276d7ce94e
+    path:
+      -
+        alias: /public-report

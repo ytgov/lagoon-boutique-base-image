@@ -1,0 +1,7 @@
+name: W3 data import
+type: module
+description: W3 data import json url.
+core_version_requirement: ^9 || ^10 || ^11
+package: Custom
+dependencies:
+  - user

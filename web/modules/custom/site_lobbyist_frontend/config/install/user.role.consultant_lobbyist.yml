@@ -1,0 +1,23 @@
+uuid: 2742fb2c-86c6-427c-8d0b-0de91e4b88e5
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: consultant_lobbyist
+label: 'Consultant lobbyist'
+weight: 4
+is_admin: null
+permissions:
+  - 'access user profiles'
+  - 'access webform overview'
+  - 'administer private_message display'
+  - 'administer private_message_thread display'
+  - 'edit consultant activity'
+  - 'view any webform submission'
+  - 'view own webform submission'
+  - 'view webform submissions any node'
+  - 'view webform submissions own node'

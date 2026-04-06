@@ -1,0 +1,673 @@
+<?php
+    
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Database\Database;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\biz_webforms\BizWebformController;
+use Drupal\biz_block_plugin\Controller\GeneralFunctions;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\taxonomy\Entity\Term;
+
+/****
+    * Returns an array of strings using a delimiter ","
+    */
+function split_by_comma_into_array($string) {
+    $array = explode(",", $string);
+    $array = array_map('trim', $array);
+    return $array;
+}
+
+/****
+    * Get and group a taxonomy using the parents
+    */
+function get_group_taxonomy($url){
+    $arr_options = array();
+    $return_taxo = [];
+    $taxo = [];
+    $request_options = BizWebformController::get_request_options(TRUE);
+    $get_taxo = BizWebformController::execute_external_api($url, [], "GET", $request_options);
+    
+    if($get_taxo['code'] !== 400) {
+        $taxo =json_decode($get_taxo['message']);
+    }
+    foreach ($taxo as $key => $item) {
+        if ($item->parent_target_id) { $arr_options["categories"][] = $item->parent_target_id; }
+    }
+    foreach($taxo as $key_taxo => $item_taxo) {
+        $name = html_entity_decode($item_taxo->name, ENT_QUOTES, "UTF-8");
+        if(in_array($item_taxo->tid, $arr_options["categories"]) && !array_key_exists($name, $return_taxo)) { 
+            $return_taxo[$name] = array();
+            $arr_options["categories"][$item_taxo->tid] = array('name' => $name);                   
+        } else {
+            if(isset($arr_options["categories"][$item_taxo->parent_target_id]['name'])){
+                $key = $arr_options["categories"][$item_taxo->parent_target_id]['name'];
+                $return_taxo[$key][$item_taxo->tid] = html_entity_decode($item_taxo->name, ENT_QUOTES, "UTF-8");
+            }
+        }
+    }
+    return $return_taxo;
+}
+
+/****
+    * Implements hook_form_alter().
+    *  The actions are change for validate and save the information in another server
+    */
+function biz_webforms_webform_submission_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+    $endpoint_port = "portfolio-taxonomy-options/get?language=" . $language;
+    $endpoint_topic = "api/get-topics?language=" . $language;
+    $url_taxo = $base_url . $endpoint_port;
+    $url_topic = $base_url . $endpoint_topic;
+    $data_form_state = $form_state->getValues();
+    $submission_id = \Drupal::request()->query->get('id');
+    $request_options = BizWebformController::get_request_options(TRUE);
+
+    switch ($form_id) {
+        case strpos($form_id, 'webform_submission_add_new_in_house_lobbyist_node_') !== FALSE :
+            $url = $base_url . \Drupal::config('biz_lobbyist_registration.settings')->get('json_path') . urlencode(\Drupal::currentUser()->getEmail());
+            
+            $response = BizWebformController::execute_external_api($url, [], "GET", $request_options);
+            $data = json_decode($response["message"])[0];
+            
+            $edit_organization = '/user/' . \Drupal::currentUser()->id() . '/edit';
+            $build = [
+              '#theme' => 'organization_info_form_header_action',
+              '#link_to_action' => $edit_organization ?? '#',
+            ];
+            
+            // Render the Twig template properly.
+            $header_action = \Drupal::service('renderer')->render($build);
+
+            // Use #markup for HTML output.
+            $form["elements"]["update_organization_action"]["#prefix"] = $header_action;          
+            
+            $build = [
+              '#theme' => 'organization_info_form_header',
+              '#organization' => $data,
+            ];
+                
+           // Render the Twig template properly.
+            $header_body = \Drupal::service('renderer')->render($build);
+            $form["elements"]["organization_header"]["#prefix"] = $header_body;
+            unset($form['elements']['general_container']['deleted']);
+            $form['actions']['submit']['#submit'] = ['biz_webforms_post'];
+        break;
+        case strpos($form_id, 'webform_submission_add_an_in_house_lobbyist_to_your_node') !== FALSE :
+            $form['actions']['submit']['#submit'] = ['::submitForm', 'biz_webforms_patching'];
+        break;
+        case strpos($form_id, 'webform_submission_add_a_lobbying_activity_edit_node_') !== FALSE :
+            $email = \Drupal::currentUser()->getEmail();
+            $return_taxo = get_group_taxonomy($url_taxo);
+            //$form['elements']['who_are_you_lobbying_or_plan_to_lobby__']['#options'] = $return_taxo;
+            $topics_options = [];
+            $get_topics = BizWebformController::execute_external_api($url_topic, [], "GET", $request_options);
+            if($get_topics['code'] !== 400) {
+                $topics_options =json_decode($get_topics['message'], true);
+                $topics_options = array_column($topics_options, 'name', 'tid');
+                $form['elements']['which_topic_do_you_want_to_lobby_government_about_']['#options'] = $topics_options;
+            }
+            $form = change_elements_to_edit($form_id, $submission_id, $form, $form_state);
+            $form['actions']['submit']['#submit'] = ['::submitForm', 'biz_webforms_patching'];
+           // $form['elements']['status']['#default_value'] = \Drupal::request()->query->get('status');
+            $form['actions']["preview_next"]['#validate'][] = 'biz_validate_specifics_fields';
+            break;
+        //Create a new activity (in-house and consultant)
+        case strpos($form_id, 'webform_submission_add_a_lobbying_activity_node_') !== FALSE :
+        case strpos($form_id, 'webform_submission_add_a_lobbying_activity_consulta_node_') !== FALSE :
+            $topics_options = [];
+            $get_topics = BizWebformController::execute_external_api($url_topic, [], "GET", $request_options);
+            if($get_topics['code'] !== 400) {
+                $topics_options =json_decode($get_topics['message'], true);
+                $topics_options = array_column($topics_options, 'name', 'tid');
+                //$form['elements']['which_topic_do_you_want_to_lobby_government_about_']['#options'] = $topics_options;
+            }
+            $return_taxo = get_group_taxonomy($url_taxo);
+            $form['elements']['who_are_you_lobbying_or_plan_to_lobby__']['#options'] = $return_taxo;
+            $form['actions']["preview_next"]['#validate'][] = 'biz_validate_specifics_fields';
+            $form['actions']['submit']['#submit'] = ['biz_webforms_post'];
+            break;
+        case strpos($form_id, 'webform_submission_add_a_lobbying_activity_consedit_node_') !== FALSE :
+            $topics_options = [];
+            $get_topics = BizWebformController::execute_external_api($url_topic, [], "GET", $request_options);
+            if($get_topics['code'] !== 400) {
+                $topics_options =json_decode($get_topics['message'], true);
+                $topics_options = array_column($topics_options, 'name', 'tid');
+                $form['elements']['which_topic_do_you_want_to_lobby_government_about_']['#options'] = $topics_options;
+            }
+            $form['actions']['submit']['#submit'] = ['::submitForm', 'biz_webforms_patching'];   
+            $return_taxo = get_group_taxonomy($url_taxo);
+            //$form['elements']['who_are_you_lobbying_or_plan_to_lobby__']['#options'] = $return_taxo;
+/*
+            $form['elements']['status']['#default_value'] = \Drupal::request()->query->get('status');
+*/
+            $form = change_elements_to_edit($form_id, $submission_id, $form, $form_state);
+            $form['actions']["preview_next"]['#validate'][] = 'biz_validate_specifics_fields';
+            break;
+        case strpos($form_id, 'webform_submission_modal_confirmation') !== FALSE :
+            $form['actions']['submit']['#submit'] = ['biz_webforms_delete_user_confirmed'];
+            break;
+        default:
+            break;
+    }
+}
+
+/**
+ * Validate if the "Other" option is select if it is, the "Other" text field is required
+ */
+function biz_validate_specifics_fields($form, &$form_state){
+    $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+    $values = $form_state->getValues();
+    $topics = isset($values['which_topic_do_you_want_to_lobby_government_about_']) ?$values['which_topic_do_you_want_to_lobby_government_about_'] : [];
+
+    $url_taxo = $base_url . 'api/get-topics-by-name?_format=json&name=Other';
+    $request_options = BizWebformController::get_request_options(TRUE);
+    $get_taxo = BizWebformController::execute_external_api($url_taxo, [], "GET", $request_options);
+    if($get_taxo['code'] == 400) {
+        \Drupal::logger('biz_webforms')->error(json_encode($get_taxo));
+        \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+        return FALSE;  
+    }
+    $taxo =json_decode($get_taxo['message'], TRUE);
+    $taxonomy_id = isset($taxo[0]['tid']) ? $taxo[0]['tid'] : 0; 
+    if(in_array($taxonomy_id, $topics)){
+        if( empty($values['other'] )){
+            $form_state->setErrorByName('other', t('The Other field is required'));
+        }
+    }
+}
+
+/****
+    * Function send the information to the backend for delete a lobbyist
+    *
+    */
+function biz_webforms_delete_user_confirmed(&$form, FormStateInterface $form_state) {
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $submission_id = \Drupal::request()->query->get('id');
+    $webform_id = \Drupal::request()->query->get('webform_id');
+    $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+    $url = $base_url . $language .'/webform-rest-adaptation/' . $webform_id . '/submission/' . $submission_id;
+    $data = ['deleted' => true];
+    $request_options = BizWebformController::get_request_options(TRUE);
+    $delete_lobbyist = BizWebformController::execute_external_api($url, $data, 'PATCH', $request_options);
+    if($delete_lobbyist['code'] == 400){
+        \Drupal::logger('biz_webforms')->notice(json_encode($delete_lobbyist));
+        \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+    }
+    else{
+       \Drupal::messenger()->addMessage(t('The lobbyist has bee deleted.'), 'status');
+    }
+    
+    BizWebformController::user_redirect(\Drupal::currentUser());  
+}
+
+/****
+    * Function send the information to the backend for creating a new activity
+    *
+    */
+function biz_webforms_post(&$form, FormStateInterface $form_state){
+  try{
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $current_user = \Drupal::currentUser();
+    $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+    $url = $base_url . $language . '/webform_rest/submit';
+    $data = $form_state->getValues();
+    $tab = '';
+    //Updated user id 
+    $email = $current_user->getEmail();
+    $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+    $endpoint = \Drupal::config('biz_lobbyist_registration.settings')->get('json_path');
+    $url_user = $base_url . $language . '/' . $endpoint . urlencode(\Drupal::currentUser()->getEmail());
+
+    $request_options = BizWebformController::get_request_options(TRUE);
+    $user = BizWebformController::execute_external_api($url_user, [], 'GET', $request_options);
+    if($user['code'] == 400){
+        \Drupal::logger('biz_webforms')->notice(json_encode($user));
+        \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+        BizWebformController::user_redirect(\Drupal::currentUser());
+    }
+    $user = isset(json_decode($user['message'])[0]) ? json_decode($user['message'])[0] : [];
+    $data['uid']= $user->uid;
+    $data['user_uid']= $user->uid;
+    $data['webform_id'] = $form["#webform_id"];
+    
+    // New code by me
+    $url_new = $base_url . $language . '/api/get-topics';
+    $topic_taxonomy = BizWebformController::execute_external_api($url_new, '', 'GET', $request_options);
+    $topic_taxonomy = json_decode($topic_taxonomy['message']);
+    $topic_taxonomy_final = [];
+    foreach ($topic_taxonomy as $topic_taxo) {
+        $topic_taxonomy_final[$topic_taxo->name] = $topic_taxo->tid;
+    }
+    
+    $url_new2 = $base_url . $language . '/portfolio-taxonomy-options/get';
+    $portfolio_taxonomy = BizWebformController::execute_external_api($url_new2, '', 'GET', $request_options);
+    $portfolio_taxonomy = json_decode($portfolio_taxonomy['message']);
+    foreach ($portfolio_taxonomy as $portfolio_taxo) {
+        $portfolio_taxonomy_final[$portfolio_taxo->name] = $portfolio_taxo->tid;
+    }
+    
+    $topic_data = $data['which_topic_do_you_want_to_lobby_government_about_'];
+    
+    foreach ($topic_data as $tdata) {
+        $term = Term::load($tdata);
+
+      // Check if the term exists.
+      if ($term) {
+        // Return the term name.
+        $final_topic[] = $topic_taxonomy_final[$term->getName()];
+      }
+       
+    }
+    
+    $portfolio_data = $data['who_are_you_lobbying_or_plan_to_lobby_'];
+    
+    foreach ($portfolio_data as $pordata) {
+        $term1 = Term::load($pordata);
+
+      // Check if the term exists.
+      if ($term1) {
+        // Return the term name.
+        $final_portfolio[] = $portfolio_taxonomy_final[$term1->getName()];
+      }
+       
+    }
+    
+    $data['which_topic_do_you_want_to_lobby_government_about_'] = $final_topic;
+    
+    $data['who_are_you_lobbying_or_plan_to_lobby_'] = $final_portfolio;
+
+    $post_activity = BizWebformController::execute_external_api($url, $data, 'POST', $request_options);
+    \Drupal::logger('biz_webforms_POST')->notice(json_encode($post_activity));
+    if($post_activity['code'] == 400){
+        \Drupal::logger('biz_webforms')->notice(json_encode($post_activity));
+        \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+    }
+    else {
+        $validate = \Drupal::config('biz_business_rules.settings')->get('wave_for_not_validate');
+        if(!$validate){
+            switch($form["#webform_id"]){
+                case 'add_a_lobbying_activity':
+                    $currentYear = date('Y');
+                    $nextYear = date('Y', strtotime('+1 year'));
+                    $today = date("Y-m-d"); // Today
+                    $from = "";
+                    $to = "";
+                    $current_month = date('m');
+                    if ($current_month == '12') {
+                        $to = date($nextYear . '-01-31');
+                    } else if ($current_month >= 1 && $current_month <= 11) {
+                        $to = date(date('Y'). '-01-31');
+                    }
+                    if($data['year'] < $currentYear && $today > $to) {
+                        $message = \Drupal::config('biz_business_rules.settings')->get('in_house_validate_end_calendar');
+                        //\Drupal::messenger()->addMessage(t($message), 'warning');
+                    }
+                break;
+                case 'add_a_lobbying_activity_consulta':
+                    $date_time_today = new DateTime();
+                    $date_time_start_date = new DateTime($data['start_date']);
+                    $interval = $date_time_today->diff($date_time_start_date);
+                    $days = $interval->format('%a');
+
+                    if($days > 15 && $date_time_today > $date_time_start_date){
+                        $message = \Drupal::config('biz_business_rules.settings')->get('consultant_validate_start_date');
+                        \Drupal::messenger()->addMessage(t($message), 'warning');
+                    }
+                break;
+            }
+        }
+
+        \Drupal::messenger()->addMessage(t('The information has been saved.'), 'status');
+    }
+    
+    $url_redirect = BizWebformController::get_user_path_redirect(\Drupal::currentUser(), $data['webform_id']);
+    $form_state->setRedirectUrl($url_redirect);
+  }
+  catch(\Exception $e){
+    if ($e->hasResponse()) {
+      \Drupal::logger('biz_lobbyist_registration')->error(json_encode($e->getMessage()));
+      \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');  
+    }
+  
+  }
+
+}
+
+/****
+    * Function send the information to the backend for update an activity
+    */
+function biz_webforms_patching(&$form, FormStateInterface &$form_state) {
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $current_user = \Drupal::currentUser();
+    $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+    $submission_id = \Drupal::request()->query->get('id');
+    $webform_id = \Drupal::request()->query->get('webform_id');
+    $submission_id = empty($submission_id) ? \Drupal::request()->query->get('sid') : $submission_id;
+    $data = $form_state->getValues(); 
+    $tab = '';
+    $validate = \Drupal::config('biz_business_rules.settings')->get('wave_for_not_validate');
+    if(!$validate){
+        switch($webform_id){
+            case 'add_a_lobbying_activity':
+                $currentYear = date('Y');
+                $nextYear = date('Y', strtotime('+1 year'));
+                $today = date("Y-m-d"); // Today
+                $from = "";
+                $to = "";
+                $current_month = date('m');
+                if ($current_month == '12') {
+                  $to = date($nextYear . '-01-31');
+                } else if ($current_month >= 1 && $current_month <= 11) {
+                  $to = date(date('Y'). '-01-31');
+                }
+                if($data['year'] < $currentYear && $today > $to) {
+                  $message = \Drupal::config('biz_business_rules.settings')->get('in_house_validate_end_calendar');
+                  //\Drupal::messenger()->addMessage(t($message), 'warning');
+                }
+            break;
+            case 'add_a_lobbying_activity_consulta':
+                $date_time_today = new DateTime();
+                $date_time_start_date = new DateTime($data['start_date']);
+                $interval = $date_time_today->diff($date_time_start_date);
+                $days = $interval->format('%a');
+          
+                if($days > 15 && $date_time_today > $date_time_start_date){
+                    $message = \Drupal::config('biz_business_rules.settings')->get('consultant_validate_start_date');
+                    \Drupal::messenger()->addMessage(t($message), 'warning');
+                }
+            break;
+        }
+    }
+    
+    // New code by me
+    $request_options = BizWebformController::get_request_options(TRUE);
+    $url_new = $base_url . $language . '/api/get-topics';
+    $topic_taxonomy = BizWebformController::execute_external_api($url_new, '', 'GET', $request_options);
+    $topic_taxonomy = json_decode($topic_taxonomy['message']);
+
+    $topic_taxonomy_final = [];
+    foreach ($topic_taxonomy as $topic_taxo) {
+        $topic_taxonomy_final[$topic_taxo->name] = $topic_taxo->tid;
+    }
+    
+    $url_new2 = $base_url . $language . '/portfolio-taxonomy-options/get';
+    $portfolio_taxonomy = BizWebformController::execute_external_api($url_new2, '', 'GET', $request_options);
+    $portfolio_taxonomy = json_decode($portfolio_taxonomy['message']);
+    foreach ($portfolio_taxonomy as $portfolio_taxo) {
+        $portfolio_taxonomy_final[$portfolio_taxo->name] = $portfolio_taxo->tid;
+    }
+    
+    $topic_data = $data['which_topic_do_you_want_to_lobby_government_about_'];
+    
+    foreach ($topic_data as $tdata) {
+        $term = Term::load($tdata);
+
+      // Check if the term exists.
+      if ($term) {
+        // Return the term name.
+        $final_topic[] = $topic_taxonomy_final[$term->getName()];
+      }
+       
+    }
+    
+    $portfolio_data = $data['who_are_you_lobbying_or_plan_to_lobby_'];
+    
+    foreach ($portfolio_data as $pordata) {
+        $term1 = Term::load($pordata);
+
+      // Check if the term exists.
+      if ($term1) {
+        // Return the term name.
+        $final_portfolio[] = $portfolio_taxonomy_final[$term1->getName()];
+      }
+       
+    }
+    
+   // $data['which_topic_do_you_want_to_lobby_government_about_'] = $final_topic;
+    
+    $data['who_are_you_lobbying_or_plan_to_lobby_'] = $final_portfolio;
+
+    BizWebformController::webforms_patching($webform_id, $submission_id, $data);
+    if($webform_id == 'add_an_in_house_lobbyist_to_your'){
+        $url_redirect->setOption('query', [
+          'qt-account_home' => '1'
+        ]);
+    }
+    $url_redirect = BizWebformController::get_user_path_redirect(\Drupal::currentUser(), $webform_id);
+    $form_state->setRedirectUrl($url_redirect);
+}
+
+/****
+    * Implements hook_system_breadcrumb_alter().
+    */
+function biz_webforms_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context){
+    $links = $breadcrumb->getLinks();
+    $lobbyist_paths = ["/home-search", "/admin-dashboard", "/admin-dashboard/in-house-activity-view", "/admin-dashboard/consultant-activity-view","/in-house-account-home/in-house-add-activity", "/in-house-account-home/add_new_house_lobbyist", "/in-house-account-home", "/consultant-account-home/consultant-activity-view/consultant-add-activity-edit", "/consultant-account-home/consultant-add-activity","/in-house-account-home/in-house-activity-view", "/in-house-in-organization-edit", "/in-house-organization-info", "/in-house-account-home/in-house-activity-view/in-house-add-activity-edit" ];
+    $current_alias = \Drupal::service('path_alias.manager')->getAliasByPath(\Drupal::service('path.current')->getPath());
+    if(in_array($current_alias, $lobbyist_paths) || strpos($current_alias, "/user/") !== FALSE){
+        unset($links[0]);
+        unset($links[1]);
+    }
+    foreach ($links as $link) {
+        $url = $link->getUrl();
+        $alias = \Drupal::service('path_alias.manager')->getAliasByPath('/'.$url->getInternalPath());
+        $param = \Drupal::request()->query->all();
+        $id_organization = trim(isset($param['org']) ? $param['org'] : ''); 
+        switch($alias){
+            case '/search-organization/organization-view':
+            case '/in-house-account-home/in-house-activity-view':
+            case '/consultant-account-home/consultant-activity-view':
+                if(!empty($id_organization)){
+                    $url->setRouteParameter('id', $id_organization);
+                }
+            break;
+            case strpos($alias, '/user/') !== FALSE:
+                $links = [];
+                $current_user = \Drupal::currentUser();
+                $roles = $current_user->getRoles(); 
+                switch(TRUE){
+                     case in_array('in_house_lobbyist', $roles): 
+                        $path = \Drupal::service('path_alias.manager')->getPathByAlias('/in-house-account-home');
+                        if(preg_match('/node\/(\d+)/', $path, $matches)) {
+                            $node = \Drupal\node\Entity\Node::load($matches[1]);
+                            $nid = $node->id();
+                            $links[] = Link::createFromRoute('Account Home','entity.node.canonical', ['node' => $nid]);
+                        }
+                    break;
+                    case in_array('consultant_lobbyist', $roles): 
+                        $path = \Drupal::service('path_alias.manager')->getPathByAlias('/consultant-account-home');
+                        if(preg_match('/node\/(\d+)/', $path, $matches)) {
+                            $node = \Drupal\node\Entity\Node::load($matches[1]);
+                            $nid = $node->id();
+                            $links[] = Link::createFromRoute('Account Home','entity.node.canonical', ['node' => $nid]);
+                        }    
+                    break;
+                }
+            break;
+        }
+        $url->setAbsolute();
+    }
+    $cacheability = \Drupal\Core\Cache\CacheableMetadata::createFromObject($breadcrumb);
+
+    if(in_array($current_alias, $lobbyist_paths) || strpos($current_alias, "/user/") !== FALSE){
+        $breadcrumb = new \Drupal\Core\Breadcrumb\Breadcrumb();
+        $breadcrumb->setLinks($links);
+    }
+
+    $breadcrumb->addCacheableDependency($cacheability);
+}
+
+/****
+    * Altering the review from submission, and will display the correct information getting from the backend
+    */
+function biz_webforms_webform_submission_view_alter(array &$build, Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+    if($entity->getEntityType()->id() == "webform_submission"){
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $request_options = BizWebformController::get_request_options(FALSE);
+        $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+        $data_submission = $entity->getData();
+
+        \Drupal::logger('biz_webforms')->error(json_encode($build['data']));
+
+        if(isset( $data_submission["who_are_you_lobbying_or_plan_to_lobby__"])){
+          $id_who_are_you_lobbying_or_plan_to_lobby_ = implode(',', $data_submission["who_are_you_lobbying_or_plan_to_lobby__"]) ;
+            $endpoint =  "api/portfolio-taxonomy-options/";
+            $url_taxo = $base_url . $endpoint. $id_who_are_you_lobbying_or_plan_to_lobby_. '?language=' . $language;
+            $get_taxo = BizWebformController::execute_external_api($url_taxo, [], "GET", $request_options);
+            if($get_taxo['code'] == 400) {
+                \Drupal::logger('biz_webforms')->error(json_encode($get_taxo));
+                \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+                return FALSE;  
+            }
+            $taxo =json_decode($get_taxo['message']);
+            $taxo_values = $build["data"]["who_are_you_lobbying_or_plan_to_lobby__"]["#value"];
+            $count = 0;
+            foreach($taxo_values as $key => $value){
+                if($value["#markup"] !== ", " ){
+                    $taxo_values[$key]["#markup"] = $taxo[$count]->name;
+                    $count++;
+                }
+            }
+            if(!isset($build["data"]["who_are_you_lobbying_or_plan_to_lobby__"])){
+              $build["data"]["who_are_you_lobbying_or_plan_to_lobby__"] = [];
+            }
+            $build["data"]["who_are_you_lobbying_or_plan_to_lobby__"]["#value"] = $taxo_values;
+        }
+        if(isset( $data_submission["which_topic_do_you_want_to_lobby_government_about_"])){
+            $id_who_are_you_lobbying_or_plan_to_lobby_ = implode(',', $data_submission["which_topic_do_you_want_to_lobby_government_about_"]) ;
+            $endpoint =  "api/topics-values/";
+            $url_taxo = $base_url . $endpoint. $id_who_are_you_lobbying_or_plan_to_lobby_. '?language=' . $language;
+            $get_taxo = BizWebformController::execute_external_api($url_taxo, [], "GET", $request_options);
+            if($get_taxo['code'] == 400) {
+                \Drupal::logger('biz_webforms')->error(json_encode($get_taxo));
+                \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+                return FALSE;  
+            }
+            $taxo =json_decode($get_taxo['message']);
+            $taxo_values = $build["data"]["which_topic_do_you_want_to_lobby_government_about_"]["#value"];
+            $count = 0;
+            foreach($taxo_values as $key => $value){
+                if($value["#markup"] !== ", " ){
+                    if($taxo[$count]->name == 'Other' || $taxo[$count]->name == 'Autre'){
+                        $other = isset($build["data"]["other"]["#value"]) && !empty($build["data"]["other"]["#value"]) ? ': '.$build["data"]["other"]["#value"]["#plain_text"]:'';
+                        $taxo[$count]->name = $taxo[$count]->name . $other;
+                    }
+                    $taxo_values[$key]["#markup"] = $taxo[$count]->name;
+                    $count++;
+                }
+            }
+            if(!isset($build["data"]["which_topic_do_you_want_to_lobby_government_about_"])){
+              $build["data"]["which_topic_do_you_want_to_lobby_government_about_"] = [];
+            }
+            
+            $other =  isset($build["data"]["other"]) && isset($build["data"]["other"]["#value"]) && !empty($build["data"]["other"]["#value"]) && isset($build["data"]["other"]["#value"]["#plain_text"]) ? ': '. $build["data"]["other"]["#value"]["#plain_text"]:'';
+            $build["data"]["which_topic_do_you_want_to_lobby_government_about_"]["#value"] = $taxo_values;
+        }
+    }
+}
+
+function change_elements_to_edit($type, $id_activity, $form, $form_state){
+  $data_form_state = $form_state->getValues();
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $base_url = \Drupal::config('biz_lobbyist_registration.settings')->get('base_url');
+  $current_user = \Drupal::currentUser();
+  $email = !empty($current_user->getEmail()) ? $current_user->getEmail(): 'anonymous';
+  $roles = $current_user->getRoles();
+  $is_commissioner = in_array("role_administrator", $roles);
+  $request_options = BizWebformController::get_request_options(FALSE);
+
+  switch($type){
+    case strpos($type, 'webform_submission_add_a_lobbying_activity_edit_node_') !== FALSE :
+      $url_get_endpoint = $base_url . $language .'/api/activity/'.$id_activity.'/add_a_lobbying_activity/' . urlencode($email) . '?_format=json' ;
+    break;
+    case strpos($type, 'webform_submission_add_a_lobbying_activity_consedit_node_') !== FALSE :
+       $url_get_endpoint = $base_url. 'api/activity/'.$id_activity.'/add_a_lobbying_activity_consulta/' . urlencode($email) . '?_format=json' ;
+    break;
+  }
+  $activity_endpoint = BizWebformController::execute_external_api($url_get_endpoint, [], "GET", $request_options);
+  if($activity_endpoint['code'] !== 400){
+    $activity_endpoint['message'] = json_decode($activity_endpoint['message']);
+    $is_owner = $activity_endpoint['message']->owner;
+    $auth = $is_commissioner || $is_owner ? TRUE : FALSE;
+
+    $activity_endpoint = $activity_endpoint['message']->endpoint;
+    $activity_response = GeneralFunctions::getSubmission($activity_endpoint, $id_activity, $auth, 'en');
+    if($activity_response['code'] == 400){
+        \Drupal::logger('InHouseActivity')->error(json_encode($activity_response));
+        \Drupal::messenger()->addMessage(t('The website encountered an unexpected error. Please try again later.'), 'error');
+        return FALSE;
+    }
+    $activity_data = isset(json_decode($activity_response['message'])[0]) ? json_decode($activity_response['message'])[0] : [];
+    
+    if (isset($activity_data->who_are_you_lobbying_label)) {
+        $plan_to_lobby = explode(", ", $activity_data->who_are_you_lobbying_label);
+    }
+    else if (isset($activity_data->who_you_lobbying)) {
+        $plan_to_lobby = explode(", ", $activity_data->who_you_lobbying);
+    }
+    foreach ($plan_to_lobby as $plan) {
+        $query = \Drupal::database()->select('taxonomy_term_field_data', 'ttfd')
+        ->fields('ttfd', ['tid'])
+        ->condition('ttfd.vid', 'lobbyist_s_portfolios')
+        ->condition('ttfd.name', $plan)
+        ->range(0, 1); // Get only the first matching term (to avoid multiple results)
+    
+        $result = $query->execute()->fetchField();
+        $all_plan[] = $result;
+    }
+    $activity_data->who_are_you_lobbying_or_plan_to_lobby_ = implode(", ", $all_plan);
+
+    foreach($form['elements'] as $field_id => $field_info) { 
+      $form = field_filling($activity_data, $form, $field_info, $field_id, $data_form_state );
+    }
+  }
+  return $form;
+}
+
+function field_filling($activity_data, $form, $field_info, $field_id, $data_form_state){
+  if(isset($field_info['#type']) && empty($data_form_state[$field_id])){
+    switch($field_info['#type']){
+      case 'webform_checkboxes_other':
+      case 'webform_term_select':
+        $form['elements'][$field_id]['#default_value'] = split_by_comma_into_array($activity_data->{$field_id});
+      break;
+      case 'radios':
+      case 'select':
+        $form['elements'][$field_id]['#default_value']= $activity_data->{$field_id};
+      break;
+      case 'textarea':
+      case 'textfield':
+      case 'date':
+        $form['elements'][$field_id]['#default_value'] = html_entity_decode($activity_data->{$field_id}, ENT_QUOTES, 'UTF-8');
+      break;
+      case 'address':
+      $country_repository = \Drupal::service('address.country_repository');
+      $countries = $country_repository->getList();
+        foreach($form['elements'][$field_id]['#default_value'] as $address_field => $address_info){
+          if($address_field !== 'country_code' && empty($data_form_state[$field_id][$address_field])){
+            $form['elements'][$field_id]['#default_value'][$address_field] =  isset($activity_data->{$address_field}) ?  html_entity_decode($activity_data->{$address_field}, ENT_QUOTES, 'UTF-8'): '';
+          }elseif(empty($data_form_state[$field_id][$address_field])){
+            $form['elements'][$field_id]['#default_value']['country_code'] =  isset($activity_data->country_code) ? (isset($countries[$activity_data->country_code]) ? ($activity_data->country_code) : ( array_search(trim($activity_data->country), $countries) ?  array_search(trim($activity_data->country_code), $countries) : '')) : '';
+          }
+        }
+      break;
+      case 'container':
+        foreach($field_info as $container_field => $container_info){
+          if(isset($container_info['#type']) && empty($data_form_state[$container_field])){
+            $form['elements'][$field_id][$container_field]['#default_value'] = isset($activity_data->{$container_field})? $activity_data->{$container_field}: '';
+          }
+        }
+      break;
+    }
+
+  }
+  return $form;
+}
+
+
+
+?>

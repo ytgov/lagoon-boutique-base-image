@@ -1,0 +1,8 @@
+name: Registration for Lobbyists
+description: Bizont enhancements for registration
+package: Custom
+type: module
+version: 1.0
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
+dependencies:
+  - drupal:system (>=8.6.0)

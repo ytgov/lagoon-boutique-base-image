@@ -1,0 +1,24 @@
+uuid: e9886074-7e5b-45b4-a65a-adb7e9d6191d
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: in_house_lobbyist
+label: 'In-house lobbyist'
+weight: 3
+is_admin: null
+permissions:
+  - 'access user profiles'
+  - 'access webform overview'
+  - 'administer private_message display'
+  - 'administer private_message_thread display'
+  - 'edit in-house activity'
+  - 'edit in_house activity'
+  - 'view any webform submission'
+  - 'view own webform submission'
+  - 'view webform submissions any node'
+  - 'view webform submissions own node'

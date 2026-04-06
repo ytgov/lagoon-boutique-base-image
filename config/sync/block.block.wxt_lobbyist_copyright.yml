@@ -1,0 +1,23 @@
+uuid: 1b24880c-621b-4b42-9463-74fbe07ebe0e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:b2d6bb36-929a-47df-813c-86d6ad9fbcfc'
+  module:
+    - block_content
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_copyright
+theme: wxt_lobbyist
+region: footer
+weight: -8
+provider: null
+plugin: 'block_content:b2d6bb36-929a-47df-813c-86d6ad9fbcfc'
+settings:
+  id: 'block_content:b2d6bb36-929a-47df-813c-86d6ad9fbcfc'
+  label: Copyright
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility: {  }

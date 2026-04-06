@@ -1,0 +1,17 @@
+smtp_password: ''
+smtp_on: true
+smtp_host: smtp.gov.yk.ca
+smtp_hostbackup: ''
+smtp_port: '25'
+smtp_protocol: standard
+smtp_username: ''
+smtp_from: eservices@gov.yk.ca
+smtp_fromname: 'Office of the Lobbyist Registry'
+smtp_client_hostname: ''
+smtp_client_helo: ''
+smtp_allowhtml: '1'
+smtp_debugging: false
+prev_mail_system: php_mail
+smtp_autotls: true
+smtp_timeout: 30
+smtp_keepalive: false

@@ -1,0 +1,160 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a table.
+ *
+ * Available variables:
+ * - activity:
+ * - link_edit_act: 
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_consultant_activity()
+ */
+#}
+{{ js_file }}
+<div class="header-view orange-header">
+    <div class="col-xs-12 no-padding">
+        <p>
+            <strong>{% trans %} Lobbying on behalf of{% endtrans %}</strong>
+        </p>
+    </div>
+</div>
+<div class="header-view info-organization gray-info-container">
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %} Org. name{% endtrans %}</p>
+            {% if activity.org_name is not empty %}
+                <p>{{activity.org_name|raw}}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %} Address{% endtrans %}</p>
+            {% if activity.address_line1 is not empty %}
+                <p>{{activity.address_line1|raw}}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %} City or town{% endtrans %}</span>
+            {% if activity.locality is not empty %}
+                <p>{{activity.locality|raw}}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %} Territory, province or state{% endtrans %}</p>
+            {% if activity.administrative_area is not empty %}
+                <p>{{activity.administrative_area|raw}}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %} Zip code{% endtrans %}</p>
+            {% if activity.postal_code is not empty %}
+                <p>{{activity.postal_code |upper }}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %} Country{% endtrans %}</p>
+            {% if activity.country is not empty %}
+                <p>{{activity.country|raw}}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-4 col-sm-4 col-md-4">
+            {% if activity.e_mail_address is not empty %}
+                <p class="field-title">{% trans %}Email{% endtrans %}</p>
+                <p>{{activity.e_mail_address|raw}}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4 col-sm-4 col-md-4">
+            {% if activity.custom_telephone is not empty %}
+                <p class="field-title">{% trans %}Telephone{% endtrans %}</p>
+                <p>{{activity.custom_telephone|raw}}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<div class="header-view two-columns-purple-header">
+    <div class="no-padding col-xs-6">
+        <p>{% trans %} Lobbying activity{% endtrans %}</p>
+    </div>
+    <div class="col-xs-6 no-padding update-action">
+        {% if link_edit_act is not empty %}
+         <a class="update-action" href="{{link_edit_act}}">{% trans %}Edit activity{% endtrans %}</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="header-view info-organization gray-info-container">
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-12 col-md-6">
+			<p class="field-title">{% trans %}Project title{% endtrans %}</p> 
+		    {% if activity.title is not empty %}
+			<p>{{activity.title|raw}}</p>
+			{% endif %}
+    	</div>
+    	<div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %} Dates{% endtrans %}</p>
+            {% if activity.display_start_date is not empty %}
+                <p>{{activity.display_start_date}} - {{activity.display_end_date}}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %} Topic{% endtrans %}</p>
+            {% if activity.topics is not empty %}
+                <p>{{activity.topics|trans|raw}}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %} Status{% endtrans %}</p>
+            {% if activity.status is not empty %}
+                <p>{{activity.status|raw}}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-12">
+            <p class="field-title">{% trans %} Details about the lobbying activity{% endtrans %}</p>
+            {% if activity.add_detail is not empty %}
+                <p>{{activity.add_detail |raw}}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %} Lobbying or plan to lobby{% endtrans %}</p>
+            {% if activity.who_you_lobbying is not empty %}
+                <p>{{activity.who_you_lobbying|raw}}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %} Type of lobbying activity{% endtrans %}</p>
+            {% if activity.how_do_you_want_to_lobby_ is not empty %}
+                <p>{{activity.how_do_you_want_to_lobby_|trans}} </p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %}Has your organization received a grant from the government of Yukon within the last year?{% endtrans %}</p>
+            {% if activity.has_your_organization_received_a_grant_from_the_government_of_yu is not empty %}
+                <p>{{activity.has_your_organization_received_a_grant_from_the_government_of_yu|raw}}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-12 col-md-6">
+            <p class="field-title">{% trans %}Was the grant awarded related to the lobbying that has been, or will be, undertaken?{% endtrans %}</p>
+            {% if activity.was_the_grant_awarded_related_to_the_matter_the_lobbying_has_bee is not empty %}
+                <p>{{activity.was_the_grant_awarded_related_to_the_matter_the_lobbying_has_bee|trans|raw}}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{{ attach_library('wxt_lobbyist/biz-update-info') }}

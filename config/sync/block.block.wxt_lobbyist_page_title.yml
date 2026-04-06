@@ -1,0 +1,26 @@
+uuid: c20b51d1-682b-4f1e-82c6-099484ceb9db
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: 6aOgWsNTXjqrDm98TXSAjP6qd2nCijD1xw45MrnbK-Y
+id: wxt_lobbyist_page_title
+theme: wxt_lobbyist
+region: content
+weight: -18
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '<front>'

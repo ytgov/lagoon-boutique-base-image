@@ -1,0 +1,147 @@
+uuid:
+  -
+    value: f82e777a-2d69-4092-bbdc-e210914e6f4f
+langcode:
+  -
+    value: en
+vid:
+  -
+    target_id: header_for_revisions
+    target_type: taxonomy_vocabulary
+    target_uuid: 6f0332c3-cfbe-42e8-9d65-7804e4668a0c
+revision_created:
+  -
+    value: '2021-06-23T20:53:26+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_user: {  }
+revision_log_message: {  }
+status:
+  -
+    value: true
+name:
+  -
+    value: Changed
+description:
+  -
+    value: "<p>dates</p>\r\n"
+    format: basic_html
+    processed: '<p>dates</p>'
+weight:
+  -
+    value: 1
+parent:
+  -
+    target_id: 0
+changed:
+  -
+    value: '2021-07-18T10:06:16+00:00'
+    format: 'Y-m-d\TH:i:sP'
+default_langcode:
+  -
+    value: true
+revision_translation_affected:
+  -
+    value: true
+metatag:
+  value:
+    canonical_url: 'http://lobbyist-registry-backend.bizont.ca/en/taxonomy/term/188'
+    description: dates
+path:
+  -
+    alias: null
+    pid: null
+    langcode: en
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+content_translation_uid:
+  -
+    target_type: user
+    target_uuid: f9a69597-58ab-4557-96d5-4dae3010a56c
+content_translation_created:
+  -
+    value: '2021-06-23T20:53:26+00:00'
+    format: 'Y-m-d\TH:i:sP'
+_content_sync:
+  entity_type: taxonomy_term
+  entity_dependencies:
+    user:
+      - user.user.f9a69597-58ab-4557-96d5-4dae3010a56c
+_translations:
+  fr:
+    uuid:
+      -
+        value: f82e777a-2d69-4092-bbdc-e210914e6f4f
+    langcode:
+      -
+        value: fr
+    vid:
+      -
+        target_id: header_for_revisions
+        target_type: taxonomy_vocabulary
+        target_uuid: 6f0332c3-cfbe-42e8-9d65-7804e4668a0c
+    revision_created:
+      -
+        value: '2021-06-23T20:53:26+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    revision_user: {  }
+    revision_log_message: {  }
+    status:
+      -
+        value: true
+    name:
+      -
+        value: Modifiée
+    description:
+      -
+        value: "<p>dates</p>\r\n"
+        format: basic_html
+        processed: '<p>dates</p>'
+    weight:
+      -
+        value: 1
+    parent:
+      -
+        target_id: 0
+    changed:
+      -
+        value: '2021-07-18T10:05:38+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    default_langcode:
+      -
+        value: false
+    revision_translation_affected:
+      -
+        value: true
+    metatag:
+      value:
+        title: 'Changed | Lobbyist Registry Backend'
+        canonical_url: 'http://lobbyist-registry-backend.bizont.ca/en/taxonomy/term/188'
+        description: dates
+    path:
+      -
+        alias: null
+        pid: null
+        langcode: fr
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_type: user
+        target_uuid: f9a69597-58ab-4557-96d5-4dae3010a56c
+    content_translation_created:
+      -
+        value: '2021-07-18T10:05:38+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    _content_sync:
+      entity_type: taxonomy_term
+      entity_dependencies:
+        user:
+          - user.user.f9a69597-58ab-4557-96d5-4dae3010a56c

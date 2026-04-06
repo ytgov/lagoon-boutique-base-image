@@ -1,0 +1,22 @@
+<?php
+use Drupal\Core\Config;
+
+require_once __DIR__ . '/includes/biz_block_plugin.theme.inc';
+
+
+function biz_block_plugin_preprocess_custom_table(array &$variables){
+    $lobbyist_path = \Drupal::service('extension.path.resolver')->getPath('module', 'biz_block_plugin');
+    $variables['js_file'] = $lobbyist_path . '/js/customTable.js';
+    $current_user = \Drupal::currentUser();
+    $variables['user'] = $current_user->id();
+    $variables['#attached']['drupalSettings']['biz_block_plugin']['id'] = $variables['attributes']['id'];
+    $variables['#attached']['drupalSettings']['biz_block_plugin']['sort_column'] = $variables['sort_column'];
+    $variables['#attached']['drupalSettings']['biz_block_plugin']['sort_order'] = $variables['sort_order'];
+    $variables['#attached']['drupalSettings']['biz_block_plugin']['url_api'] = isset($variables['url_api']) ? $variables['url_api'] : '';
+    $variables['#attached']['drupalSettings']['biz_block_plugin']['add_html_top'] = isset($variables['add_html_top']) ? $variables['add_html_top'] : '';
+}
+
+function biz_block_plugin_uninstall(){
+    $database = \Drupal::database();
+    $database->delete('config')->where("name like '%block.block.accountcustominformation%' or name like '%block.block.address%' or name like '%block.block.copyright%' or name like '%block.block.feedbackform%' or name like '%block.block.homepageintro%' or name like '%block.block.quicktabsaccounthome%' or name like '%block.block.searchactivityblock%' or name like '%block.block.quicktabsconsultantaccounthome%' or name like '%block.block.homepageimage%'")->execute();
+}

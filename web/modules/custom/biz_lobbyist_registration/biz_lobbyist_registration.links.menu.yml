@@ -1,0 +1,10 @@
+biz_lobbyist_registration.admin_config:
+  title: Lobbyist
+  parent: system.admin_config
+  route_name: biz_lobbyist_registration.admin_config
+
+biz_lobbyist_registration.settings:
+  title: Lobbyist registration settings
+  description: ''
+  parent: biz_lobbyist_registration.admin_config
+  route_name: biz_lobbyist_registration.settings

@@ -1,0 +1,23 @@
+uuid: 092d07fb-dee8-4016-90ef-dfdda6ded04c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:903fec91-2542-4f59-bacf-8f2e42f1b8e4'
+  module:
+    - block_content
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_address
+theme: wxt_lobbyist
+region: footer
+weight: -7
+provider: null
+plugin: 'block_content:903fec91-2542-4f59-bacf-8f2e42f1b8e4'
+settings:
+  id: 'block_content:903fec91-2542-4f59-bacf-8f2e42f1b8e4'
+  label: Address
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility: {  }

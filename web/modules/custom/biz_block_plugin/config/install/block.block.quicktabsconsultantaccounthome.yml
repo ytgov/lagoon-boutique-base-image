@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - quicktabs
+    - system
+    - user
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: quicktabsconsultantaccounthome
+theme: wxt_lobbyist
+region: content
+weight: -8
+provider: null
+plugin: 'quicktabs_block:consultant_account_home'
+settings:
+  id: 'quicktabs_block:consultant_account_home'
+  label: 'QuickTabs - Consultant Account Home'
+  provider: quicktabs
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: /consultant-account-home
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      consultant_lobbyist: consultant_lobbyist
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

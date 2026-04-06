@@ -1,0 +1,4 @@
+biz_business_rules.settings:
+    route_name: biz_business_rules.settings
+    title: Settings
+    base_route: biz_business_rules.settings

@@ -1,0 +1,31 @@
+uuid: 8b0b9088-f24c-4eab-a4fb-1b391ea2a10c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_position
+  module:
+    - multiple_registration
+    - user
+third_party_settings:
+  multiple_registration:
+    user_additional_register_form_required:
+      in_house_lobbyist: in_house_lobbyist
+      authenticated: 0
+      consultant_lobbyist: 0
+    user_additional_register_form:
+      in_house_lobbyist: in_house_lobbyist
+      authenticated: 0
+      consultant_lobbyist: 0
+id: user.user.field_position
+field_name: field_position
+entity_type: user
+bundle: user
+label: Position
+description: 'This is your current job title related to your role as an in-house lobbyist'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

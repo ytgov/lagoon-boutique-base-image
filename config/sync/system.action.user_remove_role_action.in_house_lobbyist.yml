@@ -1,0 +1,14 @@
+uuid: d970d83a-6cce-4716-afa0-b0e22a0281a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.in_house_lobbyist
+  module:
+    - user
+id: user_remove_role_action.in_house_lobbyist
+label: 'Remove the In-house lobbyist role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: in_house_lobbyist

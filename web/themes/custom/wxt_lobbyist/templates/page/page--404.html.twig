@@ -1,0 +1,177 @@
+{% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+
+{# Navbar #}
+{% if page.navigation or page.navigation_collapsible %}
+  {% block navbar %}
+    {%
+      set navbar_classes = []
+    %}
+
+  <header{{ navbar_attributes.addClass(navbar_classes) }} id="navbar" role="banner">
+    <div id="wb-bnr">
+      <div class="container">
+        <div class="row">
+          <div class="site-main-logo">
+            {{page.branding}}
+          </div>
+          <div class="site-nav-toggle">
+            <div class="row">
+              <div class="pull-right">
+                {{page.navigation}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </header>
+{% if page.header_slider %}
+  <div class="header_slider" role="header_slider">
+      {{ page.header_slider }}
+  </div>
+{% endif %}
+
+  {% endblock %}
+{% endif %}
+
+{# Main #}
+{% block main %}
+  {# Highlighted #}
+  {% if page.highlighted %}
+    {% block highlighted  %}
+      <div class="highlighted">{{ page.highlighted }}</div>
+    {% endblock %}
+  {% endif %}
+  {# Content #}
+    {%
+      set content_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-md-6 col-md-push-3',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-md-9 col-md-push-3',
+        page.sidebar_second and page.sidebar_first is empty ? 'col-md-9',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'col-md-12'
+      ]
+    %}
+
+  {# Header #}
+  {% if page.header %}
+    {% block header %}
+      {{ page.header }}
+    {% endblock %}
+  {% endif %}
+
+  {# Breadcrumbs #}
+  {% if breadcrumb %}
+    {% block breadcrumb %}
+      {{ breadcrumb }}
+    {% endblock %}
+  {% endif %}
+
+  {# Action Links #}
+  {% if action_links %}
+    {% block action_links %}
+      <ul class="action-links">{{ action_links }}</ul>
+    {% endblock %}
+  {% endif %}
+
+  {# Help #}
+  {% if page.help %}
+    {% block help %}
+      {{ page.help }}
+    {% endblock %}
+  {% endif %}
+
+  {% if page.content_slider %}
+    <div class="content_slider" role="content_slider">
+        {{ page.content_slider }}
+    </div>
+  {% endif %}
+  <main role="main" property="mainContentOfPage" {{ content_attributes.addClass(content_classes, 'main-container', 'js-quickedit-main-content') }}>
+    {# Content #}
+    <div class="main-content-wrap container">
+      <div class="row">
+        {% block content %}
+          <a id="main-content"></a>
+          {{ page.content_header }}
+           <div class="box">
+              <div class="row">
+                  <h1 class="page-header" id="wb-cont">Page not found</h1>
+                <div class="col-xs-3 col-sm-2 col-md-2 text-center mrgn-tp-md">
+                  <span class="glyphicon glyphicon-warning-sign glyphicon-error"></span>
+                </div>
+                <div class="col-xs-9 col-sm-10 col-md-10">
+                  <h2 class="mrgn-tp-md">{{ "We couldn't find that Web page"|t }}</h2>
+                  <p class="pagetag"><strong>{{ "Error 404"|t }}</strong></p>
+                </div>
+              </div>
+              <p class="mrgn-tp-md">{{ "We're sorry you ended up here. Sometimes a page gets moved or deleted."|t }}</p>
+            </div>
+          {{ page.content_footer }}
+        {% endblock %}
+      </div>
+
+      {% if page.page_form %}
+          {% block page_form %}
+            {{ page.page_form }}
+          {% endblock %}
+      {% endif %} 
+
+    </div>
+  </main>
+
+  {# Sidebar First #}
+    {%
+      set sidebar_first_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-md-3 col-md-pull-6',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-md-3 col-md-pull-9',
+        page.sidebar_second and page.sidebar_first is empty ? 'col-md-3 col-md-pull-9'
+      ]
+    %}
+  {# Sidebar First #}
+  {% if page.sidebar_first %}
+    {% block sidebar_first %}
+      <nav{{ attributes.addClass(sidebar_first_classes) }}>
+        {{ page.sidebar_first }}
+      </nav>
+    {% endblock %}
+  {% endif %}
+
+  {# Sidebar Second #}
+  {%
+    set sidebar_second_classes = [
+      page.sidebar_first and page.sidebar_second ? 'col-md-3',
+      page.sidebar_first and page.sidebar_second is empty ? 'col-md-3',
+      page.sidebar_second and page.sidebar_first is empty ? 'col-md-3'
+    ]
+  %}
+  {# Sidebar Second #}
+  {% if page.sidebar_second %}
+    {% block sidebar_second %}
+      <nav{{ attributes.removeClass(sidebar_first_classes).addClass(sidebar_second_classes) }}>
+        {{ page.sidebar_second }}
+      </nav>
+    {% endblock %}
+  {% endif %}
+{% endblock %}
+
+{% if page.footer %}
+  {% block footer %}
+<footer role="contentinfo" id="wb-info">
+  <div class="container">
+    <div class="row">
+      <nav class="col-md-10 ftr-urlt-lnk">
+        {{ page.menu_terms_bar }}
+      </nav>
+    </div>
+  </div>
+    {% if page.footer %}
+      <div class="footer-menu-wrapper">
+        <div class="container">
+          <div class="footer-menu navbar-left" role="navigation">
+            {{ page.footer }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+</footer>
+  {% endblock %}
+{% endif %}

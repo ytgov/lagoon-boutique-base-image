@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:79a7bd8a-b906-4560-aff8-28a67188ddc9'
+  module:
+    - block_content
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: homepageintro
+theme: wxt_lobbyist
+region: header_slider
+weight: -14
+provider: null
+plugin: 'block_content:79a7bd8a-b906-4560-aff8-28a67188ddc9'
+settings:
+  id: 'block_content:79a7bd8a-b906-4560-aff8-28a67188ddc9'
+  label: 'Homepage intro'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

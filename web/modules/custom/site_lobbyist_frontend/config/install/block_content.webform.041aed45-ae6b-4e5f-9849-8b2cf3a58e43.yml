@@ -1,0 +1,68 @@
+uuid:
+  -
+    value: 041aed45-ae6b-4e5f-9849-8b2cf3a58e43
+dependencies:
+  content:
+    - 'webform.webform.feedback_form.yml'
+langcode:
+  -
+    value: en
+type:
+  -
+    target_id: webform
+    target_type: block_content_type
+    target_uuid: 0b08e4a3-4de2-4aa9-8ef9-a5c8b31e44ab
+revision_created:
+  -
+    value: '2020-04-14T19:35:11+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_user: {  }
+revision_log: {  }
+status:
+  -
+    value: true
+info:
+  -
+    value: 'Feedback form'
+changed:
+  -
+    value: '2020-04-14T19:35:11+00:00'
+    format: 'Y-m-d\TH:i:sP'
+reusable:
+  -
+    value: true
+default_langcode:
+  -
+    value: true
+revision_translation_affected:
+  -
+    value: true
+metatag:
+  value:
+    title: 'Yukon Lobbyist Registry'
+    canonical_url: 'http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/batch'
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+content_translation_uid:
+  -
+    target_type: user
+    target_uuid: 8e951786-6657-44e0-a276-68836602c165
+content_translation_created:
+  -
+    value: '2020-04-14T19:35:11+00:00'
+    format: 'Y-m-d\TH:i:sP'
+field_webform:
+  -
+    target_id: feedback_form
+    default_data: ''
+    status: open
+    open: null
+    close: null
+    target_type: webform
+    url: /form/feedback-form
+_content_sync:
+  entity_type: block_content

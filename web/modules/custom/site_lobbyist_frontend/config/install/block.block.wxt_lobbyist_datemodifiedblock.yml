@@ -1,0 +1,28 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - block_class
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+third_party_settings:
+  block_class:
+    classes: col-md-12
+_core:
+  default_config_hash: 0tbnpDe4lDmzX8R-oZnej549njgAHBGcuaEqAsGHTZs
+id: wxt_lobbyist_datemodifiedblock
+theme: wxt_lobbyist
+region: branding
+weight: -7
+provider: null
+plugin: date_modified_block
+settings:
+  id: date_modified_block
+  label: 'Date Modified'
+  provider: wxt_library
+  label_display: '0'
+  date_format:
+    page: page
+  date_modified: tiny
+visibility: {  }

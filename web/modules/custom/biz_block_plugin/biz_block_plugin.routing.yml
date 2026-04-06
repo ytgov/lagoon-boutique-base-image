@@ -1,0 +1,78 @@
+biz_block_plugin.settings:
+  path: '/admin/config/bizont-dashbodard/settings'
+  defaults:
+    _form: '\Drupal\biz_block_plugin\Form\DashboardsSettingsForm'
+    _title: 'Dashboard Lobbyist Settings'
+  requirements:
+    _permission: 'administer site configuration'
+biz_block_plugin.consultant_activity:
+  path: '/biz_block_plugin/consultant_activity'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\BizBlockPluginController::consultantActivityContent'
+    _title: 'Consultant activity'
+  requirements:
+    _permission: 'administer site configuration'
+biz_block_plugin.in_house_activity:
+  path: '/biz_block_plugin/in_house_activity'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\BizBlockPluginController::inHouseActivityContent'
+    _title: 'In House activity'
+  requirements:
+    _permission: 'administer site configuration'
+biz_block_plugin.custom_table:
+  path: '/biz_block_plugin/custom_table'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\BizBlockPluginController::tablesContent'
+    _title: 'Custom table'
+  requirements:
+    _permission: 'administer site configuration'
+biz_block_plugin.consultant_account_info:
+  path: '/biz_block_plugin/consultant_account_info'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\BizBlockPluginController::consultantAccountInfo'
+    _title: 'Consultant Account Information'
+  requirements:
+    _permission: 'administer site configuration'
+biz_block_plugin.activity_messages:
+  path: '/biz_block_plugin/activity_messages'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\BizBlockPluginController::activityMessages'
+    _title: 'Messages'
+  requirements:
+    _permission: 'administer site configuration'
+biz_block_plugin.modal_confirmation:
+  path: '/biz_block_plugin/modal_confirmation'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\BizBlockPluginController::modalConfirmation'
+    _title: 'Messages'
+  requirements:
+    _permission: 'administer site configuration'
+biz_block_plugin.modal_compare_versions_consultant:
+  path: '/biz_block_plugin/modal_compare_versions_consultant'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\BizBlockPluginController::modalCompareVersionsConsultant'
+    _title: 'Modal to compare versions consultant'
+  requirements:
+    _permission: 'administer site configuration'
+biz_block_plugin.get_versions:
+  path: '/get-version/{sid}/{date}/{count}/{current_count}'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\GeneralFunctions::getActivityVersion'
+    _title: 'Get version to compare'
+  methods: 'GET'
+  requirements:
+    _permission: 'access content'
+biz_block_plugin.get_report:
+  path: '/get-report/{type}'
+  defaults:
+    _controller: '\Drupal\biz_block_plugin\Controller\GeneralFunctions::getReport'
+    _title: 'Get report'
+  methods: 'GET'
+  requirements:
+    _permission: 'access content'
+biz_block_plugin.exports.activities:
+ path: '/exports/activities/{type}'
+ defaults:
+   _controller: '\Drupal\biz_block_plugin\Controller\CSVReport::build'
+ requirements:
+   _permission: 'administer users'

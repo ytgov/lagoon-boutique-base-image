@@ -1,0 +1,9 @@
+webform_composite_yukon:
+  version: VERSION
+  css:
+    theme:
+      css/webform_composite_yukon.css: {}
+  js:
+    js/webform.yukon.element.multiple.js: {}
+  dependencies:
+    - webform/webform.composite

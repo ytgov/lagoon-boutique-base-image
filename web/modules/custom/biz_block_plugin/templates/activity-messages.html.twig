@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ *
+ * Available variables:
+ * - 
+ * - submitted: Submission information created from author and created
+ *   during template_preprocess_comment().
+ * - status: Comment status. Possible values are:
+ *   unpublished, published, or preview.
+ *
+ * @see template_preprocess_comment()
+ */
+#}
+<div class="header-view info-organization gray-info-container gray-info-container-messages">
+  <div class= "header-row no-padding row col-xs-12">
+    <div class= "field col no-padding align-self-start col-md-6">
+      <p class="field-title">{% trans %}From{% endtrans %}:  {{ user_name }}</p>
+    </div>
+    <div class= "field col no-padding align-self-start col-md-6">
+      <p class="field-title">{{ date }}</p>
+    </div>
+  </div>
+  <div class="header-row no-padding row col-xs-12">
+    <p class="field-title"></p>
+    <p>{{ message| raw  }}</p>
+  </div>
+</div>
+
+
+
+
+

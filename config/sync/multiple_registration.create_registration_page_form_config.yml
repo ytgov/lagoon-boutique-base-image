@@ -1,0 +1,21 @@
+in_house_lobbyist:
+  path: /in-house-registration
+  url: /user/register/in_house_lobbyist
+  redirect_path: ''
+  hidden: 0
+  form_mode_register: register
+  form_mode_edit: register
+consultant_lobbyist:
+  in_house_lobbyist:
+    path: /in-house-registration
+    url: /user/register/in_house_lobbyist
+    redirect_path: ''
+    hidden: 0
+    form_mode_register: register
+    form_mode_edit: register
+  path: /consultant-registration
+  url: /user/register/consultant_lobbyist
+  redirect_path: ''
+  hidden: 0
+  form_mode_register: register
+  form_mode_edit: register

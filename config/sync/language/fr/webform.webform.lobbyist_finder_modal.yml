@@ -1,0 +1,193 @@
+elements: |
+  page_0:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': 'J’AI COMPRIS'
+  markup_62:
+    '#text': '<p>Avertissement</p>'
+  disclaimer_body:
+    '#text': '<p>Ce questionnaire est proposé à titre informatif seulement. Le type de lobbyiste que vous êtes est déterminé à partir des critères énoncés dans la <em>Loi sur l’inscription des lobbyistes </em>du Yukon.</p>'
+  page_1:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup:
+    '#text': '<p>Nous devons déterminer si vous communiquez avec un titulaire de charge publique.</p>'
+  processed_text:
+    '#text': '<img src="/web/sites/default/files/inline-images/0.png" data-entity-uuid="1bc03b9e-95d2-4af2-8f3b-41aabcf7fddf" data-entity-type="file" width="352" height="184"><p>&nbsp;</p>'
+  page_2:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_01:
+    '#text': '<p>Communiquez-vous avec un titulaire de charge publique?</p>'
+  markup_02:
+    '#text': '<p>Ce peut être :</p><ul><li data-list-item-id="e5cc1dde0db786008beebcceec189857f">Un député de l’Assemblée législative</li><li data-list-item-id="e5cf6b74667febbecbe68d05892be72b4">Employé du caucus</li><li data-list-item-id="e43babdd64387cf9f72e2a529e62818ce">Le premier ministre, un ministre, un employé du Conseil des ministres ou un employé d’un groupe parlementaire</li><li data-list-item-id="e1b1f48c0d012f56d8ef0ae8ac345c96f">Sous-ministre d''un ministère ou d''une direction</li><li data-list-item-id="e29df28f15f594493f004f65a290339b9">Président d''une société d''État</li><li data-list-item-id="eeea3bdca2475692dc78cb9a0041a8995">Un fonctionnaire du gouvernement du Yukon</li><li data-list-item-id="e6f4d0f72b5c80f5b0402faaa37a36649">Employé de la société d''État du Yukon</li></ul>'
+  markup_2302:
+    '#text': '<p>Vous ne semblez pas être un lobbyiste.</p>'
+  processed_text_0602:
+    '#text': '<p>Selon les réponses que vous avez fournies, vous ne semblez pas être un lobbyiste au sens de la <em>Loi sur l’inscription des lobbyistes</em>.</p>'
+  processed_text_0702:
+    '#text': 'Retour à la page d’accueil du registre des lobbyistes'
+  'no':
+    '#title': 'Sélectionner une option'
+  page_3:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_03:
+    '#text': '<p>Nous devons déterminer comment vous communiquez avec un titulaire de charge publique.</p>'
+  processed_text_01:
+    '#text': '<img src="/web/sites/default/files/inline-images/1.png" data-entity-uuid="97024fa5-49ea-4b9d-908b-92a08088b831" data-entity-type="file" alt="Image" width="219" height="233"><p>&nbsp;</p>'
+  page_4:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_04:
+    '#text': '<p>Communiquez-vous ou comptez-vous communiquer avec un titulaire de charge publique?</p>'
+  markup_05:
+    '#text': '<p>Exemples de techniques de communication (liste non exhaustive) :</p><ul><li data-list-item-id="e85e2b2ebd69015cbfebac67402bddb52">Médias sociaux</li><li data-list-item-id="e14b797fba0c5be6bde81a46dff11f74c">Appels téléphoniques ou messages textes</li><li data-list-item-id="ede5ae8f246a6fb0235508c4ce3f07fe3">Réunions informelles et officielles</li><li data-list-item-id="e55549b395ad29505e1edf70af193126e">Organisation d’un rendez-vous avec un titulaire de charge publique pour le compte d’un client</li><li data-list-item-id="e034eb959e5fa577b6c539357a7524361">Appels au grand public (ex. chercher à persuader le public de signer des pétitions)</li></ul>'
+  markup_23:
+    '#text': '<p>Vous ne semblez pas être un lobbyiste.</p>'
+  processed_text_06:
+    '#text': '<p>Selon les réponses que vous avez fournies, vous ne semblez pas être un lobbyiste au sens de la <em>Loi sur l’inscription des lobbyistes</em>.</p>'
+  processed_text_07:
+    '#text': 'Retour à la page d’accueil du registre des lobbyistes'
+  select_one_option:
+    '#title': 'Sélectionner une option'
+  page_5:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_06:
+    '#text': '<p>Nous devons déterminer si le résultat de vos communications est de tenter d’influencer une décision gouvernementale.</p>'
+  processed_text_02:
+    '#text': '<img src="/web/sites/default/files/inline-images/2.png" data-entity-uuid="29f9ff53-5879-476e-b01f-54eab627e510" data-entity-type="file" alt="Image" width="189" height="180"><p>&nbsp;</p>'
+  page_6:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_07:
+    '#text': '<p>Le résultat attendu de vos communications est-il de tenter d’influencer...</p>'
+  markup_08:
+    '#text': '<p>l’élaboration de propositions législatives?</p>'
+  are_you_option:
+    '#title': 'Sélectionner une option'
+  page_6_1:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_24:
+    '#text': '<p>Le résultat attendu de vos communications est-il de tenter d’influencer…</p>'
+  markup_25:
+    '#text': '<p>le dépôt d’un projet de loi, d’une motion ou d’une résolution devant l’Assemblée législative OU sa modification, son adoption ou son rejet par celle-ci?</p>'
+  are_you_option_1:
+    '#title': 'Sélectionner une option'
+  page_6_2:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_28:
+    '#text': '<p>Le résultat attendu de vos communications est-il de tenter d’influencer…</p>'
+  markup_29:
+    '#text': '<p>la prise ou la modification d’un règlement (ex. <em>Règlement sur les refuges fauniques</em>)?</p>'
+  are_you_option_2:
+    '#title': 'Sélectionner une option'
+  page_6_3:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_31:
+    '#text': '<p>Le résultat attendu de vos communications est-il de tenter d’influencer...</p>'
+  markup_32:
+    '#text': '<p>l’élaboration, la modification ou la cessation d’une politique ou d’un programme du gouvernement (ex. création d’un nouveau programme pour les jeunes)?</p>'
+  are_you_option_3:
+    '#title': 'Sélectionner une option'
+  page_6_4:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_34:
+    '#text': '<p>Le résultat attendu de vos communications est-il de tenter d’influencer…</p>'
+  markup_35:
+    '#text': '<p>une décision du Conseil des ministres, d’un comité du Conseil des ministres ou d’un ministre de charger le secteur privé, plutôt que le gouvernement, de la fourniture de biens ou de services au gouvernement?</p>'
+  are_you_option_4:
+    '#title': 'Sélectionner une option'
+  page_6_5:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_37:
+    '#text': '<p>Le résultat attendu de vos communications est-il de tenter d’influencer…</p>'
+  markup_38:
+    '#text': '<p>l’attribution d’une subvention, d’une contribution ou de tout autre avantage financier par le gouvernement ou en son nom?</p>'
+  are_you_option_5:
+    '#title': 'Sélectionner une option'
+  page_6_6:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_09:
+    '#text': '<p>Le résultat attendu de vos communications est-il de tenter d’influencer…</p>'
+  markup_10:
+    '#text': '<p>l’attribution d’un contrat par le gouvernement ou en son nom? (ex. attribution d’un contrat pour la construction d’une nouvelle installation publique)?</p>'
+  markup_44_not:
+    '#text': '<p>Vous ne semblez pas être un lobbyiste.</p>'
+  processed_text_28_lobby:
+    '#text': '<p>Selon les réponses que vous avez fournies, vous ne semblez pas être un lobbyiste au sens de la <em>Loi sur l’inscription des lobbyistes</em>. Dans le doute, consultez la loi ou envoyez un courriel à l’adresse <a href="mailto:yla@gov.yk.ca">info@yukonlobbyistregistry.ca</a> pour obtenir une confirmation.</p>'
+  processed_text_29_link:
+    '#text': 'Retour à la page d’accueil du registre des lobbyistes'
+  are_you_option_6:
+    '#title': 'Sélectionner une option'
+  page_8:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_13:
+    '#text': '<p>Nous devons déterminer quel type de lobbyiste vous êtes.&nbsp;<br>Les questions qui suivent nous permettront de déterminer si vous êtes un lobbyiste salarié ou un lobbyiste-conseil.&nbsp;</p>'
+  processed_text_03:
+    '#text': '<img src="/web/sites/default/files/inline-images/3_0.png" data-entity-uuid="6dad5d76-6319-427b-9f8b-8224e328e445" data-entity-type="file"><p>&nbsp;</p>'
+  page_9:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_14:
+    '#text': '<p>Quel est votre rôle?</p>'
+  markup_15:
+    '#text': '<p>Faites-vous ou ferez-vous du lobbyisme pour le compte d’un client (ex. vous avez conclu un contrat avec un client pour faire du lobbyisme en son nom)?</p>'
+  are_you_option_7:
+    '#title': 'Sélectionner une option'
+  page_10:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': SUIVANT
+  markup_16:
+    '#text': '<p>Quel est votre rôle?</p>'
+  markup_17:
+    '#text': '<p>Travaillez-vous pour un autre particulier, une personne morale ou une organisation (ex. vous travaillez pour une société et vos fonctions consistent à faire du lobbyisme pour elle)?</p>'
+  are_you_option_8:
+    '#title': 'Sélectionner une option'
+  page_11:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': PRÉCÉDENT
+  markup_18:
+    '#text': '<p>Quel est votre rôle?</p>'
+  markup_19:
+    '#text': '<p>Êtes-vous un travailleur autonome ou membre d’une société de personnes?</p>'
+  are_you_option_9:
+    '#title': 'Sélectionner une option'
+  page_12:
+    '#prev_button_label': PRÉCÉDENT
+    '#next_button_label': PRÉCÉDENT
+  markup_20:
+    '#text': '<p>Quel est votre rôle?</p>'
+  markup_21:
+    '#text': '<p>Êtes-vous «&nbsp;l’âme dirigeante&nbsp;» d’une personne morale, d’une société de personnes ou d’une organisation, qui contrôle une partie ou la totalité de ses activités (ex. vous êtes membre du conseil d’administration d’une société et faites du lobbyisme pour elle)?<br><br>&nbsp;</p>'
+  markup_44:
+    '#text': '<p>Vous ne semblez pas être un lobbyiste.</p>'
+  processed_text_28:
+    '#text': '<p>Selon les réponses que vous avez fournies, vous ne semblez pas être un lobbyiste au sens de la <em>Loi sur l’inscription des lobbyistes</em>. Dans le doute, consultez la loi ou envoyez un courriel à l’adresse <a href="mailto:yla@gov.yk.ca">info@yukonlobbyistregistry.ca</a> pour obtenir une confirmation.</p>'
+  processed_text_29:
+    '#text': 'Retour à la page d’accueil du registre des lobbyistes'
+  are_you_option_10:
+    '#title': 'Sélectionner une option'
+  final_page:
+    '#prev_button_label': PRÉCÉDENT
+  markup_inhouse:
+    '#text': '<p>Vous semblez être un lobbyiste salarié.<br>&nbsp;</p>'
+  processed_inhouse:
+    '#text': '<p>Si, au cours d’une année civile, vous ou d’autres personnes de votre organisme consacrez au moins 20 heures à faire du lobbying auprès du gouvernement du Yukon, votre organisme est tenue de s’inscrire. La personne-ressource principale créera un compte pour l’organisme.</p>'
+  processed_inhouse_1:
+    '#text': Inscription
+  processed_inhouse_2:
+    '#text': 'Retour à la page d’accueil'
+  markup_consultant:
+    '#text': '<p>Vous semblez être un lobbyiste-conseil.<br><br>&nbsp;</p>'
+  processed_consultant_1:
+    '#text': "<p><a href=\"/fr/register-as-lobbyist\">Inscription</a></p>\r\n"
+  processed_consultant_2:
+    '#text': "<p><a href=\"/fr\">Retour à la page d’accueil</a></p>\r\n"

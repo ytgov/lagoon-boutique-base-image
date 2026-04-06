@@ -1,0 +1,10 @@
+{
+    "name": "drupal/biz_new_content",
+    "type": "drupal-module",
+    "description": "Create new items and updated nodes created by content sync",
+    "homepage": "",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6"
+    }
+}

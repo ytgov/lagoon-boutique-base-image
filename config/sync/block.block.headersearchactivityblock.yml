@@ -1,0 +1,35 @@
+uuid: d9f2cf2e-0924-4216-a120-eca5e286f2e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: ZsOVLcIoGTWoH4RIqIS4scT83lLzaqaulCyRxANvDpk
+id: headersearchactivityblock
+theme: wxt_lobbyist
+region: header_slider
+weight: -16
+provider: null
+plugin: header_search_block
+settings:
+  id: header_search_block
+  label: 'Header Search activity block'
+  label_display: '0'
+  provider: biz_block_plugin
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: '<front>'
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }

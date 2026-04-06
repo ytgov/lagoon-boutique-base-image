@@ -1,0 +1,20 @@
+uuid: 62ba701c-fa71-4ba2-914c-7114642cd496
+langcode: en
+status: true
+dependencies:
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: Q9_2whdOj1YIomfvsIfopROW4FT_X5pY0DjdOiOaQ5U
+id: wxt_lobbyist_primary_admin_actions
+theme: wxt_lobbyist
+region: highlighted
+weight: -19
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

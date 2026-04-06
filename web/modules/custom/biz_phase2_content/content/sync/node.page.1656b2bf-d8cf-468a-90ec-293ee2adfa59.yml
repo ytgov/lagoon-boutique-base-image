@@ -1,0 +1,101 @@
+uuid:
+  -
+    value: 1656b2bf-d8cf-468a-90ec-293ee2adfa59
+langcode:
+  -
+    value: en
+type:
+  -
+    target_id: page
+    target_type: node_type
+    target_uuid: 6fef1780-50eb-492c-a2da-f019329ea36d
+revision_timestamp:
+  -
+    value: '2021-12-28T17:31:31+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_uid:
+  -
+    target_type: user
+    target_uuid: 96661573-0cad-414d-83eb-48276d7ce94e
+revision_log: {  }
+status:
+  -
+    value: true
+uid:
+  -
+    target_type: user
+    target_uuid: 96661573-0cad-414d-83eb-48276d7ce94e
+title:
+  -
+    value: 'Register as a lobbyist'
+created:
+  -
+    value: '2021-12-28T17:04:04+00:00'
+    format: 'Y-m-d\TH:i:sP'
+changed:
+  -
+    value: '2021-12-28T17:31:31+00:00'
+    format: 'Y-m-d\TH:i:sP'
+promote:
+  -
+    value: false
+sticky:
+  -
+    value: false
+default_langcode:
+  -
+    value: true
+revision_translation_affected:
+  -
+    value: true
+moderation_state:
+  -
+    value: published
+scheduled_transition_date: {  }
+scheduled_transition_state: {  }
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+body:
+  -
+    value: "<p><span><span><span>There are 4 steps to register as a lobbyist. You must complete all of these steps to be registered.</span></span></span></p>\r\n\r\n<ol>\r\n\t<li><span><span><span> Create your account.</span></span></span></li>\r\n\t<li><span><span><span> We’ll send a verification email to the address you’ve provided. Follow the instructions in this email.</span></span></span></li>\r\n\t<li><span><span><span> Add your first lobbying activity.</span></span></span></li>\r\n\t<li><span><span><span> Once the admin approves your account and first lobbying activity – you are registered.</span></span></span></li>\r\n</ol>\r\n\r\n<h2><span><span><span><span><span>Before you register</span></span></span></span></span></h2>\r\n\r\n<ul>\r\n\t<li><span><span><span><a href=\"/determine-if-you-are-lobbyist\">Determine if you or your organization qualify as a lobbyist</a>.</span></span></span></li>\r\n\t<li><span><span><span>Make sure you've reached the <a href=\"/reporting-requirements-periods\">threshold number of hours that requires you register</a>.</span></span></span></li>\r\n</ul>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<div class=\"btn btn-primary btn-purple\"><a href=\"/in-house-registration\"><span><span><span>Register as an in-house lobbyist</span></span></span></a></div>\r\n\r\n<div class=\"btn btn-primary btn-purple\"><a href=\"/consultant-registration\"><span><span><span>Register as a consultant lobbyist</span></span></span></a></div>\r\n"
+    format: full_html
+    processed: |
+      <p><span><span><span>There are 4 steps to register as a lobbyist. You must complete all of these steps to be registered.</span></span></span></p>
+
+      <ol><li><span><span><span> Create your account.</span></span></span></li>
+      	<li><span><span><span> We’ll send a verification email to the address you’ve provided. Follow the instructions in this email.</span></span></span></li>
+      	<li><span><span><span> Add your first lobbying activity.</span></span></span></li>
+      	<li><span><span><span> Once the admin approves your account and first lobbying activity – you are registered.</span></span></span></li>
+      </ol><h2><span><span><span><span><span>Before you register</span></span></span></span></span></h2>
+
+      <ul><li><span><span><span><a href="/determine-if-you-are-lobbyist">Determine if you or your organization qualify as a lobbyist</a>.</span></span></span></li>
+      	<li><span><span><span>Make sure you've reached the <a href="/reporting-requirements-periods">threshold number of hours that requires you register</a>.</span></span></span></li>
+      </ul><h2> </h2>
+
+      <div class="btn btn-primary btn-purple"><a href="/in-house-registration"><span><span><span>Register as an in-house lobbyist</span></span></span></a></div>
+
+      <div class="btn btn-primary btn-purple"><a href="/consultant-registration"><span><span><span>Register as a consultant lobbyist</span></span></span></a></div>
+    summary: ''
+    summary_processed: ''
+comment:
+  -
+    status: 1
+    cid: 0
+    last_comment_timestamp: 1640711072
+    last_comment_name: null
+    last_comment_uid: 276
+    comment_count: 0
+field_meta_tags: {  }
+layout_selection: {  }
+_content_sync:
+  entity_type: node
+  entity_dependencies:
+    user:
+      - user.user.96661573-0cad-414d-83eb-48276d7ce94e
+path:
+  -
+    alias: /register-as-lobbyist

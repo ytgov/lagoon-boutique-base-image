@@ -1,0 +1,4 @@
+elements: "was_this_page_helpful_:\n  '#title': 'Avez-vous trouvé cette page utile?'\nhow_can_we_improve_this_page_:\n  '#title': 'Comment peut-on améliorer cette page?'\nhow_did_this_page_help_you_:\n  '#title': 'En quoi cette page vous a-t-elle été utile?'\nactions:\n  '#submit__label': 'Soumettre vos commentaires'\n"
+handlers:
+  email:
+    label: 'Adresse électronique'

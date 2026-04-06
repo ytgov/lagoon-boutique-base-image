@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: inhouseactivityblock
+theme: wxt_lobbyist
+region: content
+weight: -9
+provider: null
+plugin: in-house_single_act_block
+settings:
+  id: in-house_single_act_block
+  label: 'In-House Activity block'
+  provider: biz_block_plugin
+  label_display: '0'
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: "/in-house-account-home/in-house-activity-view\r\n/admin-dashboard/in-house-activity-view*\r\n/search-organization/organization-view/in-house-activity-view*"
+    negate: false
+    context_mapping: {  }

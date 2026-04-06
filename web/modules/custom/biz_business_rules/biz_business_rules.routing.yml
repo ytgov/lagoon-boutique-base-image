@@ -1,0 +1,15 @@
+biz_business_rules.admin_config:
+  path: '/admin/config/biz_business_rules'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Lobbyist'
+  requirements:
+    _permission: 'administer site configuration'
+
+biz_business_rules.settings:
+  path: '/admin/config/biz_business_rules/settings'
+  defaults:
+    _form: '\Drupal\biz_business_rules\Form\BusinessRulesSettingsForm'
+    _title: 'Messages for Business rules'
+  requirements:
+    _permission: 'administer site configuration'

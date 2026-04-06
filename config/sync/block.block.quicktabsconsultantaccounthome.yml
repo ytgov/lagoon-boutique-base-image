@@ -1,0 +1,43 @@
+uuid: 77e54bd7-e420-49b3-8348-e3f73783211e
+langcode: en
+status: true
+dependencies:
+  module:
+    - quicktabs
+    - system
+    - user
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: eC5vwI8qhu7hiEgxGSa33rqbkErEr-7i28VllJfgNPA
+id: quicktabsconsultantaccounthome
+theme: wxt_lobbyist
+region: content
+weight: -9
+provider: null
+plugin: 'quicktabs_block:consultant_account_home'
+settings:
+  id: 'quicktabs_block:consultant_account_home'
+  label: 'QuickTabs - Consultant Account Home'
+  label_display: visible
+  provider: quicktabs
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /consultant-account-home
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      consultant_lobbyist: consultant_lobbyist

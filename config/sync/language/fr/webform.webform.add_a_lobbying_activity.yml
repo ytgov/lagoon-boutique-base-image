@@ -1,0 +1,50 @@
+title: 'Ajouter une activité de lobbyisme'
+description: '<div style="border:0px;display:block;height:0px;left:-9999px;margin:0px;opacity:0;overflow:hidden;padding:0px;position:absolute;top:0px;width:0px;" data-cke-filler-webkit="start" data-cke-temp="1">&nbsp;</div><p>&nbsp;La personne responsable est chargée de l’ajout et de la modification des activités pour un organisme. Un organisme doit s’inscrire s''il exerce des activités de lobbyisme pendant au moins 20 heures au total sur une année civile.</p><div style="border:0px;display:block;height:0px;left:-9999px;margin:0px;opacity:0;overflow:hidden;padding:0px;position:absolute;top:0px;width:0px;" data-cke-filler-webkit="end" data-cke-temp="1">&nbsp;</div>'
+elements: |
+  sutitle_general:
+    '#text': "<p>La personne responsable est chargée de l’ajout et de la modification des activités pour un organisme. Un organisme doit s’inscrire s'il exerce des activités de lobbyisme pendant au moins 20 heures au total sur une année civile.</p>"
+  title:
+    '#title': 'Titre du projet'
+    '#description': '<p>Il s’agit d’un titre interne; utilisez une brève description du contrat.</p>'
+  which_topic_do_you_want_to_lobby_government_about_:
+    '#title': 'À quel sujet souhaitez-vous faire du lobbyisme auprès du gouvernement?'
+  other:
+    '#title': Autre
+  add_detail:
+    '#title': 'Renseignements supplémentaires au sujet de l’activité de lobbyisme (facultatif)'
+  who_are_you_lobbying_or_plan_to_lobby_:
+    '#title': 'Auprès de qui faites-vous ou prévoyez-vous faire du lobbyisme?'
+  how_do_you_want_to_lobby_:
+    '#title': 'Méthodes de lobbyisme'
+    '#description': '<p><a href="/fr/déterminer-si-vous-êtes-un-lobbyiste" data-cke-saved-href="/fr/déterminer-si-vous-êtes-un-lobbyiste">Renseignements supplémentaires </a>au sujet des activités constituant du lobbyisme</p>'
+    '#options':
+      'By letter and email': 'Lettres et courriels'
+      'By phone call': 'Appels téléphoniques'
+      'In-person conversation': 'Discussions en personne'
+      'By petition': Pétition
+      'Social media campaign': 'Campagne sur les réseaux sociaux'
+    '#other__option_label': Autre
+  has_your_organization_received_a_grant_from_the_government_of_yu:
+    '#options':
+      'Yes': Oui
+      'No': Non
+  was_the_grant_awarded_related_to_the_matter_the_lobbying_has_bee:
+    '#title': 'La subvention était-elle liée à l’activité de lobbyisme qui a été ou qui sera entreprise?'
+    '#options':
+      'Yes': Oui
+      'No': Non
+      'I don’t know': 'Je ne sais pas'
+  status:
+    '#options':
+      Pending: 'En attente'
+      Non-compliant: 'Non conforme'
+      'About to be Not in compliance': "Sur le point d''être non conforme"
+  year:
+    '#title': Année
+  actions:
+    '#submit__label': 'Soumettre l’activité de lobbyisme'
+    '#preview_prev__label': Modification
+    '#preview_next__label': 'Étape suivante'
+settings:
+  preview_message: '<p>Le processus sera terminé une fois que vous aurez confirmé les renseignements.</p>'
+  confirmation_message: '<p>Your activity has been saved.</p>'

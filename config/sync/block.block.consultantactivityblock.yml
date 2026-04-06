@@ -1,0 +1,35 @@
+uuid: f0bae7dc-5e4a-43d6-ac2e-ffe9c281e34b
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: ZaS14tyqXVOKGfZQeuT9l3neW4_W6vIP5D-NsLMFrjY
+id: consultantactivityblock
+theme: wxt_lobbyist
+region: content
+weight: -11
+provider: null
+plugin: consultant_single_act_block
+settings:
+  id: consultant_single_act_block
+  label: 'Consultant Activity block'
+  label_display: '0'
+  provider: biz_block_plugin
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/search-organization/organization-view/consultant-activity-view*\r\n/admin-dashboard/consultant-activity-view*\r\n/consultant-account-home/consultant-activity-view"
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }

@@ -1,0 +1,6 @@
+multiple_registration_pages_white_list:
+  in_house_lobbyist: in_house_lobbyist
+  consultant_lobbyist: consultant_lobbyist
+  anonymous: 0
+  authenticated: 0
+  administrator: 0

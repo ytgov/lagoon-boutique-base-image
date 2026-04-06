@@ -1,0 +1,4 @@
+defaults:
+  formatter: SMTPMailSystem
+  sender: SMTPMailSystem
+theme: current

@@ -1,0 +1,61 @@
+uuid: ebdef7e8-71e3-4573-b661-96f57f6f0ad7
+langcode: en
+status: true
+dependencies: {  }
+id: consultant_account_home
+label: 'Consultant Account Home'
+renderer: quick_tabs
+hide_empty_tabs: false
+default_tab: 0
+options:
+  quick_tabs:
+    ajax: true
+    class: ''
+    style: ''
+configuration_data:
+  -
+    title: 'Account Home'
+    weight: 0
+    type: block_content
+    content:
+      qtabs_content:
+        options:
+          machine_name: account_home
+      block_content:
+        options:
+          bid: consultant_act_block
+          block_title: ''
+          display_title: false
+      view_content:
+        options:
+          vid: block_content
+          display: default
+          args: ''
+      node_content:
+        options:
+          nid: ''
+          view_mode: full
+          hide_title: true
+  -
+    title: 'Account Information'
+    weight: 0
+    type: block_content
+    content:
+      qtabs_content:
+        options:
+          machine_name: account_home
+      block_content:
+        options:
+          bid: info_consultant_org_custom_block
+          block_title: ''
+          display_title: false
+      view_content:
+        options:
+          vid: block_content
+          display: default
+          args: ''
+      node_content:
+        options:
+          nid: ''
+          view_mode: full
+          hide_title: true

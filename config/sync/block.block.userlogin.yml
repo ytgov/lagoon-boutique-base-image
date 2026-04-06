@@ -1,0 +1,35 @@
+uuid: 1e74d760-92d4-4f34-b549-e8d8eabb088a
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: SUP7Kop-aWaGGVArbxqpUrZ90btUWCjXR1fVL3LV3kU
+id: userlogin
+theme: wxt_lobbyist
+region: content
+weight: -8
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'Log In'
+  label_display: visible
+  provider: user
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /login
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }

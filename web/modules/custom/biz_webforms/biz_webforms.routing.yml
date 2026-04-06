@@ -1,0 +1,8 @@
+biz_webforms.patch:
+  path: '/patch/{webform_id}/{submission_id}/{data}' 
+  defaults: 
+    _controller: '\Drupal\biz_webforms\BizWebformController::webforms_patching_from_js' 
+    _title: 'Patching'
+  methods: 'PATCH'
+  requirements: 
+    _permission: 'access content' 

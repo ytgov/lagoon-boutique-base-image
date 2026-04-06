@@ -1,0 +1,22 @@
+uuid: e76c2e82-a93a-49a3-9d13-f278e0a29d9d
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: wxt_lobbyist_content
+theme: wxt_lobbyist
+region: content
+weight: -13
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

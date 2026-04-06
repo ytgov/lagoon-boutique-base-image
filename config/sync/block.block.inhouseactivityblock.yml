@@ -1,0 +1,35 @@
+uuid: 6cf0eb0b-50a2-4a63-809c-273d35bfc5e2
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: EJ2Dap6SEU2e2DnGwzawRbpgJvLQ6Z20YInph-_D3Tk
+id: inhouseactivityblock
+theme: wxt_lobbyist
+region: content
+weight: -10
+provider: null
+plugin: in-house_single_act_block
+settings:
+  id: in-house_single_act_block
+  label: 'In-House Activity block'
+  label_display: '0'
+  provider: biz_block_plugin
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/in-house-account-home/in-house-activity-view\r\n/admin-dashboard/in-house-activity-view*\r\n/search-organization/organization-view/in-house-activity-view*"

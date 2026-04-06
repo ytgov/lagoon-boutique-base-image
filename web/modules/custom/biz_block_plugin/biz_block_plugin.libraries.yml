@@ -1,0 +1,13 @@
+biz-block-plugin:
+  js:
+    "//code.jquery.com/jquery-3.6.0.min.js": {type: external, minified: true}  # Add jQuery 3.6.0
+    js/customTable.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+biz-block-plugin-update-info:
+  js:
+    js/updateLobbyistInfo.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

@@ -1,0 +1,72 @@
+uuid:
+  -
+    value: e266df7b-f2fc-4b3f-9941-1a69ec38d964
+langcode:
+  -
+    value: en
+vid:
+  -
+    target_id: external_report
+    target_type: taxonomy_vocabulary
+    target_uuid: d5d2232b-e7bc-45b8-a831-d1257df265f5
+revision_created:
+  -
+    value: '2021-08-03T15:06:14+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_user: {  }
+revision_log_message: {  }
+status:
+  -
+    value: true
+name:
+  -
+    value: 'Business name'
+description:
+  -
+    value: field_business_name
+    format: restricted_html
+    processed: "<p>field_business_name</p>\n"
+weight:
+  -
+    value: 0
+parent:
+  -
+    target_id: 0
+changed:
+  -
+    value: '2021-08-04T22:42:11+00:00'
+    format: 'Y-m-d\TH:i:sP'
+default_langcode:
+  -
+    value: true
+revision_translation_affected:
+  -
+    value: true
+metatag:
+  value:
+    canonical_url: 'http://lobbyist-registry-backend.bizont.ca/en/taxonomy/term/205'
+    description: field_business_name
+path:
+  -
+    alias: null
+    pid: null
+    langcode: en
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+content_translation_uid:
+  -
+    target_type: user
+    target_uuid: f9a69597-58ab-4557-96d5-4dae3010a56c
+content_translation_created:
+  -
+    value: '2021-08-03T15:06:14+00:00'
+    format: 'Y-m-d\TH:i:sP'
+_content_sync:
+  entity_type: taxonomy_term
+  entity_dependencies:
+    user:
+      - user.user.f9a69597-58ab-4557-96d5-4dae3010a56c

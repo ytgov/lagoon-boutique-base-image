@@ -1,0 +1,5 @@
+biz_business_rules.settings:
+    title: 'Business rules for lobbyist'
+    base_route_name: biz_business_rules.settings
+    names:
+        - biz_business_rules.settings

@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - quicktabs
+    - system
+    - user
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: quicktabsaccounthome
+theme: wxt_lobbyist
+region: content
+weight: -12
+provider: null
+plugin: 'quicktabs_block:account_home'
+settings:
+  id: 'quicktabs_block:account_home'
+  label: 'QuickTabs - Account Home'
+  provider: quicktabs
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/in-house-account-home\r\n/consultant-commissioner\r\n/in-house-commissioner"
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      in_house_lobbyist: in_house_lobbyist
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

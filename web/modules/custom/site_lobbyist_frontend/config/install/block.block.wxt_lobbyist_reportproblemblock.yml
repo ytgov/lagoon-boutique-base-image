@@ -1,0 +1,44 @@
+uuid: 2d405796-255b-4ecb-a799-3e3515cd0e1d
+langcode: en
+status: false
+dependencies:
+  config:
+    - webform.webform.contact
+  module:
+    - block_class
+    - wxt_ext_webform
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+third_party_settings:
+  block_class:
+    classes: 'col-sm-6 col-md-5 col-lg-4'
+_core:
+  default_config_hash: mB9tvJ1UHyTFfTG-tCGMD0Oy9QeuMr9hLJGz2cikKqs
+id: wxt_lobbyist_reportproblemblock
+theme: wxt_lobbyist
+region: branding
+weight: -9
+provider: null
+plugin: report_problem_block
+settings:
+  id: report_problem_block
+  label: 'Report Problem block'
+  provider: wxt_ext_webform
+  label_display: '0'
+  webform_id: contact
+  report_problem_settings:
+    webform_id: ''
+    default_data: ''
+    redirect: false
+  default_data:
+    webform_id: contact
+    default_data: ''
+    redirect: true
+  redirect: true
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

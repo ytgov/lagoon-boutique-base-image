@@ -1,0 +1,5 @@
+label: 'En soumettant vos renseignements personnels, vous comprenez qu’ils seront publiés sur un site Web public.'
+description: 'Veuillez lire notre <a href="/fr/privacy-statement">énoncé de confidentialité</a>  pour savoir comment nous traitons les renseignements vous concernant.'
+settings:
+  on_label: Activé
+  off_label: Désactivé

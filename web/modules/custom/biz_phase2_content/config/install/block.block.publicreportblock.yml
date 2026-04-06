@@ -1,0 +1,32 @@
+uuid: 953c40b1-196a-47ac-be3c-02b58ccd28ac
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+id: publicreportblock
+theme: wxt_lobbyist
+region: content
+weight: 0
+provider: null
+plugin: public_report_block
+settings:
+  id: public_report_block
+  label: 'Public Report block'
+  provider: biz_block_plugin
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /public-report
+    negate: false
+    context_mapping: {  }
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

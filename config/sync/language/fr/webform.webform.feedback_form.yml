@@ -1,0 +1,12 @@
+elements: |
+  was_this_page_helpful_:
+    '#title': 'Avez-vous trouvé cette page utile?'
+    '#options':
+      'Yes': Oui
+      'No': Non
+  how_can_we_improve_this_page_:
+    '#title': 'Comment peut-on améliorer cette page?'
+  how_did_this_page_help_you_:
+    '#title': 'En quoi cette page vous a-t-elle été utile?'
+  actions:
+    '#submit__label': 'Soumettre vos commentaires'

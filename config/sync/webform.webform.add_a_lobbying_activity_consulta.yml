@@ -1,0 +1,389 @@
+uuid: c84c0b16-8190-471f-9c8a-4bcb7f75bcd0
+langcode: en
+status: open
+dependencies: {  }
+_core:
+  default_config_hash: Mo5hZFIevw66Nkp5DBMvtD6sj7Q51_GrfDgeOx9D5Gw
+weight: 0
+open: null
+close: null
+uid: 1
+template: false
+archive: false
+id: add_a_lobbying_activity_consulta
+title: 'Add a lobbying activity (consultant)'
+description: ''
+categories: {  }
+elements: |-
+  markup_0:
+    '#type': webform_markup
+    '#markup': 'Who are you lobbying on behalf of?'
+  org_name:
+    '#type': textfield
+    '#title': 'Org. Name'
+    '#format_items': comma
+  custom_address:
+    '#type': address
+    '#title': Address
+    '#required': true
+    '#default_value':
+      country_code: CA
+      langcode: ''
+      address_line1: ''
+      address_line3: ''
+      locality: ''
+      administrative_area: ''
+      postal_code: ''
+      given_name: null
+      additional_name: null
+      family_name: null
+      organization: null
+      address_line2: null
+      sorting_code: null
+      dependent_locality: null
+    '#format_items': ol
+    '#field_overrides':
+      givenName: hidden
+      additionalName: hidden
+      familyName: hidden
+      organization: hidden
+      addressLine1: required
+      addressLine2: hidden
+      postalCode: required
+      sortingCode: hidden
+      dependentLocality: hidden
+      locality: required
+      administrativeArea: required
+  e_mail_address:
+    '#type': textfield
+    '#title': Email
+    '#format_items': comma
+  custom_telephone:
+    '#type': textfield
+    '#title': Telephone
+    '#input_mask': '(999) 999-9999'
+    '#format_items': comma
+  markup_1:
+    '#type': webform_markup
+    '#markup': 'Start and end date of the lobbying contract'
+  container_dates:
+    '#type': container
+    start_date:
+      '#type': date
+      '#title': 'Start date'
+      '#format_items': comma
+      '#datepicker': true
+      '#required': true
+    end_date:
+      '#type': date
+      '#title': 'End date'
+      '#format_items': comma
+      '#datepicker': true
+      '#required': true
+  title:
+    '#type': textfield
+    '#title': 'Project title'
+    '#description': 'This is an internal title, you should use a short description of the contract.'
+    '#required': true
+  which_topic_do_you_want_to_lobby_government_about_:
+    '#type': webform_term_select
+    '#title': 'Which topic do you want to lobby the government about?'
+    '#multiple': true
+    '#select2': true
+    '#required': true
+    '#format': label
+    '#vocabulary': lobby_s_topics
+    '#breadcrumb_delimiter': ''
+  other:
+    '#type': textfield
+    '#title': Other
+  add_detail:
+    '#type': textarea
+    '#title': 'Add details about your lobbying activity (optional)'
+  who_are_you_lobbying_or_plan_to_lobby_:
+    '#type': webform_term_select
+    '#title': 'Who are you lobbying or plan to lobby?'
+    '#multiple': true
+    '#select2': true
+    '#format': text
+    '#vocabulary': lobbyist_s_portfolios
+    '#breadcrumb_delimiter': ''
+    '#tree_delimiter': ''
+    '#required': true
+  how_do_you_want_to_lobby_:
+    '#type': webform_checkboxes_other
+    '#title': 'How do you want to lobby?'
+    '#description': 'See <a href="/start-reporting" target="_blank">more details</a> about activities that qualify as lobbying'
+    '#options':
+      'By letter and email': 'By letter and email'
+      'By phone call': 'By phone call'
+      'In-person conversation': 'In-person conversation'
+      'By petition': 'By petition'
+      'Social media campaign': 'Social media campaign'
+    '#options_display': two_columns
+    '#other__option_label': Other
+    '#required': true
+  has_your_organization_received_a_grant_from_the_government_of_yu:
+    '#type': radios
+    '#title': 'Has your client received a grant from the Government of Yukon within the last year?'
+    '#options':
+      'Yes': 'Yes'
+      'No': 'No'
+    '#required': true
+  was_the_grant_awarded_related_to_the_matter_the_lobbying_has_bee:
+    '#type': radios
+    '#title': 'Was the grant awarded related to the lobbying that has been, or will be, undertaken?'
+    '#options':
+      'Yes': 'Yes'
+      'No': 'No'
+      'I don’t know': 'I don’t know'
+    '#required': true
+  status:
+    '#type': select
+    '#title': Status
+    '#options':
+      Inactive: Inactive
+      Active: Active
+      Pending: Pending
+      Non-compliant: Non-compliant
+      'About to be Not in compliance': 'About to be Not in compliance'
+    '#default_value': Pending
+    '#wrapper_attributes':
+      class:
+        - no-display
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Submit your lobbying activity'
+    '#submit__attributes':
+      class:
+        - purple-button
+    '#preview_prev__label': 'Edit details'
+    '#preview_next__label': 'Continue to next step'
+    '#update__attributes':
+      class:
+        - purple-button
+  user_uid:
+    '#type': hidden
+    '#title': user_uid
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: ''
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: /consultant-account-home/consultant-add-activity
+  page_confirm_path: /consultant-account-home/consultant-add-activity
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: true
+  form_disable_inline_errors: true
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_file_limit_message: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: false
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: true
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: false
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 2
+  preview_label: ''
+  preview_title: ''
+  preview_message: '<p>This process is not complete until you review and confirm the information is correct.</p>'
+  preview_attributes: {  }
+  preview_excluded_elements:
+    status: status
+    user_uid: user_uid
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: url_message
+  confirmation_url: /consultant-account-home
+  confirmation_title: ''
+  confirmation_message: 'Your activity has been saved.'
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: true
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: true
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  remote_post:
+    id: remote_post
+    handler_id: remote_post
+    label: remote_lobbying_activity_consultant
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      method: POST
+      type: json
+      excluded_data: {  }
+      custom_data: ''
+      custom_options: ''
+      file_data: true
+      cast: false
+      check_access: false
+      debug: false
+      completed_url: 'http://bizont-lobbyist-backend.cms-dev.ynet.gov.yk.ca/webform_rest/submit'
+      completed_custom_data: ''
+      updated_url: ''
+      updated_custom_data: ''
+      deleted_url: ''
+      deleted_custom_data: ''
+      draft_created_url: ''
+      draft_created_custom_data: ''
+      draft_updated_url: ''
+      draft_updated_custom_data: ''
+      converted_url: ''
+      converted_custom_data: ''
+      message: ''
+      messages: {  }
+      error_url: ''
+variants: {  }

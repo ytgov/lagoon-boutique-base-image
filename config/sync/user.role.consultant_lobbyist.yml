@@ -1,0 +1,9 @@
+uuid: 2db5d784-3be8-40d6-9c90-bcc023860910
+langcode: en
+status: true
+dependencies: {  }
+id: consultant_lobbyist
+label: 'Consultant lobbyist'
+weight: 5
+is_admin: false
+permissions: {  }

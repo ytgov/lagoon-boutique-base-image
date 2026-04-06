@@ -1,0 +1,43 @@
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      fields:
+        title:
+          label: Titre
+          separator: ', '
+        type:
+          label: 'Type de contenu'
+          separator: ', '
+        name:
+          label: Auteur
+          separator: ', '
+        moderation_state:
+          separator: ', '
+        changed:
+          separator: ', '
+        operations:
+          label: Actions
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tout -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: Filtrer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      filters:
+        title:
+          expose:
+            label: Titre
+        type:
+          expose:
+            label: 'Type de contenu'
+        langcode:
+          expose:
+            label: Langue

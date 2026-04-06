@@ -1,0 +1,26 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.brand
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: yA2ceTKyWYK9PAZQ8NriHRNrt6TpcuCuWbo4nI-EKCk
+id: wxt_lobbyist_brand
+theme: wxt_lobbyist
+region: branding
+weight: 0
+provider: null
+plugin: 'system_menu_block:brand'
+settings:
+  id: 'system_menu_block:brand'
+  label: Brand
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

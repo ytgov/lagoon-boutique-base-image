@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a table.
+ *
+ * Available variables:
+ * - organization:
+ * 
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_organization_info_form_header()
+ */
+#}
+
+<div class="header-view gray-info-container">
+  <div class="header-row no-padding row col-xs-12">
+    <div class="field col no-padding align-self-start col-xs-4">
+      <p class="field-title"> {% trans %}Legal organization{% endtrans %} </p>
+      <p> {{organization.field_legal_organization| raw }} </p>
+    </div>
+    <div class="field col no-padding align-self-start col-xs-4">
+      <p class="field-title"> {% trans %}Operating organization{% endtrans %} </p>
+      <p> {{organization.field_operating_organization| raw }} </p>
+    </div>
+    <div class="field col no-padding align-self-start col-xs-4">
+      <p class="field-title"></p>
+      <p></p>
+    </div>
+  </div>
+  <div class="header-row no-padding row col-xs-12">
+    <div class="field col no-padding align-self-start col-xs-4">
+      <p class="field-title"> {% trans %}Address{% endtrans %} </p>
+      <p> {{organization.field_street_address_address_line1| raw }} </p>
+    </div>
+    <div class="field col no-padding align-self-start col-xs-4">
+      <p class="field-title"> {% trans %}City or town{% endtrans %} </p>
+      <p> {{organization.field_street_address_locality| raw }} </p>
+    </div>
+    <div class="field col no-padding align-self-start col-xs-4">
+      <p class="field-title"> {% trans %}Country{% endtrans %} </p>
+      <p> {{organization.field_street_address_country_code| raw }} </p>
+    </div>
+  </div>
+</div>

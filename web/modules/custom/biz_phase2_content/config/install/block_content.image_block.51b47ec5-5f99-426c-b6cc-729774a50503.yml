@@ -1,0 +1,151 @@
+uuid:
+  -
+    value: 51b47ec5-5f99-426c-b6cc-729774a50503
+langcode:
+  -
+    value: en
+type:
+  -
+    target_id: image_block
+    target_type: block_content_type
+    target_uuid: 9ceee4f5-5e8b-4bc5-bab1-bbd01430602a
+revision_created:
+  -
+    value: '2019-11-05T00:53:11+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_user: {  }
+revision_log: {  }
+status:
+  -
+    value: true
+info:
+  -
+    value: 'Homepage Image'
+changed:
+  -
+    value: '2021-08-19T16:34:53+00:00'
+    format: 'Y-m-d\TH:i:sP'
+reusable:
+  -
+    value: true
+default_langcode:
+  -
+    value: true
+revision_translation_affected:
+  -
+    value: true
+scheduled_transition_date: {  }
+scheduled_transition_state: {  }
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+content_translation_uid:
+  -
+    target_id: 0
+    target_type: user
+    target_uuid: 6f4ef526-09e6-4b85-9d83-95cebb3acc6f
+content_translation_created:
+  -
+    value: '2020-07-28T20:31:53+00:00'
+    format: 'Y-m-d\TH:i:sP'
+body:
+  -
+    value: "<div class = 'row'>\r\n\t<div class= 'col-xs-12 col-md-3 col-md-offset-3'>\r\n\t\t<a class=\"\" href=\"/en/register-as-lobbyist\">\r\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<p>Register as a lobbyist to report your lobbying activity</p>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</a>\r\n\t</div>\r\n\t<div class= 'col-xs-12 col-md-3'>\r\n\t\t<a class=\"webform-dialog button modal-link-mobile\" data-dialog-options=\"{&quot;width&quot;:650,&quot;height&quot;:500}\" href=\"/en/form/lobbyist-finder-modal\">\r\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<p>Take the quiz to find out if you're a lobbyist</p>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</a>\r\n\t\t<a class=\"webform-dialog button modal-link-desktop\" data-dialog-options=\"{&quot;width&quot;:650,&quot;height&quot;:500}\" href=\"/en/form/lobbyist-finder-modal\">\r\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<p>Take the quiz to find out if you're a lobbyist</p>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</a>\r\n\t</div>\r\n</div>"
+    format: full_html
+    processed: "<div class=\"row\">\n\t<div class=\"col-xs-12 col-md-3 col-md-offset-3\">\n\t\t<a class=\"\" href=\"/en/register-as-lobbyist\">\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\n\t\t\t\t<div>\n\t\t\t\t\t<p>Register as a lobbyist to report your lobbying activity</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</a>\n\t</div>\n\t<div class=\"col-xs-12 col-md-3\">\n\t\t<a class=\"webform-dialog button modal-link-mobile\" data-dialog-options=\"{&quot;width&quot;:650,&quot;height&quot;:500}\" href=\"/en/form/lobbyist-finder-modal\">\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\n\t\t\t\t<div>\n\t\t\t\t\t<p>Take the quiz to find out if you're a lobbyist</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</a>\n\t\t<a class=\"webform-dialog button modal-link-desktop\" data-dialog-options=\"{&quot;width&quot;:650,&quot;height&quot;:500}\" href=\"/en/form/lobbyist-finder-modal\">\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\n\t\t\t\t<div>\n\t\t\t\t\t<p>Take the quiz to find out if you're a lobbyist</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</a>\n\t</div>\n</div>"
+    summary: ''
+    summary_processed: ''
+field_image:
+  -
+    alt: Yukon
+    title: ''
+    width: 2048
+    height: 1365
+    target_type: file
+    target_uuid: 4506553d-9cac-45c3-a039-b5c3ebf3779a
+_content_sync:
+  entity_type: block_content
+  entity_dependencies:
+    user:
+      - user.user.6f4ef526-09e6-4b85-9d83-95cebb3acc6f
+    file:
+      - file.file.4506553d-9cac-45c3-a039-b5c3ebf3779a
+_translations:
+  fr:
+    uuid:
+      -
+        value: 51b47ec5-5f99-426c-b6cc-729774a50503
+    langcode:
+      -
+        value: fr
+    type:
+      -
+        target_id: image_block
+        target_type: block_content_type
+        target_uuid: 9ceee4f5-5e8b-4bc5-bab1-bbd01430602a
+    revision_created:
+      -
+        value: '2019-11-05T00:53:11+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    revision_user: {  }
+    revision_log: {  }
+    status:
+      -
+        value: true
+    info:
+      -
+        value: 'Homepage Image'
+    changed:
+      -
+        value: '2021-07-06T19:53:17+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    reusable:
+      -
+        value: true
+    default_langcode:
+      -
+        value: false
+    revision_translation_affected:
+      -
+        value: true
+    scheduled_transition_date: {  }
+    scheduled_transition_state: {  }
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_type: user
+        target_uuid: 4554af48-a362-439f-93c6-d280ab1b752c
+    content_translation_created:
+      -
+        value: '2020-03-04T18:32:52+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    body:
+      -
+        value: "<div class = 'row'>\r\n\t<div class= 'col-xs-12 col-md-3 col-md-offset-3'>\r\n\t\t<a class=\"\" href=\"/fr/s’inscrire-en-tant-que-lobbyiste\">\r\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<p>Inscrivez-vous comme lobbyiste pour déclarer vos activités de lobbyisme</p>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</a>\r\n\t</div>\r\n\t<div class= 'col-xs-12 col-md-3'>\r\n\t\t<a class=\"webform-dialog button modal-link-mobile\" data-dialog-options=\"{&quot;width&quot;:650,&quot;height&quot;:500}\" href=\"/en/form/lobbyist-finder-modal\">\r\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<p>Répondez à quelques questions pour savoir si vous êtes un lobbyiste</p>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</a>\r\n\t\t<a class=\"webform-dialog button modal-link-desktop\" data-dialog-options=\"{&quot;width&quot;:650,&quot;height&quot;:500}\" href=\"/en/form/lobbyist-finder-modal\">\r\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<p>Répondez à quelques questions pour savoir si vous êtes un lobbyiste</p>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</a>\r\n\t</div>\r\n</div>"
+        format: full_html
+        processed: "<div class=\"row\">\n\t<div class=\"col-xs-12 col-md-3 col-md-offset-3\">\n\t\t<a class=\"\" href=\"/fr/s’inscrire-en-tant-que-lobbyiste\">\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\n\t\t\t\t<div>\n\t\t\t\t\t<p>Inscrivez-vous comme lobbyiste pour déclarer vos activités de lobbyisme</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</a>\n\t</div>\n\t<div class=\"col-xs-12 col-md-3\">\n\t\t<a class=\"webform-dialog button modal-link-mobile\" data-dialog-options=\"{&quot;width&quot;:650,&quot;height&quot;:500}\" href=\"/en/form/lobbyist-finder-modal\">\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\n\t\t\t\t<div>\n\t\t\t\t\t<p>Répondez à quelques questions pour savoir si vous êtes un lobbyiste</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</a>\n\t\t<a class=\"webform-dialog button modal-link-desktop\" data-dialog-options=\"{&quot;width&quot;:650,&quot;height&quot;:500}\" href=\"/en/form/lobbyist-finder-modal\">\n\t\t\t<div id=\"background-yellow-image\" style=\"\">\n\t\t\t\t<div>\n\t\t\t\t\t<p>Répondez à quelques questions pour savoir si vous êtes un lobbyiste</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</a>\n\t</div>\n</div>"
+        summary: ''
+        summary_processed: ''
+    field_image:
+      -
+        alt: Yukon
+        title: ''
+        width: 2048
+        height: 1365
+        target_type: file
+        target_uuid: 4506553d-9cac-45c3-a039-b5c3ebf3779a
+    _content_sync:
+      entity_type: block_content
+      entity_dependencies:
+        user:
+          - user.user.4554af48-a362-439f-93c6-d280ab1b752c
+        file:
+          - file.file.4506553d-9cac-45c3-a039-b5c3ebf3779a

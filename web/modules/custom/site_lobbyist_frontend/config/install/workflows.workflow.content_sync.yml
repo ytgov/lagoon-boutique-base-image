@@ -1,0 +1,31 @@
+uuid: baedffbd-d291-42cc-be56-3b0c17770b80
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_moderation
+id: content_sync
+label: 'Content sync'
+type: content_moderation
+type_settings:
+  states:
+    draft:
+      published: false
+      default_revision: false
+      label: Draft
+      weight: 0
+    published:
+      label: Published
+      published: true
+      default_revision: true
+      weight: 1
+  transitions:
+    publish:
+      label: Publish
+      to: published
+      weight: 1
+      from:
+        - draft
+        - published
+  entity_types: {  }
+  default_moderation_state: published

@@ -1,0 +1,27 @@
+uuid: 8340151f-3d6e-493a-9992-464efa701a45
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: KWAiziL39uEzmOJEql_wbUP2RtqGceL3WM2CfxhMelE
+id: wxt_lobbyist_main_menu
+theme: wxt_lobbyist
+region: branding
+weight: -2
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: true
+visibility: {  }

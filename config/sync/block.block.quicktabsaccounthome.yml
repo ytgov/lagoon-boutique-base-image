@@ -1,0 +1,43 @@
+uuid: f4b78e55-76ec-47c8-bc75-906f6e2a1925
+langcode: en
+status: true
+dependencies:
+  module:
+    - quicktabs
+    - system
+    - user
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: e7yLa30Scc72OLRZkTqmJ6XgHzmO8GrFgTZeAUWz13U
+id: quicktabsaccounthome
+theme: wxt_lobbyist
+region: content
+weight: -15
+provider: null
+plugin: 'quicktabs_block:account_home'
+settings:
+  id: 'quicktabs_block:account_home'
+  label: 'QuickTabs - Account Home'
+  label_display: '0'
+  provider: quicktabs
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/in-house-account-home\r\n/consultant-commissioner\r\n/in-house-commissioner"
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      in_house_lobbyist: in_house_lobbyist

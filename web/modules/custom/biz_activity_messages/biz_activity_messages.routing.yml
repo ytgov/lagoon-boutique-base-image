@@ -1,0 +1,7 @@
+biz_activity_messages.messages_form:
+  path: '/biz_activity_messages/activity_messages'
+  defaults:
+    _form: 'Drupal\biz_activity_messages\Form\ActivityMessages'
+    _title: 'Messages'
+  requirements:
+    _permission: 'access content'

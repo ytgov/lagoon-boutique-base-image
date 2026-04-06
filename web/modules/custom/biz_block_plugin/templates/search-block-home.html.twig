@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a table.
+ *
+ *
+ * @ingroup templates
+ *
+ * @see template_search_block_home()
+ */
+#}
+<div class="view-filters-search-activities">
+  <form class="views-exposed-form row"  action="/{{language}}/search-organization" method="get" id="views-exposed-form-search-activities" accept-charset="UTF-8" data-drupal-form-fields="organization,edit-submit-search-activity">
+    <div class="all-filters ">
+      <div class="form-type-textfield form-item-organization form-group col-xs-12 col-md-10">
+        <label for="organization" class="control-label">{% trans %}Search the lobbyist registry{% endtrans %}</label>
+        <input data-drupal-selector="organization" class="form-text form-control" type="text" id="organization" name="organization" value="" size="30" maxlength="128">
+      </div>
+      <div data-drupal-selector="edit-actions" class="form-actions col-xs-12 col-md-2" id="edit-actions">
+        <button data-drupal-selector="edit-submit-search-activity" class="button js-form-submit form-submit btn icon-before orange-button" type="submit" id="edit-submit-search-activity" value="SEARCH" name=""><span class="icon glyphicon glyphicon-search" aria-hidden="true"></span>{% trans %}Search{% endtrans %} </button>
+      </div>
+    </div>
+  </form>
+</div>

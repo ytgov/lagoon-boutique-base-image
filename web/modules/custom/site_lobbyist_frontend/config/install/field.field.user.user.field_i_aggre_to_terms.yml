@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_i_aggre_to_terms
+  module:
+    - multiple_registration
+    - user
+third_party_settings:
+  multiple_registration:
+    user_additional_register_form:
+      in_house_lobbyist: in_house_lobbyist
+      consultant_lobbyist: consultant_lobbyist
+      authenticated: 0
+    user_additional_register_form_required: null
+id: user.user.field_i_aggre_to_terms
+field_name: field_i_aggre_to_terms
+entity_type: user
+bundle: user
+label: 'By submitting your information, you understand it will be published on a public website'
+description: 'Read our <a href="/privacy-statement">Privacy statement</a>  to see how we handle your information.'
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

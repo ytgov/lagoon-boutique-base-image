@@ -1,0 +1,19 @@
+anonymous: Anonymous
+verify_mail: false
+notify:
+  cancel_confirm: false
+  password_reset: true
+  status_activated: true
+  status_blocked: false
+  status_canceled: false
+  register_admin_created: true
+  register_no_approval_required: false
+  register_pending_approval: false
+  email_verify_register_rest: true
+register: visitors
+cancel_method: user_cancel_block
+password_reset_timeout: 86400
+password_strength: true
+langcode: en
+_core:
+  default_config_hash: w314Zp7B4NbrlV4KeeZLNSmTTpdJiv-KwZO2E1fSSK0

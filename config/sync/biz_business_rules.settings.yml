@@ -1,0 +1,6 @@
+_core:
+  default_config_hash: zrDzV-6LU1cRUG3p_gAd8_FHy7pnRz8SS-D4uOGgb04
+langcode: en
+consultant_validate_start_date: 'You should register your activities within 15 days after starting to lobby.'
+in_house_validate_end_calendar: 'Activities for previous years cannot be added after January 31.'
+wave_for_not_validate: 0

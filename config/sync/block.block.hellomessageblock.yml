@@ -1,0 +1,29 @@
+uuid: b9eabe8a-cb59-4c95-91f0-c7138c18fb45
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: 99t2eMpOi7PL2zgZgcuOZ_mYQ2hU7xyhrxe_oyfzHDE
+id: hellomessageblock
+theme: wxt_lobbyist
+region: navigation
+weight: -17
+provider: null
+plugin: hello_msg_block
+settings:
+  id: hello_msg_block
+  label: 'Hello Message block'
+  label_display: '0'
+  provider: biz_block_plugin
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }

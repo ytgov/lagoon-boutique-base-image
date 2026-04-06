@@ -1,0 +1,20 @@
+uuid: 4d73c94e-593b-45a8-aba6-c1f14a31a546
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.audio
+  module:
+    - path
+id: media.audio.path
+field_name: path
+entity_type: media
+bundle: audio
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

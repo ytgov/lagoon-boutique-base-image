@@ -1,0 +1,15 @@
+uuid: 5663c28c-0a1a-42ed-9a62-a5bb1ed3e9f8
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: role_administrator
+label: 'Role administrator'
+weight: 5
+is_admin: null
+permissions:
+  - 'edit activity'

@@ -1,0 +1,10 @@
+{
+    "name": "drupal/biz_activity_messages",
+    "type": "drupal-module",
+    "description": "Add messages to activities",
+    "homepage": "",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6"
+    }
+}

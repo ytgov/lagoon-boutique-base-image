@@ -1,0 +1,25 @@
+uuid: 4f4d96f8-5387-4298-ae78-a5a2d9291986
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - system
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_searchactivityhomeblock
+theme: wxt_lobbyist
+region: content
+weight: -3
+provider: null
+plugin: search_activity_home_block
+settings:
+  id: search_activity_home_block
+  label: 'Search activity home block'
+  label_display: '0'
+  provider: biz_block_plugin
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

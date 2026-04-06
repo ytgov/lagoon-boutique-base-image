@@ -1,0 +1,28 @@
+uuid: 6458565e-4f0a-4e8d-8caf-d87c5fc50eb1
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:0efc5e5b-c2dc-4d6f-9224-392c48fb8fee'
+  module:
+    - block_content
+    - system
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_homepageintro
+theme: wxt_lobbyist
+region: header_slider
+weight: -17
+provider: null
+plugin: 'block_content:0efc5e5b-c2dc-4d6f-9224-392c48fb8fee'
+settings:
+  id: 'block_content:0efc5e5b-c2dc-4d6f-9224-392c48fb8fee'
+  label: 'Homepage intro'
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

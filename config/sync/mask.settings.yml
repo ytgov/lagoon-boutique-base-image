@@ -1,0 +1,27 @@
+_core:
+  default_config_hash: UAFeZSZzOJR59C4HdYtIVctXen9PKGq1NpClqRJbbT4
+use_cdn: true
+plugin_path: ''
+translation:
+  0:
+    pattern: \d
+    description: 'A number'
+    locked: true
+  9:
+    pattern: \d
+    description: 'Optional number'
+    optional: true
+    locked: true
+  '#':
+    pattern: \d
+    description: 'Repeating number'
+    recursive: true
+    locked: true
+  A:
+    pattern: '[a-zA-Z0-9]'
+    description: 'A letter or a number'
+    locked: true
+  S:
+    pattern: '[a-zA-Z]'
+    description: 'A letter'
+    locked: true

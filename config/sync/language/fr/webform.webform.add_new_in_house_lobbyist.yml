@@ -1,0 +1,21 @@
+elements: |
+  processed_text:
+    '#text': '<p>Un lobbyiste salarié fait du lobbyisme pour le compte d’un organisme. Il peut s’agir d’un employé, du PDG, d’un partenaire, du directeur général, d’un membre du conseil d’administration, etc.</p><p><a href="https://yukonlobbyistregistry.ca/fr/types-de-lobbyistes">En savoir plus sur les lobbyistes salariés</a></p>'
+  processed_text_01:
+    '#text': '<p>Renseignements sur le lobbyiste salarié</p>'
+  first_name:
+    '#title': Prénom
+  last_name:
+    '#title': Nom
+  position:
+    '#title': Poste
+  contact_information:
+    '#text': '<p>Coordonnées</p>'
+  e_mail_address:
+    '#title': Courriel
+    '#confirm__title': 'Confirmation de l’adresse courriel'
+    '#confirm__description': '<p>Un message de confirmation sera envoyé à cette adresse courriel une fois le compte créé.</p>'
+  telephone:
+    '#title': Téléphone
+  deleted:
+    '#title': Supprimé

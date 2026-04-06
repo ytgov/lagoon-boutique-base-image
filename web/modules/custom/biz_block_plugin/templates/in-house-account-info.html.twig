@@ -1,0 +1,128 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a table.
+ *
+ * Available variables:
+ * - organization: 
+ * - link_edit_org: 
+ * - description: 
+ * @ingroup templates
+ *
+ * @see template_preprocess_consultant_account_info()
+ */
+#}
+<div class="organization info-organization two-columns-orange-header">
+    <div class="col-xs-6 no-padding">
+        <p><strong>{% trans %}Organization{% endtrans %}</strong></p>
+    </div>
+    <div class="col-xs-6 no-padding update-action">
+        {% if link_edit_org is not empty %}
+            <a class="update-action" href="{{link_edit_org}}">{% trans %}Edit organization{% endtrans %}</a>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="header-view info-organization gray-info-container">
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}Legal organization{% endtrans %}</p>
+                {% if organization.field_legal_organization is not empty %}
+                <p> {{organization.field_legal_organization|trans|raw}}</p>
+                {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}Operating organization{% endtrans %}</p> 
+            {% if organization.field_operating_organization is not empty %}
+            <p>{{organization.field_operating_organization|trans|raw}}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title"></p>
+            <p></p>
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}Address{% endtrans %}</p> 
+            {% if organization.field_street_address_address_line1 is not empty %}
+            <p> {{organization.field_street_address_address_line1|raw}} </p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}City or town{% endtrans %}</p> 
+            {% if organization.field_street_address_locality is not empty %}
+            <p> {{organization.field_street_address_locality|raw}}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}Territory, province or state{% endtrans %}</p> 
+            {% if organization.field_street_address_administrative_area is not empty %}
+            <p> {{organization.field_street_address_administrative_area|raw}}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}Postal code{% endtrans %}</p>
+            {% if organization.field_street_address_postal_code is not empty %}
+            <p> {{organization.field_street_address_postal_code |upper }}</p>
+            {% endif %}
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}Country{% endtrans %}</p> 
+            {% if organization.field_street_address_country_code is not empty %}
+            <p> {{organization.field_street_address_country_code}}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="organization info-organization orange-header">
+    <div class="col-xs-6 no-padding">
+        <p><strong>{% trans %}Primary contact {% endtrans %}</strong></p>
+    </div>
+    <div class="col-xs-6 no-padding update-action">
+
+    </div>
+</div>
+<div class="header-view info-organization gray-info-container">
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}Name{% endtrans %}</p>
+            <p>
+                 {% if organization.field_first_name is not empty %}
+                 {{organization.field_first_name|raw}}
+                 {% endif %} 
+                 {% if organization.field_last_name is not empty %}
+                 {{organization.field_last_name|raw}}
+                 {% endif %}
+            </p>
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            <p class="field-title">{% trans %}Position{% endtrans %}</p>
+            <p>
+                 {% if organization.field_position is not empty %}
+                 {{organization.field_position|raw}}
+                 {% endif %} 
+            </p>
+        </div>
+    </div>
+    <div class="header-row no-padding row col-xs-12">
+        <div class="field col no-padding align-self-start col-xs-4">
+            {% if organization.mail is not empty %}
+                <p class="field-title">{% trans %}Email{% endtrans %}</p>
+                <p>{{organization.mail|raw}}</p>
+            {% endif %} 
+        </div>
+        <div class="field col no-padding align-self-start col-xs-4">
+            {% if organization.field_telephone is not empty %}
+                <p class="field-title">{% trans %}Telephone{% endtrans %}</p>
+                <p>{{organization.field_telephone}}</p>
+            {% endif %} 
+        </div>
+    </div>
+</div>
+
+

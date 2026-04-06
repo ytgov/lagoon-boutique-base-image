@@ -1,0 +1,72 @@
+uuid:
+  -
+    value: faaf203b-c9c5-42eb-8174-4325497168f9
+langcode:
+  -
+    value: en
+vid:
+  -
+    target_id: public_report
+    target_type: taxonomy_vocabulary
+    target_uuid: 2097ac03-4d6e-4c45-bfbf-600038167ab7
+revision_created:
+  -
+    value: '2021-07-30T17:19:12+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_user: {  }
+revision_log_message: {  }
+status:
+  -
+    value: true
+name:
+  -
+    value: 'Operating organization'
+description:
+  -
+    value: "operating_organization\r\n"
+    format: restricted_html
+    processed: "<p>operating_organization</p>\n"
+weight:
+  -
+    value: 1
+parent:
+  -
+    target_id: 0
+changed:
+  -
+    value: '2021-07-30T17:20:38+00:00'
+    format: 'Y-m-d\TH:i:sP'
+default_langcode:
+  -
+    value: true
+revision_translation_affected:
+  -
+    value: true
+metatag:
+  value:
+    canonical_url: 'http://lobbyist-registry-backend.bizont.ca/en/taxonomy/term/202'
+    description: operating_organization
+path:
+  -
+    alias: null
+    pid: null
+    langcode: en
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+content_translation_uid:
+  -
+    target_type: user
+    target_uuid: f9a69597-58ab-4557-96d5-4dae3010a56c
+content_translation_created:
+  -
+    value: '2021-07-30T17:19:12+00:00'
+    format: 'Y-m-d\TH:i:sP'
+_content_sync:
+  entity_type: taxonomy_term
+  entity_dependencies:
+    user:
+      - user.user.f9a69597-58ab-4557-96d5-4dae3010a56c

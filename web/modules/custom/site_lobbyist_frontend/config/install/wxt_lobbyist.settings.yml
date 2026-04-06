@@ -1,0 +1,51 @@
+schemas:
+  bootstrap: 8000
+  wxt_bootstrap: 8000
+  wxt_lobbyist: 8000
+modal_jquery_ui_bridge: 0
+favicon:
+  mimetype: image/vnd.microsoft.icon
+  path: 'public://favicon.ico'
+  url: '/sites/default/files/favicon.ico'
+  use_default: true
+wxt_skip_link_primary_text: 'Skip to main content'
+wxt_skip_link_secondary_text: 'Skip to "About this site"'
+region_wells:
+  branding: ''
+  navbar: ''
+  navigation: ''
+  search_bar: ''
+  site_alert: ''
+  highlighted: ''
+  header_slider: ''
+  header: ''
+  help: ''
+  inline_arlert: ''
+  content_slider: ''
+  content: ''
+  page_form: ''
+  sidebar: ''
+  sidebar_sticky: ''
+  featured: ''
+  footer_top: ''
+  footer: ''
+cdn_provider: jsdelivr
+logo:
+  path: 'public://logo.png'
+  url: ''
+  use_default: false
+forms_smart_descriptions: 0
+table_responsive: '-1'
+cdn_theme: bootstrap
+cdn_cache_ttl_versions: '604800'
+cdn_cache_ttl_themes: '604800'
+cdn_cache_ttl_assets: '0'
+cdn_cache_ttl_library: '0'
+breadcrumb_home: 0
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+reset_http_request_cache: ''
+table: ''

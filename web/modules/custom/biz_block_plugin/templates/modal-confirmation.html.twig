@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ *
+ * Available variables:
+ * - title: Modal title
+ * - label_yes: label for yes button
+ * - label_cancel : label for cancel button
+ */
+#}
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="confirmModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{% trans %} {{title}}{% endtrans %}</h4>
+      </div>
+      <div class="modal-body">
+      	<div>{% trans %} {{body_message}} {% endtrans %}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default orange-button" id="modal-btn-yes">{% trans %} {{label_yes}}{% endtrans %}</button>
+        <button type="button" class="btn btn-primary purple-button" id="modal-btn-no">{% trans %} {{label_cancel}}{% endtrans %}</button>
+      </div>
+    </div>
+  </div>
+</div>

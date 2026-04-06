@@ -1,0 +1,10 @@
+{
+    "name": "drupal/biz_lobbyist_registration",
+    "type": "drupal-module",
+    "description": "Bizont enhancements for registration",
+    "homepage": "",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6"
+    }
+}

@@ -1,0 +1,147 @@
+uuid:
+  -
+    value: 7219f247-e90b-4ae1-8aaf-cdc1c2081c87
+langcode:
+  -
+    value: en
+vid:
+  -
+    target_id: header_for_revisions
+    target_type: taxonomy_vocabulary
+    target_uuid: 6f0332c3-cfbe-42e8-9d65-7804e4668a0c
+revision_created:
+  -
+    value: '2021-06-23T20:52:58+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_user: {  }
+revision_log_message: {  }
+status:
+  -
+    value: true
+name:
+  -
+    value: 'Registration number'
+description:
+  -
+    value: number
+    format: basic_html
+    processed: number
+weight:
+  -
+    value: 0
+parent:
+  -
+    target_id: 0
+changed:
+  -
+    value: '2021-06-23T20:52:58+00:00'
+    format: 'Y-m-d\TH:i:sP'
+default_langcode:
+  -
+    value: true
+revision_translation_affected:
+  -
+    value: true
+metatag:
+  value:
+    canonical_url: 'http://lobbyist-registry-backend.bizont.ca/en/taxonomy/term/187'
+    description: number
+path:
+  -
+    alias: null
+    pid: null
+    langcode: en
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+content_translation_uid:
+  -
+    target_type: user
+    target_uuid: f9a69597-58ab-4557-96d5-4dae3010a56c
+content_translation_created:
+  -
+    value: '2021-06-23T20:52:58+00:00'
+    format: 'Y-m-d\TH:i:sP'
+_content_sync:
+  entity_type: taxonomy_term
+  entity_dependencies:
+    user:
+      - user.user.f9a69597-58ab-4557-96d5-4dae3010a56c
+_translations:
+  fr:
+    uuid:
+      -
+        value: 7219f247-e90b-4ae1-8aaf-cdc1c2081c87
+    langcode:
+      -
+        value: fr
+    vid:
+      -
+        target_id: header_for_revisions
+        target_type: taxonomy_vocabulary
+        target_uuid: 6f0332c3-cfbe-42e8-9d65-7804e4668a0c
+    revision_created:
+      -
+        value: '2021-06-23T20:52:58+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    revision_user: {  }
+    revision_log_message: {  }
+    status:
+      -
+        value: true
+    name:
+      -
+        value: 'Numéro d’inscription'
+    description:
+      -
+        value: "<p>number</p>\r\n"
+        format: basic_html
+        processed: '<p>number</p>'
+    weight:
+      -
+        value: 0
+    parent:
+      -
+        target_id: 0
+    changed:
+      -
+        value: '2021-07-18T10:05:25+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    default_langcode:
+      -
+        value: false
+    revision_translation_affected:
+      -
+        value: true
+    metatag:
+      value:
+        title: 'Registration number | Lobbyist Registry Backend'
+        canonical_url: 'http://lobbyist-registry-backend.bizont.ca/en/taxonomy/term/187'
+        description: number
+    path:
+      -
+        alias: null
+        pid: null
+        langcode: fr
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_type: user
+        target_uuid: f9a69597-58ab-4557-96d5-4dae3010a56c
+    content_translation_created:
+      -
+        value: '2021-07-18T10:05:25+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    _content_sync:
+      entity_type: taxonomy_term
+      entity_dependencies:
+        user:
+          - user.user.f9a69597-58ab-4557-96d5-4dae3010a56c

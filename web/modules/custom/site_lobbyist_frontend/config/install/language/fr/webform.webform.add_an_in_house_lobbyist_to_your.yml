@@ -1,0 +1,4 @@
+description: 'In-House lobbyist lobby on behalf of an organization as an emproyee, CEO, partner, exective director, board member, etc.'
+elements: "update_organization_action:\n  '#text': \"<div class=\\\"organization info-organization two-columns-orange-header\\\">\\n<div class=\\\"col-xs-6 no-padding\\\">\\n<p><strong>Organisme</strong></p>\\n</div>\\n\\n<div class=\\\"col-xs-6 no-padding update-action\\\"><a class=\\\"update-action\\\" href=\\\"update-user\\\">Modifier organisme</a></div>\\n</div>\\n\"\nposition:\n  '#title': Poste\ne_mail_address:\n  '#title': 'Adresse électronique'\ntelephone:\n  '#title': Téléphone\nstatus:\n  '#title': Statut\nactions:\n  '#preview_prev__label': Modifier\n"
+settings:
+  confirmation_message: "The lobbyist has been saved in your organization.<br />\r\n<br />\r\n&nbsp;"

@@ -1,0 +1,30 @@
+title: 'Llobbyiste salarié à l’organisme'
+description: '<p>In-House lobbyist lobby on behalf of an organization as an emproyee, CEO, partner, exective director, board member, etc.&nbsp;<br><br>Click here for definition of in-house lobbyist.</p>'
+elements: |
+  update_organization_action:
+    '#text': '<div class="organization info-organization two-columns-orange-header"><div class="col-xs-6 no-padding"><p><strong>Organization</strong></p></div><div class="col-xs-6 no-padding update-action"><a class="update-action" href="update-user">Edit organization</a></div></div>'
+  processed_text:
+    '#text': '<p>Un lobbyiste salarié fait du lobbyisme pour le compte d’un organisme. Il peut s’agir d’un employé, du PDG, d’un partenaire, du directeur général, d’un membre du conseil d’administration, etc.</p><p><a href="https://yukonlobbyistregistry.ca/fr/types-de-lobbyistes">En savoir plus sur les lobbyistes salariés</a></p>'
+  processed_text_01:
+    '#text': '<p>Renseignements sur le lobbyiste salarié</p>'
+  first_name:
+    '#title': Prénom
+  last_name:
+    '#title': Nom
+  position:
+    '#title': Poste
+  contact_information:
+    '#text': '<p>Coordonnées</p>'
+  e_mail_address:
+    '#title': Courriel
+    '#confirm__title': 'Confirmation de l’adresse courriel'
+    '#confirm__description': '<p>Un message de confirmation sera envoyé à cette adresse courriel une fois le compte créé.</p>'
+  telephone:
+    '#title': Téléphone
+  actions:
+    '#submit__label': Terminer
+    '#preview_prev__label': Modification
+    '#preview_next__label': 'Passer à l’étape suivante'
+settings:
+  preview_message: '<p>Le processus sera terminé une fois que vous aurez confirmé les renseignements.</p>'
+  confirmation_message: '<p>The lobbyist has been saved in your organization.</p>'

@@ -1,0 +1,39 @@
+uuid: 4724894f-826a-4b6c-b007-05af37273e4f
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_block_plugin
+    - block_class
+    - system
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+third_party_settings:
+  block_class:
+    classes: in-house-lobbyist-users
+_core:
+  default_config_hash: 9oPlcrTkZfSpPsvlGfJFznkNYS0XHReig_T2n-KShos
+id: inhouselobbyistcustomblock
+theme: wxt_lobbyist
+region: content
+weight: -16
+provider: null
+plugin: inhouselobbyist_custom_block
+settings:
+  id: inhouselobbyist_custom_block
+  label: 'In-house Lobbyist'
+  label_display: '0'
+  provider: biz_block_plugin
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /in-house-organization-info
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }
+    is_panelized: {  }

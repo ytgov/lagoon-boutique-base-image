@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.header_for_activities_
+id: taxonomy_term.header_for_activities_.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: header_for_activities_
+label: Metatags
+description: 'The meta tags for the entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

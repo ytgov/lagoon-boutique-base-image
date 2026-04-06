@@ -1,0 +1,147 @@
+uuid:
+  -
+    value: f349981d-355e-4d7b-8cd4-12544ae5cd0d
+langcode:
+  -
+    value: en
+vid:
+  -
+    target_id: header_for_revisions
+    target_type: taxonomy_vocabulary
+    target_uuid: 6f0332c3-cfbe-42e8-9d65-7804e4668a0c
+revision_created:
+  -
+    value: '2021-06-23T20:53:36+00:00'
+    format: 'Y-m-d\TH:i:sP'
+revision_user: {  }
+revision_log_message: {  }
+status:
+  -
+    value: true
+name:
+  -
+    value: 'Version status'
+description:
+  -
+    value: status
+    format: basic_html
+    processed: status
+weight:
+  -
+    value: 2
+parent:
+  -
+    target_id: 0
+changed:
+  -
+    value: '2021-06-24T15:55:37+00:00'
+    format: 'Y-m-d\TH:i:sP'
+default_langcode:
+  -
+    value: true
+revision_translation_affected:
+  -
+    value: true
+metatag:
+  value:
+    canonical_url: 'http://lobbyist-registry-backend.bizont.ca/en/taxonomy/term/189'
+    description: status
+path:
+  -
+    alias: null
+    pid: null
+    langcode: en
+content_translation_source:
+  -
+    value: und
+content_translation_outdated:
+  -
+    value: false
+content_translation_uid:
+  -
+    target_type: user
+    target_uuid: f9a69597-58ab-4557-96d5-4dae3010a56c
+content_translation_created:
+  -
+    value: '2021-06-23T20:53:36+00:00'
+    format: 'Y-m-d\TH:i:sP'
+_content_sync:
+  entity_type: taxonomy_term
+  entity_dependencies:
+    user:
+      - user.user.f9a69597-58ab-4557-96d5-4dae3010a56c
+_translations:
+  fr:
+    uuid:
+      -
+        value: f349981d-355e-4d7b-8cd4-12544ae5cd0d
+    langcode:
+      -
+        value: fr
+    vid:
+      -
+        target_id: header_for_revisions
+        target_type: taxonomy_vocabulary
+        target_uuid: 6f0332c3-cfbe-42e8-9d65-7804e4668a0c
+    revision_created:
+      -
+        value: '2021-06-23T20:53:36+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    revision_user: {  }
+    revision_log_message: {  }
+    status:
+      -
+        value: true
+    name:
+      -
+        value: 'État de la version'
+    description:
+      -
+        value: "<p>status</p>\r\n"
+        format: basic_html
+        processed: '<p>status</p>'
+    weight:
+      -
+        value: 2
+    parent:
+      -
+        target_id: 0
+    changed:
+      -
+        value: '2021-07-18T10:05:56+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    default_langcode:
+      -
+        value: false
+    revision_translation_affected:
+      -
+        value: true
+    metatag:
+      value:
+        title: 'Version status | Lobbyist Registry Backend'
+        canonical_url: 'http://lobbyist-registry-backend.bizont.ca/en/taxonomy/term/189'
+        description: status
+    path:
+      -
+        alias: null
+        pid: null
+        langcode: fr
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_type: user
+        target_uuid: f9a69597-58ab-4557-96d5-4dae3010a56c
+    content_translation_created:
+      -
+        value: '2021-07-18T10:05:56+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    _content_sync:
+      entity_type: taxonomy_term
+      entity_dependencies:
+        user:
+          - user.user.f9a69597-58ab-4557-96d5-4dae3010a56c

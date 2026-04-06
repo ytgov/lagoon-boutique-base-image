@@ -1,0 +1,5 @@
+label: 'Consentement à la publication des informations soumises.'
+description: "<p>En soumettant mes renseignements, je consens à ce que ceux-ci soient mis en ligne sur un site Web aux fins de les consigner dans un registre public sur les activités de lobbying.</p>\r\n\r\n<p>Les renseignements personnels sont recueillis en vertu des articles 6, 12 et 16 de la <i> Loi sur l’inscription des lobbyistes</i> . Pour en savoir plus, écrivez au Bureau du registre des lobbyistes : <a href=\"mailto:info@yukonlobbyistregistry.ca\">info@yukonlobbyistregistry.ca</a>.</p>"
+settings:
+  on_label: Activé
+  off_label: Désactivé

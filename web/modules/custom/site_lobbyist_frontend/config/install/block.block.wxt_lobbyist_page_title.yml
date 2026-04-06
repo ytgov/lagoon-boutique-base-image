@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_page_title
+theme: wxt_lobbyist
+region: content
+weight: -16
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

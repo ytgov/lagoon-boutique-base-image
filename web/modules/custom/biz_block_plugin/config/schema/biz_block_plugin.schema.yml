@@ -1,0 +1,16 @@
+biz_block_plugin.settings:
+  type: config_object
+  label: Dashboard Lobbyist Settings
+  mapping:
+    header_review_form:
+      type: text
+      label: 'Header for review form'
+    review_checkbox_acept:
+      type: text
+      label: 'Review checkbox acept'
+    consultant_content_instruct:
+      type: text_format
+      label: 'Content to instruct consultant lobbyists'
+    in_house_content_instruct:
+      type: text_format
+      label: 'Content to instruct in-house lobbyists'

@@ -1,0 +1,18 @@
+uuid: ec43c3d0-1303-4d06-9078-6bc2562f4422
+langcode: en
+status: true
+dependencies:
+  module:
+    - webform
+    - webform_node
+id: in_house_lobbyist
+label: 'In-house lobbyist'
+weight: 4
+is_admin: false
+permissions:
+  - 'access user profiles'
+  - 'access webform overview'
+  - 'view any webform submission'
+  - 'view own webform submission'
+  - 'view webform submissions any node'
+  - 'view webform submissions own node'

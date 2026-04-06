@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a table.
+ *
+ * Available variables:
+ * - organization:
+ * 
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_organization_info_form_header_action()
+ */
+#}
+
+<div class="organization info-organization two-columns-orange-header">
+  <div class="col-xs-6 no-padding">
+    <p><strong>{% trans %}Organization{% endtrans %}</strong></p>
+  </div>
+  <div class="col-xs-6 no-padding update-action">
+    <a class="update-action" href="{{link_to_action}}">{% trans %}Edit organization{% endtrans %}</a>
+  </div>
+</div>
