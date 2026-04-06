@@ -859,19 +859,6 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
-#$databases['default']['default'] = array (
-#  'database' => 'lobbyist_registry_frontend_uat_d11', 
-#  'username' => 'lobbyist_registry_frontend_d11',
-#  'password' => '8G#z&dU^@p%p5&-6FrWKxCgPt&K$XVXL',
-#  'prefix' => '',
-#  'host' => 'localhost',
-#  'port' => '3306',
-#  'isolation_level' => 'READ COMMITTED',
-#  'driver' => 'mysql',
-#  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
-#  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
-#);
-#$settings['config_sync_directory'] = 'sites/default/files/config_SN0lwYOrO0N4RmPhOpIsbTXoyz7uhEfEAABVshTiQZ8wg4DGmyYKfQpclQijpmBoLg3E80TNag/sync';
 
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 	  include $app_root . '/' . $site_path . '/settings.local.php';
