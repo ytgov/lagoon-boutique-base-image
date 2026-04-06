@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Header for all activities'
+vid: header_for_all_activities
+description: ''
+weight: 0

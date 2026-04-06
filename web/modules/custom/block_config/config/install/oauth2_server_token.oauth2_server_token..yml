@@ -1,0 +1,50 @@
+client_id:
+  -
+    target_id: lobbyist_register_frontend_2020
+    target_type: oauth2_server_client
+type:
+  -
+    value: access
+token:
+  -
+    value: a1d64531bc823393b65bd4c76d6f342893c10707
+scopes:
+  -
+    target_id: lobbyist_register_backend_lobbyist_backend
+    target_type: oauth2_server_scope
+expires:
+  -
+    value: '2021-12-27T15:53:40+00:00'
+    format: 'Y-m-d\TH:i:sP'
+last_access:
+  -
+    value: '2020-05-27T00:08:46+00:00'
+    format: 'Y-m-d\TH:i:sP'
+_content_sync:
+  entity_type: oauth2_server_token
+_translations:
+  und:
+    client_id:
+      -
+        target_id: lobbyist_register_frontend_2020
+        target_type: oauth2_server_client
+    type:
+      -
+        value: access
+    token:
+      -
+        value: a1d64531bc823393b65bd4c76d6f342893c10707
+    scopes:
+      -
+        target_id: lobbyist_register_backend_lobbyist_backend
+        target_type: oauth2_server_scope
+    expires:
+      -
+        value: '2021-12-27T15:53:40+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    last_access:
+      -
+        value: '2020-05-27T00:08:46+00:00'
+        format: 'Y-m-d\TH:i:sP'
+    _content_sync:
+      entity_type: oauth2_server_token

@@ -1,0 +1,22 @@
+uuid: c2793a5a-8475-4f54-8982-95275cde105e
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lobby_s_topics
+id: taxonomy_term.lobby_s_topics.status
+field_name: status
+entity_type: taxonomy_term
+bundle: lobby_s_topics
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

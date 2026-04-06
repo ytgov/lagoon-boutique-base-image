@@ -1,0 +1,9 @@
+biz_business_rules.admin_config:
+    title: Lobbyist
+    parent: system.admin_config
+    route_name: biz_business_rules.admin_config
+biz_business_rules.settings:
+    title: Mails for business rules
+    description: ''
+    parent: biz_business_rules.admin_config
+    route_name: biz_business_rules.settings

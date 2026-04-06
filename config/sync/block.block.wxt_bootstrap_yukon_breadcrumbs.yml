@@ -1,0 +1,22 @@
+uuid: dbeac01a-34e2-443f-b885-a9e1ac304ddb
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_bootstrap_yukon
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: wxt_bootstrap_yukon_breadcrumbs
+theme: wxt_bootstrap_yukon
+region: navbar
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

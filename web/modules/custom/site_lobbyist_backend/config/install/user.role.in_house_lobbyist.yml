@@ -1,0 +1,31 @@
+uuid: e9886074-7e5b-45b4-a65a-adb7e9d6191d
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: in_house_lobbyist
+label: 'In-house lobbyist'
+weight: 3
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access user profiles'
+  - 'access webform submission log'
+  - 'administer comments'
+  - 'administer users'
+  - 'change own username'
+  - 'edit own comments'
+  - 'post comments'
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful patch biz_webform_rest_submission'
+  - 'restful post biz_webform_rest_submit'
+  - 'restful post user_registration'
+  - 'use oauth2 server'
+  - 'view any webform submission'
+  - 'view own webform submission'

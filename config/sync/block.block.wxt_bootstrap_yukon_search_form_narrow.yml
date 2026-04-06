@@ -1,0 +1,23 @@
+uuid: 45d2a971-e551-4c1e-85a1-ea23da685da5
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - wxt_bootstrap_yukon
+_core:
+  default_config_hash: _nZjxxdypO6xrOAJkCYD81v0L7wh2zbCAVO7_C-UKIc
+id: wxt_bootstrap_yukon_search_form_narrow
+theme: wxt_bootstrap_yukon
+region: navbar
+weight: -4
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (narrow)'
+  label_display: '0'
+  provider: search
+  page_id: null
+visibility: {  }

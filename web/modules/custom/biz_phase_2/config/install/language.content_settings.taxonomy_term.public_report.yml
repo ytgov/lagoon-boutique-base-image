@@ -1,0 +1,16 @@
+uuid: 979aa15d-c5d9-4b3c-89b5-abebba3da459
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.public_report
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.public_report
+target_entity_type_id: taxonomy_term
+target_bundle: public_report
+default_langcode: site_default
+language_alterable: false

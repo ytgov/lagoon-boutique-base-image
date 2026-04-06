@@ -1,0 +1,453 @@
+uuid: c4a8f1d8-9b02-40c2-ae5d-ce8f94092b69
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_business_name
+    - field.storage.user.field_first_name
+    - field.storage.user.field_first_name_consultant_
+    - field.storage.user.field_last_name
+    - field.storage.user.field_last_name_consultant_
+    - field.storage.user.field_legal_organization
+    - field.storage.user.field_operating_organization
+    - search_api.server.search_activities_server
+  module:
+    - webform
+    - user
+    - search_api
+    - search_api_field_map
+_core:
+  default_config_hash: fCOEd8ORrQP53bhdg4bk_WJjN8kS-WkN_W73j8uy7Zg
+id: search_activities_index
+name: 'Search activities'
+description: ''
+read_only: false
+field_settings:
+  aggregated_field_submit_by:
+    label: 'Aggregated field submit by'
+    property_path: aggregated_field
+    type: string
+    configuration:
+      type: first
+      fields:
+        - 'entity:webform_submission/uid'
+  changed:
+    label: Changed
+    datasource_id: 'entity:webform_submission'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - webform
+  field_business_name:
+    label: 'Submitted by » User » Business name'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:field_business_name'
+    type: text
+    boost: 2.0
+    dependencies:
+      config:
+        - field.storage.user.field_business_name
+      module:
+        - user
+        - webform
+  field_first_name:
+    label: 'Submitted by » User » First name'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:field_first_name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_first_name
+      module:
+        - user
+        - webform
+  field_first_name_consultant_:
+    label: 'Submitted by » User » First name consultant'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:field_first_name_consultant_'
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_first_name_consultant_
+      module:
+        - user
+        - webform
+  field_last_name:
+    label: 'Submitted by » User » Last name'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:field_last_name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_last_name
+      module:
+        - user
+        - webform
+  field_last_name_consultant_:
+    label: 'Submitted by » User » Last name consultant'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:field_last_name_consultant_'
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_last_name_consultant_
+      module:
+        - user
+        - webform
+  field_legal_organization:
+    label: 'Submitted by » User » Legal Organization'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:field_legal_organization'
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_legal_organization
+      module:
+        - user
+        - webform
+  field_operating_organization:
+    label: 'Submitted by » User » Operating Organization'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:field_operating_organization'
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_operating_organization
+      module:
+        - user
+        - webform
+  mail:
+    label: 'Submitted by » User » Email'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:mail'
+    type: string
+    dependencies:
+      module:
+        - user
+        - webform
+  mapped_field__org_name:
+    label: 'Org Name'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:org_name:raw]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:org_name:raw]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_administrative_area:
+    label: 'Address:administrative_area'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:custom_address:administrative_area]'
+  mapped_field_country_code:
+    label: 'Address:country_code'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:custom_address:country_code]'
+  mapped_field_details:
+    label: Details
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:add_detail:raw]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:add_detail:raw]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_email_activity:
+    label: 'Email Activity'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:e_mail_address:raw]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_end_date:
+    label: 'End date'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:end_date:raw]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_front_status:
+    label: 'Frontend Status'
+    property_path: mapped_field
+    type: text
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:frontend_status:label:label]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:frontend_status:label:label]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_has_your_organization:
+    label: 'Has your organization received a grant from the government of Yukon within the last year?'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:has_your_organization_received_a_grant_from_the_government_of_yu:label]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:has_your_organization_received_a_grant_from_the_government_of_yu:label]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_how_do_you_want:
+    label: 'How do you want to lobby?'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:how_do_you_want_to_lobby_:label]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:how_do_you_want_to_lobby_:label]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_locality:
+    label: 'Address:locality'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:custom_address:locality]'
+  mapped_field_other:
+    label: Other
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:other:raw]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:other:raw]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_postal_code:
+    label: 'Address:postal_code'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:custom_address:postal_code]'
+  mapped_field_start_date:
+    label: 'Start date'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:start_date:raw]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_status:
+    label: Status
+    property_path: mapped_field
+    type: text
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:status:label:label]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:status:label:label]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_street:
+    label: 'Address:street'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:custom_address:address_line1]'
+  mapped_field_telephone:
+    label: Telephone
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: ''
+          add_a_lobbying_activity_consulta: '[webform_submission:values:custom_telephone:raw]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_title:
+    label: Title
+    property_path: mapped_field
+    type: text
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:title:raw]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:title:raw]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_topic:
+    label: Topics
+    property_path: mapped_field
+    type: text
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:which_topic_do_you_want_to_lobby_government_about_:label]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:which_topic_do_you_want_to_lobby_government_about_:label]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_version_number:
+    label: 'Version number'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:version_number:value]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:version_number:value]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_was_the_grant:
+    label: 'Was the grant awarded related to the matter the lobbying has been or will be undertaken'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:was_the_grant_awarded_related_to_the_matter_the_lobbying_has_bee:label]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:was_the_grant_awarded_related_to_the_matter_the_lobbying_has_bee:label]'
+  mapped_field_who_are:
+    label: 'Who are you lobbying or plan to lobby?'
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:who_are_you_lobbying_or_plan_to_lobby_:label]'
+          add_a_lobbying_activity_consulta: '[webform_submission:values:who_are_you_lobbying_or_plan_to_lobby_:label]'
+          add_new_in_house_lobbyist: ''
+  mapped_field_year:
+    label: Year
+    property_path: mapped_field
+    type: string
+    configuration:
+      field_data:
+        webform_submission:
+          add_a_lobbying_activity: '[webform_submission:values:year:value]'
+          add_a_lobbying_activity_consulta: ''
+          add_new_in_house_lobbyist: ''
+  roles:
+    label: 'Submitted by » User » Roles'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:roles'
+    type: string
+    dependencies:
+      module:
+        - user
+        - webform
+  sid:
+    label: 'Submission ID'
+    datasource_id: 'entity:webform_submission'
+    property_path: sid
+    type: integer
+    dependencies:
+      module:
+        - webform
+  uid:
+    label: 'Submitted by » User » User ID'
+    datasource_id: 'entity:webform_submission'
+    property_path: 'uid:entity:uid'
+    type: integer
+    dependencies:
+      module:
+        - user
+        - webform
+  webform_id:
+    label: Webform
+    datasource_id: 'entity:webform_submission'
+    property_path: webform_id
+    type: string
+    dependencies:
+      module:
+        - webform
+datasource_settings:
+  'entity:webform_submission':
+    bundles:
+      default: false
+      selected:
+        - add_a_lobbying_activity
+        - add_a_lobbying_activity_consulta
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  entity_type: {  }
+  ignorecase:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+    all_fields: false
+    fields:
+      - field_business_name
+      - field_first_name
+      - field_first_name_consultant_
+      - field_last_name
+      - field_last_name_consultant_
+      - field_legal_organization
+      - field_operating_organization
+      - mapped_field__org_name
+      - mapped_field_details
+      - mapped_field_email_activity
+      - mapped_field_end_date
+      - mapped_field_front_status
+      - mapped_field_has_your_organization
+      - mapped_field_how_do_you_want
+      - mapped_field_other
+      - mapped_field_start_date
+      - mapped_field_status
+      - mapped_field_telephone
+      - mapped_field_title
+      - mapped_field_topic
+      - mapped_field_version_number
+      - mapped_field_was_the_grant
+      - mapped_field_who_are
+      - mapped_field_year
+      - webform_id
+  language_with_fallback: {  }
+  mapped_field: {  }
+  mapped_terms: {  }
+  rendered_item: {  }
+  search_api_canonical_url: {  }
+  search_api_urls: {  }
+  site_name: {  }
+  tokenizer:
+    weights:
+      preprocess_index: -6
+      preprocess_query: -6
+    all_fields: false
+    fields:
+      - field_business_name
+      - field_first_name_consultant_
+      - field_last_name_consultant_
+      - field_legal_organization
+      - field_operating_organization
+      - mapped_field_front_status
+      - mapped_field_status
+      - mapped_field_title
+      - mapped_field_topic
+    spaces: ''
+    ignored: ._-
+    overlap_cjk: 1
+    minimum_word_size: '3'
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 150
+  delete_on_fail: true
+  index_directly: true
+  track_changes_in_references: true
+server: search_activities_server

@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.activiy_comments
+id: comment.activiy_comments.created
+field_name: created
+entity_type: comment
+bundle: activiy_comments
+label: Created
+description: 'The time that the comment was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

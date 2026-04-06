@@ -1,0 +1,27 @@
+uuid: 9143fc73-38af-4df7-9044-e38a34a99d01
+langcode: en
+status: true
+dependencies:
+  config:
+    - rest.resource.biz_webform_rest_organizations
+    - rest.resource.biz_webform_rest_submission
+    - rest.resource.biz_webform_rest_submission_adaptation
+    - rest.resource.biz_webform_rest_submit
+    - rest.resource.user_registration
+    - rest.resource.webform_submission_log
+  module:
+    - oauth2_server
+    - rest
+id: role_administrator
+label: 'Role administrator'
+weight: 7
+is_admin: false
+permissions:
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful patch biz_webform_rest_submission'
+  - 'restful patch biz_webform_rest_submission_adaptation'
+  - 'restful post biz_webform_rest_submit'
+  - 'restful post user_registration'
+  - 'use oauth2 server'

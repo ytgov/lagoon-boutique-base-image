@@ -1,0 +1,17 @@
+uuid: a5bfb04c-0d2d-476d-8c74-9a6d86597e99
+langcode: en
+status: false
+dependencies:
+  module:
+    - biz_phase_2
+title: 'Default cron handler'
+id: biz_phase_2_cron
+weight: 0
+module: biz_phase_2
+callback: biz_phase_2_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

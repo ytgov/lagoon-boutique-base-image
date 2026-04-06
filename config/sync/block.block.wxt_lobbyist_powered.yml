@@ -1,0 +1,22 @@
+uuid: a7db543d-5390-4835-85e7-560ca56351a5
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: eYL19CLDyinGTWYQfBD1DswWzglEotE_kHnHx3AxTXM
+id: wxt_lobbyist_powered
+theme: wxt_lobbyist
+region: navbar
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: lobbyist_activity
+label: 'Lobbyist activity'
+created: true
+changed: true
+uid: true
+title: true

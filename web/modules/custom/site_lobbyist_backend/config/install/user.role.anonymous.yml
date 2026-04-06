@@ -1,0 +1,29 @@
+uuid: 89573d84-58b6-4306-914c-8373a64d3e06
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: pq_mEIu_B4widZN7Ap81iCJSjShFFdcL0jEiCi8VrDk
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access site-wide contact form'
+  - 'access user profiles'
+  - 'administer account settings'
+  - 'administer users'
+  - 'openid connect rest api provider authorization endpoint access'
+  - 'openid connect rest api provider ids access'
+  - 'restful get biz_webform_rest_get_endpoint'
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful post user_registration'
+  - 'restful post webform_rest_submit'
+  - 'search content'
+  - 'use oauth2 server'
+  - 'use text format restricted_html'
+  - 'view any webform submission'
+  - 'view media'

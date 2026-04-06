@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_operating_organization
+  module:
+    - multiple_registration
+    - user
+third_party_settings:
+  multiple_registration:
+    user_additional_register_form:
+      in_house_lobbyist: in_house_lobbyist
+      authenticated: 0
+      consultant_lobbyist: 0
+    user_additional_register_form_required:
+      in_house_lobbyist: in_house_lobbyist
+      authenticated: 0
+      consultant_lobbyist: 0
+id: user.user.field_operating_organization
+field_name: field_operating_organization
+entity_type: user
+bundle: user
+label: 'Operating Organization'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

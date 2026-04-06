@@ -1,0 +1,52 @@
+uuid: 6b314bd6-b02a-4a24-b3ed-e24f69086736
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.compact
+    - field.field.user.user.field_business_name
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_first_name_consultant_
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_last_name_consultant_
+    - field.field.user.user.field_legal_organization
+    - field.field.user.user.field_operating_organization
+    - field.field.user.user.field_position
+    - field.field.user.user.field_street_address
+    - field.field.user.user.field_telephone
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - image
+    - user
+_core:
+  default_config_hash: 00zr_RBdTjPjBGITD3h4c1ESQZimjdVCcHGt1trLqIY
+id: user.user.compact
+targetEntityType: user
+bundle: user
+mode: compact
+content:
+  user_picture:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_business_name: true
+  field_first_name: true
+  field_first_name_consultant_: true
+  field_last_name: true
+  field_last_name_consultant_: true
+  field_legal_organization: true
+  field_operating_organization: true
+  field_position: true
+  field_street_address: true
+  field_telephone: true
+  langcode: true
+  member_for: true

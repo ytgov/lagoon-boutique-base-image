@@ -1,0 +1,27 @@
+uuid: a7b2e2e3-0d8a-4f57-8432-1e0963cccd17
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - wxt_bootstrap_yukon
+_core:
+  default_config_hash: gmxYWWHmgbe0Pnv8y48ZLSLH5mEHejOjAP6RLxUfdzU
+id: wxt_bootstrap_yukon_account_menu
+theme: wxt_bootstrap_yukon
+region: navbar
+weight: -4
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

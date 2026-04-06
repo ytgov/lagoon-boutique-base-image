@@ -1,0 +1,20 @@
+name: 'WxT Library'
+description: 'Registers WxT Boostrap as a library.'
+type: module
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+package: WxT
+configure: wxt_library.admin
+
+# Required modules
+dependencies:
+  - drupal:language
+
+# Required libraries
+libraries:
+  - wxt_library/wet-boew
+  - wxt_library/wet-boew-dev
+
+# Information added by Drupal.org packaging script on 2022-01-02
+version: '8.x-6.0'
+project: 'wxt_library'
+datestamp: 1641089962

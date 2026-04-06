@@ -1,0 +1,32 @@
+uuid: 2742fb2c-86c6-427c-8d0b-0de91e4b88e5
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: consultant_lobbyist
+label: 'Consultant lobbyist'
+weight: 4
+is_admin: null
+permissions:
+  - 'access comments'
+  - 'access user profiles'
+  - 'access webform submission log'
+  - 'administer comments'
+  - 'administer users'
+  - 'change own username'
+  - 'edit own comments'
+  - 'post comments'
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful patch biz_webform_rest_submission'
+  - 'restful post biz_webform_rest_submit'
+  - 'restful post user_registration'
+  - 'restful post webform_rest_submit'
+  - 'use oauth2 server'
+  - 'view any webform submission'
+  - 'view own webform submission'

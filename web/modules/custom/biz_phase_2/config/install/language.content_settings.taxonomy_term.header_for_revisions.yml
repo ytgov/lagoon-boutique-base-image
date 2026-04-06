@@ -1,0 +1,16 @@
+uuid: 928b9d7c-3609-409c-aac7-cd89d643ccd3
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.header_for_revisions
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.header_for_revisions
+target_entity_type_id: taxonomy_term
+target_bundle: header_for_revisions
+default_langcode: site_default
+language_alterable: false

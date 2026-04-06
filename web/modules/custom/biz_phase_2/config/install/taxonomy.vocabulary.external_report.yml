@@ -1,0 +1,8 @@
+uuid: d5d2232b-e7bc-45b8-a831-d1257df265f5
+langcode: en
+status: true
+dependencies: {  }
+name: 'Internal report'
+vid: external_report
+description: ''
+weight: 0

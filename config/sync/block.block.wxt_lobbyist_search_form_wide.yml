@@ -1,0 +1,23 @@
+uuid: c799c05d-a217-4109-aa60-bcec070cdd76
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: pbbed0hdqGDF-_QWVVTWRAwgDIotFuAvWH5mWUZu0fA
+id: wxt_lobbyist_search_form_wide
+theme: wxt_lobbyist
+region: navbar
+weight: -5
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (wide)'
+  label_display: '0'
+  provider: search
+  page_id: null
+visibility: {  }

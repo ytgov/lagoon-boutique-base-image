@@ -1,0 +1,18 @@
+uuid: 45834624-5929-48d5-903b-5a0b3c56a01c
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - oauth2_server
+    - serialization
+id: biz_webform_rest_submission_adaptation
+plugin_id: biz_webform_rest_submission_adaptation
+granularity: resource
+configuration:
+  methods:
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2

@@ -1,0 +1,77 @@
+uuid: efe22033-d2fe-4630-874b-fa7f8ef9c7dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_street_address
+  module:
+    - address
+    - content_translation
+    - multiple_registration
+    - user
+third_party_settings:
+  multiple_registration:
+    user_additional_register_form_required:
+      in_house_lobbyist: in_house_lobbyist
+      consultant_lobbyist: consultant_lobbyist
+      authenticated: 0
+    user_additional_register_form:
+      in_house_lobbyist: in_house_lobbyist
+      consultant_lobbyist: consultant_lobbyist
+      authenticated: 0
+  content_translation:
+    translation_sync:
+      langcode: langcode
+      country_code: country_code
+      administrative_area: administrative_area
+      locality: locality
+      dependent_locality: dependent_locality
+      postal_code: postal_code
+      sorting_code: sorting_code
+      address_line1: address_line1
+      address_line2: address_line2
+      address_line3: address_line3
+      organization: organization
+      given_name: given_name
+      additional_name: additional_name
+      family_name: family_name
+id: user.user.field_street_address
+field_name: field_street_address
+entity_type: user
+bundle: user
+label: 'Street address'
+description: 'What is your mailing address?'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine1:
+      override: required
+    addressLine2:
+      override: hidden
+    addressLine3:
+      override: hidden
+    postalCode:
+      override: required
+    sortingCode:
+      override: hidden
+    dependentLocality:
+      override: hidden
+    locality:
+      override: required
+    administrativeArea:
+      override: required
+  fields: {  }
+field_type: address

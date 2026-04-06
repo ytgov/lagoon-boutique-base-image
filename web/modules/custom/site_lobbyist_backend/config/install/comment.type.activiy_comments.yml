@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: activiy_comments
+label: 'Activiy comments'
+target_entity_type_id: lobbyist_activity
+description: ''

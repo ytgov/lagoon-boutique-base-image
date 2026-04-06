@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - oauth2_server
+    - serialization
+id: biz_webform_rest_submit
+plugin_id: biz_webform_rest_submit
+granularity: method
+configuration:
+  POST:
+    supported_formats:
+      - json
+    supported_auth:
+      - oauth2

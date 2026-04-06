@@ -1,0 +1,19 @@
+uuid: af30a6bb-4bbe-4407-8543-b45c6ab357b1
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - serialization
+    - user
+id: biz_webform_rest_organizations
+plugin_id: biz_webform_rest_organizations
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+    - xml
+  authentication:
+    - cookie

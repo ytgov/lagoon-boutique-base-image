@@ -1,0 +1,63 @@
+display:
+  page_1:
+    display_options:
+      filters:
+        combine:
+          group_info:
+            description: ''
+      fields:
+        webform_id:
+          alter:
+            text: "{%- if webform_id == 'add_a_lobbying_activity' -%}\r\nSalarié\r\n{%- elseif webform_id == 'add_a_lobbying_activity_consulta'  %}\r\nConseil\r\n{%- endif %}"
+        sid:
+          alter:
+            text: "{%- if webform_id_1 == 'add_a_lobbying_activity' -%}\r\n<a href = \"/fr/in-house-view?id= {{sid}} \"><i class=\"far fa-eye\"></i></a>\r\n{%- elseif webform_id_1 == 'add_a_lobbying_activity_consulta'  %}\r\n<a href = \"/fr/consultant-activity-view?id= {{sid}} \"><i class=\"far fa-eye\"></i></a>\r\n{%- endif %}"
+  rest_export_1:
+    display_options:
+      fields:
+        nothing:
+          alter:
+            text: "{% if  field_legal_organization%}\r\nSalarié{% elseif  field_legal_organization is empty %}\r\nConseil{% endif %}"
+        sid_2:
+          alter: {  }
+  rest_export_2:
+    display_options:
+      fields:
+        nothing:
+          alter:
+            text: "{% if  field_legal_organization%}\r\nSalarié{% elseif  field_legal_organization is empty %}\r\nConseil{% endif %}"
+        uid:
+          alter:
+            text: '<a href= "/fr/search-organization/organization-view?id={{ uid }}"><i class="far fa-eye"></i></a>'
+        status:
+          settings:
+            format_custom_true: Actif
+            format_custom_false: Actif
+  rest_export_3:
+    display_options:
+      filters:
+        combine:
+          group_info:
+            description: ''
+  rest_export_4:
+    display_options:
+      fields:
+        nothing:
+          alter:
+            text: "{% if  field_legal_organization%}\r\nSalarié{% elseif  field_legal_organization is empty %}\r\nConseil{% endif %}"
+        status:
+          settings:
+            format_custom_true: Actif
+            format_custom_false: Bloqué
+        uid:
+          alter:
+            text: '<a href= "/fr/search-organization/organization-view?id={{ uid }}"><i class="far fa-eye"></i></a>'
+  default:
+    display_options:
+      fields:
+        webform_id:
+          alter:
+            text: "{%- if webform_id == 'add_a_lobbying_activity' -%}\r\nSalarié\r\n{%- elseif webform_id == 'add_a_lobbying_activity_consulta'  %}\r\nConseil\r\n{%- endif %}"
+        sid:
+          alter:
+            text: "{%- if webform_id_1 == 'add_a_lobbying_activity' -%}\r\n<a href = \"/fr/in-house-view?id= {{sid}} \"><i class=\"far fa-eye\"></i></a>\r\n{%- elseif webform_id_1 == 'add_a_lobbying_activity_consulta'  %}\r\n<a href = \"/fr/consultant-activity-view?id= {{sid}} \"><i class=\"far fa-eye\"></i></a>\r\n{%- endif %}"

@@ -1,0 +1,9 @@
+uuid: 87440392-086d-4833-a190-34562d537040
+langcode: en
+status: true
+dependencies: {  }
+name: "Lobby's topics"
+vid: lobby_s_topics
+description: 'Available topics for lobby activities'
+weight: 0
+new_revision: false

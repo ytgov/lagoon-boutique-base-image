@@ -1,0 +1,18 @@
+uuid: 415846ee-1bea-4c31-84de-85db214a3186
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lobbyist_s_portfolios
+id: taxonomy_term.lobbyist_s_portfolios.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: lobbyist_s_portfolios
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

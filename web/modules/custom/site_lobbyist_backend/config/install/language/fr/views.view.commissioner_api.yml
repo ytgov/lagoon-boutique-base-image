@@ -1,0 +1,18 @@
+display:
+  rest_export_1:
+    display_options:
+      fields:
+        nothing:
+          alter:
+            text: "{% if field_legal_organization %}\r\nSalarié{% elseif  field_first_name_consultant_  %}Conseil{% endif %}"
+        sid_2:
+          alter:
+            text: "{% if  field_first_name_consultant_ is empty%}\r\n<a href=\"/fr/admin-dashboard/in-house-activity-view?id={{sid_2}}&webform_id=add_a_lobbying_activity\"><i class=\"far fa-eye\"></i></a>{% elseif  field_first_name_consultant_ is not empty %}\r\n<a href=\"/fr/admin-dashboard/consultant-activity-view?id={{sid_2}}&webform_id=add_a_lobbying_activity_consulta\"><i class=\"far fa-eye\"></i></a>{% endif %}"
+        sid_3:
+          alter:
+            text: "{% if  field_first_name_consultant_ is empty%}\r\n<a href=\"/fr/admin-dashboard/in-house-activity-view?id={{sid_3}}&webform_id=add_a_lobbying_activity#form-activity-messages\">Rejeter</a>{% elseif  field_first_name_consultant_ is not empty %}\r\n<a href=\"/fr/admin-dashboard/consultant-activity-view?id={{sid_3}}&webform_id=add_a_lobbying_activity_consulta#form-activity-messages\">Rejeter</a>{% endif %}"
+          admin_label: Rejeter
+        sid_4:
+          admin_label: Accepter
+          alter:
+            text: "{% if   webform_submission_value_1  != \"Active\" %}\r\n<div class=\"accept-action btn-confirm\">\r\n{% if  field_first_name_consultant_ is empty %}<div data=\"{{sid_4}}&amp;add_a_lobbying_activity&amp;Active\">Accepter</div>{% elseif  field_first_name_consultant_ is not empty %}<div data=\"{{sid_4}}&amp;add_a_lobbying_activity_consulta&amp;Active&amp;0\">Accepter</div>{% endif %}\r\n</div>\r\n{% endif %}\r\n"

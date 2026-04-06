@@ -1,0 +1,58 @@
+display:
+  rest_export_1:
+    display_options:
+      fields:
+        webform_id:
+          alter:
+            text: '{% if  field_legal_organization%} Salarié{% elseif  field_legal_organization is empty %}Conseil{% endif %}'
+        uid:
+          alter:
+            text: '<a href= "/fr/search-organization/organization-view?id={{ uid }}"> Afficher </a>'
+        uid_1:
+          alter:
+            text: "{% if  field_legal_organization%}\r\n  <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\"> {{ field_legal_organization }} </a>\r\n{% elseif  field_legal_organization is empty %}\r\n   {% if  field_business_name is empty %}\r\n      <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\">{{ field_first_name_consultant_ }} {{ field_last_name_consultant_ }}</a>\r\n   {%else %}\r\n     <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\">{{ field_business_name }} </a>\r\n   {% endif %}\r\n{% endif %}"
+        uid_2:
+          alter:
+            text: "{% if  field_legal_organization%}\r\nSalarié\r\n{% elseif  field_legal_organization is empty %}\r\nConseil\r\n{% endif %}"
+  rest_export_2:
+    display_options:
+      fields:
+        webform_id:
+          alter:
+            text: "{% if  field_legal_organization%}\r\n<label>Salarié </label>\r\n{% elseif  field_legal_organization is empty %}\r\n   {% if  field_business_name is empty %}\r\n'Conseil'\r\n   {%else %}\r\n'Salarié'\r\n   {% endif %}\r\n{% endif %}"
+        roles:
+          alter:
+            text: "{% if  field_legal_organization%}\r\nSalarié\r\n{% elseif  field_legal_organization is empty %}\r\nConseil\r\n{% endif %}"
+        uid:
+          alter:
+            text: '<a href= "/fr/search-organization/organization-view?id={{ uid }}"> Afficher </a>'
+        uid_1:
+          alter:
+            text: "{% if  field_legal_organization%}\r\n  <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\"> {{ field_legal_organization }} </a>\r\n{% elseif  field_legal_organization is empty %}\r\n   {% if  field_business_name is empty %}\r\n      <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\">{{ field_first_name_consultant_ }} {{ field_last_name_consultant_ }}</a>\r\n   {%else %}\r\n     <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\">{{ field_business_name }} </a>\r\n   {% endif %}\r\n{% endif %}"
+        uid_2:
+          alter:
+            text: "{% if  field_legal_organization%}\r\nSalarié\r\n{% elseif  field_legal_organization is empty %}\r\nConseil\r\n{% endif %}"
+  rest_export_3:
+    display_options:
+      fields:
+        webform_id:
+          alter:
+            text: "{% if  field_legal_organization%}\r\n<label>Salarié</label>\r\n{% elseif  field_legal_organization is empty %}\r\n   {% if  field_business_name is empty %}\r\n'Conseil'\r\n   {%else %}\r\n'Salarié'\r\n   {% endif %}\r\n{% endif %}"
+        roles:
+          alter:
+            text: "{% if  field_legal_organization%}\r\nSalarié\r\n{% elseif  field_legal_organization is empty %}\r\nConseil\r\n{% endif %}"
+        uid:
+          alter:
+            text: '<a href= "/fr/search-organization/organization-view?id={{ uid }}"> Afficher </a>'
+        uid_1:
+          alter:
+            text: "{% if  field_legal_organization%}\r\n  <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\"> {{ field_legal_organization }} </a>\r\n{% elseif  field_legal_organization is empty %}\r\n   {% if  field_business_name is empty %}\r\n      <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\">{{ field_first_name_consultant_ }} {{ field_last_name_consultant_ }}</a>\r\n   {%else %}\r\n     <a href= \"/fr/search-organization/organization-view?id={{ uid_1 }}\">{{ field_business_name }} </a>\r\n   {% endif %}\r\n{% endif %}"
+        uid_2:
+          alter:
+            text: "{% if  field_legal_organization%}\r\nSalarié\r\n{% elseif  field_legal_organization is empty %}\r\nConseil\r\n{% endif %}"
+  default:
+    display_options:
+      fields:
+        webform_id:
+          alter:
+            text: "{% if  webform_id%}\r\nSalarié{% elseif  webform_id is empty %}\r\nConseil{% endif %}"

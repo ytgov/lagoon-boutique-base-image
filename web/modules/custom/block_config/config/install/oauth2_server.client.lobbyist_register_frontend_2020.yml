@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies: {  }
+client_id: lobbyist_register_frontend_2020
+server_id: lobbyist_register_backend
+name: 'Lobbyist Register Frontend 2020'
+client_secret: $S$Ex9rYgksUrqMnN.229ODV.fxcLh/m43YJoyYL8lCWfVV9vXzkWBY
+public_key: ''
+redirect_uri: /
+automatic_authorization: true
+settings:
+  override_grant_types: false
+  allow_implicit: false
+  grant_types:
+    authorization_code: authorization_code
+    refresh_token: refresh_token
+    client_credentials: '0'
+    'urn:ietf:params:oauth:grant-type:jwt-bearer': '0'
+    password: '0'
+  always_issue_new_refresh_token: false
+  unset_refresh_token_after_use: true

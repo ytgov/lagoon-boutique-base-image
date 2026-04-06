@@ -1,0 +1,18 @@
+uuid: ad185b44-7314-4d28-94ad-1b35001039f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lobby_s_topics
+id: taxonomy_term.lobby_s_topics.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: lobby_s_topics
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

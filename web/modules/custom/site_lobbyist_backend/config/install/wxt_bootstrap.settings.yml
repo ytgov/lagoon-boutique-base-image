@@ -1,0 +1,19 @@
+schemas:
+  bootstrap: 8000
+  wxt_bootstrap: 8000
+cdn_provider: ''
+breadcrumb_home: 1
+favicon:
+  mimetype: image/vnd.microsoft.icon
+  path: ''
+  url: 'http://pr-10-lobbyist-frontend.pantheonsite.io/themes/contrib/bootstrap/favicon.ico'
+  use_default: true
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+logo:
+  path: ''
+  url: ''
+  use_default: true

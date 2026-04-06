@@ -1,0 +1,14 @@
+uuid: a0a43734-712e-417a-a47b-db0c87074e31
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.consultant_lobbyist
+  module:
+    - user
+id: user_remove_role_action.consultant_lobbyist
+label: 'Remove the Consultant lobbyist role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: consultant_lobbyist

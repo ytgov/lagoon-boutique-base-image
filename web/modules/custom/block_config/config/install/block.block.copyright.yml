@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:1564f790-6835-4373-9889-94f245233346'
+  module:
+    - block_class
+    - block_content
+    - wxt_library
+  theme:
+    - wxt_lobbyist
+third_party_settings:
+  block_class:
+    classes: 'col-xs-12 col-md-6'
+id: copyright
+theme: wxt_lobbyist
+region: footer
+weight: -8
+provider: null
+plugin: 'block_content:1564f790-6835-4373-9889-94f245233346'
+settings:
+  id: 'block_content:1564f790-6835-4373-9889-94f245233346'
+  label: Copyright
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  panels_title:
+    id: panels_title
+    enabled: 0
+    negate: false
+    context_mapping: {  }

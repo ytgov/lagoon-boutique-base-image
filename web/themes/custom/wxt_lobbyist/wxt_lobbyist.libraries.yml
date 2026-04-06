@@ -1,0 +1,68 @@
+global-styling:
+  css:
+    theme:
+      "//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.css": {type: external}
+      css/font-awesome.css: {}
+      css/style.css: {}
+      css/style_yukon.css: {}
+      css/slick-theme.css: {}
+      css/slick.css: {}
+      css/lobbyist-finder.css: {}
+      css/select2.min.css: {}
+      css/jquery.dataTables.css: {}
+  js: 
+    js/registration-modal.js: {}
+    js/select2.full.min.js: {}
+    js/webforms-steps-confirm-check.js: {}
+    js/jquery.dataTables.min.js: {}
+    js/custom.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/once
+fonts:
+  css:
+    theme:
+      "//fonts.googleapis.com/css?family=Open+Sans:400,500,600,800,900": {type: external, minified: true}
+  js:
+    js/bootstrap/alert.js: {}
+    js/bootstrap/collapse.js: {}
+    js/bootstrap/dropdown.js: {}
+    js/bootstrap/tooltip.js: {}
+    js/bootstrap/popover.js: {}
+    js/wetkit-bootstrap.modules.js: {}
+    js/sticky.min.js: {}
+    js/custom-logic.js: {}
+    js/slick.min.js: {}
+    js/select2.full.min.js: {} 
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/once
+drupal.wxt_bootstrap:
+  js:
+    js/drupal.wxt_bootstrap.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+    - wxt_bootstrap/framework
+    - core/once
+select2.theme:
+  css:
+    component:
+      css/select2.min.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/once
+biz-update-info:
+  js: 
+    js/updateLobbyistInfo.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/once
+
+

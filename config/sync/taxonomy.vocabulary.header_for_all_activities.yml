@@ -1,0 +1,9 @@
+uuid: 9492095a-9e55-48e5-a057-169610835c95
+langcode: en
+status: true
+dependencies: {  }
+name: 'Header for all activities'
+vid: header_for_all_activities
+description: null
+weight: 0
+new_revision: false

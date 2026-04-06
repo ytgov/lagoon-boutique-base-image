@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - serialization
+    - user
+id: biz_webform_rest_get_endpoint
+plugin_id: biz_webform_rest_get_endpoint
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - cookie

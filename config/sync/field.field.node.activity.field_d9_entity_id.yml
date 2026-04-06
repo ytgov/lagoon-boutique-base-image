@@ -1,0 +1,19 @@
+uuid: 8766b22b-0cb4-40cc-b24a-a389ab8a6774
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_d9_entity_id
+    - node.type.activity
+id: node.activity.field_d9_entity_id
+field_name: field_d9_entity_id
+entity_type: node
+bundle: activity
+label: 'D9 Entity id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

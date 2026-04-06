@@ -1,0 +1,32 @@
+uuid: 13759be8-2f0d-4938-a9eb-310222bbc327
+langcode: en
+status: true
+dependencies:
+  module:
+    - oauth2_server
+    - serialization
+    - user
+id: entity.user
+plugin_id: 'entity:user'
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie
+  POST:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie
+  DELETE:
+    supported_formats:
+      - json
+    supported_auth:
+      - oauth2
+  PATCH:
+    supported_formats:
+      - json
+    supported_auth:
+      - oauth2

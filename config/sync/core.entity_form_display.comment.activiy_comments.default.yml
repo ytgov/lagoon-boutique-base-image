@@ -1,0 +1,43 @@
+uuid: 46e404c3-b2f8-468f-819d-107ce8c6348e
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.activiy_comments
+    - field.field.comment.activiy_comments.comment_body
+  module:
+    - text
+id: comment.activiy_comments.default
+targetEntityType: comment
+bundle: activiy_comments
+mode: default
+content:
+  author:
+    weight: -2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  comment_body:
+    type: text_textarea
+    weight: 11
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  subject:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,18 @@
+uuid: 5314455d-fc65-42ab-9784-5e719b30ffae
+langcode: en
+status: true
+dependencies:
+  module:
+    - oauth2_server
+    - serialization
+    - user
+id: user_registration
+plugin_id: user_registration
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2

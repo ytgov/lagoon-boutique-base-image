@@ -1,0 +1,8 @@
+uuid: 4fb9127d-58d5-4b94-adaa-ddd05068c9d5
+langcode: en
+status: true
+dependencies: {  }
+id: lobbyist_register_backend_lobbyist_backend
+scope_id: lobbyist_backend
+server_id: lobbyist_register_backend
+description: lobbyist_backend

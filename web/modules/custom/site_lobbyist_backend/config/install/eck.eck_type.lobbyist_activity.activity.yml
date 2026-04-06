@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.lobbyist_activity
+type: activity
+name: Activity
+description: ''

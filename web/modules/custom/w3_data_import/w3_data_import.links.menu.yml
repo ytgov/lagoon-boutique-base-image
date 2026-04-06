@@ -1,0 +1,13 @@
+# w3_data_import.settings:
+#   title: 'Page import'
+#   route_name: w3_data_import.page
+#   description: 'Import page using CSV file'
+#   parent: system.admin_config_system
+#   weight: 99
+
+w3_data_import.page_import_settings:
+  title: 'D9 Import Settings'
+  route_name: w3_data_import.data_settings_config_form
+  description: 'Import page setting form'
+  parent: system.admin_config_system
+  weight: 98

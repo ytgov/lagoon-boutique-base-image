@@ -1,0 +1,220 @@
+_core:
+  default_config_hash: d0JwykHPy0g9bCApr0LGT4fOOEeey5dN8Jvaq9vokss
+langcode: en
+front_base_url: 'http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/'
+in_house_subject_add_new_lobbyist: "You've been added to the Yukon Lobbyist Registry"
+in_house_add_new_lobbyist:
+  value: '<p>You have been added as an in-house lobbyist by {{organization}}. This information has been published on the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/">Yukon Lobbyist Registry</a>.&nbsp;</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see&nbsp;the&nbsp;<a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em>.</a></p>'
+  format: basic_html
+in_house_subject_add_new_activity: 'New lobbying activity'
+in_house_add_new_activity:
+  value: '<p>You submitted a new lobbying activity. It has been published on the&nbsp;<a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca">Yukon Lobbyist Registry.</a>&nbsp;</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+in_house_subject_end_31_dec: ' End of reporting period for lobbying'
+in_house_end_31_dec:
+  value: '<p>This message is to notify you that your return for the end of the calendar year is due on January 31.</p><p>&nbsp;</p><p><strong>What you need to do:</strong></p><p>To file your year-end return, log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/">Yukon Lobbyist Registry.</a> Review your lobbying activities, provide updates as necessary and certify the information is correct.</p><p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+in_house_subject_end_15_jan: 'Interim reporting on lobbying'
+in_house_end_15_jan:
+  value: '<p>This message is to notify you that your return for the end of the calendar year was due on January 31. You have 15 days from today to do so.&nbsp;</p><p>&nbsp;</p><p><strong>What you need to do:</strong></p><p>Contact the administrator at <a href="mailto:info@yukonlobbyistregistry.ca">info@yukonlobbyistregistry.ca</a> to bring your account into compliance.&nbsp;</p><p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+in_house_subject_end_31_jan: 'End of reporting period for lobbying – failure to report'
+in_house_end_31_jan:
+  value: '<p>This message is to notify you that your return for the end of the calendar year was due on January 31. You have not submitted your return. Your organization has been identified as non-compliant and your lobbying activities are now locked from editing.</p><p>&nbsp;</p><p><strong>What you need to do:</strong></p><p>Contact the administrator at <a href="mailto:info@yukonlobbyistregistry.ca">info@yukonlobbyistregistry.ca</a> to bring your account into compliance.&nbsp;</p><p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+in_house_subject_update_before_end_calendar: 'End of reporting period for lobbying'
+in_house_update_before_end_calendar:
+  value: '<p>Your return for the end of the calendar year has been received. Thank you.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For general information or to log into your registry account, visit the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca">Yukon Lobbyist Registry.</a></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+in_house_subject_first_activity: 'Yukon Lobbyist Registry: You have submitted your first lobbying activity'
+in_house_first_activity:
+  value: '<p>You have submitted your first lobbying activity to the Yukon Lobbyist Registry. Your registration is not complete until the administrator reviews and publishes it to the registry.</p><p><strong>What’s next:</strong></p><p>The administrator will review your submission. They will contact you if they have questions about the information you provided.<br>Once they have accepted your submission, they will publish it to the registry.<br>This will complete the registration process.<br>You can now add additional lobbying activities and additional in-house lobbyists to your organization’s account.</p><p><strong>For more information:</strong></p><ul><li data-list-item-id="e53ae168ff9fb4d8cf9e1b41b188ceabe"><a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/en/how-to-manage-your-account">How to manage your account</a><a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/en/how-to-manage-your-account).">.</a> This includes information about adding in-house lobbyists to your organization’s account.</li><li data-list-item-id="ee33c0e8d2fefc288e564b5fe9d8d085a"><a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/en/reporting-requirements-periods">Reporting requirements for lobbyists</a></li></ul><p>For questions about the registration process email <a href="mailto:info@yukonlobbyistregistry.ca">info@yukonlobbyistregistry.ca</a> or phone 867-667-5618.</p>'
+  format: basic_html
+consultant_subject_add_new_activity: 'New lobbying activity'
+consultant_add_new_activity:
+  value: '<p>You submitted a new lobbying activity. It has been published on the&nbsp; <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca">Yukon Lobbyist Registry.</a>&nbsp;</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+consultant_subject_first_activity: 'Yukon Lobbyist Registry: You have submitted your first lobbying activity'
+consultant_first_activity:
+  value: '<p>You have submitted your first lobbying activity to the Yukon Lobbyist Registry. Your registration is not complete until the administrator reviews and publishes it to the registry.</p><p><strong>What’s next:</strong></p><p>The administrator will review your submission. They will contact you if they have questions about the information you provided.<br>Once they have accepted your submission, they will publish it to the registry.<br>This will complete the registration process.<br>You can now add additional lobbying activities and additional in-house lobbyists to your organization’s account.</p><p><strong>For more information:</strong></p><ul><li data-list-item-id="ec624f501e4329915fd15c7820e866871"><a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/en/how-to-manage-your-account">How to manage your account</a><a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/en/how-to-manage-your-account).">.</a> This includes information about adding in-house lobbyists to your organization’s account.</li><li data-list-item-id="e51ef891026102cad8793589f89b4c8ab"><a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/en/reporting-requirements-periods">Reporting requirements for lobbyists</a></li></ul><p>For questions about the registration process email <a href="mailto:info@yukonlobbyistregistry.ca">info@yukonlobbyistregistry.ca</a> or phone 867-667-5618.</p>'
+  format: basic_html
+consultant_subject_certify: 'Interim reporting on lobbying'
+consultant_certify:
+  value: '<p>Your semi-annual return has been received. Thank you.</p><p><strong>For more information:</strong></p><p>For general information or to log into your registry account, visit the Yukon Lobbyist Registry.</p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+consultant_subject_prior_6_months: 'Interim reporting on lobbying'
+consultant_prior_6_months:
+  value: '<p>You are required to provide updates on your lobbying every 6 months within your lobbying contract. You have 30 days from today to do so.&nbsp;</p><p>&nbsp;</p><p><strong>What you need to do:</strong></p><p>To file your semi-annual return, log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry.</a> Review your lobbying activities, provide updates as necessary and certify the information is correct.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+consultant_subject_prior_6_months_plus_15: 'Interim reporting on lobbying'
+consultant_prior_6_months_plus_15:
+  value: '<p>You are required to provide updates on your lobbying every 6 months within your lobbying contract. You have 15 days from today to do so.&nbsp;</p><p>&nbsp;</p><p><strong>What you need to do:</strong></p><p>To file your semi-annual return, log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry.</a> Review your lobbying activities, provide updates as necessary and certify the information is correct.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p><p>&nbsp;</p><p><strong>If you need assistance:</strong></p><p>Contact the administrator at <a href="mailto:info@yukonlobbyistregistry.ca">info@yukonlobbyistregistry.ca</a></p>'
+  format: basic_html
+consultant_subject_prior_6_months_plus_30: 'Interim reporting on lobbying – failure to report'
+consultant_prior_6_months_plus_30:
+  value: '<p>Your organization has not submitted your semi-annual return.&nbsp;Your semi-annual return is now overdue.&nbsp;</p><p>You are required to provide updates on your lobbying every 6&nbsp;months within your lobbying contract.&nbsp;</p><p>&nbsp;</p><p><strong>What you need to do:</strong></p><p>To file your semi-annual return, log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry</a>. Review your lobbying activities, provide updates as necessary and certify the information is correct.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+consultant_subject_end_contract: 'End of reporting period for lobbying'
+consultant_end_contract:
+  value: '<p>This message is to notify you that your return for the end of your lobbying contract is due in 30 days.</p><p><strong>What you need to do:</strong></p><p>Log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry</a> to file your final return for your lobbying contract. Review your lobbying activities, provide updates as necessary and certify the information is correct.</p><p>&nbsp;</p><p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+consultant_subject_end_contract_plus_15: 'End of reporting period for lobbying'
+consultant_end_contract_plus_15:
+  value: '<p>This message is to notify you that your return for the end of your lobbying contract is due in 15 days.</p><p>&nbsp;</p><p><strong>What you need to do:</strong></p><p>Log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry</a> to file your final return for your lobbying contract. Review your lobbying activities, provide updates as necessary and certify the information is correct.</p><p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+consultant_subject_end_contract_plus_30: 'End of reporting period for lobbying – failure to report'
+consultant_end_contract_plus_30:
+  value: '<p>This message is to notify you that your final return for the end of your lobbying contract is overdue.</p><p>You have been identified as non-compliant. Your lobbying activities are now locked from editing.</p><p>&nbsp;</p><p><strong>What you need to do:</strong></p><p>Contact the administrator at <a href="mailto:info@yukonlobbyistregistry.ca">info@yukonlobbyistregistry.ca</a> to bring your account into compliance.</p><p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+admin_subject_end_consultant_activity: 'Interim reporting on lobbying'
+admin_end_consultant_activity:
+  value: '<p>{{organization}} did not submit a semi-annual return.</p><p><a href="{{link}}">Click here</a> to login and verify.</p>'
+  format: basic_html
+admin_subject_contract_end_date: 'End of reporting period – failure to report'
+admin_contract_end_date:
+  value: '<p>{{organization}} did not submit a final return for the end of lobbying contract. The lobbying activity/activities is now locked and can’t be edited by the lobbyist.</p><p><a href="{{link}}">Click here</a> to login and verify.</p>'
+  format: basic_html
+admin_subject_end_31_jan: 'End of reporting period – failure to report'
+admin_end_31_jan:
+  value: '<p>{{organization}}&nbsp;did not submit a return for the end of the calendar year. The lobbying activity/activities is now locked and can’t be edited by the lobbyist.&nbsp;</p>'
+  format: basic_html
+admin_subject_in_house_first_activity: 'First lobbying activity'
+admin_in_house_first_activity:
+  value: '<p>{{organization}}&nbsp;submitted the first lobbying activity. Log into the Yukon Lobbyist Registry to verify the activity and update the status.</p><p><a href="{{link}}">Click here</a> to login and verify.</p>'
+  format: basic_html
+admin_subject_consultant_first_activity: 'First lobbying activity'
+admin_consultant_first_activity:
+  value: '<p>{{organization}}&nbsp;submitted the first lobbying activity. Log into the Yukon Lobbyist Registry to verify the activity and update the status.</p><p><a href="{{link}}">Click here</a> to login and verify.</p>'
+  format: basic_html
+lobbyist_subject_new_comment: 'New comment from a lobbyist'
+lobbyist_new_comment:
+  value: '<p>{{organization}}&nbsp;sent you a message. Log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry</a> to view the comment and reply.</p><p><a href="{{link}}">Click here</a> to login and verify.</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+lobbyist_updated_act:
+  value: '<p>{{organization}}&nbsp;updated an activity. Log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry</a> to view the activity.</p><p><a href="{{link}}">Click here</a> to login and verify.</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+admin_subject_new_comment: 'New comment - Yukon Lobbyist Registry'
+admin_new_comment:
+  value: '<p>The administrator sent you a message.</p><p><a href="{{link}}">Click here</a> to login and verify.</p><p><strong>What you need to do:</strong></p><p>Log into the <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry</a> to view the comment and reply as necessary.</p><p>&nbsp;</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+commissioner_subject_approve_first_act: 'Yukon Lobbyist Registry: You are registered'
+commissioner_approve_first_act:
+  value: '<p>The Yukon Lobbyist Administrator has approved your first reported lobbying activity. This means your registration is complete. We only review and approve your first lobbying activity to verify your account</p><p><a href="{{link}}">Click here</a> to login and verify.</p><p><strong>What’s next:</strong></p><p>You can now log in to your account and manage your information.</p><p>Refer to our <a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/en/how-to-manage-your-account">How to manage your lobbyist account</a>&nbsp;page for guidance on adding in-house lobbyists and adding more lobbying activities.</p><p><strong>For more information:</strong></p><p>Email <a href="mailto:info@yukonlobbyistregistry.ca">info@yukonlobbyistregistry.ca</a> for questions about the Yukon Lobbyist Registry.</p>'
+  format: basic_html
+commissioner_updated_act:
+  value: '<p>Administrator updated an activity. &nbsp;<strong>If the Administrator commented on your registration, you can&nbsp;</strong>log into the&nbsp;<a href="http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login">Yukon Lobbyist Registry</a>&nbsp;to view the comment and reply.</p><p><a href="{{link}}">Click here</a> to login and verify.</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+you_updated_act:
+  value: '<p>The activity was updated.</p><p><a href="{{link}}">Click here</a> to login and verify.</p><p><strong>For more information:</strong></p><p>For more information about your requirements to report lobbying activities, see the <a href="https://legislation.yukon.ca/acts/lobreg_c.pdf"><em>Lobbyists Registration Act</em></a>.</p>'
+  format: basic_html
+wave_for_not_validate: 1
+in_house:
+  in_house_subject_add_new_lobbyist: 'New lobbying activity'
+  in_house_add_new_lobbyist:
+    value: "<p>You have been added as an in-house lobbyist by {{Organization}}. This information has been published on the Yukon Lobbyist Registry.&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, visit the&nbsp;<a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\"><em>Lobbyists Registration Act</em>.</a></p>\r\n"
+    format: basic_html
+  in_house_subject_add_new_activity: 'New lobbying activity'
+  in_house_add_new_activity:
+    value: "<p>You have been added as an in-house lobbyist by {{organization}}.&nbsp;This information has been published on the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\">Yukon Lobbyist Registry.</a>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  in_house_subject_end_31_dec: ' End of reporting period for lobbying'
+  in_house_end_31_dec:
+    value: "<p>This message is to notify you that your return for the end of the calendar year is due on January 31.</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>To file your year-end return, log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\">Yukon Lobbyist Registry.</a> Review your lobbying activities, provide updates as necessary and certify the information is correct.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more Information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  in_house_subject_end_15_jan: 'Interim reporting on lobbying'
+  in_house_end_15_jan:
+    value: "<p>This message is to notify you that your return for the end of the calendar year was due on January 31. You have 15 days from today to do so.&nbsp;</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>Contact the administrator at <a href=\"mailto:info@yukonlobbyistregistry.ca\">info@yukonlobbyistregistry.ca</a> to bring your account into compliance.&nbsp;</p>\r\n\r\n<p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more Information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  in_house_subject_end_31_jan: 'End of reporting period for lobbying – failure to report'
+  in_house_end_31_jan:
+    value: "<p>This message is to notify you that your return for the end of the calendar year was due on January 31. You have not submitted your return. Your organization has been identified as non-compliant and your lobbying activities are now locked from editing.</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>Contact the administrator at <a href=\"mailto:info@yukonlobbyistregistry.ca\">info@yukonlobbyistregistry.ca</a> to bring your account into compliance.&nbsp;</p>\r\n\r\n<p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more Information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  in_house_subject_update_before_end_calendar: 'End of reporting period for lobbying'
+  in_house_update_before_end_calendar:
+    value: "<p>Your return for the end of the calendar year has been received. Thank you.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more Information:</strong></p>\r\n\r\n<p>For general information or to log into your registry account, visit the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\">Yukon Lobbyist Registry.</a></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  in_house_subject_first_activity: 'First lobbying activity'
+  in_house_first_activity:
+    value: "<p>You submitted your first lobbying activity.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>What’s next:</strong></p>\r\n\r\n<p>The administrator will review the activity. Once the administrator accepts the activity, it will be published on the registry.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+consultant:
+  consultant_subject_prior_6_months: 'Interim reporting on lobbying'
+  consultant_prior_6_months:
+    value: "<p>You are required to provide updates on your lobbying every 6 months within your lobbying contract. You have 30 days from today to do so.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>To file your semi-annual return, log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry.</a> Review your lobbying activities, provide updates as necessary and certify the information is correct.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  consultant_subject_prior_6_months_plus_15: 'Interim reporting on lobbying'
+  consultant_prior_6_months_plus_15:
+    value: "<p>You are required to provide updates on your lobbying every 6 months within your lobbying contract. You have 15 days from today to do so.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>To file your semi-annual return, log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry.</a> Review your lobbying activities, provide updates as necessary and certify the information is correct.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>If you need assistance:</strong></p>\r\n\r\n<p>Contact the administrator at <a href=\"mailto:info@yukonlobbyistregistry.ca\">info@yukonlobbyistregistry.ca</a></p>\r\n"
+    format: basic_html
+  consultant_subject_prior_6_months_plus_30: 'Interim reporting on lobbying – failure to report'
+  consultant_prior_6_months_plus_30:
+    value: "<p>Your organization has not submitted your semi-annual return.&nbsp;Your semi-annual return is now overdue.&nbsp;</p>\r\n\r\n<p>You are required to provide updates on your lobbying every six months within your lobbying contract.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>To file your semi-annual return, log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry</a>. Review your lobbying activities, provide updates as necessary and certify the information is correct.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  consultant_subject_end_contract: 'End of reporting period for lobbying'
+  consultant_end_contract:
+    value: "<p>This message is to notify you that your return for the end of your lobbying contract is due in 30 days.</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>Log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry</a> to file your final return for your lobbying contract. Review your lobbying activities, provide updates as necessary and certify the information is correct.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more Information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  consultant_subject_end_contract_plus_15: 'End of reporting period for lobbying'
+  consultant_end_contract_plus_15:
+    value: "<p>This message is to notify you that your return for the end of your lobbying contract is due in 15 days.</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>Log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry</a> to file your final return for your lobbying contract. Review your lobbying activities, provide updates as necessary and certify the information is correct.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more Information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  consultant_subject_end_contract_plus_30: 'End of reporting period for lobbying – failure to report'
+  consultant_end_contract_plus_30:
+    value: "<p>This message is to notify you that your final return for the end of your lobbying contract is overdue.</p>\r\n\r\n<p>You have been identified as non-compliant. Your lobbying activities are now locked from editing.</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>Contact the administrator at <a href=\"mailto:info@yukonlobbyistregistry.ca\">info@yukonlobbyistregistry.ca</a> to bring your account into compliance.</p>\r\n\r\n<p>It is and remains your responsibility to ensure that filings are completed and submitted within the timelines required by the Act.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more Information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  consultant_subject_add_new_activity: 'New lobbying activity'
+  consultant_add_new_activity:
+    value: "<p>You have been added as an in-house lobbyist by {{organization}}.&nbsp;This information has been published on the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\">Yukon Lobbyist Registry.</a>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  consultant_subject_first_activity: 'First lobbying activity'
+  consultant_first_activity:
+    value: "<p>You submitted your first lobbying activity.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>What’s next:</strong></p>\r\n\r\n<p>The administrator will review the activity. Once the administrator accepts the activity, it will be published on the registry.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  consultant_subject_certify: 'Interim reporting on lobbying'
+  consultant_certify:
+    value: "<p>Your semi-annual return has been received. Thank you.</p>\r\n\r\n<p><strong>For more Information:</strong></p>\r\n\r\n<p>For general information or to log into your registry account, visit the Yukon Lobbyist Registry.</p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+admin:
+  admin_subject_end_consultant_activity: 'Interim reporting on lobbying'
+  admin_end_consultant_activity:
+    value: "<p>{{Organization}} did not submit a semi-annual return.</p>\r\n"
+    format: basic_html
+  admin_subject_contract_end_date: 'End of reporting period – failure to report'
+  admin_contract_end_date:
+    value: "<p>{{Organization}} did not submit a final return for the end of lobbying contract. The lobbying activity/activities is now locked and can’t be edited by the lobbyist.</p>\r\n"
+    format: basic_html
+  admin_subject_end_31_jan: 'End of reporting period – failure to report'
+  admin_end_31_jan:
+    value: "<p>{{Organization}}&nbsp;did not submit a return for the end of the calendar year. The lobbying activity/activities is now locked and can’t be edited by the lobbyist.&nbsp;</p>\r\n"
+    format: basic_html
+  admin_subject_in_house_first_activity: 'First lobbying activity'
+  admin_in_house_first_activity:
+    value: "<p>{{Organization}}&nbsp;submitted its first lobbying activity. Log into the Yukon Lobbyist Registry to verify the activity and update the status.</p>\r\n"
+    format: basic_html
+  admin_subject_consultant_first_activity: 'First lobbying activity'
+  admin_consultant_first_activity:
+    value: "<p>{{Organization}}&nbsp;submitted its first lobbying activity. Log into the Yukon Lobbyist Registry to verify the activity and update the status.</p>\r\n"
+    format: basic_html
+  admin_subject_new_comment: 'New comment - Yukon Lobbyist Registry'
+  admin_new_comment:
+    value: "<p>The administrator sent you a message.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>What you need to do:</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Log into the<a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\"> Yukon Lobbyist Registry </a>to view the comment and reply as necessary.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+lobbyist:
+  lobbyist_subject_new_comment: 'New comment from a lobbyist'
+  lobbyist_new_comment:
+    value: "<p>{{Organization}}&nbsp;sent you a message. Log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry</a> to view the comment and reply.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  lobbyist_updated_act:
+    value: "<p>{{Organization}}&nbsp;updated an activity. Log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry</a> to view the comment and reply.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  you_updated_act:
+    value: "<p>Your activity was updated. Log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry</a> to view the comment and reply.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  commissioner_subject_approve_first_act: 'Lobbying activity accepted'
+  commissioner_approve_first_act:
+    value: "<p>&nbsp;</p>\r\n\r\n<p>The administrator accepted your first lobbying activity and it is now available on the registry.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>What’s next:</strong></p>\r\n\r\n<p>The administrator only reviews the first lobbying activity. Any edits or additional activities will be automatically published on the registry.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  commissioner_updated_act:
+    value: "<p>Administrator updated an activity. Log into the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca/login\">Yukon Lobbyist Registry</a> to view the comment and reply.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>For more information:</strong></p>\r\n\r\n<p>For more information about your requirements to report lobbying activities, see the <a href=\"http://bizont-lobbyist.cms-dev.ynet.gov.yk.ca\"><em>Lobbyists Registration Act</em></a>.</p>\r\n"
+    format: basic_html
+  wave_for_not_validate: 0

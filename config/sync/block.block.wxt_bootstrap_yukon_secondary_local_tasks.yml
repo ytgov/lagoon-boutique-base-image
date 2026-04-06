@@ -1,0 +1,22 @@
+uuid: a87bdf6e-8c18-411d-a83e-2870e692d50c
+langcode: en
+status: true
+dependencies:
+  theme:
+    - wxt_bootstrap_yukon
+_core:
+  default_config_hash: ydSxdq7R66I8UMC460rOzlfzvlUL4VRbdwc6z9DWaUI
+id: wxt_bootstrap_yukon_secondary_local_tasks
+theme: wxt_bootstrap_yukon
+region: highlighted
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

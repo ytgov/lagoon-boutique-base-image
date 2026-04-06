@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.lobbyist_activity.activity
+id: lobbyist_activity.activity.created
+field_name: created
+entity_type: lobbyist_activity
+bundle: activity
+label: 'Authored on'
+description: 'The time that the entity was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

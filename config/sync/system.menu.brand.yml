@@ -1,0 +1,10 @@
+uuid: 47c259f6-bc50-4ada-8beb-38522eb83ef4
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: VpiIxA4CNdyAHFE_pk1pFLY-69aTk6dYx1VRDVh4q6Q
+id: brand
+label: Brand
+description: 'Brand Menu.'
+locked: false

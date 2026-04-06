@@ -1,0 +1,32 @@
+uuid: 115815b7-e07d-43cf-a408-8a0ce4cfdca4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_telephone
+  module:
+    - multiple_registration
+    - telephone
+    - user
+third_party_settings:
+  multiple_registration:
+    user_additional_register_form_required:
+      in_house_lobbyist: in_house_lobbyist
+      consultant_lobbyist: consultant_lobbyist
+      authenticated: 0
+    user_additional_register_form:
+      in_house_lobbyist: in_house_lobbyist
+      consultant_lobbyist: consultant_lobbyist
+      authenticated: 0
+id: user.user.field_telephone
+field_name: field_telephone
+entity_type: user
+bundle: user
+label: Telephone
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

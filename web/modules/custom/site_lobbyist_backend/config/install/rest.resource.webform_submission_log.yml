@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - serialization
+    - user
+id: webform_submission_log
+plugin_id: webform_submission_log
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie

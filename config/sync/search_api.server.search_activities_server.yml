@@ -1,0 +1,15 @@
+uuid: e9b2d636-14af-4500-b170-156ebd2de6eb
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_db
+id: search_activities_server
+name: 'Search activities'
+description: ''
+backend: search_api_db
+backend_config:
+  database: 'default:default'
+  min_chars: 1
+  matching: words
+  phrase: bigram

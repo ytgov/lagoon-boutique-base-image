@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oauth2_server
+    - serialization
+    - user
+    - webform
+id: entity.webform_submission
+plugin_id: 'entity:webform_submission'
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - cookie
+  POST:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - oauth2
+  DELETE:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - oauth2
+  PATCH:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - oauth2

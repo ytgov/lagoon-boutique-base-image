@@ -1,0 +1,10 @@
+multiple_registration_pages_allowed_list:
+  in_house_lobbyist: in_house_lobbyist
+  consultant_lobbyist: consultant_lobbyist
+  anonymous: 0
+  authenticated: 0
+  content_editor: 0
+  administrator: 0
+  reviewer: 0
+  role_administrator: 0
+  creator: 0

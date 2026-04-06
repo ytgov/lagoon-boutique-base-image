@@ -1,0 +1,21 @@
+uuid: c347ce0a-2ae3-4b29-b7ef-4355c2ea7d90
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lobby_s_topics
+  module:
+    - text
+id: taxonomy_term.lobby_s_topics.description
+field_name: description
+entity_type: taxonomy_term
+bundle: lobby_s_topics
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

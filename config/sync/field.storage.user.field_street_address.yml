@@ -1,0 +1,19 @@
+uuid: 9443c5c0-eeb1-4497-a387-8895d000013d
+langcode: en
+status: true
+dependencies:
+  module:
+    - address
+    - user
+id: user.field_street_address
+field_name: field_street_address
+entity_type: user
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

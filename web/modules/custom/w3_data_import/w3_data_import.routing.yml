@@ -1,0 +1,63 @@
+w3_data_import.all_users:
+  path: '/user-import'
+  defaults:
+    _controller: '\Drupal\w3_data_import\Controller\UserImportController::content'
+    _title: 'All Users JSON'
+  requirements:
+    _permission: 'administer users'
+  methods: [GET]
+
+w3_data_import.webform_import:
+  path: '/webform-import'
+  defaults:
+    _controller: '\Drupal\w3_data_import\Controller\WebfornImportController::content'
+    _title: 'All webform JSON'
+  requirements:
+    _permission: 'administer users'
+  methods: [GET]
+
+w3_data_import.webform_import-inhouse:
+  path: '/webform-import-inhouse'
+  defaults:
+    _controller: '\Drupal\w3_data_import\Controller\WebfornImportController::content_in_house'
+    _title: 'All webform JSON'
+  requirements:
+    _permission: 'administer users'
+  methods: [GET]
+
+w3_data_import.webform_import-inhouse_org:
+  path: '/webform-import-inhouse-org'
+  defaults:
+    _controller: '\Drupal\w3_data_import\Controller\WebfornImportController::content_in_house_org'
+    _title: 'All webform JSON'
+  requirements:
+    _permission: 'administer users'
+  methods: [GET]
+  
+w3_data_import.activity-import:
+  path: '/activity-import'
+  defaults:
+    _controller: '\Drupal\w3_data_import\Controller\ActivityImportController::content'
+    _title: 'Activity Import'
+  requirements:
+    _permission: 'administer users'
+  methods: [GET]
+
+w3_data_import.data_settings_config_form:  
+  path: '/admin/config/data-import-settings'  
+  defaults:  
+    _form: '\Drupal\w3_data_import\Form\SiteConfig'  
+    _title: 'D9 Import Settings'
+  requirements:  
+    _permission: 'access administration pages'  
+  options:  
+    _admin_route: TRUE
+
+w3_data_import.comment:
+  path: '/comment-import'
+  defaults:
+    _controller: '\Drupal\w3_data_import\Controller\CommentImportController::content'
+    _title: 'Comment Import'
+  requirements:
+    _permission: 'administer users'
+  methods: [GET]

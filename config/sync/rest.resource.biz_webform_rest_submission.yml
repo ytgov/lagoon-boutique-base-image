@@ -1,0 +1,23 @@
+uuid: 42f61099-3975-482c-b0ea-3049ff9a6f7f
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - oauth2_server
+    - serialization
+    - user
+id: biz_webform_rest_submission
+plugin_id: biz_webform_rest_submission
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie
+  PATCH:
+    supported_formats:
+      - json
+    supported_auth:
+      - oauth2

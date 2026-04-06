@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.lobbyist_activity.activity
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: lobbyist_activity.activity
+target_entity_type_id: lobbyist_activity
+target_bundle: activity
+default_langcode: site_default
+language_alterable: true

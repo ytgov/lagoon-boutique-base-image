@@ -1,0 +1,11 @@
+uuid: cbae8130-94f9-4f27-a432-ae8f5c6ae54f
+langcode: en
+status: true
+dependencies:
+  module:
+    - oauth2_server
+id: oauth2_server_token.token
+label: Token
+description: null
+targetEntityType: oauth2_server_token
+cache: true

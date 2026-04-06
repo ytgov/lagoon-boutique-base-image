@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Default theme implementation for webform submission data.
+ *
+ * Available variables:
+ * - webform_submission: The webform submission.
+ * - webform: The webform.
+ *
+ * @see template_preprocess_webform_submission_data()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+set classes = ['custom-webform-preview',
+'webform-submission-data',
+'webform-submission-data--webform-' ~ webform.id()|clean_class,
+view_mode ? 'webform-submission-data--view-mode-' ~ view_mode|clean_class,
+]
+%}
+<div id='preview-header-container'>
+  <label>{% trans %}Review your submission details to make sure they are correct. Select the "Edit details" button to make changes. When the information is correct, select the confirmation checkbox and submit to add your lobbying activity to the registry.{% endtrans %}
+  </label>
+</div>
+<div{{ attributes.addClass(classes) }}>
+{{ elements }}
+</div>
+<div id="checkbox-container-preview">
+  <input type="checkbox" id="confirm-checkbox">
+  <label for="confirm-checkbox">{% trans %}I confirm that the information I’m about to submit is accurate and I am legally permitted to do so.{% endtrans %}</label>
+</div>

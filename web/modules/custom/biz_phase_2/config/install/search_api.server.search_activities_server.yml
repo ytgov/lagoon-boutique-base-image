@@ -1,0 +1,14 @@
+uuid: 23c98504-ce86-4f01-a58e-8feef80bbc19
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_db
+id: search_activities_server
+name: 'Search activities'
+description: ''
+backend: search_api_db
+backend_config:
+  database: 'default:default'
+  min_chars: 1
+  matching: words

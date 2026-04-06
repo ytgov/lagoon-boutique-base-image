@@ -1,0 +1,113 @@
+<?php
+    
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Database\Database;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\biz_sync_users\GeneralCustomController;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ * Change the title from tabs in registration page
+ */
+function biz_sync_users_menu_local_tasks_alter(&$data, $route_name) {
+  $forms = ["user.login", "multiple_registration.role_registration_page","user.pass"];
+  if(in_array($route_name, $forms)){
+    $new_tab['#link']['title'] = t("I Don't know");
+  	$new_tab['#link']['url'] = Drupal\Core\Url::fromUri('internal:/form/lobbyist-finder-modal');
+  	$new_tab['#theme'] = "menu_local_task";
+  	$new_tab['#active'] = FALSE;
+  	$new_tab['#access'] = $data['tabs'][0]['multiple_registration.local_tasks:in_house_lobbyist']['#access'];
+  	$data['tabs'][0]['multiple_registration.local_tasks:modal_lobbyist'] = $new_tab;
+  	
+  	foreach ($data['tabs'][0] as $type => &$tab) {
+        if ($tab['#link']['title'] == t('Create new In-house lobbyist account') || $tab['#link']['title'] == t('Create new Consultant lobbyist account') || $tab['#link']['title'] == t("I Don't know") || $tab['#link']['title'] == t("Create new account") )  {
+           unset($data['tabs'][0][$type]);
+        }
+        unset($tab);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page document templates.
+ */
+function biz_sync_users_preprocess_page(&$page) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+  if($current_path == '/admin/people' && !in_array('administrator', $roles, true) ){
+    unset($page['page']['content']['seven_local_actions']);
+    unset($page['page']['header']['wxt_lobbyist_local_actions']);
+    
+  }
+}
+
+/*
+ * Implements hook_form_alter()  for add actions in specifics forms
+ *
+*/
+function biz_sync_users_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+    $front_base_url = \Drupal::config('biz_business_rules.settings')->get('front_base_url');
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    switch ($form_id) {
+        case "user_register_form":
+            $form['#validate'][] = 'biz_sync_users_validate_email';
+            if(in_array('editor', $roles)){
+              $param = \Drupal::request()->query->all();
+              $role = isset($param['user']) ? $param['user'] : "";
+              $visible = ['visible' => [':input[name="roles[administrator]"]' => ['value' => 'checked']]];
+              switch($role){
+                case 'admin' :
+                  $form['account']['roles']['#default_value'] = ['authenticated', 'role_administrator'];
+                  $form['account']['roles']['#states'] = $visible;
+                  unset($form['account']['notify']);
+                break;
+                case 'editor':
+                  $form['account']['roles']['#default_value'] = ['authenticated', 'editor'];
+                  $form['account']['roles']['#states'] = $visible;
+                  unset($form['account']['notify']);
+                break;
+              }
+            }
+            break;
+        case "user_form":
+            if(!in_array('administrator', $roles)){
+              unset( $form['actions']['delete']);
+            }
+            break;
+        case "views_form_user_admin_people_page_1":     
+            if(!in_array('administrator', $roles)){
+              unset( $form['header']);
+              unset($form['user_bulk_form']);
+              unset( $form['actions']);
+            }
+            break;
+    }
+}
+
+/**
+ * Validate if the email address is already taken 
+ */
+function biz_sync_users_validate_email($form, &$form_state){
+    //Save User
+    $user_values = $form_state->getValues();
+    $param = \Drupal::request()->query->all();
+    $role = isset($param['user']) ? $param['user'] : "";
+    switch($role){
+        case 'admin' :
+            $user_values["roles"][0] = 'role_administrator';
+        break;
+        case 'editor':
+            $user_values["roles"][0] = 'editor';
+        break;
+        default:
+            $user_values["roles"][0] = isset($data["multiple_registration_rid"]) ? $data["multiple_registration_rid"]: $data["roles"][1];
+        break;
+    }
+    $user_values = $form_state->setValues($user_values);
+  }

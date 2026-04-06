@@ -1,0 +1,132 @@
+display:
+  default:
+    display_title: Master
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Apply
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Sort by'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
+          tags:
+            previous: ‹‹
+            next: ››
+      fields:
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        mail:
+          separator: ', '
+      title: 'In-house lobbying activities'
+      arguments:
+        sid:
+          exception:
+            title: All
+  rest_export_1:
+    display_options:
+      arguments:
+        mail:
+          exception:
+            title: All
+      fields:
+        webform_submission_value:
+          alter:
+            text: '<a href = "/fr/consultant-account-home/consultant-activity-view?id={{ sid_1 }}" >{{ webform_submission_value }}</a>'
+        webform_submission_value_11:
+          label: Email
+        sid:
+          admin_label: Afficher
+          alter:
+            text: '<a href = "/fr/consultant-account-home/consultant-activity-view?id={{ sid }}" > Afficher </a>'
+          separator: ', '
+        uuid:
+          separator: ', '
+        mail:
+          separator: ', '
+        field_telephone:
+          separator: ', '
+        changed:
+          separator: ', '
+  rest_export_2:
+    display_options:
+      arguments:
+        uid:
+          exception:
+            title: All
+      fields:
+        uid:
+          separator: ', '
+        sid_1:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            text: '<a href ="/fr/search-organization/organization-view/consultant-activity-view?id={{ sid_1}}&org={{ uid }}&webform_id=add_a_lobbying_activity_consulta" >{{ webform_submission_value }}</a>'
+        sid:
+          admin_label: Afficher
+          alter:
+            text: '<a href = "/fr/search-organization/organization-view/consultant-activity-view?id={{ sid }}&org={{ uid }}&webform_id=add_a_lobbying_activity_consulta" > Afficher </a>'
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+        webform_submission_value_4:
+          admin_label: État
+          label: État
+  rest_export_3:
+    display_options:
+      arguments:
+        mail:
+          exception:
+            title: All
+      fields:
+        sid_1:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            text: '<a href = "/fr/consultant-account-home/consultant-activity-view?id={{ sid_1 }}&webform_id=add_a_lobbying_activity_consulta" >{{ webform_submission_value }}</a>'
+        sid:
+          admin_label: Afficher
+          alter:
+            text: '<a href = "/fr/consultant-account-home/consultant-activity-view?id={{ sid }}&webform_id=add_a_lobbying_activity_consulta" > Afficher </a>'
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+  rest_export_4:
+    display_options:
+      fields:
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+        webform_submission_value_20:
+          admin_label: Country
+        uid:
+          separator: ', '
+  rest_export_6:
+    display_options:
+      fields:
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+        webform_submission_value_20:
+          admin_label: Country
+        mail:
+          separator: ', '
+        uid:
+          separator: ', '

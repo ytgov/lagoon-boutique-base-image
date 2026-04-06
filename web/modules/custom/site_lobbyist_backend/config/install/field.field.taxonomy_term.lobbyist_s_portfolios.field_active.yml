@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_active
+    - taxonomy.vocabulary.lobbyist_s_portfolios
+id: taxonomy_term.lobbyist_s_portfolios.field_active
+field_name: field_active
+entity_type: taxonomy_term
+bundle: lobbyist_s_portfolios
+label: Active
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

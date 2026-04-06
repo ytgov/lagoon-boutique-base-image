@@ -1,0 +1,5 @@
+biz_business_rules.settings:
+    title: 'Mails for business rules'
+    base_route_name: biz_business_rules.settings
+    names:
+        - biz_business_rules.settings

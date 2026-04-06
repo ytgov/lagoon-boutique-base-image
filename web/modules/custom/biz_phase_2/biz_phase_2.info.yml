@@ -1,0 +1,17 @@
+name: 'Update info'
+type: module
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+dependencies:
+  - block
+  - block_class
+  - block_content
+  - system
+  - wxt_library
+  - search_api
+  - search_api_db
+  - search_api_field_map
+  - search_api_fulltext_translations
+  - translation_views
+  - views_field_view
+version: 8.x-1.0

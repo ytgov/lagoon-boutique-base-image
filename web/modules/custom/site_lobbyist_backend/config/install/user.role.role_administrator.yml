@@ -1,0 +1,31 @@
+uuid: 3a82b7e4-50cd-4394-842d-38f4e3d2a0bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: role_administrator
+label: 'Role administrator'
+weight: 5
+is_admin: null
+permissions:
+  - 'access comments'
+  - 'access user profiles'
+  - 'access webform submission log'
+  - 'administer biz_business_rules'
+  - 'administer comments'
+  - 'administer users'
+  - 'change own username'
+  - 'edit own comments'
+  - 'post comments'
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful patch biz_webform_rest_submission'
+  - 'restful post biz_webform_rest_submit'
+  - 'restful post user_registration'
+  - 'use oauth2 server'
+  - 'view any webform submission'

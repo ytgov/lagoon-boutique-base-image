@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.lobbyist_s_portfolios.field_active
+    - field.field.taxonomy_term.lobbyist_s_portfolios.field_period
+    - taxonomy.vocabulary.lobbyist_s_portfolios
+  module:
+    - datetime
+id: taxonomy_term.lobbyist_s_portfolios.default
+targetEntityType: taxonomy_term
+bundle: lobbyist_s_portfolios
+mode: default
+content:
+  field_active:
+    weight: 1
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_period:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  langcode:
+    type: language_select
+    weight: 3
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  path: true

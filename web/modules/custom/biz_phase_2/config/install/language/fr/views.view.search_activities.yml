@@ -1,0 +1,235 @@
+display:
+  default:
+    display_options:
+      fields:
+        webform_id_1:
+          label: Webform
+          separator: ', '
+        field_last_name_consultant_:
+          separator: ', '
+        field_operating_organization:
+          separator: ', '
+        field_first_name_consultant_:
+          separator: ', '
+        field_legal_organization:
+          separator: ', '
+        field_business_name:
+          separator: ', '
+        nothing:
+          label: 'Custom text'
+        changed:
+          separator: ', '
+        webform_id:
+          label: Type
+          alter:
+            text: "{%- if webform_id == 'add_a_lobbying_activity' -%}\r\nSalarié\r\n{%- elseif webform_id == 'add_a_lobbying_activity_consulta'  %}\r\nConseil\r\n{%- endif %}"
+          separator: ', '
+        sid:
+          label: 'Submission ID'
+          alter:
+            text: "{%- if webform_id_1 == 'add_a_lobbying_activity' -%}\r\n<a href = \"/fr/in-house-view?id= {{sid}} \"><i class=\"far fa-eye\"></i></a>\r\n{%- elseif webform_id_1 == 'add_a_lobbying_activity_consulta'  %}\r\n<a href = \"/fr/consultant-activity-view?id= {{sid}} \"><i class=\"far fa-eye\"></i></a>\r\n{%- endif %}"
+          separator: ', '
+      exposed_form:
+        options:
+          submit_button: Apply
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Sort by'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+    display_title: Master
+  page_1:
+    display_options:
+      filters:
+        combine:
+          expose:
+            label: 'Combine fields filter'
+          group_info:
+            label: 'Combine fields filter'
+      fields:
+        webform_id_1:
+          label: Webform
+          separator: ', '
+        field_last_name_consultant_:
+          separator: ', '
+        field_operating_organization:
+          separator: ', '
+        field_first_name_consultant_:
+          separator: ', '
+        field_legal_organization:
+          separator: ', '
+        field_business_name:
+          separator: ', '
+        nothing:
+          label: 'Custom text'
+        webform_id:
+          label: Type
+          alter:
+            text: "{%- if webform_id == 'add_a_lobbying_activity' -%}\r\nSalarié\r\n{%- elseif webform_id == 'add_a_lobbying_activity_consulta'  %}\r\nConseil\r\n{%- endif %}"
+          separator: ', '
+        sid:
+          label: 'Submission ID'
+          alter:
+            text: "{%- if webform_id_1 == 'add_a_lobbying_activity' -%}\r\n<a href = \"/fr/in-house-view?id= {{sid}} \"><i class=\"far fa-eye\"></i></a>\r\n{%- elseif webform_id_1 == 'add_a_lobbying_activity_consulta'  %}\r\n<a href = \"/fr/consultant-activity-view?id= {{sid}} \"><i class=\"far fa-eye\"></i></a>\r\n{%- endif %}"
+          separator: ', '
+        sid_1:
+          label: 'Submission ID'
+          separator: ', '
+        name:
+          label: Name
+          separator: ', '
+        name_1:
+          label: Name
+          separator: ', '
+        changed:
+          separator: ', '
+      pager:
+        options:
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
+    display_title: Page
+  rest_export_1:
+    display_options:
+      filters:
+        combine:
+          expose:
+            label: 'Combine fields filter'
+      fields:
+        field_legal_organization:
+          separator: ', '
+        field_first_name_consultant_:
+          separator: ', '
+        field_last_name_consultant_:
+          separator: ', '
+        sid_2:
+          separator: ', '
+        nothing_2:
+          admin_label: Topics
+        sid_1:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            text: '<a href = "/fr/search-organization/organization-view/in-house-activity-view?id={{sid_1}}&org={{ uid }}&webform_id=&webform_id=add_a_lobbying_activity" >{{ webform_submission_value }}</a>'
+        sid:
+          admin_label: Afficher
+          alter:
+            text: '<a href = "/fr/search-organization/organization-view/in-house-activity-view?id={{sid}}&org={{ uid }}&webform_id=&webform_id=add_a_lobbying_activity" >Afficher</a>'
+          separator: ', '
+        changed:
+          separator: ', '
+  rest_export_2:
+    display_options:
+      filters:
+        combine:
+          expose:
+            label: 'Combine fields filter'
+        tid:
+          expose:
+            label: Term
+      fields:
+        field_legal_organization:
+          separator: ', '
+        field_first_name_consultant_:
+          separator: ', '
+        field_last_name_consultant_:
+          separator: ', '
+        nothing:
+          admin_label: Type
+        field_business_name:
+          separator: ', '
+        nothing_2:
+          admin_label: Topics
+        field_first_name:
+          separator: ', '
+        field_last_name:
+          separator: ', '
+        status:
+          settings:
+            format_custom_true: Actif
+            format_custom_false: Bloqué
+          separator: ', '
+        uid:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            text: '<a href = "/fr/in-house-account-home/in-house-activity-view?id={{sid_1}}&webform_id=add_a_lobbying_activity" >{{ webform_submission_value }}</a>'
+        changed:
+          separator: ', '
+  rest_export_3:
+    display_options:
+      filters:
+        combine:
+          expose:
+            label: 'Combine fields filter'
+          group_info:
+            label: 'Combine fields filter'
+        webform_submission_value:
+          expose:
+            label: deleted
+          group_info:
+            label: deleted
+      fields:
+        field_last_name_consultant_:
+          separator: ', '
+        field_operating_organization:
+          separator: ', '
+        field_first_name_consultant_:
+          separator: ', '
+        field_legal_organization:
+          separator: ', '
+        field_business_name:
+          separator: ', '
+        sid_1:
+          label: 'Submission ID'
+          separator: ', '
+        name:
+          label: Name
+          separator: ', '
+        name_1:
+          label: Name
+          separator: ', '
+  rest_export_4:
+    display_options:
+      filters:
+        combine:
+          expose:
+            label: 'Combine fields filter'
+        tid:
+          expose:
+            label: Term
+      fields:
+        field_legal_organization:
+          separator: ', '
+        field_first_name_consultant_:
+          separator: ', '
+        field_last_name_consultant_:
+          separator: ', '
+        changed:
+          separator: ', '
+        nothing:
+          admin_label: Type
+        field_business_name:
+          separator: ', '
+        nothing_2:
+          admin_label: Topics
+        field_first_name:
+          separator: ', '
+        field_last_name:
+          separator: ', '
+        status:
+          settings:
+            format_custom_true: Actif
+            format_custom_false: Bloqué
+          separator: ', '
+        uid:
+          separator: ', '
+      arguments:
+        sid:
+          exception:
+            title: All

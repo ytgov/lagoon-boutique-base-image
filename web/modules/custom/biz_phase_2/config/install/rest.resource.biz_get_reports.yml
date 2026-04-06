@@ -1,0 +1,20 @@
+uuid: e357d1f2-5199-465d-be76-d4d3ce3f44a8
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - oauth2_server
+    - serialization
+    - user
+id: biz_get_reports
+plugin_id: biz_get_reports
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - oauth2
+      - cookie

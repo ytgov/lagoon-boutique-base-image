@@ -1,0 +1,18 @@
+uuid: cd5433f9-dd9b-468b-aaa0-ccb0dbff4071
+langcode: en
+status: false
+dependencies:
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_pagetitle
+theme: wxt_lobbyist
+region: content
+weight: -10
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.activiy_comments
+    - field.field.comment.activiy_comments.comment_body
+  module:
+    - text
+id: comment.activiy_comments.default
+targetEntityType: comment
+bundle: activiy_comments
+mode: default
+content:
+  comment_body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true

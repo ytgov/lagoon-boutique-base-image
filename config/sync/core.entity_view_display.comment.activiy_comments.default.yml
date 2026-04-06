@@ -1,0 +1,29 @@
+uuid: 00d8cfb5-85e8-4059-9ffc-fecf24038591
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.activiy_comments
+    - field.field.comment.activiy_comments.comment_body
+  module:
+    - text
+id: comment.activiy_comments.default
+targetEntityType: comment
+bundle: activiy_comments
+mode: default
+content:
+  comment_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

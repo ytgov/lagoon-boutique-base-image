@@ -1,0 +1,20 @@
+uuid: 5c2632fd-5359-4029-b81b-53acaca662c9
+langcode: en
+status: true
+dependencies:
+  theme:
+    - wxt_bootstrap_yukon
+_core:
+  default_config_hash: Q9_2whdOj1YIomfvsIfopROW4FT_X5pY0DjdOiOaQ5U
+id: wxt_bootstrap_yukon_primary_admin_actions
+theme: wxt_bootstrap_yukon
+region: highlighted
+weight: -5
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

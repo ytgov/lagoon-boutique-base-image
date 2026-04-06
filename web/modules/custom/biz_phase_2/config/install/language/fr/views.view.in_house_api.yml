@@ -1,0 +1,185 @@
+display:
+  rest_export_3:
+    display_options:
+      filters:
+        webform_submission_value:
+          group_info:
+            description: ''
+            label: deleted
+          expose:
+            label: deleted
+      fields:
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+        sid_2:
+          alter:
+            text: '<div class = "edit-action" ><a sid={{sid}} href="[[custom_href]]">Modifier</a></div><div class = "delete-action btn-confirm"><div  data="{{sid}}&{{ nothing }}" class="">Supprimer</div></div>'
+          separator: ', '
+      arguments:
+        mail:
+          exception:
+            title: All
+  rest_export_6:
+    display_options:
+      filters:
+        webform_submission_value:
+          group_info:
+            description: ''
+            label: deleted
+          expose:
+            label: deleted
+      fields:
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+        sid_2:
+          separator: ', '
+      arguments:
+        uid:
+          exception:
+            title: All
+  default:
+    display_title: Master
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Apply
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Sort by'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      arguments:
+        sid:
+          exception:
+            title: All
+  page_1:
+    display_title: Page
+    display_options:
+      arguments:
+        sid:
+          exception:
+            title: All
+      fields:
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+        webform_id:
+          separator: ', '
+        uid:
+          separator: ', '
+  rest_export_1:
+    display_options:
+      arguments:
+        uid:
+          exception:
+            title: All
+      fields:
+        sid_1:
+          separator: ', '
+        uid:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            text: '<a href = "/fr/search-organization/organization-view/in-house-activity-view?id={{sid_1}}&org={{ uid }}&webform_id=&webform_id=add_a_lobbying_activity" >{{ webform_submission_value }}</a>'
+        webform_submission_value_9:
+          label: Email
+        webform_submission_value_8:
+          label: Telephone
+        sid:
+          admin_label: Afficher
+          alter:
+            text: '<a href = "/fr/search-organization/organization-view/in-house-activity-view?id={{sid}}&org={{ uid }}&webform_id=&webform_id=add_a_lobbying_activity" >Afficher</a>'
+          separator: ', '
+        uuid:
+          separator: ', '
+        mail:
+          separator: ', '
+        changed:
+          separator: ', '
+        webform_id:
+          separator: ', '
+  rest_export_2:
+    display_options:
+      arguments:
+        mail:
+          exception:
+            title: All
+      fields:
+        sid_1:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            text: '<a href = "/fr/in-house-account-home/in-house-activity-view?id={{sid_1}}&webform_id=add_a_lobbying_activity" >{{ webform_submission_value }}</a>'
+        sid:
+          alter:
+            text: '<a href = "/fr/in-house-account-home/in-house-activity-view?id={{sid}}&webform_id=add_a_lobbying_activity" >Afficher</a>'
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+        webform_id:
+          separator: ', '
+  rest_export_4:
+    display_options:
+      fields:
+        completed:
+          separator: ', '
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        mail:
+          separator: ', '
+        webform_id:
+          separator: ', '
+      arguments:
+        sid:
+          exception:
+            title: All
+  rest_export_5:
+    display_options:
+      arguments:
+        sid:
+          exception:
+            title: All
+      fields:
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        mail:
+          separator: ', '
+        changed:
+          separator: ', '
+        webform_id:
+          separator: ', '
+        uid:
+          separator: ', '
+  rest_export_7:
+    display_options:
+      arguments:
+        sid:
+          exception:
+            title: All
+      fields:
+        sid:
+          separator: ', '
+        uuid:
+          separator: ', '
+        changed:
+          separator: ', '
+        webform_id:
+          separator: ', '
+        uid:
+          separator: ', '

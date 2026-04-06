@@ -1,0 +1,63 @@
+name: 'Site lobbyist backend'
+type: module
+package: Custom
+version: 8.x-1.0
+core_version_requirement: ^10 || ^11
+dependencies:
+  - address
+  - biz_business_rules
+  - biz_webform_rest
+  - block
+  - block_content
+  - ckeditor
+  - comment
+  - contact
+  - content_sync
+  - content_translation
+  - csv_serialization
+  - datetime
+  - dblog
+  - eck
+  - editor
+  - email_registration
+  - field
+  - file
+  - filter
+  - fontawesome
+  - help
+  - history
+  - htmlmail
+  - http_client_manager
+  - image
+  - language
+  - lightning_core
+  - mailsystem
+  - mask
+  - menu_ui
+  - mimemail
+  - multiple_registration
+  - nocurrent_pass
+  - node
+  - oauth2_server
+  - options
+  - path
+  - rdf
+  - rest
+  - search
+  - serialization
+  - smtp
+  - system
+  - taxonomy
+  - telephone
+  - telephone_formatter
+  - text
+  - toolbar_menu
+  - ultimate_cron
+  - update
+  - user
+  - views
+  - views_data_export
+  - webform
+  - webform_content_creator
+  - webform_views
+  - wxt_library

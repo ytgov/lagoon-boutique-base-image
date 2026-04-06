@@ -1,0 +1,20 @@
+uuid: d38875cf-cb99-4aa4-a29e-cf8cf5ad8262
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lobbyist_s_portfolios
+  module:
+    - path
+id: taxonomy_term.lobbyist_s_portfolios.path
+field_name: path
+entity_type: taxonomy_term
+bundle: lobbyist_s_portfolios
+label: 'URL alias'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

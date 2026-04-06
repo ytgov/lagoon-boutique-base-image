@@ -1,0 +1,174 @@
+{% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+
+{# Navbar #}
+{% if page.navigation or page.navigation_collapsible %}
+  {% block navbar %}
+    {%
+      set navbar_classes = []
+    %}
+
+  <header{{ navbar_attributes.addClass(navbar_classes) }} id="navbar" role="banner">
+    <div id="wb-bnr">
+      <div class="container">
+        <div class="row">
+          <div class="site-main-logo col-xs-6">
+            {{ drupal_entity('block', 'wxt_bootstrap_yukon_sitebranding') }}
+          </div>
+          <div class="site-nav-toggle col-xs-6">
+            <div class="row">
+              <div class="pull-right">
+                <section id="wb-lng" class="header-lang-toggle">
+                  {{ drupal_entity('block', 'languageswitcher')}}
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {% endblock %}
+{% endif %}
+
+  <div class="aurora-town">
+    <span class="aurora--main"></span>
+  </div>
+
+{# Main #}
+{% block main %}
+  {# Highlighted #}
+  {% if page.highlighted %}
+    {% block highlighted  %}
+      <div class="highlighted">{{ page.highlighted }}</div>
+    {% endblock %}
+  {% endif %}
+
+  {# Content #}
+    {%
+      set content_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-md-6 col-md-push-3',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-md-9 col-md-push-3',
+        page.sidebar_second and page.sidebar_first is empty ? 'col-md-9',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'col-md-12'
+      ]
+    %}
+
+  {# Header #}
+  {% if page.header %}
+    {% block header %}
+      {{ page.header }}
+    {% endblock %}
+  {% endif %}
+
+  {# Breadcrumbs #}
+  {% if breadcrumb %}
+    {% block breadcrumb %}
+      {{ breadcrumb }}
+    {% endblock %}
+  {% endif %}
+
+  {# Action Links #}
+  {% if action_links %}
+    {% block action_links %}
+      <ul class="action-links">{{ action_links }}</ul>
+    {% endblock %}
+  {% endif %}
+
+  {# Help #}
+  {% if page.help %}
+    {% block help %}
+      {{ page.help }}
+    {% endblock %}
+  {% endif %}
+
+  <main role="main" property="mainContentOfPage" {{ content_attributes.addClass(content_classes, 'main-container', 'js-quickedit-main-content') }}>
+    {# Content #}
+    <div class="main-content-wrap container">
+      <div class="row">
+        {% block content %}
+          <a id="main-content"></a>
+          {{ page.content_header }}
+          {{ page.content }}
+          <!--span class="aurora--mini"></span-->
+          {{ page.content_footer }}
+          {% if page.page_form %}
+            {{ page.page_form }}
+          {% endif %}
+        {% endblock %}
+      </div>
+    </div>
+  </main>
+
+  {# Sidebar First #}
+    {%
+      set sidebar_first_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-md-3 col-md-pull-6',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-md-3 col-md-pull-9',
+        page.sidebar_second and page.sidebar_first is empty ? 'col-md-3 col-md-pull-9'
+      ]
+    %}
+  {# Sidebar First #}
+  {% if page.sidebar_first %}
+    {% block sidebar_first %}
+      <nav{{ attributes.addClass(sidebar_first_classes) }}>
+        {{ page.sidebar_first }}
+      </nav>
+    {% endblock %}
+  {% endif %}
+
+  {# Sidebar Second #}
+  {%
+    set sidebar_second_classes = [
+      page.sidebar_first and page.sidebar_second ? 'col-md-3',
+      page.sidebar_first and page.sidebar_second is empty ? 'col-md-3',
+      page.sidebar_second and page.sidebar_first is empty ? 'col-md-3'
+    ]
+  %}
+  {# Sidebar Second #}
+  {% if page.sidebar_second %}
+    {% block sidebar_second %}
+      <nav{{ attributes.removeClass(sidebar_first_classes).addClass(sidebar_second_classes) }}>
+        {{ page.sidebar_second }}
+      </nav>
+    {% endblock %}
+  {% endif %}
+{% endblock %}
+
+{% if page.footer %}
+  {% block footer %}
+<footer role="contentinfo" id="wb-info">
+  <div class="container">
+    <div class="row">
+      <nav class="col-md-10 ftr-urlt-lnk">
+        <h2 class="wb-inv">{{ 'About this site'|t }}</h2>
+        {{ page.menu_terms_bar }}
+      </nav>
+    </div>
+  </div>
+  <div class="brand">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 brand-items">
+          <div class="site-main-logo">
+           {{ drupal_entity('block', 'wxt_bootstrap_yukon_sitebranding_footer') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% if page.footer %}
+      <div class="footer-menu-wrapper">
+        <div class="container">
+          <nav class="footer-menu navbar-left" role="navigation">
+            {{ page.footer }}
+          </nav>
+          <div class="site-desc-wrap navbar-right">
+            <p class="site-desc">{{ '© Copyright '|t }}{{ 'now'|date('Y') }} <a href="/">{{ 'Government of Yukon'|t }}</a></p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+</footer>
+  {% endblock %}
+{% endif %}

@@ -1,0 +1,39 @@
+search_api.property_configuration.mapped_field:
+  type: mapping
+  label: 'Mapped fields configuration'
+  mapping:
+    field_data:
+      type: sequence
+      label: 'The fields to be aggregated'
+      sequence:
+        type: sequence
+        label: 'The entity type'
+        sequence:
+          type: string
+          label: 'The bundle type'
+
+search_api.property_configuration.site_name:
+  type: mapping
+  label: 'Site name processor configuration'
+  mapping:
+    site_name:
+      type: string
+      label: 'The name of the site'
+    use_system_site_name:
+      type: integer
+      label: 'Inherit the site name from configuration'
+
+plugin.plugin_configuration.search_api_processor.*:
+  type: mapping
+  label: 'The configuration for a single processor'
+  mapping:
+    description:
+      type: string
+      label: 'The description of the item'
+    weights:
+      type: mapping
+      label: 'Sort order for elements'
+      mapping:
+        postprocess_query:
+          type: integer
+          label: 'Postprocess element'

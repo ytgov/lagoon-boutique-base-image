@@ -1,0 +1,20 @@
+uuid: 4a7a1655-4e4d-4ba9-b1bd-f480bf61cc88
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_breadcrumbs_2
+theme: wxt_lobbyist
+region: header
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

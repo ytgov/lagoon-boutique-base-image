@@ -1,0 +1,72 @@
+uuid: 35db9989-c76a-4dc9-ae26-46fe084db18a
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+_core:
+  default_config_hash: VX1Aq1RHkgiiRyZqHpSf5j6atRPCdtL3oXASoZBsgw8
+id: editor
+label: Editor
+weight: 6
+is_admin: null
+permissions:
+  - 'access comments'
+  - 'access content overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'access webform submission log'
+  - 'access webform submission user'
+  - 'administer account settings'
+  - 'administer biz_business_rules'
+  - 'administer comments'
+  - 'administer content translation'
+  - 'administer entity browsers'
+  - 'administer filters'
+  - 'administer permissions'
+  - 'administer taxonomy'
+  - 'administer toolbar menu'
+  - 'administer users'
+  - 'administer webform submission'
+  - 'change own username'
+  - 'create content translations'
+  - 'create page content'
+  - 'create terms in lobbyist_s_portfolios'
+  - 'create terms in tags'
+  - 'delete own page content'
+  - 'delete terms in lobby_s_topics'
+  - 'delete terms in lobbyist_s_portfolios'
+  - 'edit any page content'
+  - 'edit own comments'
+  - 'edit terms in lobby_s_topics'
+  - 'edit terms in lobbyist_s_portfolios'
+  - 'post comments'
+  - 'restful get biz_get_reports'
+  - 'restful get biz_get_submission_history_change'
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful patch biz_webform_rest_submission'
+  - 'restful patch biz_webform_rest_submission_adaptation'
+  - 'restful post biz_webform_rest_submit'
+  - 'restful post user_registration'
+  - 'translate any entity'
+  - 'translate block_content'
+  - 'translate configuration'
+  - 'translate lobby_s_topics taxonomy_term'
+  - 'translate lobbyist_s_portfolios taxonomy_term'
+  - 'translate menu_link_content'
+  - 'update content translations'
+  - 'use oauth2 server'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'use text format rich_text'
+  - 'view any webform submission'
+  - 'view editor in toolbar'
+  - 'view own unpublished content'
+  - 'view webform submissions any node'

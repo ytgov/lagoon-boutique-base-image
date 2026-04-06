@@ -1,0 +1,20 @@
+uuid: 700e815b-da8e-42ae-bb9c-9cbec4a42a86
+langcode: en
+status: true
+dependencies:
+  theme:
+    - wxt_bootstrap_yukon
+_core:
+  default_config_hash: 6aOgWsNTXjqrDm98TXSAjP6qd2nCijD1xw45MrnbK-Y
+id: wxt_bootstrap_yukon_page_title
+theme: wxt_bootstrap_yukon
+region: navbar
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

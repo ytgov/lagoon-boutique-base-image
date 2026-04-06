@@ -1,0 +1,44 @@
+uuid: 9e4e2a85-aca7-4431-9c99-b8dc6f6a6cb1
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.restricted_html
+    - rest.resource.biz_get_reports
+    - rest.resource.biz_get_submission_history_change
+    - rest.resource.biz_webform_rest_get_endpoint
+    - rest.resource.biz_webform_rest_organizations
+    - rest.resource.biz_webform_rest_submission
+    - rest.resource.user_registration
+    - rest.resource.webform_submission_log
+  module:
+    - comment
+    - filter
+    - oauth2_server
+    - rest
+    - search
+    - system
+    - webform
+_core:
+  default_config_hash: xLG41YbRo2NP-0SgRNTkMzLEuaeibanGXgUTbdIcIIg
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access user profiles'
+  - 'administer account settings'
+  - 'administer users'
+  - 'restful get biz_get_reports'
+  - 'restful get biz_get_submission_history_change'
+  - 'restful get biz_webform_rest_get_endpoint'
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful post user_registration'
+  - 'search content'
+  - 'use oauth2 server'
+  - 'use text format restricted_html'
+  - 'view any webform submission'

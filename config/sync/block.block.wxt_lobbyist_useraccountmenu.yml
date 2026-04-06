@@ -1,0 +1,25 @@
+uuid: e1508d95-e450-40c2-9808-950d400e431d
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_useraccountmenu
+theme: wxt_lobbyist
+region: navigation
+weight: 0
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: null
+  expand_all_items: false
+visibility: {  }

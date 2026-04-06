@@ -1,0 +1,20 @@
+uuid: ab237c8a-41e3-47bd-9fec-a9a3bc342196
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_submission_id
+field_name: field_submission_id
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

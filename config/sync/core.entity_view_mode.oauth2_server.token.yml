@@ -1,0 +1,11 @@
+uuid: 00775143-6009-4ceb-bdbf-14af848019cd
+langcode: en
+status: true
+dependencies:
+  module:
+    - oauth2_server
+id: oauth2_server.token
+label: Token
+description: null
+targetEntityType: oauth2_server
+cache: true

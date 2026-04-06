@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies: {  }
+server_id: lobbyist_register_backend
+name: 'Lobbyist Register Backend'
+settings:
+  enforce_state: true
+  default_scope: ''
+  allow_implicit: false
+  use_openid_connect: false
+  use_crypto_tokens: false
+  grant_types:
+    authorization_code: authorization_code
+    client_credentials: client_credentials
+    refresh_token: refresh_token
+    password: password
+    'urn:ietf:params:oauth:grant-type:jwt-bearer': '0'
+  always_issue_new_refresh_token: false
+  unset_refresh_token_after_use: false
+  advanced_settings:
+    access_lifetime: 50104000
+    id_lifetime: 3600
+    refresh_token_lifetime: 0
+    require_exact_redirect_uri: false
+module: null

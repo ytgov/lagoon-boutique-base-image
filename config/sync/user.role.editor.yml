@@ -1,0 +1,27 @@
+uuid: aa86c1a4-5234-470a-a29f-1ec280b6881e
+langcode: en
+status: true
+dependencies:
+  config:
+    - rest.resource.biz_webform_rest_organizations
+    - rest.resource.biz_webform_rest_submission
+    - rest.resource.biz_webform_rest_submission_adaptation
+    - rest.resource.biz_webform_rest_submit
+    - rest.resource.user_registration
+    - rest.resource.webform_submission_log
+  module:
+    - oauth2_server
+    - rest
+id: editor
+label: Editor
+weight: 9
+is_admin: false
+permissions:
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful patch biz_webform_rest_submission'
+  - 'restful patch biz_webform_rest_submission_adaptation'
+  - 'restful post biz_webform_rest_submit'
+  - 'restful post user_registration'
+  - 'use oauth2 server'

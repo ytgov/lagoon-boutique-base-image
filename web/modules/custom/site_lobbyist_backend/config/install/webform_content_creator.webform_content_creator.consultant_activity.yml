@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies: {  }
+id: consultant_activity
+title: 'Consultant activity'
+webform: add_a_lobbying_activity_consulta
+content_type: activity
+field_title: 'Consultant Activity'
+use_encrypt: false
+encryption_profile: ''
+sync_content: true
+sync_content_delete: true
+sync_content_node_field: field_submission_id
+create_nodes_manually: null
+elements:
+  field_email:
+    type: false
+    webform_field: e_mail_address
+    custom_check: false
+    custom_value: ''
+  field_status:
+    type: false
+    webform_field: status
+    custom_check: false
+    custom_value: ''
+  field_submission_id:
+    type: true
+    webform_field: sid
+    custom_check: false
+    custom_value: ''
+  field_title:
+    type: false
+    webform_field: title
+    custom_check: false
+    custom_value: ''
+  uid:
+    type: true
+    webform_field: uid
+    custom_check: false
+    custom_value: ''

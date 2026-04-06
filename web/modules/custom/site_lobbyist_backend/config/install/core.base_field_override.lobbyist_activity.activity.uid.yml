@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.lobbyist_activity.activity
+id: lobbyist_activity.activity.uid
+field_name: uid
+entity_type: lobbyist_activity
+bundle: activity
+label: 'Authored by'
+description: 'The username of the entity author.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

@@ -1,0 +1,311 @@
+.ui-dialog-titlebar {
+    border: none;
+    background: none;
+}
+
+.ui-dialog-titlebar .ui-dialog-title {
+	display: none;
+}
+
+.ui-dialog-titlebar .ui-button.ui-corner-all {
+	width: 28px;
+	height: 28px;
+	z-index: 9999;
+	border: none;
+	margin-top: 0px;
+	background: none;
+}
+
+.ui-dialog-titlebar .ui-dialog-titlebar-close {
+	background-image: url("../images/close.png");
+	background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  width: 28px;
+  height: 28px;
+  top: 10px;
+  background-size: 20px;
+}
+
+
+.ui-dialog {
+	background: #DD971A;
+	border: none !important;
+	border-radius: 0px;
+}
+
+.finder-modal {
+	font-family: "Open Sans";
+	background: #DD971A;
+	color: white;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	height: -webkit-fill-available;
+}
+
+.finder-modal .form-actions,
+body.form-lobbyist-finder-modal .breadcrumb{
+	display: none !important;
+}
+body.form-lobbyist-finder-modal .js-form-type-processed-text{
+	text-align: center;
+  
+}
+body.form-lobbyist-finder-modal div#edit-actions{
+	display: block !important;
+	float: right;
+	text-align: right;
+}
+.custom-button {
+	height: 49px;
+	width: 241px;
+	border-radius: 3px;
+	background-color: #481747;
+	text-align: center;
+	margin: 24px auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.custom-button a {
+	font-size: 12px;	
+	font-weight: bold;	
+	line-height: 15px;	
+	text-align: center;
+	color: white !important;
+	font-family: Verdana;
+}
+
+.title {
+	color: white;	
+	font-size: 26px;	
+	font-weight: bold;	
+	line-height: 26px;	
+	text-align: center;
+	width: 329px;
+	margin: 16px auto;
+	margin-bottom: 24px;
+	font-family: Verdana;
+}
+
+.title-disclaimer {
+	color: white;	
+	font-size: 26px;	
+	font-weight: bold;	
+	line-height: 26px;	
+	margin: 16px auto;
+	margin-bottom: 30px;
+	width: 504px;
+	font-family: Verdana;
+}
+
+.body-disclaimer {
+	height: 192px;
+	width: 291px;
+	color: white;
+	font-family: "Open Sans";
+	font-size: 18px;
+	font-weight: 800;
+	line-height: 24px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.ui-dialog-buttonpane {
+	background: #DD971A;
+	border: none;
+}
+body.form-lobbyist-finder-modal div#edit-actions .webform-button--previous {
+	float: left;
+}
+body.form-lobbyist-finder-modal .align-center{
+	display: inline-flex;
+}
+body.form-lobbyist-finder-modal div#edit-actions .webform-button--next,
+body.form-lobbyist-finder-modal div#edit-actions .webform-button--previous,
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset button {
+	background-color: #481747;
+	border: none;
+	width: 94px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 15px;
+	font-family: Verdana;
+	color: white;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset button:hover {
+	background-color: #481747;
+}
+
+div[data-drupal-messages] {
+	width: 100%;
+}
+
+.body-messages {
+	height: auto;
+	width: 434px;	
+	color: white;	
+	font-family: "Open Sans";	
+	font-size: 18px;	
+	font-weight: 600;	
+	line-height: 24px;
+}
+
+.body-title {
+	width: 504px;
+	color: white;
+	font-family: Verdana;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 26px;
+	margin: 30px 0;
+}
+
+.js-webform-webform-buttons .ui-button {
+	border: 2px solid #481647;
+    background: none;
+    font-weight: normal;
+    color: #481647;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 6px 14px;
+    transition: all ease 0.35;
+    min-width: 68px;
+
+}
+
+.js-webform-webform-buttons .ui-button:hover {
+	background: #481647;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 8px 20px;
+    border: none;
+}
+
+#drupal-modal .ui-state-active, #drupal-modal .ui-widget-content .ui-state-active {
+	border: none;
+    background: #481647;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 8px 20px;
+    text-transform: uppercase;
+}
+
+.finder-modal .js-form-wrapper {
+	min-width: 504px;
+	width: 98%;
+}
+
+.body-messages.form-type-processed-text {
+	min-width: 504px;
+  padding: 14px 40px;
+}
+
+.finder-modal .webform-options-display-side-by-side {
+    margin-top: 24px;
+}
+
+.hidden {
+	display: none !important;
+}
+.finder-modal div.radios--wrapper.fieldgroup{
+    display: flex;
+    justify-content: center;
+}
+.finder-modal  .modal-form-radio label input{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.01;
+    z-index: 100;
+}
+
+.finder-modal div.radios--wrapper.fieldgroup div.form-item.js-form-item {
+    border: 2px solid #481647;
+    border-radius: 3px;
+    background: none;
+    padding: 6px 14px;
+    transition: all ease 0.35;
+    min-width: 70px;
+    margin-right: 10px;
+    align-items: center;
+    padding: 2px;
+}
+.finder-modal div.radios--wrapper.fieldgroup div.form-item.js-form-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.finder-modal div.radios--wrapper.fieldgroup div.form-item.js-form-item label{
+    font-weight: normal;
+    color: #481647;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin: 2px 0px;
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.finder-modal .js-webform-radios.webform-options-display-two-columns, .img-center{
+    display: flex;
+    justify-content: center;
+}
+.finder-modal div.radios--wrapper.fieldgroup div.form-item.js-form-item:hover{
+    background: #481647;
+}
+.finder-modal div.radios--wrapper.fieldgroup div.form-item.js-form-item:hover label{
+    color: #ffffff;
+}
+.finder-modal  .img-center img{
+    height: 200px;
+    width: auto;
+}
+@media (max-width: 991px) {
+  .finder-modal .img-center img{
+    margin-top: 30px;
+  }
+}
+@media (max-width: 500px) {
+  .ui-dialog #drupal-modal{
+    display: flex;
+  }
+  .finder-modal .img-center img{
+    height: auto;
+    width: auto;
+    margin-top: 25px;
+  }
+  form.webform-submission-lobbyist-finder-modal-form .custom-button{
+    border-radius: 3px;
+    background-color: #481747;
+    text-align: center;
+  }
+  form.webform-submission-lobbyist-finder-modal-form .custom-button a{
+    background-color: transparent;
+  }
+}
+@media (max-width: 340px){
+  .finder-modal .img-center img{
+    height: 100%;
+    width: 100%;
+    margin-top: 25px;
+  }
+}
+body.form-lobbyist-finder-modal #edit-processed-text-02 > p,
+body.form-lobbyist-finder-modal #edit-processed-text-03 > p,
+body.form-lobbyist-finder-modal #edit-processed-text-04 > p{
+	background-color: transparent;
+}

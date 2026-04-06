@@ -1,0 +1,9 @@
+uuid: a39fabed-ce79-4fb4-9890-5b6b84617f71
+langcode: en
+status: true
+dependencies: {  }
+name: 'Internal report'
+vid: external_report
+description: null
+weight: 0
+new_revision: false

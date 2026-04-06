@@ -1,0 +1,22 @@
+uuid: 6a1e24fd-e273-449e-a163-e216650c8091
+langcode: en
+status: false
+dependencies:
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: nGE3EoPQQaQCuqTUtZgw0-KIzmrqdKDzdNQf2JyPUt4
+id: wxt_lobbyist_primary_local_tasks
+theme: wxt_lobbyist
+region: highlighted
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: d1b4779a-1cf8-49cb-aaa3-bfef4ad04fa1
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_bootstrap_yukon
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: wxt_bootstrap_yukon_content
+theme: wxt_bootstrap_yukon
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

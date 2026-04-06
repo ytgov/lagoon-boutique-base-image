@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: find_post
+label: 'Find post'
+service_api: example_services
+command_name: FindPost
+parameters:
+  postId: '1'

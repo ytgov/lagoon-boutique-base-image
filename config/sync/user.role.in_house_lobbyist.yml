@@ -1,0 +1,43 @@
+uuid: 0c6372f0-f5b6-4e51-ae78-74575514cb94
+langcode: en
+status: true
+dependencies:
+  config:
+    - rest.resource.biz_get_reports
+    - rest.resource.biz_get_submission_history_change
+    - rest.resource.biz_webform_rest_organizations
+    - rest.resource.biz_webform_rest_submission
+    - rest.resource.biz_webform_rest_submission_adaptation
+    - rest.resource.biz_webform_rest_submit
+    - rest.resource.user_registration
+    - rest.resource.webform_submission_log
+  module:
+    - comment
+    - oauth2_server
+    - rest
+    - webform
+    - webform_submission_log
+id: in_house_lobbyist
+label: 'In-house lobbyist'
+weight: 4
+is_admin: false
+permissions:
+  - 'access user profiles'
+  - 'access webform submission log'
+  - 'administer comments'
+  - 'administer users'
+  - 'change own username'
+  - 'edit own comments'
+  - 'post comments'
+  - 'restful get biz_get_reports'
+  - 'restful get biz_get_submission_history_change'
+  - 'restful get biz_webform_rest_organizations'
+  - 'restful get biz_webform_rest_submission'
+  - 'restful get webform_submission_log'
+  - 'restful patch biz_webform_rest_submission'
+  - 'restful patch biz_webform_rest_submission_adaptation'
+  - 'restful post biz_webform_rest_submit'
+  - 'restful post user_registration'
+  - 'use oauth2 server'
+  - 'view any webform submission'
+  - 'view own webform submission'

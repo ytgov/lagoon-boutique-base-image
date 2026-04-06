@@ -1,0 +1,9 @@
+uuid: 6c5e4145-872e-4a95-a0de-93e7353285d5
+langcode: en
+status: true
+dependencies: {  }
+name: "Lobbyist's Portfolios"
+vid: lobbyist_s_portfolios
+description: null
+weight: 0
+new_revision: false

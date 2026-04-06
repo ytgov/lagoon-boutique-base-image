@@ -1,0 +1,29 @@
+display:
+  rest_export_1:
+    display_options:
+      fields:
+        sid:
+          alter:
+            text: '<a href = "/fr/search-organization/organization-view/in-house-activity-view?id={{sid}}&org={{ uid }}&webform_id=&webform_id=add_a_lobbying_activity" ><i class="far fa-eye"></i></a>'
+  rest_export_2:
+    display_options:
+      fields:
+        sid:
+          alter:
+            text: '<a href = "/fr/in-house-account-home/in-house-activity-view?id={{sid}}&webform_id=add_a_lobbying_activity" ><i class="far fa-eye"></i></a>'
+  rest_export_3:
+    display_options:
+      filters:
+        webform_submission_value:
+          group_info:
+            description: ''
+      fields:
+        sid_2:
+          alter:
+            text: '<div class = "edit-action" ><a sid={{sid}} href="[[custom_href]]">Modifier</a></div><div class = "delete-action btn-confirm"><div  data="{{sid}}&{{ nothing }}" class="">Supprimer</div></div>'
+  rest_export_6:
+    display_options:
+      filters:
+        webform_submission_value:
+          group_info:
+            description: ''

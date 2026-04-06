@@ -1,0 +1,18 @@
+uuid: 97c73921-59f7-46e0-894e-48ef794492c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lobbyist_s_portfolios
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.lobbyist_s_portfolios
+target_entity_type_id: taxonomy_term
+target_bundle: lobbyist_s_portfolios
+default_langcode: site_default
+language_alterable: true

@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_powered
+theme: wxt_lobbyist
+region: footer
+weight: -6
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

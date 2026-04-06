@@ -1,0 +1,11 @@
+name: 'Block config'
+type: module
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+dependencies:
+  - block
+  - block_class
+  - block_content
+  - system
+  - wxt_library
+version: 8.x-1.0

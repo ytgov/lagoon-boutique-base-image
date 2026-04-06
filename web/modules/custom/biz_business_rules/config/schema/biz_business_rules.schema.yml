@@ -1,0 +1,214 @@
+biz_business_rules.settings:
+    type: config_object
+    label: 'Mails for business rules'
+    mapping:
+        front_base_url:
+            type: text
+            label: 'Front: Base URL'    
+        in_house_subject_add_new_lobbyist:
+            type: text
+            label: 'Subject in-house lobbyist when added a new lobbyist'
+            translatable: true
+        in_house_add_new_lobbyist:
+            type: text_format
+            label: 'Mail to in-house lobbyist when added a new lobbyist'
+            translatable: true
+        in_house_subject_add_new_activity:
+            type: text
+            label: 'Subject in-house lobbyist when added a new activity'
+            translatable: true
+        in_house_add_new_activity:
+            type: text_format
+            label: 'Mail to in-house lobbyist when added a new activity'
+            translatable: true
+        in_house_subject_end_31_dec:
+            type: text
+            label: 'Subject in-house lobbyist when the calendar year ends'
+            translatable: true
+        in_house_end_31_dec:
+            type: text_format
+            label: 'Mail to in-house lobbyist when the calendar year ends'
+            translatable: true
+        in_house_subject_end_15_jan:
+            type: text
+            label: 'Subject in-house lobbyist when is the end of the calendar year +15 days'
+            translatable: true
+        in_house_end_15_jan:
+            type: text_format
+            label: 'Mail to in-house lobbyist when is the end of the calendar year +15 days'
+            translatable: true
+        in_house_subject_end_31_jan:
+            type: text
+            label: 'Subject in-house lobbyist when is the end of the calendar year +31 days'
+            translatable: true
+        in_house_end_31_jan:
+            type: text_format
+            label: 'Mail to in-house lobbyist when is the end of the calendar year +31 days'
+            translatable: true
+        in_house_subject_update_before_end_calendar:
+            type: text
+            label: 'Subject in-house lobbyist when updated previous calendar year'
+            translatable: true
+        in_house_update_before_end_calendar:
+            type: text_format
+            label: 'Mail to in-house lobbyist when updated previous calendar year'
+            translatable: true
+        in_house_subject_first_activity:
+            type: text
+            label: 'Subject in-house lobbyist when created their first activity'
+            translatable: true
+        in_house_first_activity:
+            type: text_format
+            label: 'Mail to in-house lobbyist when created their first activity'      
+            translatable: true
+        consultant_subject_add_new_activity:
+            type: text
+            label: 'Subject consultant lobbyist when added a new activity'
+            translatable: true
+        consultant_add_new_activity:
+            type: text_format
+            label: 'Mail to consultant lobbyist when added a new activity'
+            translatable: true
+        consultant_subject_first_activity:
+            type: text
+            label: 'Subject consultant lobbyist when created their first activity'
+            translatable: true
+        consultant_first_activity:
+            type: text_format
+            label: 'Mail to consultant lobbyist when created their first activity'
+            translatable: true
+        consultant_subject_certify:
+            type: text
+            label: 'Subject consultant when certify their activity'
+            translatable: true
+        consultant_certify:
+            type: text_format
+            label: 'Mail to consultant when certify their activity'
+            translatable: true
+        consultant_subject_prior_6_months:
+            type: text
+            label: 'Subject consultant when the start date is prior to 6 Months from today'
+            translatable: true
+        consultant_prior_6_months:
+            type: text_format
+            label: 'Mail to consultant when the start date is prior to 6 Months from today'
+            translatable: true
+        consultant_subject_prior_6_months_plus_15:
+            type: text
+            label: 'Subject consultant when start date is prior 6 Months +15 days'
+            translatable: true
+        consultant_prior_6_months_plus_15:
+            type: text_format
+            label: 'Mail to consultant when start date is prior 6 Months +15 days'
+            translatable: true
+        consultant_subject_prior_6_months_plus_30:
+            type: text
+            label: 'Subject consultant when start date is prior 6 Months +30 days'
+            translatable: true
+        consultant_prior_6_months_plus_30:
+            type: text_format
+            label: 'Mail to consultant when start date is prior 6 Months +30 days'
+            translatable: true
+        consultant_subject_end_contract:
+            type: text
+            label: 'Subject consultant when the contract date ends'
+            translatable: true
+        consultant_end_contract:
+            type: text_format
+            label: 'Mail to consultant when the contract date ends'
+            translatable: true
+        consultant_subject_end_contract_plus_15:
+            type: text
+            label: 'Subject consultant when end of contract date +15 days'
+            translatable: true
+        consultant_end_contract_plus_15:
+            type: text_format
+            label: 'Mail to consultant when end of contract date +15 days'
+            translatable: true
+        consultant_subject_end_contract_plus_30:
+            type: text
+            label: 'Subject consultant when end of contract date +30 days'
+            translatable: true
+        consultant_end_contract_plus_30:
+            type: text_format
+            label: 'Mail to consultant when end of contract date +30 days'
+            translatable: true
+        admin_subject_end_consultant_activity:
+            type: text
+            label: 'Subject admin when consultant non-compliance the sixth month'
+            translatable: true
+        admin_end_consultant_activity:
+            type: text_format
+            label: 'Mail to admin when consultant non-compliance the sixth month'
+            translatable: true
+        admin_subject_contract_end_date:
+            type: text
+            label: 'Subject admin when the contract ends in the consultant activity'
+            translatable: true
+        admin_contract_end_date:
+            type: text_format
+            label: 'Mail to admin when the contract ends in the consultant activity'
+            translatable: true
+        admin_subject_end_31_jan:
+            type: text
+            label: 'Subject admin when the calendar year ends +31 days'
+            translatable: true
+        admin_end_31_jan:
+            type: text_format
+            label: 'Mail to admin when the calendar year ends +31 days'
+            translatable: true
+        admin_subject_in_house_first_activity:
+            type: text
+            label: 'Subject admin for first in-house activity'
+            translatable: true
+        admin_in_house_first_activity:
+            type: text_format
+            label: 'Mail to admin for first in-house activity'
+            translatable: true
+        admin_subject_consultant_first_activity:
+            type: text
+            label: 'Subject admin for first consultant activity'
+            translatable: true
+        admin_consultant_first_activity:
+            type: text_format
+            label: 'Mail to admin for first consultant activity'
+            translatable: true
+        lobbyist_subject_new_comment:
+            type: text
+            label: 'Subject admin when a comment is made in an activity by the lobbyist'
+            translatable: true
+        lobbyist_new_comment:
+            type: text_format
+            label: 'Mail to admin when a comment is made in an activity by the lobbyist'
+            translatable: true
+        lobbyist_updated_act:
+            type: text_format
+            label: 'Mail to commissioner when lobbyist updated an activity'
+            translatable: true
+        admin_subject_new_comment:
+            type: text
+            label: 'Subject lobbyist when a comment is made in an activity by the admin'
+            translatable: true
+        admin_new_comment:
+            type: text_format
+            label: 'Mail to lobbyist when a comment is made in an activity by the admin'
+            translatable: true
+        commissioner_subject_approve_first_act:
+            type: text
+            label: 'Subject lobbyist when commissioner approve their first activity'
+            translatable: true
+        commissioner_approve_first_act:
+            type: text_format
+            label: 'Mail to lobbyist when commissioner approve their first activity'
+            translatable: true
+        commissioner_updated_act:
+            type: text_format
+            label: 'Mail to lobbyist when commissioner updated an activity'
+            translatable: true
+        you_updated_act:
+            type: text_format
+            label: 'Mail when user updated an activity'
+            translatable: true
+        wave_for_not_validate:
+            type: checkbox
+            label: 'Not end the activities'

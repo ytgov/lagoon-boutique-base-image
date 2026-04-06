@@ -1,0 +1,18 @@
+uuid: f0ee35cc-abc6-4480-a09a-3db5eab4d603
+langcode: en
+status: true
+dependencies:
+  theme:
+    - wxt_lobbyist
+id: wxt_lobbyist_primaryadminactions
+theme: wxt_lobbyist
+region: header
+weight: 0
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

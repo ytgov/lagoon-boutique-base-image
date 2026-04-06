@@ -1,0 +1,13 @@
+htmlmail_debug: false
+hmtlmail_theme: ''
+htmlmail_html_with_plain: false
+htmlmail_use_mime_mail: false
+htmlmail_postfilter: full_html
+htmlmail_test:
+  to: mariazel@bizont.ca
+  subject: 'subject test'
+  body:
+    value: "<p>body test</p>\r\n"
+    format: basic_html
+  class: htmlmail
+htmlmail_theme: ''

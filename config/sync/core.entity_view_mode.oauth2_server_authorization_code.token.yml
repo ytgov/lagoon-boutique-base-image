@@ -1,0 +1,11 @@
+uuid: 42b01422-badf-4c14-b4b1-e8be874b8401
+langcode: en
+status: true
+dependencies:
+  module:
+    - oauth2_server
+id: oauth2_server_authorization_code.token
+label: Token
+description: null
+targetEntityType: oauth2_server_authorization_code
+cache: true

@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.activity.field_comments
+    - field.field.node.activity.field_email
+    - field.field.node.activity.field_status
+    - field.field.node.activity.field_submission_id
+    - field.field.node.activity.field_title
+    - node.type.activity
+  module:
+    - user
+id: node.activity.teaser
+targetEntityType: node
+bundle: activity
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_comments: true
+  field_email: true
+  field_status: true
+  field_submission_id: true
+  field_title: true
+  langcode: true

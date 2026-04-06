@@ -1,0 +1,18 @@
+uuid: ca926e87-05e2-46f1-a83c-8d76229cb1b2
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - serialization
+    - user
+id: webform_submission_log
+plugin_id: webform_submission_log
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - cookie

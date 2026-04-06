@@ -1,0 +1,5 @@
+settings:
+  default_image:
+    alt: 'A generic silhouette of a person.'
+label: Image
+description: 'Votre visage ou image virtuelle.'

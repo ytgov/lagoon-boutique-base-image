@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.activiy_comments
+id: comment.activiy_comments.mail
+field_name: mail
+entity_type: comment
+bundle: activiy_comments
+label: Email
+description: 'The comment author''s email address.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

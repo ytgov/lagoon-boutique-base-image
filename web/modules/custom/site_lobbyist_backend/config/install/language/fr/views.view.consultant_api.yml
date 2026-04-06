@@ -1,0 +1,19 @@
+display:
+  rest_export_1:
+    display_options:
+      fields:
+        sid:
+          alter:
+            text: '<a href = "/fr/consultant-account-home/consultant-activity-view?id={{ sid }}" ><i class="far fa-eye"></i></a>'
+  rest_export_2:
+    display_options:
+      fields:
+        sid:
+          alter:
+            text: '<a href = "/fr/search-organization/organization-view/consultant-activity-view?id={{ sid }}&org={{ uid }}&webform_id=add_a_lobbying_activity_consulta" ><i class="far fa-eye"></i></a>'
+  rest_export_3:
+    display_options:
+      fields:
+        sid:
+          alter:
+            text: '<a href = "/fr/consultant-account-home/consultant-activity-view?id={{ sid }}&webform_id=add_a_lobbying_activity_consulta" ><i class="far fa-eye"></i></a>'

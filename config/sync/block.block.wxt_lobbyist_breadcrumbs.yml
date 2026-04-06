@@ -1,0 +1,22 @@
+uuid: 184aa096-5b82-434a-b554-818208dc0dbc
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - wxt_lobbyist
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: wxt_lobbyist_breadcrumbs
+theme: wxt_lobbyist
+region: navbar
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

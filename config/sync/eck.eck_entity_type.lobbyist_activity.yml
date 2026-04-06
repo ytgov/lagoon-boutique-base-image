@@ -1,0 +1,14 @@
+uuid: c296bb92-bf7a-407b-86bc-57fcd1d44a3f
+langcode: en
+status: false
+dependencies: {  }
+_core:
+  default_config_hash: MyH1P9EAmBQ6reDOS8s0iHvT6G4jMvYPQC7vw1lBs2c
+id: lobbyist_activity
+label: 'Lobbyist activity'
+description: null
+uid: true
+created: true
+changed: true
+title: true
+standalone_url: null

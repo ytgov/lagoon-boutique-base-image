@@ -1,0 +1,27 @@
+uuid: 4e94f0da-3c44-4674-8189-45035a380719
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - wxt_bootstrap_yukon
+_core:
+  default_config_hash: KWAiziL39uEzmOJEql_wbUP2RtqGceL3WM2CfxhMelE
+id: wxt_bootstrap_yukon_main_menu
+theme: wxt_bootstrap_yukon
+region: navbar
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: true
+visibility: {  }

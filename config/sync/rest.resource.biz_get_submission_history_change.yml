@@ -1,0 +1,17 @@
+uuid: 87c2243f-2e90-44ff-bbd6-d38e52d001fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - biz_webform_rest
+    - serialization
+    - user
+id: biz_get_submission_history_change
+plugin_id: biz_get_submission_history_change
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie

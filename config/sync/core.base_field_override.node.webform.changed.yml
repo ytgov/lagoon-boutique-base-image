@@ -1,0 +1,18 @@
+uuid: a95b1d79-7d04-4ac1-bcf4-9f43e2e275d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.webform
+id: node.webform.changed
+field_name: changed
+entity_type: node
+bundle: webform
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

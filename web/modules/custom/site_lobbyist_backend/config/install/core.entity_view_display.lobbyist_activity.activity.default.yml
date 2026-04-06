@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_display.comment.activiy_comments.default
+    - eck.eck_type.lobbyist_activity.activity
+    - field.field.lobbyist_activity.activity.field_comments
+  module:
+    - comment
+    - user
+id: lobbyist_activity.activity.default
+targetEntityType: lobbyist_activity
+bundle: activity
+mode: default
+content:
+  created:
+    label: hidden
+    type: timestamp
+    weight: 0
+    region: content
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+  field_comments:
+    weight: 1
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    type: comment_default
+    region: content
+  title:
+    label: hidden
+    type: string
+    weight: -5
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  uid:
+    label: hidden
+    type: author
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  changed: true
+  langcode: true

@@ -1,0 +1,11 @@
+uuid: cf973b28-2126-4b46-baee-138e00a451c9
+langcode: en
+status: true
+dependencies:
+  module:
+    - oauth2_server
+id: oauth2_server_jti.token
+label: Token
+description: null
+targetEntityType: oauth2_server_jti
+cache: true

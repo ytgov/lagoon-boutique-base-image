@@ -1,0 +1,21 @@
+uuid: 69ce6f4b-8681-46fd-9c6b-97dfe9c519a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.lobbyist_s_portfolios
+  module:
+    - text
+id: taxonomy_term.lobbyist_s_portfolios.description
+field_name: description
+entity_type: taxonomy_term
+bundle: lobbyist_s_portfolios
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

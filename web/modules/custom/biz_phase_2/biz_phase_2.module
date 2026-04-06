@@ -1,0 +1,79 @@
+<?php
+use Drupal\webform\Entity\Webform;
+use Drupal\webform_submission_change_history\WebformSubmissionChangeHistory\SubmissionInfo;
+use Drupal\webform_submission_change_history\WebformSubmissionChangeHistory\Change;
+/**
+ * Implements hook_cronapi().
+ */
+function biz_phase_2_cron(){
+  $database =  \Drupal::database();
+  $string = " SELECT webform_id,  GROUP_CONCAT(sid) as sids,count" .
+             " FROM (" .
+                " SELECT webform_id, sid, count(sid) as count" .
+                 " FROM (" .
+                    " SELECT wsl.sid, DATE_FORMAT(FROM_UNIXTIME(wsl.timestamp), '%Y/%m/%d') AS date,wsl.webform_id" .
+                    " FROM webform_submission_log as wsl " .
+                    " INNER JOIN webform_submission wsd " .
+                    " ON wsd.sid = wsl.sid and  wsd.uid = wsl.uid and wsl.webform_id =wsd.webform_id" .
+                    " WHERE data NOT LIKE '%{a:0}%' AND operation = 'submission updated'" .
+                    " AND  (data LIKE '%start_date%' OR data LIKE '%end_date%' OR data LIKE '%year%')" .
+                    " GROUP BY wsl.sid , DATE_FORMAT(FROM_UNIXTIME(wsl.timestamp), '%Y/%m/%d')" .
+                    " ORDER BY DATE_FORMAT(FROM_UNIXTIME(wsl.timestamp), '%Y/%m/%d') ASC" .
+                " ) temp2" .
+                " GROUP by  webform_id, sid" .
+                " )temp3" .
+             " GROUP by  webform_id,count" ;
+            
+  $query = $database->query($string);
+  $result = $query->fetchAll();
+
+  foreach ($result as $row) {
+
+    $submissions = \Drupal::entityTypeManager()->getStorage('webform_submission')->loadMultiple( explode(',', $row->sids));
+    foreach($submissions as $submission){
+      $submission->setElementData('version_number', intval($row->count) + 1 );
+      $submission->save();
+    }    
+  }
+
+}
+
+
+function biz_phase_2_uninstall(){
+  \Drupal::configFactory()->getEditable('tour.tour.search-api-server-form')->delete();
+  \Drupal::configFactory()->getEditable('language.content_settings.taxonomy_term.external_report')->delete();
+  \Drupal::configFactory()->getEditable('tour.tour.search-api-server')->delete();
+  \Drupal::configFactory()->getEditable('language.content_settings.taxonomy_term.header_for_revisions')->delete();
+  \Drupal::configFactory()->getEditable('ultimate_cron.job.biz_phase_2_cron')->delete();
+  \Drupal::configFactory()->getEditable('language.content_settings.taxonomy_term.public_report')->delete();
+  \Drupal::configFactory()->getEditable('ultimate_cron.job.search_api_cron')->delete();
+  \Drupal::configFactory()->getEditable('rest.resource.biz_get_reports')->delete();
+  \Drupal::configFactory()->getEditable('rest.resource.biz_get_submission_history_change')->delete();
+  \Drupal::configFactory()->getEditable('user.role.consultant_lobbyist')->delete();
+  \Drupal::configFactory()->getEditable('search_api.index.search_activities')->delete();
+  \Drupal::configFactory()->getEditable('user.role.editor')->delete();
+  \Drupal::configFactory()->getEditable('search_api.server.search_activities_server')->delete();
+  \Drupal::configFactory()->getEditable('user.role.in_house_lobbyist')->delete();
+  \Drupal::configFactory()->getEditable('search_api.settings')->delete();
+  \Drupal::configFactory()->getEditable('views.view.consultant_api')->delete();
+  \Drupal::configFactory()->getEditable('search_api_db.settings')->delete();
+  \Drupal::configFactory()->getEditable('views.view.content_translations')->delete();
+  \Drupal::configFactory()->getEditable('taxonomy.vocabulary.external_report')->delete();
+  \Drupal::configFactory()->getEditable('views.view.headers_for_tables')->delete();
+  \Drupal::configFactory()->getEditable('taxonomy.vocabulary.header_for_revisions')->delete();
+  \Drupal::configFactory()->getEditable('views.view.in_house_api')->delete();
+  \Drupal::configFactory()->getEditable('taxonomy.vocabulary.public_report')->delete();
+  \Drupal::configFactory()->getEditable('views.view.search_activities')->delete();
+  \Drupal::configFactory()->getEditable('tour.tour.search-api-index-fields')->delete();
+  \Drupal::configFactory()->getEditable('views.view.search_organization')->delete();
+  \Drupal::configFactory()->getEditable('tour.tour.search-api-index-form')->delete();
+  \Drupal::configFactory()->getEditable('views_field_view.settings')->delete();
+  \Drupal::configFactory()->getEditable('tour.tour.search-api-index-processors')->delete();
+  \Drupal::configFactory()->getEditable('webform.webform.add_a_lobbying_activity')->delete();
+  \Drupal::configFactory()->getEditable('tour.tour.search-api-index')->delete();
+  \Drupal::configFactory()->getEditable('webform.webform.add_a_lobbying_activity_consulta')->delete();
+  \Drupal::configFactory()->getEditable('views.view.commissioner_api')->delete();
+  \Drupal::configFactory()->getEditable('views.view.content')->delete();
+  \Drupal::configFactory()->getEditable('views.view.search_api')->delete();
+ 
+}

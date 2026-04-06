@@ -1,0 +1,12 @@
+format: full_html
+name: 'Office of the Lobbyist Registry'
+mail: edgar@bizont.ca
+linkonly: false
+textonly: false
+sitestyle: true
+simple_address: false
+preserve_class: false
+advanced:
+  incoming: false
+  key: Q_4Nvn8HHeLN2uq66HmseRr1CzX_BfN0I4R24jWns9A
+user_plaintext_field: ''
