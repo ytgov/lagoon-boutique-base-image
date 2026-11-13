@@ -17,7 +17,7 @@
     "require": {
         "ext-simplexml": "*",
         "composer/installers": "^2.0.1",
-        "cweagans/composer-patches": "^1.7.3",
+        "cweagans/composer-patches": "^2.0.0",
         "drupal/addtoany": "^2.0.0",
         "drupal/admin_toolbar": "^3.3.0",
         "drupal/allowed_formats": "^3.0",
