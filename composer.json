@@ -106,9 +106,10 @@
                 "type:drupal-custom-theme"
             ]
         },
+        "composer-exit-on-patch-failure": true,
         "patches": {
             "drupal/entity_reference_revisions": {
-                "Non-translatable fields can only be changed when updating the current revision (#3150084, MR !8 snapshot 2026-09-21)": "patches/entity_reference_revisions-3150084-mr8.diff"
+                "Non-translatable fields can only be changed when updating the current revision (#3150084, MR !8 snapshot 2026-09-21)": "https://raw.githubusercontent.com/ytgov/lagoon-boutique-base-image/45833fd6ea2f83439c96f741dea51662945e2043/patches/entity_reference_revisions-3150084-mr8.diff"
             },
             "drupal/core": {
                 "Exposed filters get values from url when ajax is on": "https://www.drupal.org/files/issues/2024-08-23/drupal-3121172-34.patch"

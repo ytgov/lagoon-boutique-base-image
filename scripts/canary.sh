@@ -149,9 +149,6 @@ fi
 step "Base candidate: $BASE_DIR ($base_rev)"
 mkdir "$workdir/.base-pkg"
 cp "$BASE_DIR/composer.json" "$workdir/.base-pkg/"
-if [ -d "$BASE_DIR/patches" ]; then
-  cp -R "$BASE_DIR/patches" "$workdir/.base-pkg/"
-fi
 
 cd "$workdir"
 
@@ -244,6 +241,34 @@ $composer['repositories'] = array_values(array_filter($composer['repositories'],
   fn($repo) => strpos($repo['url'] ?? '', 'lagoon-boutique-base-image') === FALSE));
 file_put_contents('composer.json', json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
 PHP
+cat > .canary/base-patches.php <<'PHP'
+<?php
+// Checks that every patch the base defines was applied to the child site.
+// composer-patches writes a PATCHES.txt listing each patch's source into every
+// package it patches. Prints "disabled" if the child does not set
+// enable-patching, otherwise one "missing <source>" line per unapplied patch.
+$base = json_decode(file_get_contents('.base-pkg/composer.json'), TRUE);
+$child = json_decode(file_get_contents('composer.json'), TRUE);
+if (empty($child['extra']['enable-patching'])) {
+  echo "disabled\n";
+  exit;
+}
+$applied = '';
+foreach (['web', 'vendor'] as $root) {
+  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS)) as $file) {
+    if ($file->getFilename() === 'PATCHES.txt') {
+      $applied .= file_get_contents($file->getPathname());
+    }
+  }
+}
+foreach ($base['extra']['patches'] ?? [] as $patches) {
+  foreach ($patches as $source) {
+    if (strpos($applied, $source) === FALSE) {
+      echo "missing $source\n";
+    }
+  }
+}
+PHP
 cat > .canary/base-modules.php <<'PHP'
 <?php
 // Prints the machine name of every drupal/* module the base requires.
@@ -267,8 +292,17 @@ else
   fail "composer update $BASE_PACKAGE -W (see $log)"
   finish
 fi
-if grep -q '"patches"' .base-pkg/composer.json && [ -z "$(find web -maxdepth 4 -name PATCHES.txt)" ]; then
-  warn "The base defines patches but none were applied to the child site"
+patches_status=0
+patches=$("${PHP[@]}" .canary/base-patches.php 2>>"$log") || patches_status=$?
+patches=$(printf '%s\n' "$patches" | grep -v -e '^configured lagoon-php.ini$' -e '^$' || true)
+if [ "$patches_status" != 0 ]; then
+  fail "Could not check the base's patches (see $log)"
+elif [ "$patches" = disabled ]; then
+  warn "The child does not set extra.enable-patching, so it gets none of the base's patches"
+elif [ -n "$patches" ]; then
+  fail "Base patches not applied: $(printf '%s\n' "$patches" | sed -n 's/^missing //p' | tr '\n' ' ')"
+else
+  pass "Every base patch is applied"
 fi
 
 # ---------------------------------------------------------------------------
