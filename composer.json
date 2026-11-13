@@ -22,13 +22,11 @@
         "drupal/admin_toolbar": "^3.3.0",
         "drupal/allowed_formats": "^3.0",
         "drupal/better_exposed_filters": "^7.0.0-beta1",
-        "drupal/coder": "^8.3.17",
         "drupal/color_field": "^3.0.0",
         "drupal/core-composer-scaffold": "^11",
-        "drupal/core-project-message": "^11",
         "drupal/core-recommended": "^11",
         "drupal/easy_breadcrumb": "^2.0.9",
-        "drupal/field_group": "^3.4.0",
+        "drupal/field_group": "^4.0",
         "drupal/fontawesome": "^3.0",
         "drupal/image_effects": "^4.0",
         "drupal/layout_paragraphs": "^2.1.1",
@@ -37,7 +35,7 @@
         "drupal/matomo": "^1.21.0",
         "drupal/menu_block": "^1.10.0",
         "drupal/metatag": "^2.0.0",
-        "drupal/openid_connect": "3.0.0-alpha5",
+        "drupal/openid_connect": "3.0.0-alpha9",
         "drupal/paragraphs": "^1.15.0",
         "drupal/pathauto": "^1.11.0",
         "drupal/redirect": "^1.8.0",
@@ -68,9 +66,13 @@
             "phpstan/extension-installer": true,
             "cweagans/composer-patches": true,
             "php-http/discovery": true,
-            "tbachert/spi": false
+            "tbachert/spi": false,
+            "symfony/runtime": true
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.4.0"
+        }
     },
     "extra": {
         "drupal-scaffold": {
@@ -107,34 +109,16 @@
                 "type:drupal-custom-theme"
             ]
         },
-        "drupal-core-project-message": {
-            "include-keys": [
-                "homepage",
-                "support"
-            ],
-            "post-create-project-cmd-message": [
-                "<bg=blue;fg=white>                                                         </>",
-                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
-                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
-                "<bg=blue;fg=white>                                                         </>",
-                "",
-                "<bg=yellow;fg=black>Next steps</>:",
-                "  * Install the site: https://www.drupal.org/docs/8/install",
-                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
-                "  * Get support: https://www.drupal.org/support",
-                "  * Get involved with the Drupal community:",
-                "      https://www.drupal.org/getting-involved",
-                "  * Remove the plugin that prints this message:",
-                "      composer remove drupal/core-project-message"
-            ]
-        },
         "patches": {
             "drupal/entity_reference_revisions": {
-                "Non-translatable fields can only be changed when updating the current revision": "https://www.drupal.org/files/issues/2024-01-15/3150084-35.patch"
+                "Non-translatable fields can only be changed when updating the current revision (#3150084, MR !8 snapshot 2026-09-21)": "patches/entity_reference_revisions-3150084-mr8.diff"
             },
             "drupal/core": {
                 "Exposed filters get values from url when ajax is on": "https://www.drupal.org/files/issues/2024-08-23/drupal-3121172-34.patch"
             }
         }
+    },
+    "require-dev": {
+        "drupal/coder": "^8.3.28"
     }
 }

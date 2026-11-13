@@ -1,0 +1,875 @@
+diff --git a/composer.json b/composer.json
+index 26c0bf67b8799ae0d3fa083563cc7a575eb4a213..e4f362bcf84c6cec2d78420789032f64f5a76f74 100644
+--- a/composer.json
++++ b/composer.json
+@@ -7,9 +7,20 @@
+     "drupal/core": "^10.2 || ^11 || ^12"
+   },
+   "require-dev": {
+-    "drupal/diff": "^1 || ^2"
++    "drupal/diff": "^1 || ^2",
++    "drupal/paragraphs": "^1"
+   },
+   "conflict": {
+-      "drush/drush": "<12.5.1"
++    "drush/drush": "<12.5.1"
++  },
++  "extra": {
++    "drush": {
++      "services": {
++        "drush.services.yml": "^9 || ^10 || ^11"
++      }
++    },
++    "branch-alias": {
++      "dev-8.x-1.x": "1.x-dev"
++    }
+   }
+ }
+diff --git a/src/Hook/EntityHooks.php b/src/Hook/EntityHooks.php
+index 00c77a3a3ab4bbd008f9f8ca57c90d9088335dca..67966a6f5041d3ffd777691654f20e3e6288e6ca 100644
+--- a/src/Hook/EntityHooks.php
++++ b/src/Hook/EntityHooks.php
+@@ -148,7 +148,9 @@ final class EntityHooks {
+                   $target_entity = $item->entity->getTranslation($active_langcode);
+                 }
+               }
+-              $revised_entity = $target_storage->createRevision($target_entity, $new_revision->isDefaultRevision(), $keep_untranslatable_fields);
++              // The defaultness of anything revisioned by reference is
++              // practically pointless so set it to TRUE unconditionally.
++              $revised_entity = $target_storage->createRevision($target_entity, TRUE, $keep_untranslatable_fields);
+               // Restore the revision ID.
+               $revision_key = $revised_entity->getEntityType()->getKey('revision');
+               $revised_entity->set($revision_key, $revised_entity->getLoadedRevisionId());
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.changed.yml b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.changed.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..8f8cc42448fbd4d92bba34b76744930b63200338
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.changed.yml
+@@ -0,0 +1,17 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.test_type
++id: node.test_type.changed
++field_name: changed
++entity_type: node
++bundle: test_type
++label: Changed
++description: 'The time that the node was last edited.'
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: changed
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.created.yml b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.created.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..23f1c41602ab238377c384ee23927ccc414f6bc3
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.created.yml
+@@ -0,0 +1,17 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.test_type
++id: node.test_type.created
++field_name: created
++entity_type: node
++bundle: test_type
++label: 'Authored on'
++description: 'The date and time that the content was created.'
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: created
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.promote.yml b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.promote.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..65a5ae37f42db19f0b86e1a362d98431a493ee7a
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.promote.yml
+@@ -0,0 +1,21 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.test_type
++id: node.test_type.promote
++field_name: promote
++entity_type: node
++bundle: test_type
++label: 'Promoted to front page'
++description: ''
++required: false
++translatable: false
++default_value:
++  -
++    value: 0
++default_value_callback: ''
++settings:
++  on_label: 'On'
++  off_label: 'Off'
++field_type: boolean
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.status.yml b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.status.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..090e4e2572ff07a36b442f40755bd981d6732cf9
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.status.yml
+@@ -0,0 +1,21 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.test_type
++id: node.test_type.status
++field_name: status
++entity_type: node
++bundle: test_type
++label: Published
++description: ''
++required: false
++translatable: false
++default_value:
++  -
++    value: 1
++default_value_callback: ''
++settings:
++  on_label: 'On'
++  off_label: 'Off'
++field_type: boolean
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.sticky.yml b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.sticky.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..847751069302cbad895c9b0d3e92f40ca877a272
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.sticky.yml
+@@ -0,0 +1,21 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.test_type
++id: node.test_type.sticky
++field_name: sticky
++entity_type: node
++bundle: test_type
++label: 'Sticky at top of lists'
++description: ''
++required: false
++translatable: false
++default_value:
++  -
++    value: 0
++default_value_callback: ''
++settings:
++  on_label: 'On'
++  off_label: 'Off'
++field_type: boolean
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.uid.yml b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.uid.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..a9d74c43ea009ca99ff91d129fdf8f987806f9c1
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.node.test_type.uid.yml
+@@ -0,0 +1,19 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.test_type
++id: node.test_type.uid
++field_name: uid
++entity_type: node
++bundle: test_type
++label: 'Authored by'
++description: 'The username of the content author.'
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
++settings:
++  handler: default
++  handler_settings: {  }
++field_type: entity_reference
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.paragraph.test_paragraph.created.yml b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.paragraph.test_paragraph.created.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..a96d08040ca35a49d22cf656b237e4b3bd33d4ea
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.paragraph.test_paragraph.created.yml
+@@ -0,0 +1,17 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - paragraphs.paragraphs_type.test_paragraph
++id: paragraph.test_paragraph.created
++field_name: created
++entity_type: paragraph
++bundle: test_paragraph
++label: 'Authored on'
++description: 'The time that the Paragraph was created.'
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: created
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.paragraph.test_paragraph.status.yml b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.paragraph.test_paragraph.status.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..c356b5f818f331333bf084484b28f2a38a875450
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.base_field_override.paragraph.test_paragraph.status.yml
+@@ -0,0 +1,21 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - paragraphs.paragraphs_type.test_paragraph
++id: paragraph.test_paragraph.status
++field_name: status
++entity_type: paragraph
++bundle: test_paragraph
++label: Published
++description: ''
++required: false
++translatable: false
++default_value:
++  -
++    value: 1
++default_value_callback: ''
++settings:
++  on_label: 'On'
++  off_label: 'Off'
++field_type: boolean
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.entity_form_display.node.test_type.default.yml b/tests/modules/entity_translation_revision_test/config/install/core.entity_form_display.node.test_type.default.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..8993f0709367d42900f03126b43945eab9d9c5d0
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.entity_form_display.node.test_type.default.yml
+@@ -0,0 +1,72 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.field.node.test_type.field_paragraphs
++    - node.type.test_type
++  module:
++    - paragraphs
++id: node.test_type.default
++targetEntityType: node
++bundle: test_type
++mode: default
++content:
++  created:
++    type: datetime_timestamp
++    weight: 10
++    region: content
++    settings: {  }
++    third_party_settings: {  }
++  field_paragraphs:
++    type: paragraphs
++    weight: 121
++    region: content
++    settings:
++      title: Paragraph
++      title_plural: Paragraphs
++      edit_mode: open
++      closed_mode: summary
++      autocollapse: none
++      closed_mode_threshold: 0
++      add_mode: dropdown
++      form_display_mode: default
++      default_paragraph_type: ''
++      features:
++        collapse_edit_all: collapse_edit_all
++        duplicate: duplicate
++    third_party_settings: {  }
++  langcode:
++    type: language_select
++    weight: 2
++    region: content
++    settings:
++      include_locked: true
++    third_party_settings: {  }
++  status:
++    type: boolean_checkbox
++    weight: 120
++    region: content
++    settings:
++      display_label: true
++    third_party_settings: {  }
++  title:
++    type: string_textfield
++    weight: -5
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++  uid:
++    type: entity_reference_autocomplete
++    weight: 5
++    region: content
++    settings:
++      match_operator: CONTAINS
++      match_limit: 10
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++hidden:
++  promote: true
++  sticky: true
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.entity_form_display.paragraph.test_paragraph.default.yml b/tests/modules/entity_translation_revision_test/config/install/core.entity_form_display.paragraph.test_paragraph.default.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2ca185acbf04e023b8c5bf3ca88c4141c498a602
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.entity_form_display.paragraph.test_paragraph.default.yml
+@@ -0,0 +1,22 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.field.paragraph.test_paragraph.field_test_field
++    - paragraphs.paragraphs_type.test_paragraph
++id: paragraph.test_paragraph.default
++targetEntityType: paragraph
++bundle: test_paragraph
++mode: default
++content:
++  field_test_field:
++    type: string_textfield
++    weight: 0
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++hidden:
++  created: true
++  status: true
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.entity_view_display.node.test_type.default.yml b/tests/modules/entity_translation_revision_test/config/install/core.entity_view_display.node.test_type.default.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..cfcc1f407239d9d36755b193b768e08905c705c1
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.entity_view_display.node.test_type.default.yml
+@@ -0,0 +1,30 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.field.node.test_type.field_paragraphs
++    - node.type.test_type
++  module:
++    - entity_reference_revisions
++    - user
++id: node.test_type.default
++targetEntityType: node
++bundle: test_type
++mode: default
++content:
++  field_paragraphs:
++    type: entity_reference_revisions_entity_view
++    label: above
++    settings:
++      view_mode: default
++      link: ''
++    third_party_settings: {  }
++    weight: 101
++    region: content
++  links:
++    settings: {  }
++    third_party_settings: {  }
++    weight: 100
++    region: content
++hidden:
++  langcode: true
+diff --git a/tests/modules/entity_translation_revision_test/config/install/core.entity_view_display.paragraph.test_paragraph.default.yml b/tests/modules/entity_translation_revision_test/config/install/core.entity_view_display.paragraph.test_paragraph.default.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..4c4ac96b97276defa96ddc2441fbb2e04ddf749b
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/core.entity_view_display.paragraph.test_paragraph.default.yml
+@@ -0,0 +1,20 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.field.paragraph.test_paragraph.field_test_field
++    - paragraphs.paragraphs_type.test_paragraph
++id: paragraph.test_paragraph.default
++targetEntityType: paragraph
++bundle: test_paragraph
++mode: default
++content:
++  field_test_field:
++    type: string
++    label: above
++    settings:
++      link_to_entity: false
++    third_party_settings: {  }
++    weight: 0
++    region: content
++hidden: {  }
+diff --git a/tests/modules/entity_translation_revision_test/config/install/field.field.node.test_type.field_paragraphs.yml b/tests/modules/entity_translation_revision_test/config/install/field.field.node.test_type.field_paragraphs.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..9d6a073c9e49f08fe56e7361571f74c4e0720884
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/field.field.node.test_type.field_paragraphs.yml
+@@ -0,0 +1,30 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_paragraphs
++    - node.type.test_type
++    - paragraphs.paragraphs_type.test_paragraph
++  module:
++    - entity_reference_revisions
++id: node.test_type.field_paragraphs
++field_name: field_paragraphs
++entity_type: node
++bundle: test_type
++label: Paragraphs
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  handler: 'default:paragraph'
++  handler_settings:
++    target_bundles:
++      test_paragraph: test_paragraph
++    negate: 0
++    target_bundles_drag_drop:
++      test_paragraph:
++        weight: 2
++        enabled: true
++field_type: entity_reference_revisions
+diff --git a/tests/modules/entity_translation_revision_test/config/install/field.field.paragraph.test_paragraph.field_test_field.yml b/tests/modules/entity_translation_revision_test/config/install/field.field.paragraph.test_paragraph.field_test_field.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..22d72479afd3871d0c1584fa5e74a6e4a0dd5887
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/field.field.paragraph.test_paragraph.field_test_field.yml
+@@ -0,0 +1,18 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.paragraph.field_test_field
++    - paragraphs.paragraphs_type.test_paragraph
++id: paragraph.test_paragraph.field_test_field
++field_name: field_test_field
++entity_type: paragraph
++bundle: test_paragraph
++label: 'Test field'
++description: ''
++required: false
++translatable: true
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: string
+diff --git a/tests/modules/entity_translation_revision_test/config/install/field.storage.node.field_paragraphs.yml b/tests/modules/entity_translation_revision_test/config/install/field.storage.node.field_paragraphs.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..332d836fab95e2744120180499a0672b74761085
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/field.storage.node.field_paragraphs.yml
+@@ -0,0 +1,20 @@
++langcode: en
++status: true
++dependencies:
++  module:
++    - entity_reference_revisions
++    - node
++    - paragraphs
++id: node.field_paragraphs
++field_name: field_paragraphs
++entity_type: node
++type: entity_reference_revisions
++settings:
++  target_type: paragraph
++module: entity_reference_revisions
++locked: false
++cardinality: -1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/tests/modules/entity_translation_revision_test/config/install/field.storage.paragraph.field_test_field.yml b/tests/modules/entity_translation_revision_test/config/install/field.storage.paragraph.field_test_field.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..edb0273e0d084b46bf4d4d162bc02d0515a385a0
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/field.storage.paragraph.field_test_field.yml
+@@ -0,0 +1,20 @@
++langcode: en
++status: true
++dependencies:
++  module:
++    - paragraphs
++id: paragraph.field_test_field
++field_name: field_test_field
++entity_type: paragraph
++type: string
++settings:
++  max_length: 255
++  case_sensitive: false
++  is_ascii: false
++module: core
++locked: false
++cardinality: 1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/tests/modules/entity_translation_revision_test/config/install/language.content_settings.content_moderation_state.content_moderation_state.yml b/tests/modules/entity_translation_revision_test/config/install/language.content_settings.content_moderation_state.content_moderation_state.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..724cb4077f3f13a33651392c709a929bc220fefe
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/language.content_settings.content_moderation_state.content_moderation_state.yml
+@@ -0,0 +1,10 @@
++langcode: en
++status: true
++dependencies:
++  module:
++    - content_moderation
++id: content_moderation_state.content_moderation_state
++target_entity_type_id: content_moderation_state
++target_bundle: content_moderation_state
++default_langcode: site_default
++language_alterable: false
+diff --git a/tests/modules/entity_translation_revision_test/config/install/language.content_settings.node.test_type.yml b/tests/modules/entity_translation_revision_test/config/install/language.content_settings.node.test_type.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..16da8602bf505bd8c11306474b2e0ad209e15cbc
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/language.content_settings.node.test_type.yml
+@@ -0,0 +1,17 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.test_type
++  module:
++    - content_translation
++third_party_settings:
++  content_translation:
++    enabled: true
++    bundle_settings:
++      untranslatable_fields_hide: '1'
++id: node.test_type
++target_entity_type_id: node
++target_bundle: test_type
++default_langcode: site_default
++language_alterable: true
+diff --git a/tests/modules/entity_translation_revision_test/config/install/language.content_settings.paragraph.test_paragraph.yml b/tests/modules/entity_translation_revision_test/config/install/language.content_settings.paragraph.test_paragraph.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..9ac1384b47d5845e745a04cd9f4a1a5c154e67e0
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/language.content_settings.paragraph.test_paragraph.yml
+@@ -0,0 +1,17 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - paragraphs.paragraphs_type.test_paragraph
++  module:
++    - content_translation
++third_party_settings:
++  content_translation:
++    enabled: true
++    bundle_settings:
++      untranslatable_fields_hide: '0'
++id: paragraph.test_paragraph
++target_entity_type_id: paragraph
++target_bundle: test_paragraph
++default_langcode: site_default
++language_alterable: true
+diff --git a/tests/modules/entity_translation_revision_test/config/install/language.entity.nl.yml b/tests/modules/entity_translation_revision_test/config/install/language.entity.nl.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..b4e50d13e59aefc2c47c037725a0db8bc43d1b7e
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/language.entity.nl.yml
+@@ -0,0 +1,8 @@
++langcode: en
++status: true
++dependencies: {  }
++id: nl
++label: Dutch
++direction: ltr
++weight: 1
++locked: false
+diff --git a/tests/modules/entity_translation_revision_test/config/install/node.type.test_type.yml b/tests/modules/entity_translation_revision_test/config/install/node.type.test_type.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..67c539408e71b933632f27bc4f9d95766d06a56b
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/node.type.test_type.yml
+@@ -0,0 +1,10 @@
++langcode: en
++status: true
++dependencies: {  }
++name: 'Test type'
++type: test_type
++description: null
++help: null
++new_revision: true
++preview_mode: 1
++display_submitted: true
+diff --git a/tests/modules/entity_translation_revision_test/config/install/paragraphs.paragraphs_type.test_paragraph.yml b/tests/modules/entity_translation_revision_test/config/install/paragraphs.paragraphs_type.test_paragraph.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..55a8b2892f810dd21b6b6a6934a1d0ad4cbb04d6
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/paragraphs.paragraphs_type.test_paragraph.yml
+@@ -0,0 +1,9 @@
++langcode: en
++status: true
++dependencies: {  }
++id: test_paragraph
++label: 'Test paragraph'
++icon_uuid: null
++icon_default: null
++description: ''
++behavior_plugins: {  }
+diff --git a/tests/modules/entity_translation_revision_test/config/install/workflows.workflow.content_moderation.yml b/tests/modules/entity_translation_revision_test/config/install/workflows.workflow.content_moderation.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..92e3cfe77790c4c2d8416eb2bdde2a764053e7de
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/config/install/workflows.workflow.content_moderation.yml
+@@ -0,0 +1,41 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.test_type
++  module:
++    - content_moderation
++id: content_moderation
++label: 'Content moderation'
++type: content_moderation
++type_settings:
++  states:
++    draft:
++      label: Draft
++      weight: 0
++      published: false
++      default_revision: false
++    published:
++      label: Published
++      weight: 1
++      published: true
++      default_revision: true
++  transitions:
++    create_new_draft:
++      label: 'Create New Draft'
++      from:
++        - draft
++        - published
++      to: draft
++      weight: 0
++    publish:
++      label: Publish
++      from:
++        - draft
++        - published
++      to: published
++      weight: 1
++  entity_types:
++    node:
++      - test_type
++  default_moderation_state: draft
+diff --git a/tests/modules/entity_translation_revision_test/entity_translation_revision_test.info.yml b/tests/modules/entity_translation_revision_test/entity_translation_revision_test.info.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..1d59ef4002d22e5868a6e1d74443122d83296836
+--- /dev/null
++++ b/tests/modules/entity_translation_revision_test/entity_translation_revision_test.info.yml
+@@ -0,0 +1,13 @@
++name: 'Entity Translation Revision ERR'
++type: module
++description: 'Node type and paragraph type with translation support and content moderation.'
++package: Testing
++
++dependencies:
++  - drupal:node
++  - drupal:language
++  - drupal:content_translation
++  - drupal:content_moderation
++  - drupal:workflows
++  - paragraphs:paragraphs
++  - entity_reference_revisions:entity_reference_revisions
+diff --git a/tests/src/Functional/EntityReferenceRevisionsDraftTranslationTest.php b/tests/src/Functional/EntityReferenceRevisionsDraftTranslationTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..d7fa60deacdcf57d96976a225539295e73e27344
+--- /dev/null
++++ b/tests/src/Functional/EntityReferenceRevisionsDraftTranslationTest.php
+@@ -0,0 +1,67 @@
++<?php
++
++namespace Drupal\Tests\entity_reference_revisions\Functional;
++
++use Drupal\Tests\BrowserTestBase;
++
++/**
++ * Tests draft translations of nodes with untranslatable paragraph fields.
++ *
++ * @group entity_reference_revisions
++ */
++class EntityReferenceRevisionsDraftTranslationTest extends BrowserTestBase {
++
++  /**
++   * Modules to enable.
++   *
++   * @var array
++   */
++  protected static $modules = [
++    'node',
++    'paragraphs',
++    'entity_reference_revisions',
++    'language',
++    'content_translation',
++    'content_moderation',
++    'workflows',
++    'entity_translation_revision_test',
++  ];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected $defaultTheme = 'stark';
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp(): void {
++    parent::setUp();
++
++    // Create an admin user with necessary permissions.
++    $admin_user = $this->drupalCreateUser([], NULL, TRUE);
++    $this->drupalLogin($admin_user);
++  }
++
++  /**
++   * Tests that a paragraph on a draft translation does not become default.
++   */
++  public function testDraftTranslationParagraphRevision() {
++    $this->drupalGet('node/add/test_type');
++    $this->submitForm([
++      'moderation_state[0][state]' => 'published',
++      'title[0][value]' => 'Draft Dutch title',
++      'field_paragraphs[0][subform][field_test_field][0][value]' => 'Draft Dutch text',
++    ], 'Save');
++
++    $this->drupalGet('nl/node/1/translations/add/en/nl');
++    $this->submitForm([
++      'moderation_state[0][state]' => 'draft',
++      'title[0][value]' => 'Draft Dutch title',
++      'field_paragraphs[0][subform][field_test_field][0][value]' => 'Draft Dutch text',
++    ], 'Save (all translations)');
++
++    $this->assertSession()->pageTextNotContains('Non-translatable fields can only be changed when updating the original language.');
++  }
++
++}
+diff --git a/tests/src/Kernel/EntityReferenceRevisionsCompositeTranslationTest.php b/tests/src/Kernel/EntityReferenceRevisionsCompositeTranslationTest.php
+index dd833a8c4e63bbd844a72eeaf6b74279b5068489..fb70b89c2fb5848154b00354c525c979790959e0 100644
+--- a/tests/src/Kernel/EntityReferenceRevisionsCompositeTranslationTest.php
++++ b/tests/src/Kernel/EntityReferenceRevisionsCompositeTranslationTest.php
+@@ -12,6 +12,7 @@ use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
+ use Drupal\language\Entity\ConfigurableLanguage;
+ use Drupal\node\Entity\Node;
+ use Drupal\node\Entity\NodeType;
++use Drupal\Tests\content_moderation\Traits\ContentModerationTestTrait;
+ use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
+ use Drupal\Tests\node\Traits\NodeCreationTrait;
+ use PHPUnit\Framework\Attributes\Group;
+@@ -26,6 +27,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+ #[Group('entity_reference_revisions')]
+ class EntityReferenceRevisionsCompositeTranslationTest extends EntityKernelTestBase {
+ 
++  use ContentModerationTestTrait;
+   use ContentTypeCreationTrait;
+   use NodeCreationTrait;
+ 
+@@ -40,7 +42,9 @@ class EntityReferenceRevisionsCompositeTranslationTest extends EntityKernelTestB
+     'entity_reference_revisions',
+     'entity_composite_relationship_test',
+     'language',
+-    'content_translation'
++    'content_translation',
++    'content_moderation',
++    'workflows',
+   ];
+ 
+   /**
+@@ -667,6 +671,73 @@ class EntityReferenceRevisionsCompositeTranslationTest extends EntityKernelTestB
+     $this->assertAffectedRevisionCount(2, $node_de);
+   }
+ 
++  /**
++   * Tests entity reference revision creation logic in isolation.
++   */
++  public function testEntityReferenceRevisionCreation() {
++
++    // Make the article a moderated entity.
++    $this->installEntitySchema('content_moderation_state');
++    $this->installConfig(['system', 'content_moderation']);
++    $workflow = $this->createEditorialWorkflow();
++    $workflow->getTypePlugin()->addEntityTypeAndBundle('node', 'article');
++    $workflow->getTypePlugin()->addEntityTypeAndBundle('entity_test_composite', 'entity_test_composite');
++    $workflow->save();
++
++    // Create a nested composite entity.
++    $nested_composite = EntityTestCompositeRelationship::create([
++      'langcode' => 'en',
++      'name' => 'Initial Nested Source Composite',
++    ]);
++    $nested_composite->save();
++
++    // Create a composite entity.
++    $composite = EntityTestCompositeRelationship::create([
++      'langcode' => 'en',
++      'name' => 'Initial Source Composite',
++      'field_untranslatable' => 'Initial untranslatable field',
++      'composite_reference' => $nested_composite,
++    ]);
++    $composite->save();
++
++    // Create a node with a reference to the test composite entity.
++    $node = Node::create([
++      'langcode' => 'en',
++      'title' => 'Initial Source Node',
++      'type' => 'article',
++      'composite_reference' => $composite,
++      'moderation_state' => 'published',
++    ]);
++    $node->setNewRevision();
++    $node->save();
++
++    // Ensure initial revision is the default because it is published.
++    $this->assertTrue($node->isDefaultRevision(), 'Initial revision is the default because it is published.');
++
++    // Clone revision and target nodes to simulate draft revisions.
++    $new_nested_composite = clone $nested_composite;
++    $new_nested_composite->set('field_untranslatable', 'Changed value');
++    $new_nested_composite->save();
++    $new_composite = clone $composite;
++    $new_composite->set('composite_reference', $new_nested_composite);
++    $new_composite->save();
++    $new_node = clone $node;
++    $new_node->setNewRevision();
++    $new_node->set('moderation_state', 'draft');
++    $new_node->set('composite_reference', $new_composite);
++
++    // Ensure the new revision is not the default revision.
++    $this->assertFalse($new_node->isDefaultRevision(), 'New revision is not the default because it is a draft of a previously published entity.');
++
++    // Call function directly to ensure its behavior in isolation.
++    entity_reference_revisions_entity_revision_create($new_node, $node, TRUE);
++
++    // Ensure that the target revision is the default revision despite the
++    // new revision being non-default.
++    $target_entity = $new_node->get('composite_reference')->entity;
++    $this->assertTrue($target_entity->isDefaultRevision(), 'The target revision is the default revision');
++  }
++
+   /**
+    * Asserts the affected revision count of a certain entity.
+    *
