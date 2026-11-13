@@ -11,7 +11,9 @@
 version: 2
 updates:
   # Constraints in composer.json are the floor every child site gets, so
-  # raise them rather than only updating composer.lock.
+  # raise them rather than only updating composer.lock. Major versions can
+  # need upgrade work in every child site, so they are done deliberately
+  # rather than proposed weekly. Dependabot alerts still report them.
   - package-ecosystem: composer
     directory: /
     target-branch: prod11
@@ -19,6 +21,10 @@ updates:
       interval: weekly
     versioning-strategy: increase
     open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
     groups:
       drupal-core:
         patterns:
