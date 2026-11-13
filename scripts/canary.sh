@@ -22,7 +22,7 @@
 #   --template SRC      Template git URL or local directory. A local directory
 #                       is copied as-is, including uncommitted changes.
 #                       Default: https://github.com/ytgov/lagoon-boutique-template.git
-#   --template-ref REF  Branch or tag to clone when SRC is a URL. Default: main.
+#   --template-ref REF  Branch or tag to clone when SRC is a URL. Default: prod11.
 #   --workdir DIR       Empty directory to build the site in. Default: a new
 #                       temporary directory.
 #   --apache            ddev mode only: use apache-fpm instead of nginx-fpm.
@@ -50,7 +50,7 @@ usage() {
 mode=${1:-}
 [ $# -gt 0 ] && shift
 template=https://github.com/ytgov/lagoon-boutique-template.git
-template_ref=main
+template_ref=prod11
 workdir=
 apache=0
 image=

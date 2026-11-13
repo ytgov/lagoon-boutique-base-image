@@ -33,6 +33,25 @@ jobs:
           echo "IMAGE_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
           echo "SHA_TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
 
+      # The template has a branch per base branch (prod11, later prod12, ...).
+      # Test a PR against its target branch, a push against its own branch, and
+      # a vNN.x.y tag against prodNN. CANARY_TEMPLATE_REF overrides all three.
+      - name: Choose canary template branch
+        env:
+          OVERRIDE: ${{ vars.CANARY_TEMPLATE_REF }}
+        run: |
+          if [ -n "$OVERRIDE" ]; then
+            ref="$OVERRIDE"
+          elif [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            ref="$GITHUB_BASE_REF"
+          elif [ "$GITHUB_REF_TYPE" = tag ]; then
+            major="${GITHUB_REF_NAME#v}"
+            ref="prod${major%%.*}"
+          else
+            ref="$GITHUB_REF_NAME"
+          fi
+          echo "TEMPLATE_REF=$ref" >> "$GITHUB_ENV"
+
       # Tagging scheme (identical for the cli, nginx and fpm images):
       # - prod (Drupal 10) keeps publishing :latest, which existing D10 child
       #   sites build FROM. Do not publish :latest from prod11.
@@ -107,8 +126,8 @@ jobs:
       # Install a site from lagoon-boutique-template against this commit of
       # the base, inside the CLI image just built; a failure stops any image
       # from being pushed. Skipped for prod (Drupal 10): the template targets
-      # Drupal 11. The repository variable CANARY_TEMPLATE_REF overrides the
-      # template branch (default main). See scripts/canary.sh.
+      # Drupal 11. The template branch comes from the step above. See
+      # scripts/canary.sh.
       - name: Canary
         if: github.ref != 'refs/heads/prod' && github.base_ref != 'prod'
         env:
@@ -116,7 +135,7 @@ jobs:
         run: >-
           scripts/canary.sh docker
           --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli:${{ env.SHA_TAG }}
-          --template-ref ${{ vars.CANARY_TEMPLATE_REF || 'main' }}
+          --template-ref ${{ env.TEMPLATE_REF }}
           --workdir ${{ runner.temp }}/canary
 
       - name: Upload canary log
