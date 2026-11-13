@@ -110,9 +110,9 @@ if (getenv('LAGOON_ENVIRONMENT_TYPE')) {
   // Default settings for all development environments.
   // Be cautious as some of these may be public.
   if ($lagoon_env_type === 'development') {
-    // @see https://www.drupal.org/node/2492225
-    assert_options(ASSERT_ACTIVE, TRUE);
-    \Drupal\Component\Assertion\Handle::register();
+    // Assertions are controlled by the zend.assertions php.ini setting since
+    // PHP 8.3; Drupal 10+ no longer provides Assertion\Handle::register().
+    // @see https://www.drupal.org/node/3105918
   }
   unset($lagoon_env_type);
 }
