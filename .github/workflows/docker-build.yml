@@ -2,9 +2,10 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches: [ prod ]
+    branches: [ prod, prod11 ]
+    tags: [ 'v*' ]
   pull_request:
-    branches: [ prod ]
+    branches: [ prod, prod11 ]
 
 env:
   REGISTRY: ghcr.io
@@ -21,39 +22,103 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set image name to lowercase
-        run: echo "IMAGE_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        run: |
+          echo "IMAGE_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "SHA_TAG=sha-${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      # Tagging scheme (identical for the cli, nginx and fpm images):
+      # - prod (Drupal 10) keeps publishing :latest, which existing D10 child
+      #   sites build FROM. Do not publish :latest from prod11.
+      # - prod11 (Drupal 11) publishes :11.x and :prod11.
+      # - Git tags vX.Y.Z publish :X.Y.Z and :X.Y for child sites to pin.
+      # - Every build is also tagged :sha-<short sha>.
+      - name: Compute cli image tags
+        id: meta_cli
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/prod' }}
+            type=raw,value=11.x,enable=${{ github.ref == 'refs/heads/prod11' }}
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+          flavor: |
+            latest=false
+
+      - name: Compute nginx image tags
+        id: meta_nginx
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-nginx
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/prod' }}
+            type=raw,value=11.x,enable=${{ github.ref == 'refs/heads/prod11' }}
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+          flavor: |
+            latest=false
+
+      - name: Compute fpm image tags
+        id: meta_fpm
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-fpm
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/prod' }}
+            type=raw,value=11.x,enable=${{ github.ref == 'refs/heads/prod11' }}
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+          flavor: |
+            latest=false
 
       - name: Log in to the Container registry
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push CLI image
+      # The nginx and php images copy /app from the CLI image, so it is only
+      # loaded into the local Docker store here and referenced by its
+      # :sha-<short sha> tag as CLI_IMAGE; it is pushed after they build.
+      - name: Build CLI image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile.cli
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli:latest
+          load: true
+          tags: ${{ steps.meta_cli.outputs.tags }}
+          labels: ${{ steps.meta_cli.outputs.labels }}
 
       - name: Build and push NGINX image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile.nginx
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-nginx:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta_nginx.outputs.tags }}
+          labels: ${{ steps.meta_nginx.outputs.labels }}
           build-args: |
-            CLI_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli:latest
+            CLI_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli:${{ env.SHA_TAG }}
 
       - name: Build and push PHP-FPM image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile.php
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-fpm:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta_fpm.outputs.tags }}
+          labels: ${{ steps.meta_fpm.outputs.labels }}
           build-args: |
-            CLI_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli:latest
+            CLI_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli:${{ env.SHA_TAG }}
+
+      - name: Push CLI image
+        if: github.event_name != 'pull_request'
+        run: docker push --all-tags ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli
