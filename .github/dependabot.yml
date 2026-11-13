@@ -1,0 +1,64 @@
+# Dependabot version updates for the Drupal 11 base (prod11).
+#
+# Dependabot only reads this file from the repository's default branch
+# (currently prod), so keep an identical copy on prod and prod11. Security
+# updates for prod (Drupal 10) come from the repository's Dependabot security
+# updates setting, not from this file.
+#
+# Every PR runs the canary (see .github/workflows/docker-build.yml), so a bump
+# that breaks a site built from the template fails before it can be merged.
+
+version: 2
+updates:
+  # Constraints in composer.json are the floor every child site gets, so
+  # raise them rather than only updating composer.lock.
+  - package-ecosystem: composer
+    directory: /
+    target-branch: prod11
+    schedule:
+      interval: weekly
+    versioning-strategy: increase
+    open-pull-requests-limit: 10
+    groups:
+      drupal-core:
+        patterns:
+          - drupal/core*
+      drupal-contrib:
+        patterns:
+          - drupal/*
+        exclude-patterns:
+          - drupal/core*
+          - drupal/openid_connect
+      php-tools:
+        patterns:
+          - drush/drush
+          - composer/*
+          - cweagans/*
+
+  # The Lagoon images in Dockerfile.cli, Dockerfile.php and Dockerfile.nginx.
+  - package-ecosystem: docker
+    directory: /
+    target-branch: prod11
+    schedule:
+      interval: weekly
+    groups:
+      lagoon-images:
+        patterns:
+          - uselagoon/*
+
+  # The MariaDB image in docker-compose.yml.
+  - package-ecosystem: docker-compose
+    directory: /
+    target-branch: prod11
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: prod11
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
