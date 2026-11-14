@@ -1,9 +1,10 @@
 # Dependabot version updates for the Drupal 11 base (prod11).
 #
 # Dependabot only reads this file from the repository's default branch
-# (currently prod), so keep an identical copy on prod and prod11. Security
-# updates for prod (Drupal 10) come from the repository's Dependabot security
-# updates setting, not from this file.
+# (prod11). Keep identical copies on the other prod branches anyway, so the
+# .github directory stays the same everywhere. Security updates also target
+# only the default branch, so the Drupal 10 lines (prod, prod10) no longer get
+# them automatically.
 #
 # Every PR runs the canary (see .github/workflows/docker-build.yml), so a bump
 # that breaks a site built from the template fails before it can be merged.

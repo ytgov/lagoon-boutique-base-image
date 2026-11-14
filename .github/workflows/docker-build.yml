@@ -2,10 +2,10 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches: [ prod, prod11 ]
+    branches: [ prod, 'prod[0-9]*' ]
     tags: [ 'v*' ]
   pull_request:
-    branches: [ prod, prod11 ]
+    branches: [ prod, 'prod[0-9]*' ]
 
 env:
   REGISTRY: ghcr.io
@@ -51,11 +51,15 @@ jobs:
             ref="$GITHUB_REF_NAME"
           fi
           echo "TEMPLATE_REF=$ref" >> "$GITHUB_ENV"
+          # prodNN branches also publish :NN.x.
+          if [ "$GITHUB_REF_TYPE" = branch ] && [[ "$GITHUB_REF_NAME" =~ ^prod([0-9]+)$ ]]; then
+            echo "MAJOR_TAG=${BASH_REMATCH[1]}.x" >> "$GITHUB_ENV"
+          fi
 
       # Tagging scheme (identical for the cli, nginx and fpm images):
-      # - prod (Drupal 10) keeps publishing :latest, which existing D10 child
-      #   sites build FROM. Do not publish :latest from prod11.
-      # - prod11 (Drupal 11) publishes :11.x and :prod11.
+      # - prod (Drupal 10, being phased out) keeps publishing :latest, which
+      #   existing D10 child sites build FROM. No other branch publishes it.
+      # - prodNN publishes :NN.x and :prodNN (prod10 -> :10.x, prod11 -> :11.x).
       # - Git tags vX.Y.Z publish :X.Y.Z and :X.Y for child sites to pin.
       # - Every build is also tagged :sha-<short sha>.
       - name: Compute cli image tags
@@ -65,7 +69,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cli
           tags: |
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/prod' }}
-            type=raw,value=11.x,enable=${{ github.ref == 'refs/heads/prod11' }}
+            type=raw,value=${{ env.MAJOR_TAG }},enable=${{ env.MAJOR_TAG != '' }}
             type=ref,event=branch
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
@@ -80,7 +84,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-nginx
           tags: |
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/prod' }}
-            type=raw,value=11.x,enable=${{ github.ref == 'refs/heads/prod11' }}
+            type=raw,value=${{ env.MAJOR_TAG }},enable=${{ env.MAJOR_TAG != '' }}
             type=ref,event=branch
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
@@ -95,7 +99,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-fpm
           tags: |
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/prod' }}
-            type=raw,value=11.x,enable=${{ github.ref == 'refs/heads/prod11' }}
+            type=raw,value=${{ env.MAJOR_TAG }},enable=${{ env.MAJOR_TAG != '' }}
             type=ref,event=branch
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
@@ -125,11 +129,11 @@ jobs:
 
       # Install a site from lagoon-boutique-template against this commit of
       # the base, inside the CLI image just built; a failure stops any image
-      # from being pushed. Skipped for prod (Drupal 10): the template targets
-      # Drupal 11. The template branch comes from the step above. See
-      # scripts/canary.sh.
+      # from being pushed. Skipped for the Drupal 10 lines (prod, prod10), which
+      # have no template branch. The template branch comes from the step above.
+      # See scripts/canary.sh.
       - name: Canary
-        if: github.ref != 'refs/heads/prod' && github.base_ref != 'prod'
+        if: env.TEMPLATE_REF != 'prod' && env.TEMPLATE_REF != 'prod10'
         env:
           COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.GITHUB_TOKEN }}"}}'
         run: >-
