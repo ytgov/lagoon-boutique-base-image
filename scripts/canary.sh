@@ -390,13 +390,18 @@ if [ "$mode" = docker ]; then
   done
 fi
 
+# Follows redirects, so a site with language prefixes (/ -> /en) passes.
 http_check() {
-  local got
-  got=$(curl -sk -o /dev/null -w '%{http_code}' "$base_url$1" || true)
+  local got path
+  got=$(curl -skL -o /dev/null -w '%{http_code} %{url_effective}' "$base_url$1" || true)
+  path=${got#* }
+  path=${path#"$base_url"}
+  got=${got%% *}
+  [ "$path" != "$1" ] && path="$1 (redirected to $path)" || path=$1
   if [ "$got" = "$2" ]; then
-    pass "GET $1 -> $got"
+    pass "GET $path -> $got"
   else
-    fail "GET $1 -> $got (expected $2)"
+    fail "GET $path -> $got (expected $2)"
   fi
 }
 http_check / 200
