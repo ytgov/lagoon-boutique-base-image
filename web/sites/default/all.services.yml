@@ -1,3 +1,6 @@
 # Shared services for all environments.
-parameters: {}
+parameters:
+  # User 1 is an ordinary account, with only its roles' permissions, instead of
+  # bypassing every access check. Give admins the administrator role.
+  security.enable_super_user: false
 services: {}
