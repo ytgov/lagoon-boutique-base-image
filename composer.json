@@ -26,6 +26,8 @@
         "drupal/core-composer-scaffold": "^11",
         "drupal/core-recommended": "^11",
         "drupal/easy_breadcrumb": "^2.0.9",
+        "drupal/facets": "^3.0",
+        "drupal/facets_exposed_filters": "^3.0",
         "drupal/field_group": "^4.0",
         "drupal/fontawesome": "^3.0",
         "drupal/image_effects": "^4.0",
