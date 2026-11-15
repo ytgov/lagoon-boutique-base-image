@@ -327,8 +327,13 @@ PHP
     finish
   fi
 fi
+# A throwaway admin password. Read a fixed amount of randomness rather than
+# piping /dev/urandom into head, which closes the pipe on tr (where SIGPIPE
+# is ignored, as on GitHub runners, tr prints "write error: Broken pipe").
+admin_pass=$(head -c 512 /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9')
+admin_pass=${admin_pass:0:20}
 if "${DRUSH[@]}" site:install "$profile" --existing-config -y \
-  --account-name=admin --account-pass="$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 20)" >>"$log" 2>&1; then
+  --account-name=admin --account-pass="$admin_pass" >>"$log" 2>&1; then
   pass "drush site:install $profile --existing-config"
 else
   fail "drush site:install (see $log)"
