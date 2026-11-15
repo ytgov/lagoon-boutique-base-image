@@ -43,6 +43,7 @@
         "drupal/symfony_mailer": "^1.5",
         "drupal/tmgmt": "^1.15.0",
         "drupal/token": "^1.11.0",
+        "drupal/translatable_menu_link_uri": "^2.1",
         "drupal/twig_tweak": "^3.2.0",
         "drupal/views_bulk_operations": "^4.2.0",
         "drupal/views_infinite_scroll": "^2.0.3",
