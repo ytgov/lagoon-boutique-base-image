@@ -404,9 +404,26 @@ http_check() {
     fail "GET $path -> $got (expected $2)"
   fi
 }
-http_check / 200
+# A site whose front page is content (system.site page.front: /node/N) has
+# no such node after a fresh install, so / is a 404. Check the login page in
+# its place.
+cat > .canary/front-page.php <<'PHP'
+<?php
+// Prints the front page path, then "missing" if it doesn't exist.
+$front = \Drupal::config('system.site')->get('page.front');
+echo $front, "\n";
+if (!\Drupal::service('path.validator')->getUrlIfValidWithoutAccessCheck($front)) {
+  echo "missing\n";
+}
+PHP
+front=/
+if drush_capture php:script .canary/front-page.php && printf '%s\n' "$out" | grep -qx missing; then
+  warn "Front page $(printf '%s\n' "$out" | head -1) doesn't exist after a fresh install; checking /user/login instead"
+  front=/user/login
+fi
+http_check "$front" 200
 if [ -f config/sync/language.entity.fr.yml ]; then
-  http_check /fr 200
+  http_check "/fr${front%/}" 200
 fi
 http_check /admin/config 403
 http_check /canary-page-that-does-not-exist 404
