@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f92463e0d44167db8f38509a106ee92a",
+    "content-hash": "019631ac63659e4d8003054561aef5a1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3110,6 +3110,78 @@
                 "source": "https://git.drupalcode.org/project/redirect"
             },
             "published-time": "2026-04-24T05:02:35+00:00"
+        },
+        {
+            "name": "drupal/search_api",
+            "version": "1.43.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/search_api.git",
+                "reference": "8.x-1.43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.43.zip",
+                "reference": "8.x-1.43",
+                "shasum": "2176deccfe21141e357c9002ea8e6a7560e91a23"
+            },
+            "require": {
+                "drupal/core": "^10.3 || ^11 || ^12"
+            },
+            "conflict": {
+                "drupal/search_api_solr": "2.* || 3.0 || 3.1"
+            },
+            "require-dev": {
+                "drupal/config_readonly": "1.x-dev",
+                "drupal/language_fallback_fix": "1.x-dev",
+                "drupal/search_api_autocomplete": "1.x-dev",
+                "drupal/search_api_db": "*"
+            },
+            "suggest": {
+                "drupal/facets": "Adds the ability to create faceted searches.",
+                "drupal/search_api_autocomplete": "Allows adding autocomplete suggestions to search fields.",
+                "drupal/search_api_solr": "Adds support for using Apache Solr as a backend."
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.43",
+                    "datestamp": "1793194856",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "branch-alias": {
+                    "dev-8.x-1.x": "1.x-dev"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Seidl",
+                    "homepage": "https://www.drupal.org/u/drunken-monkey"
+                },
+                {
+                    "name": "Nick Veenhof",
+                    "homepage": "https://www.drupal.org/u/nick_vh"
+                },
+                {
+                    "name": "See other contributors",
+                    "homepage": "https://www.drupal.org/node/790418/committers"
+                }
+            ],
+            "description": "Provides a generic framework for modules offering search capabilities.",
+            "homepage": "https://www.drupal.org/project/search_api",
+            "support": {
+                "source": "https://git.drupalcode.org/project/search_api",
+                "issues": "https://www.drupal.org/project/issues/search_api",
+                "irc": "irc://irc.freenode.org/drupal-search-api"
+            },
+            "published-time": "2026-10-28T09:14:58+00:00"
         },
         {
             "name": "drupal/simple_sitemap",
