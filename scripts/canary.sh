@@ -386,6 +386,16 @@ else
   pass "OpenID Connect credentials and endpoints are placeholders in config/sync"
 fi
 
+# MyYukon passes the prompt on to Entra ID, which rejects it combined with the
+# one MyYukon adds ("AADSTS90023: Unsupported 'prompt' value"), so OpenID
+# Connect clients send none. openid_connect 3.x gives new clients "login".
+oidc_prompts=$(awk '/^  prompt:/ && !/prompt: *(\{ *\}|\[ *\])$/ { sub("^config/sync/", "", FILENAME); print FILENAME }' config/sync/openid_connect.client.*.yml 2>/dev/null || true)
+if [ -n "$oidc_prompts" ]; then
+  fail "OpenID Connect clients with a prompt (MyYukon and Entra ID need none): $(echo $oidc_prompts)"
+elif [ -n "$oidc_values" ]; then
+  pass "OpenID Connect clients send no prompt"
+fi
+
 if drush_capture core:requirements --severity=2 --field=title; then
   [ -z "$out" ] && pass "No errors in the status report" || fail "Status report errors: $out"
 else
@@ -443,6 +453,9 @@ if [ -f config/sync/language.entity.fr.yml ]; then
   http_check "/fr${front%/}" 200
 fi
 http_check /admin/config 403
+# Password reset is off (the template's yg_login module): staff sign in with
+# MyYukon, and a reset would let a mailbox give an account a password.
+http_check /user/password 403
 http_check /canary-page-that-does-not-exist 404
 
 # After the HTTP checks, so errors from serving pages are caught too.
