@@ -35,6 +35,7 @@
         "drupal/linkit": "^7.0.3",
         "drupal/matomo": "^1.21.0",
         "drupal/menu_block": "^1.10.0",
+        "drupal/menu_breadcrumb": "^2.0",
         "drupal/metatag": "^2.0.0",
         "drupal/openid_connect": "3.0.0-alpha9",
         "drupal/paragraphs": "^1.15.0",
