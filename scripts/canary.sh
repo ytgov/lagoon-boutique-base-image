@@ -374,6 +374,18 @@ else
   fail "drush config:status failed"
 fi
 
+# OpenID Connect credentials and endpoints differ by environment and come from
+# environment variables (see settings.php), so config/sync keeps placeholders.
+# A value saved through the client form would otherwise be exported to git.
+oidc_values=$(grep -HE '^  (client_id|client_secret|authorization_endpoint|token_endpoint|userinfo_endpoint):' config/sync/openid_connect.client.*.yml 2>/dev/null || true)
+if [ -z "$oidc_values" ]; then
+  warn "No OpenID Connect client in config/sync"
+elif oidc_real=$(printf '%s\n' "$oidc_values" | grep -v ': SEELOCALSETTINGS$'); then
+  fail "OpenID Connect values in config/sync instead of SEELOCALSETTINGS: $(printf '%s\n' "$oidc_real" | sed 's|^config/sync/||; s/:  */ /; s/:.*//' | tr '\n' ' ')"
+else
+  pass "OpenID Connect credentials and endpoints are placeholders in config/sync"
+fi
+
 if drush_capture core:requirements --severity=2 --field=title; then
   [ -z "$out" ] && pass "No errors in the status report" || fail "Status report errors: $out"
 else
