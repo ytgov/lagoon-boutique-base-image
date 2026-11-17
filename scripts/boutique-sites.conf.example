@@ -1,0 +1,29 @@
+# boutique-sites.conf: the boutique sites in this workspace.
+#
+# Copy this file to the workspace root (the directory holding
+# lagoon-boutique-base-image and lagoon-boutique-template) as
+# boutique-sites.conf and list your sites. scripts/boutique.sh reads it.
+#
+# git-config format, read with `git config -f boutique-sites.conf` (key names:
+# letters, digits and hyphens only).
+#
+# The [boutique] section holds workspace settings:
+#   sites    directory that site checkouts go in, relative to this file
+#            (default: sites)
+#   branch   the base and template release branch, such as prod11
+#            (optional; default: the base repository's default branch)
+#
+# Then one [site "<name>"] section per site:
+#   remote   git URL to clone the site from (required)
+#   branch   release branch the site works on (required)
+#   path     checkout directory, relative to this file
+#            (optional; default <sites>/<name>)
+#
+# Keep the copy out of every repository: it may hold internal GitLab URLs.
+
+[boutique]
+	sites = sites
+
+[site "lagoon-dizzydig"]
+	remote = https://github.com/ytgov/lagoon-dizzydig.git
+	branch = release-1

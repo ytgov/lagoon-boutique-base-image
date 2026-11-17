@@ -8,7 +8,8 @@ maintaining its own core, standard modules and images.
 
 © 2026 Government of Yukon / Gouvernement du Yukon
 
-**Contact:** [eservices@yukon.ca](mailto:eservices@yukon.ca)
+**Contact:** Highways and Public Works, Information and Communications Technology,
+eServices for Citizens [eservices@yukon.ca](mailto:eservices@yukon.ca)
 
 ## Overview
 
@@ -59,6 +60,8 @@ are kept only for sites not yet on Drupal 11 and will be decommissioned.
 **Other files:**
 
 - `scripts/canary.sh`: the canary test (see [Testing with the canary](#testing-with-the-canary)).
+- `scripts/boutique.sh` and `scripts/boutique-sites.conf.example`: maintenance commands
+  (see [Maintenance commands](#maintenance-commands)).
 - `patches/`: patches the base keeps itself (see [patches/README.md](patches/README.md)).
 - `.github/workflows/docker-build.yml`: builds, tests and publishes the images.
 - `.github/dependabot.yml`: weekly update pull requests.
@@ -145,6 +148,53 @@ then set the same release in `lagoon/*.dockerfile`. The site canary fails if
 the two disagree.
 
 ## Maintaining the base image
+
+### Maintenance commands
+
+`scripts/boutique.sh` works across the base, the template and the sites built
+from them. It runs on Linux, macOS and WSL with bash 3.2 or later, git and the
+GitHub CLI. GitHub access comes from your `gh` sign-in (`gh auth login`, and
+`gh auth setup-git` for HTTPS remotes); the script stores no credentials, and
+git fails rather than prompting.
+
+| Command | What it does |
+|---|---|
+| `boutique.sh doctor` | Checks the tools (git, `gh` and its sign-in, Docker, DDEV), the platform, the workspace, and each checkout: location, remote, branch, uncommitted changes, DDEV project and your GitHub role. Read-only. |
+| `boutique.sh status` | One line per repository: current branch against GitHub, uncommitted changes, the base release it's locked to (flagged when a newer one exists or the Dockerfiles disagree), open pull requests and the latest CI run on its release branch. Notes unreleased base commits and a set `.github/canary-template-ref`. Fetches first (`--no-fetch` to skip); changes nothing else. |
+| `boutique.sh sync` | Fetches, then fast-forwards local branches that are behind: `prodNN` and `eservices/prepare-prodNN` in the base and the template (the working branch to its GitHub copy, then to `prodNN`), and each site's release branch. It never pushes, merges, rebases or switches branches, and leaves diverged branches alone. `--dry-run` shows what it would do. |
+
+**Workspace.** The commands work on a directory laid out like this:
+
+```text
+<workspace>/
+  lagoon-boutique-base-image/
+  lagoon-boutique-template/
+  boutique-sites.conf          # copied from scripts/boutique-sites.conf.example
+  sites/<name>/                # one checkout per site
+```
+
+The workspace is found from `$BOUTIQUE_ROOT`, else the current directory or
+one of its parents (wherever `boutique-sites.conf` is), else the parent of the
+base checkout running the script. `boutique-sites.conf` lists the sites in
+git-config format; [scripts/boutique-sites.conf.example](scripts/boutique-sites.conf.example)
+describes the keys. Keep it out of every repository, since it may hold
+internal GitLab URLs.
+
+**Running it.** It works from any directory, and always on the whole
+workspace. An alias in your shell profile saves typing the path:
+
+```bash
+alias boutique="$HOME/src/<workspace>/lagoon-boutique-base-image/scripts/boutique.sh"
+boutique status
+```
+
+Run the copy in the workspace's base checkout. Sites also have one in
+`vendor/ytgov/lagoon-boutique-base-image/scripts/`, but only at the release
+they're locked to, which may be older.
+
+**Release line.** `prodNN` is the base repository's default branch on GitHub,
+unless `boutique-sites.conf` sets `boutique.branch`. The working branch is
+`eservices/prepare-prodNN`.
 
 ### Branches, versions and releases
 
@@ -326,7 +376,8 @@ Don't use a bare `prod*` pattern: it also matches working branches such as
 - Only GitHub's actions and actions from verified creators may run.
 - Every action is pinned to a full commit SHA, with its version in a comment
   (`uses: actions/checkout@<sha> # v7.0.1`), and the repository requires it
-  ("Require actions to be pinned to a full-length commit SHA"). A version tag
+  ("Require actions to be pinned to a full-length commit SHA"; the template
+  requires it, this repository not yet: see [TODO](#todo)). A version tag
   can be moved to different code; a commit can't. Dependabot updates the
   SHAs and comments.
 - The default `GITHUB_TOKEN` is read-only, and workflows can't approve pull
@@ -423,3 +474,29 @@ Don't report security issues publicly. See [SECURITY.md](SECURITY.md).
 
 Unless otherwise noted, the source code of this project is distributed under
 the [MIT License](LICENSE).
+
+## TODO
+
+- **Require pinned actions here.** Turn on "Require actions to be pinned to a
+  full-length commit SHA" (Settings → Actions → General) once work on older
+  branches has finished. Those branches still use action tags, so their
+  builds would fail until they're updated from `prodNN`. The release and
+  working branches are pinned, and the template already requires it.
+- **Finish `scripts/boutique.sh`:** `canary`, `flag` (set and clear
+  `.github/canary-template-ref`) and `pr`, then `release` and `bump`; and
+  run shellcheck on the scripts in CI.
+- **Retire the Drupal 10 line.** Once its sites have moved to `prod10` (`:10.x`)
+  or `prod11`, stop publishing `:latest` from `prod` and freeze the branch.
+- **Share more than modules.** Decide how shared configuration reaches sites
+  (a recipe, an install profile or config_split), and review the modules many
+  sites add themselves as candidates for the base.
+- **Settings from the environment.** Load `.env.defaults` and `.env` in
+  `settings.php`, using Lagoon's variable names, so servers outside Lagoon
+  are configured the same way; then remove the committed empty `.env`.
+- **Deployment documentation.** A versioned `docs/DEPLOYMENT.md` for the steps
+  every site deploys with.
+- **More canary coverage.** Upgrade from the previous release (restore its
+  database, then the deploy steps) as well as a fresh install, and a run of
+  the real images with docker-compose.
+- **Multi-architecture images.** The images are `linux/amd64` only.
+- **composer-patches 2.x.** Retry the upgrade; it broke the canary last time.
