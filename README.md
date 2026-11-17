@@ -202,13 +202,19 @@ the base and the template change together:
 1. Base: `ddev composer require drupal/<module>`.
 2. Template: enable and configure the module on its working branch and push
    it (no pull request yet).
-3. Point the base canary at that branch (an administrator: only administrators
-   can manage Actions variables):
-   `gh variable set CANARY_TEMPLATE_REF --body eservices/prepare-prod11 -R ytgov/lagoon-boutique-base-image`
+3. Point the base canary at that branch: in the base pull request, add a file
+   `.github/canary-template-ref` holding the branch name
+   (`echo eservices/prepare-prod11 > .github/canary-template-ref`). CI then
+   tests the pull request, the merge and the release tag against that template
+   branch, and warns that the file is there.
 4. Open the base pull request, merge it and tag a minor release.
 5. Update the template to the release, open its pull request and merge it.
-6. Delete the variable (an administrator):
-   `gh variable delete CANARY_TEMPLATE_REF -R ytgov/lagoon-boutique-base-image`
+6. Remove `.github/canary-template-ref` in the next base pull request (there's
+   no need to release for it), so the canary goes back to template `prodNN`.
+   Until then, every base build tests against the working branch.
+
+Anyone who can merge into `prodNN` (maintainers and administrators) can add
+and remove the file; see [Testing with the canary](#testing-with-the-canary).
 
 Removing a module is the reverse: uninstall it in the template first, then
 remove it from the base.
@@ -242,8 +248,8 @@ A new major version gets its own branch, so sites move when they're ready:
 3. Raise the constraints in `composer.json` (core, Drush, contrib majors), run
    `ddev composer update -W`, and update patches, the PHP version and the
    Lagoon images as needed.
-4. Create the template's `prodNN` branch with matching changes, and use
-   `CANARY_TEMPLATE_REF` until it exists on GitHub.
+4. Create the template's `prodNN` branch with matching changes, and name a
+   template branch in `.github/canary-template-ref` until it exists on GitHub.
 5. Update the branch-specific settings: Dependabot's `target-branch` and the
    repository's default branch (in both repositories), once the new line is
    ready.
@@ -276,6 +282,17 @@ scripts/canary.sh ddev --template ../lagoon-boutique-template   # local template
 A failing run keeps the site and `canary.log` for inspection. CI runs the same
 script against the newly built image (`docker` mode); a canary failure stops
 the images from being published.
+
+CI chooses the template branch to test against: a pull request uses the
+template branch with the same name as its target branch, a push to `prodNN`
+uses `prodNN`, and a `vNN.x.y` tag uses `prodNN`. The file
+`.github/canary-template-ref` overrides all three while a base change needs
+template work that isn't merged yet (see
+[Adding or removing a standard module](#adding-or-removing-a-standard-module)).
+It holds one branch name; blank lines and lines starting with `#` are ignored.
+It's a file rather than a repository variable so that it goes through review
+with the change that needs it, and so maintainers can set it, not only
+administrators. Locally, pass `--template-ref <branch>` instead.
 
 ## GitHub repository settings
 
@@ -314,9 +331,9 @@ Don't use a bare `prod*` pattern: it also matches working branches such as
   SHAs and comments.
 - The default `GITHUB_TOKEN` is read-only, and workflows can't approve pull
   requests.
-- No repository secrets are needed: workflows use `GITHUB_TOKEN`. The only
-  variable, `CANARY_TEMPLATE_REF`, exists only while a new module is being
-  added.
+- No repository secrets or variables are needed: workflows use
+  `GITHUB_TOKEN`, and the canary's template branch override is a committed
+  file (`.github/canary-template-ref`).
 
 **Security**
 
@@ -391,8 +408,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Changes go through pull requests into
 | Role | Can |
 |---|---|
 | Write | Push working branches and open pull requests. Pull requests need an approval from someone else. |
-| Maintain | Also merge their own pull requests once the CI check passes (ruleset bypass, through a pull request only), approve others' pull requests (including Dependabot's) and create release tags. |
-| Admin | Also change repository settings and rulesets, and set or delete Actions variables such as `CANARY_TEMPLATE_REF`. |
+| Maintain | Also merge their own pull requests once the CI check passes (ruleset bypass, through a pull request only), approve others' pull requests (including Dependabot's) and create release tags. That includes adding and removing `.github/canary-template-ref`. |
+| Admin | Also change repository settings and rulesets. |
 
 GitHub never lets authors approve their own pull requests; the bypass is how
 maintainers and administrators merge theirs. Nobody can bypass the CI check or

@@ -34,13 +34,18 @@ jobs:
 
       # The template has a branch per base branch (prod11, later prod12, ...).
       # Test a PR against its target branch, a push against its own branch, and
-      # a vNN.x.y tag against prodNN. CANARY_TEMPLATE_REF overrides all three.
+      # a vNN.x.y tag against prodNN. A template branch named in
+      # .github/canary-template-ref overrides all three; it's committed only
+      # while a base change needs template work that isn't merged yet.
       - name: Choose canary template branch
-        env:
-          OVERRIDE: ${{ vars.CANARY_TEMPLATE_REF }}
         run: |
-          if [ -n "$OVERRIDE" ]; then
-            ref="$OVERRIDE"
+          override=
+          if [ -f .github/canary-template-ref ]; then
+            override=$(grep -v -e '^[[:space:]]*#' -e '^[[:space:]]*$' .github/canary-template-ref | head -n 1 | tr -d '[:space:]' || true)
+          fi
+          if [ -n "$override" ]; then
+            ref="$override"
+            echo "::warning file=.github/canary-template-ref::The canary uses template branch $ref. Remove .github/canary-template-ref once the template change is merged."
           elif [ "$GITHUB_EVENT_NAME" = pull_request ]; then
             ref="$GITHUB_BASE_REF"
           elif [ "$GITHUB_REF_TYPE" = tag ]; then
