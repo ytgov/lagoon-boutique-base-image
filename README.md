@@ -320,7 +320,9 @@ base, installs it from the template's configuration and checks it:
 - no pending database updates, no configuration differences, no status report
   errors and no errors in the log;
 - the main pages respond as expected, including the standards (for example,
-  password reset is off and OpenID Connect settings are placeholders).
+  OpenID Connect settings are placeholders, and there's no password login once
+  Yukon SSO is configured: login display `force_replace`, password reset and
+  the JSON login off).
 
 Run it locally before opening a pull request:
 
