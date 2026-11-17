@@ -396,6 +396,19 @@ elif [ -n "$oidc_values" ]; then
   pass "OpenID Connect clients send no prompt"
 fi
 
+# No password login where Yukon SSO is configured: "replace" still shows the
+# password form to anyone who adds ?showcore. Where SSO isn't configured
+# (DDEV, the canary), settings.php overrides the display to "hidden", which
+# keeps the password form.
+if [ -n "$oidc_values" ]; then
+  oidc_display=$(awk '$1 == "user_login_display:" { print $2 }' config/sync/openid_connect.settings.yml 2>/dev/null || true)
+  if [ "$oidc_display" = force_replace ]; then
+    pass "OpenID Connect login display is force_replace in config/sync (no password login)"
+  else
+    fail "OpenID Connect login display is ${oidc_display:-unset} in config/sync (expected force_replace: no password login)"
+  fi
+fi
+
 if drush_capture core:requirements --severity=2 --field=title; then
   [ -z "$out" ] && pass "No errors in the status report" || fail "Status report errors: $out"
 else
@@ -456,6 +469,15 @@ http_check /admin/config 403
 # Password reset is off (the template's yg_login module): staff sign in with
 # MyYukon, and a reset would let a mailbox give an account a password.
 http_check /user/password 403
+# The JSON login (on whenever the serialization module is) accepts a password
+# whatever the login form shows; yg_login turns it off. Where it's on, bogus
+# credentials get 400.
+got=$(curl -sk -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' \
+  -d '{"name":"canary","pass":"canary"}' "$base_url/user/login?_format=json" || true)
+case $got in
+  403|404|406) pass "POST /user/login?_format=json -> $got (JSON login off)" ;;
+  *) fail "POST /user/login?_format=json -> $got (expected 403, 404 or 406: the JSON login must be off)" ;;
+esac
 http_check /canary-page-that-does-not-exist 404
 
 # After the HTTP checks, so errors from serving pages are caught too.

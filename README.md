@@ -8,7 +8,8 @@ maintaining its own core, standard modules and images.
 
 © 2026 Government of Yukon / Gouvernement du Yukon
 
-**Contact:** [eservices@yukon.ca](mailto:eservices@yukon.ca)
+**Contact:** Highways and Public Works, Information and Communications Technology,
+eServices for Citizens [eservices@yukon.ca](mailto:eservices@yukon.ca)
 
 ## Overview
 
@@ -59,6 +60,8 @@ are kept only for sites not yet on Drupal 11 and will be decommissioned.
 **Other files:**
 
 - `scripts/canary.sh`: the canary test (see [Testing with the canary](#testing-with-the-canary)).
+- `scripts/boutique.sh` and `scripts/boutique-sites.conf.example`: maintenance commands
+  (see [Maintenance commands](#maintenance-commands)).
 - `patches/`: patches the base keeps itself (see [patches/README.md](patches/README.md)).
 - `.github/workflows/docker-build.yml`: builds, tests and publishes the images.
 - `.github/dependabot.yml`: weekly update pull requests.
@@ -146,6 +149,53 @@ the two disagree.
 
 ## Maintaining the base image
 
+### Maintenance commands
+
+`scripts/boutique.sh` works across the base, the template and the sites built
+from them. It runs on Linux, macOS and WSL with bash 3.2 or later, git and the
+GitHub CLI. GitHub access comes from your `gh` sign-in (`gh auth login`, and
+`gh auth setup-git` for HTTPS remotes); the script stores no credentials, and
+git fails rather than prompting.
+
+| Command | What it does |
+|---|---|
+| `boutique.sh doctor` | Checks the tools (git, `gh` and its sign-in, Docker, DDEV), the platform, the workspace, and each checkout: location, remote, branch, uncommitted changes, DDEV project and your GitHub role. Read-only. |
+| `boutique.sh status` | One line per repository: current branch against GitHub, uncommitted changes, the base release it's locked to (flagged when a newer one exists or the Dockerfiles disagree), open pull requests and the latest CI run on its release branch. Notes unreleased base commits and a set `.github/canary-template-ref`. Fetches first (`--no-fetch` to skip); changes nothing else. |
+| `boutique.sh sync` | Fetches, then fast-forwards local branches that are behind: `prodNN` and `eservices/prepare-prodNN` in the base and the template (the working branch to its GitHub copy, then to `prodNN`), and each site's release branch. It never pushes, merges, rebases or switches branches, and leaves diverged branches alone. `--dry-run` shows what it would do. |
+
+**Workspace.** The commands work on a directory laid out like this:
+
+```text
+<workspace>/
+  lagoon-boutique-base-image/
+  lagoon-boutique-template/
+  boutique-sites.conf          # copied from scripts/boutique-sites.conf.example
+  sites/<name>/                # one checkout per site
+```
+
+The workspace is found from `$BOUTIQUE_ROOT`, else the current directory or
+one of its parents (wherever `boutique-sites.conf` is), else the parent of the
+base checkout running the script. `boutique-sites.conf` lists the sites in
+git-config format; [scripts/boutique-sites.conf.example](scripts/boutique-sites.conf.example)
+describes the keys. Keep it out of every repository, since it may hold
+internal GitLab URLs.
+
+**Running it.** It works from any directory, and always on the whole
+workspace. An alias in your shell profile saves typing the path:
+
+```bash
+alias boutique="$HOME/src/<workspace>/lagoon-boutique-base-image/scripts/boutique.sh"
+boutique status
+```
+
+Run the copy in the workspace's base checkout. Sites also have one in
+`vendor/ytgov/lagoon-boutique-base-image/scripts/`, but only at the release
+they're locked to, which may be older.
+
+**Release line.** `prodNN` is the base repository's default branch on GitHub,
+unless `boutique-sites.conf` sets `boutique.branch`. The working branch is
+`eservices/prepare-prodNN`.
+
 ### Branches, versions and releases
 
 Work happens on a working branch, `eservices/prepare-prodNN`, merged into
@@ -202,13 +252,19 @@ the base and the template change together:
 1. Base: `ddev composer require drupal/<module>`.
 2. Template: enable and configure the module on its working branch and push
    it (no pull request yet).
-3. Point the base canary at that branch (an administrator: only administrators
-   can manage Actions variables):
-   `gh variable set CANARY_TEMPLATE_REF --body eservices/prepare-prod11 -R ytgov/lagoon-boutique-base-image`
+3. Point the base canary at that branch: in the base pull request, add a file
+   `.github/canary-template-ref` holding the branch name
+   (`echo eservices/prepare-prod11 > .github/canary-template-ref`). CI then
+   tests the pull request, the merge and the release tag against that template
+   branch, and warns that the file is there.
 4. Open the base pull request, merge it and tag a minor release.
 5. Update the template to the release, open its pull request and merge it.
-6. Delete the variable (an administrator):
-   `gh variable delete CANARY_TEMPLATE_REF -R ytgov/lagoon-boutique-base-image`
+6. Remove `.github/canary-template-ref` in the next base pull request (there's
+   no need to release for it), so the canary goes back to template `prodNN`.
+   Until then, every base build tests against the working branch.
+
+Anyone who can merge into `prodNN` (maintainers and administrators) can add
+and remove the file; see [Testing with the canary](#testing-with-the-canary).
 
 Removing a module is the reverse: uninstall it in the template first, then
 remove it from the base.
@@ -242,8 +298,8 @@ A new major version gets its own branch, so sites move when they're ready:
 3. Raise the constraints in `composer.json` (core, Drush, contrib majors), run
    `ddev composer update -W`, and update patches, the PHP version and the
    Lagoon images as needed.
-4. Create the template's `prodNN` branch with matching changes, and use
-   `CANARY_TEMPLATE_REF` until it exists on GitHub.
+4. Create the template's `prodNN` branch with matching changes, and name a
+   template branch in `.github/canary-template-ref` until it exists on GitHub.
 5. Update the branch-specific settings: Dependabot's `target-branch` and the
    repository's default branch (in both repositories), once the new line is
    ready.
@@ -264,7 +320,9 @@ base, installs it from the template's configuration and checks it:
 - no pending database updates, no configuration differences, no status report
   errors and no errors in the log;
 - the main pages respond as expected, including the standards (for example,
-  password reset is off and OpenID Connect settings are placeholders).
+  OpenID Connect settings are placeholders, and there's no password login once
+  Yukon SSO is configured: login display `force_replace`, password reset and
+  the JSON login off).
 
 Run it locally before opening a pull request:
 
@@ -276,6 +334,17 @@ scripts/canary.sh ddev --template ../lagoon-boutique-template   # local template
 A failing run keeps the site and `canary.log` for inspection. CI runs the same
 script against the newly built image (`docker` mode); a canary failure stops
 the images from being published.
+
+CI chooses the template branch to test against: a pull request uses the
+template branch with the same name as its target branch, a push to `prodNN`
+uses `prodNN`, and a `vNN.x.y` tag uses `prodNN`. The file
+`.github/canary-template-ref` overrides all three while a base change needs
+template work that isn't merged yet (see
+[Adding or removing a standard module](#adding-or-removing-a-standard-module)).
+It holds one branch name; blank lines and lines starting with `#` are ignored.
+It's a file rather than a repository variable so that it goes through review
+with the change that needs it, and so maintainers can set it, not only
+administrators. Locally, pass `--template-ref <branch>` instead.
 
 ## GitHub repository settings
 
@@ -309,14 +378,15 @@ Don't use a bare `prod*` pattern: it also matches working branches such as
 - Only GitHub's actions and actions from verified creators may run.
 - Every action is pinned to a full commit SHA, with its version in a comment
   (`uses: actions/checkout@<sha> # v7.0.1`), and the repository requires it
-  ("Require actions to be pinned to a full-length commit SHA"). A version tag
+  ("Require actions to be pinned to a full-length commit SHA"; the template
+  requires it, this repository not yet: see [TODO](#todo)). A version tag
   can be moved to different code; a commit can't. Dependabot updates the
   SHAs and comments.
 - The default `GITHUB_TOKEN` is read-only, and workflows can't approve pull
   requests.
-- No repository secrets are needed: workflows use `GITHUB_TOKEN`. The only
-  variable, `CANARY_TEMPLATE_REF`, exists only while a new module is being
-  added.
+- No repository secrets or variables are needed: workflows use
+  `GITHUB_TOKEN`, and the canary's template branch override is a committed
+  file (`.github/canary-template-ref`).
 
 **Security**
 
@@ -391,8 +461,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Changes go through pull requests into
 | Role | Can |
 |---|---|
 | Write | Push working branches and open pull requests. Pull requests need an approval from someone else. |
-| Maintain | Also merge their own pull requests once the CI check passes (ruleset bypass, through a pull request only), approve others' pull requests (including Dependabot's) and create release tags. |
-| Admin | Also change repository settings and rulesets, and set or delete Actions variables such as `CANARY_TEMPLATE_REF`. |
+| Maintain | Also merge their own pull requests once the CI check passes (ruleset bypass, through a pull request only), approve others' pull requests (including Dependabot's) and create release tags. That includes adding and removing `.github/canary-template-ref`. |
+| Admin | Also change repository settings and rulesets. |
 
 GitHub never lets authors approve their own pull requests; the bypass is how
 maintainers and administrators merge theirs. Nobody can bypass the CI check or
@@ -406,3 +476,29 @@ Don't report security issues publicly. See [SECURITY.md](SECURITY.md).
 
 Unless otherwise noted, the source code of this project is distributed under
 the [MIT License](LICENSE).
+
+## TODO
+
+- **Require pinned actions here.** Turn on "Require actions to be pinned to a
+  full-length commit SHA" (Settings → Actions → General) once work on older
+  branches has finished. Those branches still use action tags, so their
+  builds would fail until they're updated from `prodNN`. The release and
+  working branches are pinned, and the template already requires it.
+- **Finish `scripts/boutique.sh`:** `canary`, `flag` (set and clear
+  `.github/canary-template-ref`) and `pr`, then `release` and `bump`; and
+  run shellcheck on the scripts in CI.
+- **Retire the Drupal 10 line.** Once its sites have moved to `prod10` (`:10.x`)
+  or `prod11`, stop publishing `:latest` from `prod` and freeze the branch.
+- **Share more than modules.** Decide how shared configuration reaches sites
+  (a recipe, an install profile or config_split), and review the modules many
+  sites add themselves as candidates for the base.
+- **Settings from the environment.** Load `.env.defaults` and `.env` in
+  `settings.php`, using Lagoon's variable names, so servers outside Lagoon
+  are configured the same way; then remove the committed empty `.env`.
+- **Deployment documentation.** A versioned `docs/DEPLOYMENT.md` for the steps
+  every site deploys with.
+- **More canary coverage.** Upgrade from the previous release (restore its
+  database, then the deploy steps) as well as a fresh install, and a run of
+  the real images with docker-compose.
+- **Multi-architecture images.** The images are `linux/amd64` only.
+- **composer-patches 2.x.** Retry the upgrade; it broke the canary last time.
