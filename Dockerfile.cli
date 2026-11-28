@@ -1,4 +1,4 @@
-FROM uselagoon/php-8.4-cli-drupal:26.11.5
+FROM uselagoon/php-8.4-cli-drupal:26.11.6
 
 COPY composer.* /app/
 RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev

@@ -1,6 +1,6 @@
 ARG CLI_IMAGE
 FROM ${CLI_IMAGE} as cli
 
-FROM uselagoon/php-8.4-fpm:26.11.5
+FROM uselagoon/php-8.4-fpm:26.11.6
 
 COPY --from=cli /app /app
