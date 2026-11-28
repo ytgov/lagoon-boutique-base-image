@@ -20,7 +20,23 @@
 #                     and the template (the working branch to origin, then to
 #                     prodNN), and each site's release branch. Never pushes,
 #                     merges, rebases or switches branches.
-#     --dry-run       Show what sync would do.
+#     -D, --dry-run   Show what sync would do.
+#   canary [REPO...]  Run the base checkout's canary (scripts/canary.sh in
+#                     DDEV) on the working tree of each REPO: "template", a
+#                     site name, or "all" (the default: the template and every
+#                     site). Uncommitted changes are included. Each run
+#                     replaces the previous ytg-canary DDEV project.
+#     --apache        Use apache-fpm (LAMP parity).
+#     --keep          Keep the site after a passing run (one REPO only).
+#   bump [REPO...]    Move each REPO (as for canary) to a base release:
+#                     composer.lock and lagoon/*.dockerfile, then updb, cr
+#                     and cst in its DDEV site. The template must be on its
+#                     working branch, a site on its release branch, with no
+#                     uncommitted changes to composer.* or lagoon/. Never
+#                     commits.
+#     --to VERSION    The release, such as v11.3.1 (default: the latest).
+#     --canary        Run the canary on each repository after bumping it.
+#     -D, --dry-run   Show what bump would do.
 #   help              Show this help.
 #
 # Workspace:
@@ -543,7 +559,7 @@ cmd_sync() {
   local kind name dir remote branch
   while [ $# -gt 0 ]; do
     case $1 in
-      --dry-run) DRY_RUN=1; shift ;;
+      -D|--dry-run) DRY_RUN=1; shift ;;
       *) die "unknown sync option: $1" ;;
     esac
   done
@@ -586,12 +602,323 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# Helpers for canary and bump: the template and the sites they work on.
+
+# The REPOS lines for the named repositories ("template" or a site name), or
+# for the template and every site when there are no names or the name "all".
+CHILDREN=
+select_children() {
+  local want line kind name found
+  CHILDREN=
+  if [ $# -eq 0 ] || { [ $# -eq 1 ] && [ "$1" = all ]; }; then
+    CHILDREN=$(printf '%s\n' "$REPOS" | awk -F '\t' '$1 != "base"')
+    return 0
+  fi
+  for want in "$@"; do
+    [ "$want" = template ] && want=$TEMPLATE_NAME
+    if [ "$want" = base ] || [ "$want" = "$BASE_NAME" ]; then
+      die "the base is what canary and bump test the others against; name the template or a site"
+    fi
+    found=
+    while IFS= read -r line; do
+      IFS='	' read -r kind name _ <<<"$line"
+      if [ "$name" = "$want" ] && [ "$kind" != base ]; then
+        found=$line
+        break
+      fi
+    done <<EOF
+$REPOS
+EOF
+    [ -n "$found" ] || die "unknown repository $want: use template, all or a site in $CONF_NAME"
+    CHILDREN="${CHILDREN:+$CHILDREN
+}$found"
+  done
+}
+
+need_docker() {
+  command -v ddev >/dev/null || die "DDEV is not installed"
+  docker info >/dev/null 2>&1 || die "Docker isn't running: start it"
+}
+
+# The base checkout canary and bump use, described in one line.
+describe_base() {
+  local dir=$ROOT/$BASE_NAME desc
+  is_checkout "$dir" || die "no base checkout at $dir"
+  desc="$(current_branch "$dir") at $(git -C "$dir" rev-parse --short HEAD)"
+  [ -z "$(git -C "$dir" status --porcelain 2>/dev/null)" ] || desc="$desc, with uncommitted changes"
+  echo "$desc"
+}
+
+# True if version $1 (vX.Y.Z) is older than $2.
+version_lt() {
+  [ "$1" != "$2" ] &&
+    [ "$(printf '%s\n%s\n' "${1#v}" "${2#v}" | sort -t . -k 1,1n -k 2,2n -k 3,3n | head -n 1)" = "${1#v}" ]
+}
+
+# ---------------------------------------------------------------------------
+# canary
+
+# Runs the base checkout's canary on checkout $2 (named $1). Its output
+# streams through; the result is its exit status.
+run_canary() {
+  local name=$1 dir=$2
+  shift 2
+  echo
+  echo "---- canary: $name (${dir#"$ROOT"/}) ----"
+  "$ROOT/$BASE_NAME/scripts/canary.sh" ddev --template "$dir" "$@"
+}
+
+cmd_canary() {
+  local opts=() targets=() results='' kind name dir remote branch count
+  while [ $# -gt 0 ]; do
+    case $1 in
+      --apache|--keep) opts+=("$1"); shift ;;
+      -*) die "unknown canary option: $1" ;;
+      *) targets+=("$1"); shift ;;
+    esac
+  done
+  select_children "${targets[@]+"${targets[@]}"}"
+  count=$(printf '%s\n' "$CHILDREN" | grep -c . || true)
+  case " ${opts[*]+"${opts[*]}"} " in
+    *" --keep "*) [ "$count" = 1 ] || die "--keep needs one repository: each run replaces the previous canary site" ;;
+  esac
+  need_docker
+
+  echo "Candidate base: $BASE_NAME on $(describe_base)"
+  while IFS='	' read -r kind name dir remote branch <&3; do
+    if ! is_checkout "$dir"; then
+      results="$results
+    FAIL  $name: not checked out (run scripts/boutique.sh doctor)"
+      nfail=$((nfail + 1))
+      continue
+    fi
+    if run_canary "$name" "$dir" "${opts[@]+"${opts[@]}"}" </dev/null; then
+      results="$results
+    PASS  $name"
+    else
+      results="$results
+    FAIL  $name"
+      nfail=$((nfail + 1))
+    fi
+  done 3<<EOF
+$CHILDREN
+EOF
+
+  step "Canary results (candidate base: $(describe_base))"
+  printf '%s\n' "$results" | sed '/^$/d'
+  echo
+  echo "Each repository is tested as it is in its working tree, against the base checkout."
+  echo "A site's own CI tests the base release in its composer.lock instead."
+  [ "$nfail" = 0 ] || exit 1
+}
+
+# ---------------------------------------------------------------------------
+# bump
+
+BUMP_LOG=
+
+# Moves checkout $2 (kind $1, name $3, release branch $4) to base $5.
+bump_repo() {
+  local kind=$1 dir=$2 name=$3 branch=$4 version=$5
+  local expected current locked tags image changes out f tmp token auth
+  step "$name"
+  if ! is_checkout "$dir"; then
+    fail "not checked out (run scripts/boutique.sh doctor)"
+    return 0
+  fi
+
+  # The template moves on its working branch, a site on its release branch.
+  if [ "$kind" = template ]; then expected=$WORK_BRANCH; else expected=$branch; fi
+  current=$(current_branch "$dir")
+  if [ "$current" != "$expected" ]; then
+    fail "on $current: switch to $expected first"
+    return 0
+  fi
+  if [ "$kind" = template ] && has_ref "$dir" "origin/$branch" &&
+    ! git -C "$dir" merge-base --is-ancestor "origin/$branch" HEAD; then
+    fail "$expected is behind origin/$branch: run scripts/boutique.sh sync first"
+    return 0
+  fi
+  if [ -n "$(git -C "$dir" status --porcelain -- composer.json composer.lock lagoon 2>/dev/null)" ]; then
+    fail "composer.json, composer.lock or lagoon/ has uncommitted changes: commit or discard them first"
+    return 0
+  fi
+
+  locked=$(locked_base "$dir")
+  tags=$(dockerfile_tags "$dir")
+  if [ -z "$locked" ]; then
+    fail "composer.lock doesn't lock $BASE_PACKAGE"
+    return 0
+  fi
+  if [ "$locked" = "$version" ] && [ "$tags" = "${version#v}" ]; then
+    pass "already on $version"
+    return 0
+  fi
+  if version_lt "$version" "$locked"; then
+    fail "locked to $locked, newer than $version; bump doesn't downgrade"
+    return 0
+  fi
+  if [ "$DRY_RUN" = 1 ]; then
+    info "would move from $locked (Dockerfiles: $(echo "$tags" | tr '\n' ' ' | sed 's/ $//')) to $version"
+    return 0
+  fi
+
+  # The images must be published before the Dockerfiles point at them.
+  while IFS= read -r image; do
+    [ -n "$image" ] || continue
+    if ! docker manifest inspect "$image${version#v}" >/dev/null 2>&1; then
+      fail "image $image${version#v} isn't published (has the $version tag build finished?)"
+      return 0
+    fi
+  done <<EOF
+$(cat "$dir"/lagoon/*.dockerfile | grep -oE "[^[:space:]]*$BASE_NAME-[a-z]+:" | sort -u || true)
+EOF
+
+  if ! (cd "$dir" && ddev describe -j 2>/dev/null) | grep -q '"status": *"running"'; then
+    info "starting DDEV"
+    (cd "$dir" && ddev start >>"$BUMP_LOG" 2>&1) || { fail "ddev start failed (see $BUMP_LOG)"; return 0; }
+  fi
+
+  # Composer reads the base from GitHub; pass the gh token for this run only.
+  auth=()
+  token=$(gh auth token 2>/dev/null || true)
+  [ -z "$token" ] || auth=(env "COMPOSER_AUTH={\"github-oauth\":{\"github.com\":\"$token\"}}")
+  echo "    ...  composer update $BASE_PACKAGE to $version"
+  if ! out=$(cd "$dir" && ddev exec "${auth[@]+"${auth[@]}"}" \
+    composer update "$BASE_PACKAGE" --with "$BASE_PACKAGE:${version#v}" -W --no-interaction 2>&1); then
+    printf '%s\n' "$out" >>"$BUMP_LOG"
+    fail "composer update failed (see $BUMP_LOG); restore with: git -C ${dir#"$ROOT"/} checkout -- composer.lock"
+    return 0
+  fi
+  printf '%s\n' "$out" >>"$BUMP_LOG"
+  # On macOS DDEV syncs files with Mutagen, so the new lock can reach the
+  # host a little later. (A project without Mutagen has nothing to sync.)
+  (cd "$dir" && ddev mutagen sync >/dev/null 2>&1) || true
+  locked=$(locked_base "$dir")
+  if [ "$locked" != "$version" ]; then
+    fail "composer.lock has $BASE_PACKAGE $locked after the update, not $version (see $BUMP_LOG)"
+    return 0
+  fi
+  pass "composer.lock: $BASE_PACKAGE $version"
+  # Other packages the update moved (-W updates the base's dependencies too).
+  changes=$(printf '%s\n' "$out" | grep -E '^  - (Upgrading|Downgrading|Locking|Removing) ' |
+    grep -v '): ' | grep -v " $BASE_PACKAGE " | sed 's/^  - //' || true)
+  if [ -n "$changes" ]; then
+    printf '%s\n' "$changes" | while IFS= read -r line; do info "also: $line"; done
+  fi
+
+  for f in "$dir"/lagoon/*.dockerfile; do
+    grep -qE "$BASE_NAME-[a-z]+:" "$f" || continue
+    tmp=$(mktemp)
+    sed -E "s#($BASE_NAME-[a-z]+):[^[:space:]]+#\\1:${version#v}#g" "$f" >"$tmp"
+    cat "$tmp" >"$f"
+    rm -f "$tmp"
+  done
+  tags=$(dockerfile_tags "$dir")
+  if [ "$tags" = "${version#v}" ]; then
+    pass "lagoon/*.dockerfile: :${version#v}"
+  else
+    fail "lagoon/*.dockerfile still have $(echo "$tags" | tr '\n' ' ')"
+    return 0
+  fi
+
+  # The local site, if there is one, picks up the new code.
+  if ! (cd "$dir" && ddev drush status --field=bootstrap 2>/dev/null) | grep -q Successful; then
+    warn "no installed local site: skipped updb and cst"
+  else
+    out=$(cd "$dir" && ddev drush updatedb -y 2>&1) || { fail "drush updatedb failed:"; printf '%s\n' "$out" | sed 's/^/          /'; return 0; }
+    if printf '%s\n' "$out" | grep -q 'No pending updates'; then
+      pass "drush updatedb: no pending updates"
+    else
+      info "drush updatedb ran updates:"
+      printf '%s\n' "$out" | sed 's/^/          /'
+    fi
+    (cd "$dir" && ddev drush cache:rebuild -q) || warn "drush cache:rebuild failed"
+    out=$(cd "$dir" && ddev drush config:status 2>&1) || true
+    if printf '%s\n' "$out" | grep -q 'No differences'; then
+      pass "drush config:status: no differences"
+    else
+      fail "drush config:status shows differences (an update changed config? export and review it):"
+      printf '%s\n' "$out" | sed 's/^/          /'
+    fi
+  fi
+
+  if [ "$RUN_CANARY" = 1 ]; then
+    if run_canary "$name" "$dir" </dev/null; then
+      pass "canary passed"
+    else
+      fail "canary failed"
+    fi
+  fi
+  BUMPED="$BUMPED
+  git -C ${dir#"$ROOT"/} add composer.lock lagoon && git -C ${dir#"$ROOT"/} commit -m \"Update the base image to $version.\""
+}
+
+RUN_CANARY=0
+BUMPED=
+
+cmd_bump() {
+  local version='' targets=() latest kind name dir remote branch
+  while [ $# -gt 0 ]; do
+    case $1 in
+      --to) [ $# -ge 2 ] || die "--to needs a version"; version=$2; shift 2 ;;
+      --to=*) version=${1#--to=}; shift ;;
+      --canary) RUN_CANARY=1; shift ;;
+      -D|--dry-run) DRY_RUN=1; shift ;;
+      -*) die "unknown bump option: $1" ;;
+      *) targets+=("$1"); shift ;;
+    esac
+  done
+  select_children "${targets[@]+"${targets[@]}"}"
+
+  fetch "$ROOT/$BASE_NAME" --tags || warn "couldn't fetch the base's tags; using what was last fetched"
+  latest=$(latest_release)
+  if [ -z "$version" ]; then
+    version=$latest
+    [ -n "$version" ] || die "no v$MAJOR.x.y release in the base checkout"
+  fi
+  version=v${version#v}
+  [[ $version =~ ^v$MAJOR\.[0-9]+\.[0-9]+$ ]] || die "$version isn't a v$MAJOR.x.y release (release branch $RELEASE_BRANCH)"
+  git -C "$ROOT/$BASE_NAME" rev-parse -q --verify "refs/tags/$version" >/dev/null ||
+    die "the base has no tag $version"
+  [ "$DRY_RUN" = 1 ] || need_docker
+
+  echo "Bumping to base $version${latest:+ (latest: $latest)}"
+  if [ "$RUN_CANARY" = 1 ]; then
+    echo "Candidate base for --canary: $BASE_NAME on $(describe_base)"
+  fi
+  BUMP_LOG=$(mktemp "${TMPDIR:-/tmp}/boutique-bump.XXXXXX")
+  while IFS='	' read -r kind name dir remote branch <&3; do
+    bump_repo "$kind" "$dir" "$name" "$branch" "$version" </dev/null
+  done 3<<EOF
+$CHILDREN
+EOF
+
+  echo
+  if [ "$DRY_RUN" = 1 ]; then
+    rm -f "$BUMP_LOG"
+    echo "Dry run: nothing was changed."
+    [ "$nfail" = 0 ] || exit 1
+    return 0
+  fi
+  if [ -n "$BUMPED" ]; then
+    echo "Nothing is committed. Review the changes, then commit each bump:$BUMPED"
+  fi
+  if [ "$nfail" -gt 0 ]; then
+    echo
+    echo "$nfail problem(s); Composer output is in $BUMP_LOG"
+    exit 1
+  fi
+  rm -f "$BUMP_LOG"
+}
+
+# ---------------------------------------------------------------------------
 
 command=${1:-help}
 [ $# -gt 0 ] && shift
 case $command in
   help|-h|--help) usage; exit 0 ;;
-  doctor|status|sync) ;;
+  doctor|status|sync|canary|bump) ;;
   *) usage >&2; exit 2 ;;
 esac
 
