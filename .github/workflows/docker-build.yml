@@ -20,7 +20,7 @@ jobs:
     # Database for the canary site.
     services:
       mariadb:
-        image: uselagoon/mariadb-10.11-drupal:26.11.2
+        image: uselagoon/mariadb-10.11-drupal:26.11.5
         ports:
           - 3306:3306
 

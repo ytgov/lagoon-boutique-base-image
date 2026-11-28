@@ -70,6 +70,7 @@ while [ $# -gt 0 ]; do
 done
 
 case $mode in
+  -h|--help) usage; exit 0 ;;
   ddev) ;;
   docker) [ -n "$image" ] || { echo "docker mode needs --image" >&2; exit 2; } ;;
   *) usage >&2; exit 2 ;;

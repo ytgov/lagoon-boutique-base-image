@@ -11,6 +11,37 @@ maintaining its own core, standard modules and images.
 **Contact:** Highways and Public Works, Information and Communications Technology,
 eServices for Citizens [eservices@yukon.ca](mailto:eservices@yukon.ca)
 
+## Contents
+
+- [Overview](#overview)
+  - [When to use it](#when-to-use-it)
+  - [How it's structured](#how-its-structured)
+- [Requirements](#requirements)
+- [Using the base image](#using-the-base-image)
+  - [Sites created from the boutique template](#sites-created-from-the-boutique-template)
+  - [Other Drupal sites](#other-drupal-sites)
+  - [Keeping a site up to date](#keeping-a-site-up-to-date)
+- [Maintaining the base image](#maintaining-the-base-image)
+  - [Maintenance commands](#maintenance-commands)
+  - [Branches, versions and releases](#branches-versions-and-releases)
+  - [Updating core or modules within a major version](#updating-core-or-modules-within-a-major-version)
+  - [Adding or removing a standard module](#adding-or-removing-a-standard-module)
+  - [Adding or changing a patch](#adding-or-changing-a-patch)
+  - [Updating PHP, the Lagoon images or MariaDB](#updating-php-the-lagoon-images-or-mariadb)
+  - [Upgrading to a new major Drupal version](#upgrading-to-a-new-major-drupal-version)
+- [Testing with the canary](#testing-with-the-canary)
+- [Script reference](#script-reference)
+  - [boutique.sh](#boutiquesh)
+  - [canary.sh](#canarysh)
+- [GitHub repository settings](#github-repository-settings)
+- [Security measures](#security-measures)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+  - [Roles](#roles)
+- [Security](#security)
+- [License](#license)
+- [TODO](#todo)
+
 ## Overview
 
 ### When to use it
@@ -59,7 +90,8 @@ are kept only for sites not yet on Drupal 11 and will be decommissioned.
 
 **Other files:**
 
-- `scripts/canary.sh`: the canary test (see [Testing with the canary](#testing-with-the-canary)).
+- `scripts/canary.sh`: the canary test (see [Testing with the canary](#testing-with-the-canary)
+  and [canary.sh](#canarysh)).
 - `scripts/boutique.sh` and `scripts/boutique-sites.conf.example`: maintenance commands
   (see [Maintenance commands](#maintenance-commands)).
 - `patches/`: patches the base keeps itself (see [patches/README.md](patches/README.md)).
@@ -145,7 +177,8 @@ Check the canary result, then merge.
 
 To update by hand: `ddev composer update ytgov/lagoon-boutique-base-image -W`,
 then set the same release in `lagoon/*.dockerfile`. The site canary fails if
-the two disagree.
+the two disagree. `scripts/boutique.sh bump` does both, and checks the local
+site (see [Maintenance commands](#maintenance-commands)).
 
 ## Maintaining the base image
 
@@ -160,8 +193,13 @@ git fails rather than prompting.
 | Command | What it does |
 |---|---|
 | `boutique.sh doctor` | Checks the tools (git, `gh` and its sign-in, Docker, DDEV), the platform, the workspace, and each checkout: location, remote, branch, uncommitted changes, DDEV project and your GitHub role. Read-only. |
-| `boutique.sh status` | One line per repository: current branch against GitHub, uncommitted changes, the base release it's locked to (flagged when a newer one exists or the Dockerfiles disagree), open pull requests and the latest CI run on its release branch. Notes unreleased base commits and a set `.github/canary-template-ref`. Fetches first (`--no-fetch` to skip); changes nothing else. |
-| `boutique.sh sync` | Fetches, then fast-forwards local branches that are behind: `prodNN` and `eservices/prepare-prodNN` in the base and the template (the working branch to its GitHub copy, then to `prodNN`), and each site's release branch. It never pushes, merges, rebases or switches branches, and leaves diverged branches alone. `--dry-run` shows what it would do. |
+| `boutique.sh status` | One line per repository: current branch against GitHub, uncommitted changes, the base release it's locked to (flagged when a newer one exists or the Dockerfiles disagree), open pull requests and the latest CI run on its release branch. Notes unreleased base commits and a set `.github/canary-template-ref`. Fetches first; changes nothing else. |
+| `boutique.sh sync` | Fetches, then fast-forwards local branches that are behind: `prodNN` and `eservices/prepare-prodNN` in the base and the template (the working branch to its GitHub copy, then to `prodNN`), and each site's release branch. It never pushes, merges, rebases or switches branches, and leaves diverged branches alone. |
+| `boutique.sh canary [REPO...]` | Runs this checkout's canary (`scripts/canary.sh` in DDEV) on the working tree of the template, a site, or `all` (the default), uncommitted changes included, and lists which passed. A site's own CI tests the release in its `composer.lock` instead. |
+| `boutique.sh bump [REPO...]` | Moves the template or sites (`all` by default) to a base release (the latest by default): `composer.lock` and the `lagoon/*.dockerfile` tags, then `updb`, `cr` and `cst` in the local DDEV site. It needs the template on its working branch and each site on its release branch, with no uncommitted changes to `composer.*` or `lagoon/`, and the release's images published. It never downgrades or commits, and prints the commit commands. It can run the canary after each bump. |
+
+Each command's options are in [boutique.sh](#boutiquesh) under
+[Script reference](#script-reference).
 
 **Workspace.** The commands work on a directory laid out like this:
 
@@ -239,7 +277,8 @@ next version.
    dropped patches. If a patch no longer applies, remove or replace it (see
    [patches/README.md](patches/README.md)).
 3. Run the canary against the template. If an update changes configuration,
-   export it in the template and test with `--template <template checkout>`.
+   export it in the template and test with the local template checkout (see
+   [canary.sh](#canarysh)).
 4. Release as a patch version.
 
 Dependabot proposes these updates weekly; review them the same way.
@@ -329,6 +368,7 @@ Run it locally before opening a pull request:
 ```bash
 scripts/canary.sh ddev                                   # template from GitHub
 scripts/canary.sh ddev --template ../lagoon-boutique-template   # local template
+scripts/boutique.sh canary                               # the template and every site in the workspace
 ```
 
 A failing run keeps the site and `canary.log` for inspection. CI runs the same
@@ -344,7 +384,90 @@ template work that isn't merged yet (see
 It holds one branch name; blank lines and lines starting with `#` are ignored.
 It's a file rather than a repository variable so that it goes through review
 with the change that needs it, and so maintainers can set it, not only
-administrators. Locally, pass `--template-ref <branch>` instead.
+administrators. Locally, choose the template branch with the canary's options
+(see [canary.sh](#canarysh)).
+
+## Script reference
+
+The help text of the two scripts, as `scripts/boutique.sh help` and
+`scripts/canary.sh --help` print it.
+
+### boutique.sh
+
+Maintenance commands for the boutique base image, the template and the sites
+built from them. See [Maintenance commands](#maintenance-commands) for the
+workspace layout, how to run it and the release line.
+
+```bash
+scripts/boutique.sh <command> [options]
+```
+
+| Command | What it does |
+|---|---|
+| `doctor` | Check this machine and the workspace: tools, GitHub sign-in, Docker, DDEV, and each checkout (location, remote, branch, uncommitted changes, access). Read-only. |
+| `status` | One line per repository: current branch against GitHub, uncommitted changes, the base release it uses, open pull requests and the latest CI run on its release branch. Fetches first; changes nothing else. |
+| `sync` | Fetch, then fast-forward local branches that are behind: `prodNN` and `eservices/prepare-prodNN` in the base and the template (the working branch to origin, then to `prodNN`), and each site's release branch. Never pushes, merges, rebases or switches branches. |
+| `canary [REPO...]` | Run the base checkout's canary (`scripts/canary.sh` in DDEV) on the working tree of each REPO: `template`, a site name, or `all` (the default: the template and every site). Uncommitted changes are included. Each run replaces the previous `ytg-canary` DDEV project. |
+| `bump [REPO...]` | Move each REPO (as for `canary`) to a base release: `composer.lock` and `lagoon/*.dockerfile`, then `updb`, `cr` and `cst` in its DDEV site. The template must be on its working branch, a site on its release branch, with no uncommitted changes to `composer.*` or `lagoon/`. Never commits. |
+| `help` | Show the help. |
+
+| Command | Option | What it does |
+|---|---|---|
+| `status` | `--no-fetch` | Use what was last fetched. |
+| `sync` | `-D`, `--dry-run` | Show what `sync` would do. |
+| `canary` | `--apache` | Use apache-fpm (LAMP parity). |
+| `canary` | `--keep` | Keep the site after a passing run (one REPO only). |
+| `bump` | `--to VERSION` | The release, such as `v11.3.1` (default: the latest). |
+| `bump` | `--canary` | Run the canary on each repository after bumping it. |
+| `bump` | `-D`, `--dry-run` | Show what `bump` would do. |
+
+**Credentials.** GitHub API calls use the GitHub CLI's sign-in
+(`gh auth login`). git over HTTPS needs a credential helper
+(`gh auth setup-git`); SSH remotes use your keys. Nothing is stored, and git
+never prompts.
+
+**Requires** bash 3.2 or later, git and `gh`. `doctor` also checks Docker and
+DDEV; `canary` and `bump` need them.
+
+### canary.sh
+
+Canary test for the base image. Builds a throwaway Drupal site from
+lagoon-boutique-template, points its `ytgov/lagoon-boutique-base-image`
+dependency at this checkout of the base (the "candidate"), installs it from
+the template's config and checks that it is healthy. A failing canary means
+the candidate must not be released. See
+[Testing with the canary](#testing-with-the-canary) for what it checks.
+
+```bash
+scripts/canary.sh ddev [options]
+scripts/canary.sh docker --image IMAGE [options]
+```
+
+| Mode | What it does |
+|---|---|
+| `ddev` | Run the site in a DDEV project named `ytg-canary`. Use this on a workstation. `--apache` switches DDEV to apache-fpm (LAMP parity). |
+| `docker` | Run composer and drush inside IMAGE, normally the freshly built base CLI image (Lagoon parity), against an existing MariaDB, and serve the HTTP checks with PHP's built-in web server. Used by CI. |
+
+| Option | What it does |
+|---|---|
+| `--template SRC` | Template git URL or local directory. A local directory is copied as-is, including uncommitted changes. Default: `https://github.com/ytgov/lagoon-boutique-template.git`. |
+| `--template-ref REF` | Branch or tag to clone when SRC is a URL. Default: `prod11`. |
+| `--workdir DIR` | Empty directory to build the site in. Default: a new temporary directory. |
+| `--apache` | `ddev` mode only: use apache-fpm instead of nginx-fpm. |
+| `--image IMAGE` | `docker` mode only: image to run composer and drush in. |
+| `--keep` | Keep the site (and DDEV project) after a passing run. A failing run is always kept for inspection. |
+
+`docker` mode reads these environment variables:
+
+| Variable | Default |
+|---|---|
+| `CANARY_DB_HOST` | `127.0.0.1` |
+| `CANARY_DB_PORT` | `3306` |
+| `CANARY_DB_NAME`, `CANARY_DB_USER`, `CANARY_DB_PASSWORD` | `drupal` |
+| `CANARY_DOCKER_NETWORK` | `host` |
+
+On macOS use a user-defined Docker network instead of host networking, with
+the database container on it.
 
 ## GitHub repository settings
 
@@ -484,9 +607,9 @@ the [MIT License](LICENSE).
   branches has finished. Those branches still use action tags, so their
   builds would fail until they're updated from `prodNN`. The release and
   working branches are pinned, and the template already requires it.
-- **Finish `scripts/boutique.sh`:** `canary`, `flag` (set and clear
-  `.github/canary-template-ref`) and `pr`, then `release` and `bump`; and
-  run shellcheck on the scripts in CI.
+- **Finish `scripts/boutique.sh`:** `release` and `pr`, then `flag` (set and
+  clear `.github/canary-template-ref`); and run shellcheck on the scripts in
+  CI (`canary.sh` has a few info-level notes to clear first).
 - **Retire the Drupal 10 line.** Once its sites have moved to `prod10` (`:10.x`)
   or `prod11`, stop publishing `:latest` from `prod` and freeze the branch.
 - **Share more than modules.** Decide how shared configuration reaches sites
